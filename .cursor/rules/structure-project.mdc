@@ -1,0 +1,244 @@
+---
+alwaysApply: true
+---
+## Vai trò thư mục (Nuxt 4)
+# structure-project
+
+## Mục tiêu
+- Chuẩn hóa cấu trúc thư mục dự án, vai trò từng phần, và quy tắc phát triển.
+- Giúp AI/Dev đọc nhanh, thống nhất cách tổ chức mã nguồn, tránh rối.
+- Bám theo chuẩn Nuxt 4, Tailwind, shadcn-vue và các quy ước nội bộ.
+
+---
+
+## Sơ đồ cấu trúc Nuxt 4 (đầy đủ)
+```
+DTU-SUPPORT-FE/
+  .nuxt/                    # build artifacts (auto-generated)
+  .output/                  # output khi build (auto-generated)
+
+  app/                      # lớp ứng dụng Nuxt (auto-import, runtime)
+    assets/                 # asset cục bộ (được bundle)
+      css/
+        main.css            # CSS global (được khai báo trong nuxt.config.ts)
+    components/             # Vue components (auto-import theo cấu hình)
+    composables/            # composables auto-import (useXxx)
+    lib/                    # thư viện tiện ích nội bộ (helpers, class-variance, cn)
+    layouts/                # layout pages
+    middleware/             # route middleware (named/inline)
+    pages/                  # file-based routing
+    plugins/                # Nuxt plugins (auto-register top-level)
+    utils/                  # hàm util (auto-import nếu bật)
+    app.vue                 # root app shell
+    app.config.ts           # app config (title, meta defaults...)
+    error.vue               # error page fallback
+
+  node_modules/
+
+  public/                   # static assets không qua bundler
+    favicon.ico
+    robots.txt
+
+
+
+  .env                      # biến môi trường
+  .gitignore
+  .nuxtignore
+  .nuxtrc                   # cấu hình Nuxt RC (nếu dùng)
+  nuxt.config.ts            # cấu hình Nuxt chính
+  package.json
+  tsconfig.json
+
+  assets/                   # tài nguyên gốc (nguồn Tailwind, imgs...)
+    css/
+      tailwind.css          # nguồn Tailwind (CSS variables, layers)
+
+  components.json           # config generator shadcn-vue
+  tailwind.config.js        # cấu hình theme/tokens Tailwind
+  README.md
+  yarn.lock
+
+  .cursor/
+    rules/
+      overview.mdc          # tổng quan dự án & process
+      structure-project.mdc # (tài liệu này)
+  .eslintrc.json
+  .prettierrc
+  .prettierignore
+```
+
+Tham chiếu: [Nuxt Docs - Directory Structure / app/plugins](https://nuxt.com/docs/4.x/guide/directory-structure/app/plugins)
+
+---
+
+## Vai trò chi tiết theo thư mục chính
+- `app/`
+  - Runtime cho client/server của Nuxt (auto-import components, composables, utils).
+  - Tổ chức theo feature/domain; tránh nhúng nghiệp vụ phức tạp vào components.
+
+- `app/assets/`
+  - Asset import vào bundle (fonts, css nội bộ, icons nhỏ). Không chứa ảnh tĩnh nặng.
+
+- `app/components/`
+  - Components Vue tái sử dụng, đặt theo feature folder khi phù hợp.
+  - Đặt tên PascalCase; props rõ ràng; không side-effects.
+
+- `app/composables/`
+  - Composables auto-import dạng `useXxx`. Tránh phụ thuộc thứ tự plugins.
+
+- `app/lib/`
+  - Chứa tiện ích nội bộ mức thư viện (ví dụ `cn`, helpers UI). Dùng cho các hàm không phụ thuộc Nuxt runtime và có thể tái sử dụng rộng rãi giữa components/composables.
+
+- `app/layouts/`
+  - File-based layouts, ví dụ `default.vue`, `auth.vue`.
+
+- `app/middleware/`
+  - Route middleware (global/named) cho guard, redirect, prefetch nhẹ.
+
+- `app/pages/`
+  - File-based routing. Tối ưu lazy-load, split-chunk theo route khi cần.
+
+- `app/plugins/`
+  - Nuxt plugins để cấu hình thư viện, provide helpers/directives.
+
+- `app/utils/`
+  - Hàm tiện ích thuần (pure), không side-effects. Có thể auto-import theo cấu hình.
+
+- `assets/` (gốc repo)
+  - Nguồn Tailwind CSS, SCSS, tokens, variables; ảnh nguồn gốc.
+
+- `public/`
+  - File tĩnh phục vụ trực tiếp (ảnh nặng, robots, favicon...). Không bundle.
+
+---
+
+## Quy ước Nuxt Plugins (app/plugins)
+
+### Sơ đồ cấu trúc (khuyến nghị)
+```
+project-root/
+│
+├─ app/                     # nơi Nuxt runtime làm việc
+│  ├─ assets/               # fonts, css nội bộ, icon nhỏ
+│  ├─ components/           # chia theo feature
+│  │   ├─ common/           # button, modal, form control tái sử dụng
+│  │   ├─ layout/           # header, footer, sidebar
+│  │   └─ featureX/         # components thuộc 1 domain (ví dụ: posts, profile)
+│  ├─ composables/          # useAuth, useFetchX, useTheme...
+│  ├─ layouts/              # default.vue, auth.vue
+│  ├─ middleware/           # guard, check auth
+│  ├─ pages/                # file-based routing
+│  │   └─ (feature folders) # ví dụ: /auth/login.vue, /posts/[id].vue
+│  ├─ plugins/              # nuxt plugins (theo thứ tự load)
+│  ├─ utils/                # hàm helper thuần (string, format, calc)
+│  └─ app.vue               # entrypoint
+│
+├─ server/                  # Nitro server: API, middleware, plugins
+│  ├─ api/                  # server API routes
+│  ├─ middleware/           # server middlewares
+│  └─ services/             # logic server side (ví dụ kết nối DB)
+│
+├─ modules/                 # custom nuxt modules (nếu cần)
+│
+├─ content/                 # markdown/mdx nếu dùng @nuxt/content
+│
+├─ public/                  # ảnh tĩnh, file nặng, robots.txt, favicon...
+│
+├─ assets/                  # tailwind.css, scss, tokens, ảnh nguồn gốc
+│
+├─ .nuxt/                   # build output (ignore git)
+├─ nuxt.config.ts           # cấu hình chính
+├─ tsconfig.json            # TS config
+└─ package.json
+
+
+### Auto-register & thứ tự nạp
+- Auto-register: chỉ các file top-level trong `app/plugins/` được tự động nạp.
+- Subfolder: không auto; muốn nạp phải khai báo tại `nuxt.config.ts > plugins`.
+- Thứ tự: dùng tiền tố số (ví dụ `01.xxx.ts`) để kiểm soát phụ thuộc.
+- Môi trường: hậu tố `.client.ts` hoặc `.server.ts` để ràng buộc môi trường.
+
+Ví dụ khai báo subfolder trong cấu hình:
+```ts
+// nuxt.config.ts
+export default defineNuxtConfig({
+  plugins: [
+    '~/plugins/auth/session',
+    '~/plugins/i18n/setup',
+  ],
+})
+```
+
+### Cú pháp plugin
+- Functional:
+```ts
+export default defineNuxtPlugin((nuxtApp) => {
+  // setup logic
+})
+```
+- Object-syntax (nâng cao):
+```ts
+export default defineNuxtPlugin({
+  name: 'my-plugin',
+  enforce: 'pre',
+  parallel: true,
+  async setup (nuxtApp) {
+    // logic
+  },
+  hooks: {
+    'app:created' () {
+      const nuxtApp = useNuxtApp()
+      // xử lý tại hook
+    },
+  },
+  env: { islands: true },
+})
+```
+
+### Provide helpers (mẫu)
+```ts
+export default defineNuxtPlugin(() => {
+  return {
+    provide: {
+      hello: (msg: string) => `Hello ${msg}!`,
+    },
+  }
+})
+```
+Sử dụng trong component:
+```vue
+<script setup lang="ts">
+const { $hello } = useNuxtApp()
+</script>
+<template>
+  <div>{{ $hello('world') }}</div>
+</template>
+```
+
+Nguồn: [Nuxt Docs - app/plugins](https://nuxt.com/docs/4.x/guide/directory-structure/app/plugins)
+
+---
+
+## UI conventions (Tailwind / shadcn-vue)
+- shadcn-vue: generate vào `components/ui/`; tuỳ biến tokens qua CSS variables.
+- Tailwind: `darkMode: ['class']`, safelist `dark`; utility-first, hạn chế CSS tùy biến trùng lặp.
+- Components: tên PascalCase, nhỏ gọn, tránh nesting sâu; style tối giản.
+- Accessibility: kiểm tra focus state, contrast ratio, keyboard nav.
+
+---
+
+## Checklist thêm/sửa cấu trúc
+- [ ] Đặt file đúng thư mục chuẩn Nuxt 4
+- [ ] Nếu thêm plugin: xác định `.client/.server`, tiền tố số hoặc đăng ký trong `nuxt.config.ts`
+- [ ] Cập nhật tokens/màu ở `assets/css/tailwind.css` khi cần
+- [ ] Kiểm tra dark mode, focus và contrast
+- [ ] Không đưa logic server vào client và ngược lại
+
+---
+
+## Do/Don't nhanh
+- Do: nhóm theo feature, trích xuất logic sang `app/composables/` hoặc `app/utils/`.
+- Do: dùng `defineNuxtPlugin` để cấu hình libs và `provide` helpers.
+- Do: ưu tiên route-level code splitting; lazy import components nặng.
+- Don't: đặt ảnh nặng trong `app/assets/`; đặt vào `public/`.
+- Don't: truy cập trực tiếp API server trong components; dùng server routes/services.

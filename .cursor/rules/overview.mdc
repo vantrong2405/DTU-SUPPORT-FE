@@ -1,0 +1,305 @@
+---
+description: Tổng quan dự án, quy tắc code và quy trình khảo sát dành cho Cursor
+globs:
+  - "**/*.ts"
+  - "**/*.vue"
+  - "**/*.js"
+  - "**/*.mdc"
+alwaysApply: true
+---
+
+# 01_get_information.md
+
+## Mục đích
+Quy tắc bắt buộc để Cursor thu thập và xác minh tất cả thông tin trước khi sửa/viết/refactor code. Mọi hành động thay đổi code phải bắt đầu từ bước này.
+
+## Nguyên tắc chính
+- Bắt buộc: dùng Cursor tools (`read_file`, `codebase_search`, `grep`) để đọc các file liên quan trước khi viết bất kỳ code nào.
+- Giao tiếp: mọi báo cáo, câu hỏi và xác nhận phải bằng Tiếng Việt. Mở đầu với: "Hi boss Trong".
+- Code: khi tạo hoặc sửa file code — code phải viết bằng tiếng Anh và không có comment (trừ trường hợp bắt buộc theo ngôn ngữ).
+
+## Các bước khảo sát (Task 0)
+
+### 1. Xác định feature scope
+- Ví dụ: "Homepage minimal UI", "GPA calculator", "Marketplace listing".
+
+### 2. Đọc cấu trúc dự án và config chính
+```bash
+# Đọc cấu trúc và config nền
+read_file nuxt.config.ts
+read_file tailwind.config.js
+read_file assets/css/tailwind.css
+read_file app/app.vue
+read_file package.json
+```
+
+### 3. Tìm và đọc phần liên quan tới feature
+```bash
+# Components/UI
+codebase_search "homepage header hero quick actions" ["app/components/"]
+# Plugins
+codebase_search "theme plugin analytics client" ["app/plugins/"]
+# Utils
+read_file app/lib/utils.ts
+## 2. Code Rules & Conventions
+
+### Communication Rules
+- **Giao tiếp với user**: Bằng Tiếng Việt, luôn mở đầu với *"Hi boss Trong"*
+- **Code**: Luôn viết bằng tiếng Anh (biến, hàm, component names)
+- **Comments**: Không viết comment trừ trường hợp bắt buộc (SSR directives, license headers, logic phức tạp)
+- **Trước khi code**: BẮT BUỘC dùng Cursor tools (`read_file`, `codebase_search`, `grep`) để đọc và hiểu file liên quan
+
+### Naming Conventions
+```
+Components:        PascalCase          UserProfile.vue, GpaCalculator.vue
+Functions/vars:    camelCase           calculateGpa, isUserLoggedIn
+Constants:         UPPER_SNAKE_CASE    MAX_CREDITS, API_BASE_URL
+Files:             kebab-case          user-profile.vue, gpa-calculator.ts
+Types/Interfaces:  PascalCase          User, GpaResult, CourseGrade
+Composables:       use + PascalCase    useGpaCalculator, useAuth
+```
+
+### Nuxt & Plugins
+- `app/plugins/` chỉ quét file top-level. Dùng tiền tố số cho thứ tự nạp: `01.`, `02.`, `03.`
+- `.client.ts` cho client-only; `.server.ts` cho server-only
+- Subfolder plugins cần khai báo trong `nuxt.config.ts > plugins`
+- Tham khảo: [Nuxt Docs - app/plugins](https://nuxt.com/docs/4.x/guide/directory-structure/app/plugins)
+
+
+### Vue Component Structure
+```vue
+<script setup lang="ts">
+// 1. Imports
+import { ref, computed } from 'vue'
+import type { User } from '~/types'
+
+// 2. Props & Emits
+interface Props {
+  userId: string
+}
+const props = defineProps<Props>()
+const emit = defineEmits<{ update: [user: User] }>()
+
+// 3. Composables
+const { data, pending } = await useFetch('/api/user')
+
+// 4. Reactive state
+const isLoading = ref(false)
+
+// 5. Computed properties
+const fullName = computed(() => `${data.value?.firstName} ${data.value?.lastName}`)
+
+// 6. Methods
+const handleUpdate = () => {
+  emit('update', data.value)
+}
+
+// 7. Lifecycle hooks (if needed)
+onMounted(() => {
+  // initialization
+})
+</script>
+
+<template>
+  <!-- Template content -->
+</template>
+```
+
+### 4. Tóm tắt kết quả khảo sát
+Cho mỗi file liệt kê:
+- Mục đích file (1 dòng)
+- APIs/props/methods/chỗ mở rộng quan trọng
+- Phát hiện mâu thuẫn / duplicate logic / chỗ mơ hồ
+
+### 5. Kiểm tra build setup
+- Kiểm tra shadcn, Tailwind, dark mode class, componentDir.
+- Nếu thiếu config cần thiết → đề xuất chỉnh (không tự xoá file đặc biệt trừ khi được yêu cầu).
+
+### 6. Performance & Security Check (front-end)
+- Unused deps, bundle bloat, lazy-load cần thiết
+- Auth guard route (nếu có), bảo vệ dữ liệu nhạy cảm trong client
+- Input validation cơ bản phía client
+
+## Output bắt buộc của Task 0
+1. Danh sách file đã đọc
+2. Tóm tắt ngắn cho từng file (tối đa 10–12 dòng/file)
+3. Danh sách các điểm mơ hồ (mỗi điểm kèm câu hỏi rõ ràng)
+4. Danh sách phần cần refactor/nguy cơ
+5. Performance & Security findings
+6. Gợi ý bước tiếp theo (thiết kế, scaffold, hoặc chỉnh config)
+
+---
+
+# 02_project_overview.md
+
+## Project Overview
+- Project: DTU Student Helper Website (DTU Help Center)
+- Purpose: Hỗ trợ sinh viên tính điểm, dự đoán loại bằng, và marketplace chia sẻ tài liệu.
+- Tech Stack: Nuxt 4, Tailwind CSS, shadcn-vue, Radix Vue.
+
+## Project Description
+Website dành cho sinh viên Đại học Duy Tân với 2 nhóm tính năng chính:
+
+1. Công cụ miễn phí:
+   - Tính điểm từng môn, GPA, và dự đoán xếp loại bằng (giỏi, khá, trung bình).
+   - Tư vấn lộ trình tín chỉ để qua môn hoặc đạt mục tiêu bằng.
+
+2. Dịch vụ nâng cao (tốn phí):
+   - Marketplace mua/bán tài liệu học tập, tài liệu ôn thi (user upload → nhận hoa hồng).
+   - Hỗ trợ đăng ký tín chỉ, đăng ký học hộ, và các tiện ích hỗ trợ khác.
+
+Mục tiêu: Giúp sinh viên dễ dàng tính toán kết quả học tập và tiếp cận tài liệu, đồng thời tạo nguồn thu qua dịch vụ.
+
+## Design
+- Sử dụng hệ token HSL của shadcn-vue (biến dạng `--primary`, `--background`, ...)
+- Chủ đạo (DTU Red): HSL gần đúng của `#C8102E` → `350 85% 42%`
+- Accent: `#E63946` → gợi ý `352 77% 57%`
+- Neutral theo shadcn base; tối ưu contrast ở light/dark
+- Semantic: success/warning/error theo HSL (xem Color System bên dưới)
+- Giao diện tối giản, rõ ràng, hover/focus tinh tế, đảm bảo AA/AAA nếu có thể
+
+---
+
+# 03_code_conventions.md
+
+## Quy tắc code chung
+- English cho tên file, biến, hàm, và codebase.
+- Không comment trong code trừ khi bắt buộc (ví dụ directive SSR props, hoặc license headers).
+- 2 spaces indentation; meaningful naming; tránh viết tắt.
+- Pure functions cho helpers; tránh side-effects không cần thiết.
+- Tổ chức component theo tính năng; tách nhỏ logic phức tạp.
+
+## Nuxt & Plugins
+- `app/plugins/` chỉ quét file top-level. Dùng tiền tố số cho thứ tự nạp.
+- `.client.ts` cho client-only; `.server.ts` cho server-only.
+- Subfolder cần khai báo trong `nuxt.config.ts > plugins`.
+- Tham khảo: [Nuxt Docs - app/plugins](https://nuxt.com/docs/4.x/guide/directory-structure/app/plugins)
+
+## Tailwind & shadcn-vue
+- Quản lý tokens qua `assets/css/tailwind.css` + `tailwind.config.js`.
+- Dark mode bằng class `dark` (safelist trong Tailwind config).
+- Ưu tiên utility-first; chỉ viết CSS custom khi cần token/theme.
+
+### TypeScript Rules
+- Strict mode enabled (no implicit any)
+- Không dùng `any`, dùng `unknown` nếu thực sự cần
+- Interfaces cho object shapes, Type cho unions/intersections
+- Annotate function returns khi không rõ ràng
+
+## 3. Color Palette (HSL tokens)
+
+### Brand (HSL)
+- **Primary (DTU Red)**: `350 85% 42%`
+- **Primary Foreground**: `210 40% 98%`
+- **Accent**: `352 77% 57%`
+- **Accent Foreground**: `210 40% 98%`
+
+### Semantic (HSL)
+- **Success**: `158 64% 38%` | Foreground: `210 40% 98%` | Bg: `158 80% 95%`
+- **Warning**: `32 95% 44%` | Foreground: `210 40% 98%` | Bg: `48 100% 96%`
+- **Destructive/Error**: `0 72% 51%` | Foreground: `210 40% 98%` | Bg: `0 85% 97%`
+
+### Neutral (Light)
+- **Background**: `0 0% 100%`
+- **Foreground**: `222.2 84% 4.9%`
+- **Border/Input**: `214.3 31.8% 91.4%`
+- **Muted**: `210 40% 96.1%` | `Muted-foreground`: `215.4 16.3% 46.9%`
+- **Card/Popover**: `0 0% 100%` | `Foreground`: `222.2 84% 4.9%`
+
+### Neutral (Dark)
+- **Background**: `222.2 84% 4.9%`
+- **Foreground**: `210 40% 98%`
+- **Border/Input**: `217.2 32.6% 17.5%`
+- **Muted**: `217.2 32.6% 17.5%` | `Muted-foreground`: `215 20.2% 65.1%`
+
+---
+
+## 4. Color System - BẮT BUỘC (Maintainability)
+
+> Lưu ý: Hệ màu dùng HSL tokens theo shadcn-vue đã được định nghĩa trong `assets/css/tailwind.css` và map sẵn trong `tailwind.config.js`. Xem mục “Color Rules” bên dưới để áp dụng.
+
+
+## Color Rules
+
+### Nguyên tắc chung
+- Tất cả màu phải được quản lý qua biến HSL trong `:root` (ví dụ `--primary`, `--background`) và map qua `tailwind.config.js` (theme.extend.colors theo shadcn-vue).
+- ❌ Không hardcode màu trực tiếp trong component (vd: `text-[#ff0000]`).
+- ✅ Luôn sử dụng token Tailwind đã map (vd: `text-primary`, `bg-accent`, `text-muted-foreground`).
+- Khi đổi màu chủ đạo, chỉ cần sửa biến HSL → toàn bộ UI tự động cập nhật.
+
+---
+
+### Brand & Palette (HSL tokens)
+- **Primary (Brand color)**: `--primary: 350 85% 42%` (DTU Red)
+- **Primary Foreground**: `--primary-foreground: 210 40% 98%`
+- **Accent**: `--accent: 352 77% 57%`
+- **Accent Foreground**: `--accent-foreground: 210 40% 98%`
+- **Background / Foreground**: dùng `--background`, `--foreground` theo shadcn base
+- **Text muted**: `--muted-foreground: 215.4 16.3% 46.9%`
+- **Success / Warning / Error**: dùng cặp token HSL và bg như phần Color Palette ở trên
+- Dark mode: định nghĩa lại toàn bộ biến trong `.dark { ... }` tương ứng
+
+---
+
+### Cách áp dụng (gợi ý class)
+- **Hero section**: `bg-primary text-primary-foreground`
+- **Card**: `bg-card text-card-foreground border border-border hover:bg-accent/5`
+- **CTA button**: `bg-primary text-primary-foreground hover:bg-primary/90 focus:ring-2 focus:ring-accent`
+- **Highlight / Link**: `text-accent hover:underline`
+- **State (Success/Warning/Error)**: ưu tiên nền nhạt + text rõ ràng, ví dụ `bg-success/10 text-success` hoặc dùng cặp `bg-[state-bg] text-[state-foreground]` nếu đã map
+
+---
+
+### Công cụ chọn màu (designer-driven)
+- Dùng [Coolors](https://coolors.co/) hoặc [Color Hunt](https://colorhunt.co/) để tạo palette bổ sung.
+- Nếu cần mở rộng dải màu (50–900), dùng [Tailwind Ink](https://tailwind.ink/) để generate từ Primary HSL.
+
+---
+
+### Checklist trước khi merge UI
+- [ ] Không có màu hardcode.
+- [ ] Màu dùng đúng token/utility Tailwind.
+- [ ] Dark mode kiểm tra đã đổi biến đúng.
+- [ ] CTA và link nổi bật, không bị chìm với background.
+
+
+## 6. Dev Checklist (Trước Khi Code)
+
+Trước khi bắt đầu code feature/fix, phải hoàn thành checklist này:
+
+- [ ] **Đọc config files**:
+  - [ ] `nuxt.config.ts` - Hiểu cấu trúc project, plugins, modules
+  - [ ] `tailwind.config.js` - Hiểu color tokens, theme setup
+  - [ ] `assets/css/tailwind.css` - Hiểu CSS variables đang dùng
+
+- [ ] **Xác định scope**:
+  - [ ] Mục tiêu feature/fix là gì?
+  - [ ] Components nào bị ảnh hưởng?
+  - [ ] Cần tạo component mới hay sửa component cũ?
+
+- [ ] **Research codebase**:
+  - [ ] Dùng `codebase_search` tìm components liên quan
+  - [ ] Dùng `read_file` đọc components tương tự để hiểu pattern
+  - [ ] Dùng `grep` tìm usage của functions/components sẽ sửa
+
+- [ ] **Check dependencies**:
+  - [ ] Color tokens đã có trong CSS variables chưa?
+  - [ ] Types/interfaces cần có chưa tồn tại?
+  - [ ] Composables cần có chưa tồn tại?
+
+- [ ] **Verify requirements**:
+  - [ ] Responsive design cần support breakpoints nào?
+  - [ ] Dark mode có cần không?
+  - [ ] Performance requirements (lazy load, code splitting)?
+
+- [ ] **HỎI USER NẾU CÓ MƠ HỒ**:
+  - [ ] Không tự ý assume requirements
+  - [ ] Clarify edge cases
+  - [ ] Confirm design decisions
+
+## Notes
+
+- **Living Document**: Update rules này khi có thay đổi architecture
+- **AI Convention**: Rules này áp dụng cho cả Cursor và AI assistants khác
+- **Breaking Changes**: Discuss với team trước khi thay đổi core rules
+- **Color System Priority**: Khi conflict giữa design và color system, ưu tiên maintainability (dùng tokens)
