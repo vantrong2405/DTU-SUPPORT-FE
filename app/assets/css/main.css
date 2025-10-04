@@ -1,1 +1,36 @@
 @import "tailwindcss";
+
+@layer base {
+  :root {
+    --dtu-red: 350 85% 42%;
+    --dtu-white: 0 0% 100%;
+    --dtu-gray: 0 0% 9%;
+  }
+}
+
+@layer utilities {
+  .bg-dtu-red {
+    background-color: hsl(var(--dtu-red));
+  }
+  .text-dtu-red {
+    color: hsl(var(--dtu-red));
+  }
+  .bg-dtu-white {
+    background-color: hsl(var(--dtu-white));
+  }
+  .text-dtu-white {
+    color: hsl(var(--dtu-white));
+  }
+  .bg-dtu-gray {
+    background-color: hsl(var(--dtu-gray));
+  }
+  .text-dtu-gray {
+    color: hsl(var(--dtu-gray));
+  }
+  .from-dtu-red {
+    --tw-gradient-from: hsl(var(--dtu-red));
+  }
+  .to-dtu-red {
+    --tw-gradient-to: hsl(var(--dtu-red));
+  }
+}
