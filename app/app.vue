@@ -1,5 +1,6 @@
 <template>
-  <div class="text-red-500">
-    hello123
+  <div class="min-h-dvh bg-background text-foreground">
+    <NuxtPage />
   </div>
+
 </template>
