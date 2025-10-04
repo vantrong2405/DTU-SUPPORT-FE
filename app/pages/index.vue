@@ -1,16 +1,23 @@
 <script setup lang="ts">
-import HeroSection from '~/components/home/HeroSection.vue'
-import FeaturesGrid from '~/components/home/FeaturesGrid.vue'
+import Hero from '~/components/common/Hero.vue'
+import WhatWeDo from '~/components/home/WhatWeDo.vue'
+import AboutUs from '~/components/home/AboutUs.vue'
+import Testimonials from '~/components/home/Testimonials.vue'
 import FAQ from '~/components/home/FAQ.vue'
-import Footer from '~/components/home/Footer.vue'
+import ScrollToTop from '~/components/common/ScrollToTop.vue'
 </script>
 
 <template>
   <div>
-    <HeroSection />
-    <FeaturesGrid />
+    <Hero
+      title="DTU Help Center"
+      subtitle="Nền tảng hỗ trợ học tập toàn diện cho sinh viên Đại học Duy Tân"
+    />
+    <WhatWeDo />
+    <AboutUs />
+    <Testimonials />
     <FAQ />
-    <Footer />
+    <ScrollToTop />
   </div>
 
 </template>

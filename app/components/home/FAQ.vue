@@ -29,7 +29,7 @@ const faqs = [
 </script>
 
 <template>
-  <section class="py-20 md:py-24 bg-gradient-to-br from-gray-50 to-white relative overflow-hidden">
+  <section id="faq" class="py-20 md:py-24 bg-gradient-to-br from-gray-50 to-white relative overflow-hidden">
     <div class="absolute top-0 left-0 w-full h-full">
       <div class="absolute top-20 right-20 w-24 h-24 bg-dtu-red/5 rounded-full blur-xl"></div>
       <div class="absolute bottom-20 left-20 w-32 h-32 bg-dtu-red/5 rounded-full blur-2xl"></div>

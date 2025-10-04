@@ -5,12 +5,12 @@ import Button from '@/components/ui/button/Button.vue'
 
 const title = computed(() => 'DTU Help Center')
 const subtitle = computed(() => 'Khám phá các công cụ hỗ trợ học tập toàn diện cho sinh viên DTU')
-const primaryCta = computed(() => ({ label: 'Khám phá các tool', to: '/tools' }))
+const primaryCta = computed(() => ({ label: 'Khám phá các công cụ', to: '/tools' }))
 const secondaryCta = computed(() => ({ label: 'Tìm hiểu thêm', to: '/about' }))
 </script>
 
 <template>
-  <section class="relative overflow-hidden bg-dtu-red text-dtu-white">
+    <section class="relative overflow-hidden bg-dtu-red text-dtu-white">
     <div class="absolute inset-0 bg-gradient-to-br from-dtu-red/90 to-dtu-red"></div>
     <div class="relative z-10">
       <div class="container mx-auto px-4 py-24 md:py-32">
@@ -27,9 +27,9 @@ const secondaryCta = computed(() => ({ label: 'Tìm hiểu thêm', to: '/about' 
             {{ subtitle }}
           </p>
           <div class="flex flex-col sm:flex-row justify-center items-center gap-4 max-w-lg mx-auto">
-            <Button as="NuxtLink" :to="primaryCta.to" variant="secondary" size="lg" class="w-full sm:w-auto bg-dtu-white text-dtu-red hover:bg-dtu-white/90 hover:scale-105 shadow-lg hover:shadow-xl transition-all duration-300">
+            <NuxtLink :to="primaryCta.to" class="w-full sm:w-auto bg-dtu-white text-dtu-red hover:bg-dtu-white/90 hover:scale-105 shadow-lg hover:shadow-xl transition-all duration-300 inline-flex items-center justify-center whitespace-nowrap rounded-md text-sm font-medium ring-offset-background transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:pointer-events-none disabled:opacity-50 cursor-pointer h-11 rounded-md px-8">
               {{ primaryCta.label }}
-            </Button>
+            </NuxtLink>
             <Button as="NuxtLink" :to="secondaryCta.to" variant="outline" size="lg" class="w-full sm:w-auto border-2 border-dtu-white/30 bg-dtu-white/10 backdrop-blur-sm text-dtu-white hover:bg-dtu-white/20 hover:border-dtu-white/50 hover:scale-105 transition-all duration-300">
               {{ secondaryCta.label }}
             </Button>
