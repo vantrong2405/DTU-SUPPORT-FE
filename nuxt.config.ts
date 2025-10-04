@@ -8,12 +8,15 @@ export default defineNuxtConfig({
     plugins: [
       tailwindcss(),
     ],
+    css: {
+      devSourcemap: true,
+    },
   },
   modules: [
     'shadcn-nuxt'
   ],
   shadcn: {
     prefix: '',
-    componentDir: './components/ui'
+    componentDir: './app/components/ui'
   }
 });

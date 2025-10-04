@@ -6,7 +6,6 @@ const currentYear = new Date().getFullYear()
   <footer class="bg-dtu-gray text-dtu-white">
     <div class="container mx-auto px-4 py-12">
       <div class="grid gap-8 md:grid-cols-4">
-        <!-- Cột 1: Thông tin thương hiệu -->
         <div class="md:col-span-1">
           <div class="flex items-center mb-4">
             <div class="w-10 h-10 bg-dtu-red rounded-lg flex items-center justify-center mr-3">
@@ -22,7 +21,6 @@ const currentYear = new Date().getFullYear()
           </p>
         </div>
 
-        <!-- Cột 2: Dịch vụ -->
         <div>
           <h4 class="text-lg font-bold text-dtu-white mb-4">Dịch vụ</h4>
           <ul class="space-y-3">
@@ -35,7 +33,6 @@ const currentYear = new Date().getFullYear()
           </ul>
         </div>
 
-        <!-- Cột 3: Hỗ trợ -->
         <div>
           <h4 class="text-lg font-bold text-dtu-white mb-4">Hỗ trợ</h4>
           <ul class="space-y-3">
@@ -46,7 +43,6 @@ const currentYear = new Date().getFullYear()
           </ul>
         </div>
 
-        <!-- Cột 4: Liên hệ -->
         <div>
           <h4 class="text-lg font-bold text-dtu-white mb-4">Liên hệ</h4>
           <ul class="space-y-3">
@@ -72,7 +68,6 @@ const currentYear = new Date().getFullYear()
         </div>
       </div>
 
-      <!-- Phần bản quyền -->
       <div class="border-t border-border mt-12 pt-8 text-center">
         <p class="text-muted-foreground text-sm">
           © {{ currentYear }} DTU Help Center. Tất cả quyền được bảo lưu.
@@ -84,6 +79,3 @@ const currentYear = new Date().getFullYear()
     </div>
   </footer>
 </template>
-
-<style scoped>
-</style>

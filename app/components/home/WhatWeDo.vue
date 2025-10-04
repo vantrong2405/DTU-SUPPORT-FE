@@ -1,4 +1,6 @@
 <script setup lang="ts">
+import * as SU from '@/components/ui'
+
 const features = [
   {
     icon: '📊',
@@ -60,7 +62,7 @@ const features = [
 
           <!-- Right: Visual -->
           <div class="relative">
-            <div class="bg-gradient-to-br from-dtu-red/10 to-dtu-red/5 rounded-3xl p-8 border border-dtu-red/20">
+            <div class="bg-gradient-to-br from-dtu-red/10 to-dtu-red/5 rounded-3xl p-8 border border-gray-300/50">
               <div class="text-center">
                 <div class="w-20 h-20 mx-auto bg-dtu-red rounded-2xl flex items-center justify-center mb-6">
                   <span class="text-3xl text-dtu-white">🎓</span>
@@ -90,21 +92,30 @@ const features = [
 
         <!-- Features Grid -->
         <div class="grid md:grid-cols-3 gap-8">
-          <div v-for="feature in features" :key="feature.title"
-            class="text-center p-6 rounded-2xl bg-gradient-to-br from-gray-50 to-white hover:from-dtu-red/5 hover:to-dtu-red/10 transition-all duration-300 border border-gray-100 shadow-sm hover:shadow-lg">
-            <div class="w-16 h-16 mx-auto mb-4 rounded-2xl flex items-center justify-center text-2xl bg-gradient-to-br from-dtu-red/10 to-dtu-red/20">
-              {{ feature.icon }}
-            </div>
-            <h4 class="text-xl font-bold text-gray-900 mb-3">{{ feature.title }}</h4>
-            <p class="text-gray-600 mb-4 leading-relaxed">{{ feature.description }}</p>
-            <ul class="space-y-1">
-              <li v-for="benefit in feature.benefits" :key="benefit"
-                class="text-sm text-dtu-red flex items-center justify-center">
-                <span class="mr-2">✓</span>
-                {{ benefit }}
-              </li>
-            </ul>
-          </div>
+          <SU.Card v-for="feature in features" :key="feature.title"
+            class="text-center hover:from-dtu-red/5 hover:to-dtu-red/10 transition-all duration-300 hover:shadow-lg border-gray-300/50">
+            <SU.CardHeader>
+              <div class="w-16 h-16 mx-auto mb-4 rounded-2xl flex items-center justify-center text-2xl bg-gradient-to-br from-dtu-red/10 to-dtu-red/20">
+                {{ feature.icon }}
+              </div>
+              <SU.CardTitle class="text-xl font-bold text-gray-900">
+                {{ feature.title }}
+              </SU.CardTitle>
+              <SU.CardDescription class="text-gray-600 leading-relaxed">
+                {{ feature.description }}
+              </SU.CardDescription>
+            </SU.CardHeader>
+
+            <SU.CardContent>
+              <ul class="space-y-1">
+                <li v-for="benefit in feature.benefits" :key="benefit"
+                  class="text-sm text-dtu-red flex items-center justify-center">
+                  <span class="mr-2">✓</span>
+                  {{ benefit }}
+                </li>
+              </ul>
+            </SU.CardContent>
+          </SU.Card>
         </div>
       </div>
     </div>

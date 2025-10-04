@@ -40,7 +40,7 @@ const teamMembers = [
       <div class="absolute bottom-20 left-20 w-32 h-32 bg-dtu-red/5 rounded-full blur-2xl"></div>
     </div>
 
-    <div class="container mx-auto px-4 relative z-10 max-w-7xl">
+    <div class="container mx-auto px-4 relative z-10 max-w-8xl">
       <div class="text-center mb-16">
         <h2 class="text-4xl md:text-5xl font-black text-gray-900 mb-6">
           Về <span class="text-dtu-red">chúng tôi</span>
@@ -50,7 +50,7 @@ const teamMembers = [
         </p>
       </div>
 
-      <div class="max-w-6xl mx-auto">
+      <div class="max-w-7xl mx-auto">
         <div class="bg-white rounded-3xl p-8 md:p-12 shadow-2xl">
           <div class="text-center mb-8">
             <h3 class="text-2xl font-bold text-gray-900 mb-4">Đội ngũ phát triển</h3>
@@ -59,9 +59,9 @@ const teamMembers = [
             </p>
           </div>
 
-          <div class="grid gap-6 md:grid-cols-3 lg:grid-cols-5">
+          <div class="grid gap-6 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-5">
             <div v-for="member in teamMembers" :key="member.name"
-              class="text-center p-6 rounded-2xl bg-gradient-to-br from-dtu-red/5 to-dtu-red/5 hover:from-dtu-red/10 hover:to-dtu-red/10 transition-all duration-300 border border-gray-200 shadow-md hover:shadow-lg">
+              class="text-center p-6 rounded-2xl bg-gradient-to-br from-dtu-red/5 to-dtu-red/5 hover:from-dtu-red/10 hover:to-dtu-red/10 transition-all duration-300 border border-gray-300/50 shadow-md hover:shadow-lg">
               <div class="text-4xl mb-4">{{ member.avatar }}</div>
               <h4 class="text-lg font-bold text-gray-900 mb-2">{{ member.name }}</h4>
               <p class="text-dtu-red font-semibold mb-2">{{ member.role }}</p>

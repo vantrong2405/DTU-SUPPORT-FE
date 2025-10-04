@@ -32,7 +32,6 @@ const navItems = [
   <header class="bg-dtu-white shadow-lg sticky top-0 z-50">
     <div class="container mx-auto px-4">
       <div class="flex items-center justify-between h-16">
-        <!-- Logo -->
         <NuxtLink to="/" class="flex items-center space-x-3" @click="closeMenu">
           <div class="w-10 h-10 bg-dtu-red rounded-lg flex items-center justify-center">
             <img :src="logoDtu" alt="DTU Logo" class="w-8 h-8 object-contain">
@@ -43,7 +42,6 @@ const navItems = [
           </div>
         </NuxtLink>
 
-        <!-- Desktop Navigation -->
         <nav class="hidden md:flex items-center space-x-8">
           <NuxtLink
             v-for="item in navItems"
@@ -57,7 +55,6 @@ const navItems = [
           </NuxtLink>
         </nav>
 
-        <!-- CTA Buttons -->
         <div class="hidden md:flex items-center space-x-3">
           <NuxtLink
             to="/login"
@@ -73,7 +70,6 @@ const navItems = [
           </NuxtLink>
         </div>
 
-        <!-- Mobile Menu Button -->
         <button
           @click="toggleMenu"
           class="md:hidden p-2 rounded-lg text-gray-700 hover:bg-gray-100 transition-colors duration-200"
@@ -87,7 +83,6 @@ const navItems = [
         </button>
       </div>
 
-        <!-- Mobile Navigation -->
         <div v-if="isMenuOpen" class="md:hidden border-t border-gray-200 py-4">
           <nav class="flex flex-col space-y-4">
             <NuxtLink

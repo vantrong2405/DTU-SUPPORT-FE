@@ -1,4 +1,6 @@
 <script setup lang="ts">
+import * as SU from '@/components/ui'
+
 const tools = [
   {
     title: 'Hỗ trợ học tập & tính toán GPA',
@@ -66,60 +68,60 @@ const tools = [
       </div>
 
       <div class="grid gap-8 md:grid-cols-2 lg:grid-cols-3 max-w-7xl mx-auto">
-        <div v-for="tool in tools" :key="tool.title"
-          class="relative bg-white rounded-2xl p-6 shadow-lg border border-gray-100 overflow-hidden">
-
+        <SU.Card v-for="tool in tools" :key="tool.title" class="relative overflow-hidden border-gray-300/50">
           <!-- Coming Soon Badge -->
           <div v-if="tool.status === 'coming-soon'"
-            class="absolute top-4 right-4 bg-orange-500 text-white text-xs font-bold px-3 py-1 rounded-full">
+            class="absolute top-4 right-4 bg-orange-500 text-white text-xs font-bold px-3 py-1 rounded-full z-10">
             Coming Soon
           </div>
 
-          <!-- Icon -->
-          <div class="flex items-center mb-4">
-            <div class="w-12 h-12 bg-dtu-red rounded-lg flex items-center justify-center mr-4">
-              <span class="text-2xl text-white">{{ tool.icon }}</span>
+          <SU.CardHeader>
+            <!-- Icon -->
+            <div class="flex items-center mb-4">
+              <div class="w-12 h-12 bg-dtu-red rounded-lg flex items-center justify-center mr-4">
+                <span class="text-2xl text-white">{{ tool.icon }}</span>
+              </div>
             </div>
-          </div>
 
-          <!-- Title -->
-          <h3 class="text-xl font-bold text-gray-900 mb-3">
-            {{ tool.title }}
-          </h3>
+            <SU.CardTitle class="text-xl font-bold text-gray-900">
+              {{ tool.title }}
+            </SU.CardTitle>
 
-          <!-- Description -->
-          <p class="text-gray-600 text-sm mb-4 leading-relaxed">
-            {{ tool.desc }}
-          </p>
+            <SU.CardDescription class="text-gray-600 leading-relaxed">
+              {{ tool.desc }}
+            </SU.CardDescription>
+          </SU.CardHeader>
 
-          <!-- Key Features -->
-          <div class="mb-6">
-            <div class="flex items-center mb-3">
-              <span class="text-yellow-500 mr-2">💡</span>
-              <h4 class="text-sm font-semibold text-gray-800">Tính năng chính:</h4>
+          <SU.CardContent>
+            <!-- Key Features -->
+            <div class="mb-6">
+              <div class="flex items-center mb-3">
+                <span class="text-yellow-500 mr-2">💡</span>
+                <h4 class="text-sm font-semibold text-gray-800">Tính năng chính:</h4>
+              </div>
+              <ul class="space-y-1">
+                <li v-for="feature in tool.features" :key="feature"
+                  class="text-xs text-gray-600 flex items-start">
+                  <span class="text-gray-400 mr-2 mt-1">•</span>
+                  {{ feature }}
+                </li>
+              </ul>
             </div>
-            <ul class="space-y-1">
-              <li v-for="feature in tool.features" :key="feature"
-                class="text-xs text-gray-600 flex items-start">
-                <span class="text-gray-400 mr-2 mt-1">•</span>
-                {{ feature }}
-              </li>
-            </ul>
-          </div>
 
-          <!-- Button -->
-          <div class="mt-auto">
-            <NuxtLink v-if="tool.status === 'available'" :to="tool.to"
-              class="w-full bg-dtu-red hover:bg-dtu-red/90 text-white font-medium py-3 px-4 rounded-lg transition-colors duration-200 flex items-center justify-center">
-              {{ tool.buttonText }}
-            </NuxtLink>
-            <button v-else disabled
-              class="w-full bg-gray-300 text-gray-500 font-medium py-3 px-4 rounded-lg cursor-not-allowed flex items-center justify-center">
-              <span class="mr-2">⏰</span>
-              {{ tool.buttonText }}
-            </button>
-          </div>
-        </div>
+            <!-- Button -->
+            <div class="mt-auto">
+              <NuxtLink v-if="tool.status === 'available'" :to="tool.to"
+                class="w-full bg-dtu-red hover:bg-dtu-red/90 text-white font-medium py-3 px-4 rounded-lg transition-colors duration-200 flex items-center justify-center">
+                {{ tool.buttonText }}
+              </NuxtLink>
+              <button v-else disabled
+                class="w-full bg-gray-300 text-gray-500 font-medium py-3 px-4 rounded-lg cursor-not-allowed flex items-center justify-center">
+                <span class="mr-2">⏰</span>
+                {{ tool.buttonText }}
+              </button>
+            </div>
+          </SU.CardContent>
+        </SU.Card>
       </div>
     </div>
   </section>
