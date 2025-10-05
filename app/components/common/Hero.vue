@@ -1,7 +1,8 @@
 <script setup lang="ts">
-import logoDtu from '~/assets/images/logo-dtu.png'
+import logoDtu from '@/assets/images/logo-dtu.png'
+import * as SU from '@/components/ui'
 
-interface Props {
+interface IProps {
   title: string
   subtitle: string
   showButtons?: boolean
@@ -15,7 +16,7 @@ interface Props {
   }
 }
 
-const props = withDefaults(defineProps<Props>(), {
+const props = withDefaults(defineProps<IProps>(), {
   showButtons: true,
   primaryCta: () => ({
     label: 'Khám phá các công cụ',
@@ -29,16 +30,16 @@ const props = withDefaults(defineProps<Props>(), {
 </script>
 
 <template>
-  <section class="relative overflow-hidden bg-dtu-red text-dtu-white">
-    <div class="absolute inset-0 bg-gradient-to-br from-dtu-red/90 to-dtu-red"></div>
-    <div class="absolute top-0 right-0 w-1/3 h-full opacity-10">
-      <div class="w-full h-full bg-gradient-to-l from-dtu-white/20 to-transparent"></div>
+  <section class="relative overflow-hidden bg-background text-foreground">
+    <div class="absolute inset-0 bg-gradient-to-br from-primary/15 to-primary/5 pointer-events-none"></div>
+    <div class="absolute top-0 right-0 w-1/3 h-full opacity-10 pointer-events-none">
+      <div class="w-full h-full bg-gradient-to-l from-primary-foreground/20 to-transparent"></div>
     </div>
     <div class="relative z-10">
       <div class="container mx-auto px-4 py-24 md:py-32">
         <div class="max-w-4xl mx-auto text-center">
           <div class="mb-8">
-            <div class="bg-dtu-white/10 backdrop-blur-sm rounded-2xl p-6 border border-dtu-white/20 inline-block">
+            <div class="bg-primary text-primary-foreground rounded-2xl p-6 inline-block">
               <img :src="logoDtu" alt="DTU Logo" class="w-32 h-24 object-contain">
             </div>
           </div>
@@ -50,14 +51,12 @@ const props = withDefaults(defineProps<Props>(), {
           </p>
 
           <div v-if="props.showButtons" class="flex flex-col sm:flex-row gap-4 justify-center items-center">
-            <NuxtLink :to="props.primaryCta.to"
-              class="bg-dtu-white text-dtu-red px-8 py-4 rounded-xl font-semibold text-lg hover:bg-dtu-white/90 hover:scale-105 transition-all duration-300 shadow-lg hover:shadow-xl">
+            <SU.Button as="NuxtLink" :to="props.primaryCta.to" class="px-8 py-4 text-lg font-semibold">
               {{ props.primaryCta.label }}
-            </NuxtLink>
-            <NuxtLink :to="props.secondaryCta.to"
-              class="bg-dtu-white/10 text-dtu-white px-8 py-4 rounded-xl font-semibold text-lg border border-dtu-white/30 hover:bg-dtu-white/20 hover:scale-105 transition-all duration-300">
+            </SU.Button>
+            <SU.Button as="NuxtLink" :to="props.secondaryCta.to" variant="outline" class="px-8 py-4 text-lg font-semibold">
               {{ props.secondaryCta.label }}
-            </NuxtLink>
+            </SU.Button>
           </div>
         </div>
       </div>

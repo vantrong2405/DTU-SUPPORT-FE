@@ -1,8 +1,8 @@
 <script setup lang="ts">
-import Hero from '~/components/common/Hero.vue'
-import ToolsGrid from '~/components/tools/ToolsGrid.vue'
-import BenefitsSection from '~/components/tools/BenefitsSection.vue'
-import ToolsCTA from '~/components/tools/ToolsCTA.vue'
+import Hero from '@/components/common/Hero.vue'
+import ToolsGrid from '@/components/tools/ToolsGrid.vue'
+import BenefitsSection from '@/components/tools/BenefitsSection.vue'
+import ToolsCTA from '@/components/tools/ToolsCTA.vue'
 </script>
 
 <template>

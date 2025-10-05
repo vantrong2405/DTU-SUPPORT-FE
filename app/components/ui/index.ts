@@ -34,3 +34,6 @@ export { default as DropdownMenuTrigger } from './dropdown-menu/DropdownMenuTrig
 
 // Input components
 export { default as Input } from './input/Input.vue'
+
+// Theme components
+export { default as Theme } from './theme-selector/Theme.vue'

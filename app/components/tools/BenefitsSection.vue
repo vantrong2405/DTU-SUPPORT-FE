@@ -34,25 +34,25 @@ const benefits = [
 </script>
 
 <template>
-  <section class="py-20 md:py-24 bg-white">
+  <section class="py-20 md:py-24 bg-background">
     <div class="container mx-auto px-4">
       <div class="text-center mb-16">
-        <h2 class="text-4xl md:text-5xl font-black text-gray-900 mb-6">
-          Tại sao nên <span class="text-dtu-red">sử dụng?</span>
+        <h2 class="text-4xl md:text-5xl font-black text-foreground mb-6">
+          Tại sao nên <span class="text-primary">sử dụng?</span>
         </h2>
-        <p class="text-xl text-gray-600 max-w-3xl mx-auto leading-relaxed">
+        <p class="text-xl text-muted-foreground max-w-3xl mx-auto leading-relaxed">
           Những lợi ích thiết thực mà công cụ mang lại cho việc học tập của bạn
         </p>
       </div>
 
       <div class="grid gap-8 md:grid-cols-2 lg:grid-cols-3 max-w-6xl mx-auto">
         <div v-for="benefit in benefits" :key="benefit.title"
-          class="text-center p-6 rounded-2xl bg-gradient-to-br from-gray-50 to-white hover:from-dtu-red/5 hover:to-dtu-red/10 transition-all duration-300 border border-gray-100 shadow-sm hover:shadow-lg">
-          <div class="w-16 h-16 mx-auto mb-4 rounded-2xl flex items-center justify-center text-2xl bg-gradient-to-br from-dtu-red/10 to-dtu-red/20">
+          class="text-center p-6 rounded-2xl bg-gradient-to-br from-muted to-background hover:from-primary/5 hover:to-primary/10 transition-all duration-300 border border-border shadow-sm hover:shadow-lg">
+          <div class="w-16 h-16 mx-auto mb-4 rounded-2xl flex items-center justify-center text-2xl bg-gradient-to-br from-primary/10 to-primary/20">
             {{ benefit.icon }}
           </div>
-          <h3 class="text-xl font-bold text-gray-900 mb-3">{{ benefit.title }}</h3>
-          <p class="text-gray-600 leading-relaxed">{{ benefit.description }}</p>
+          <h3 class="text-xl font-bold text-foreground mb-3">{{ benefit.title }}</h3>
+          <p class="text-muted-foreground leading-relaxed">{{ benefit.description }}</p>
         </div>
       </div>
     </div>

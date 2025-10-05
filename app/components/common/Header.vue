@@ -1,7 +1,10 @@
 <script setup lang="ts">
-import logoDtu from '~/assets/images/logo-dtu.png'
+import logoDtu from '@/assets/images/logo-dtu.png'
+import * as SU from '@/components/ui'
 
 const isMenuOpen = ref(false)
+
+const route = useRoute()
 
 const toggleMenu = () => {
   isMenuOpen.value = !isMenuOpen.value
@@ -19,6 +22,13 @@ const scrollToSection = (sectionId: string) => {
   }
 }
 
+const handleNavClick = (event: MouseEvent, item: { to: string; scroll?: boolean }) => {
+  if (item.scroll) {
+    event.preventDefault()
+    scrollToSection(item.to)
+  }
+}
+
 const navItems = [
   { label: 'Trang chủ', to: '/' },
   { label: 'DTU Helper là gì?', to: '#what-we-do', scroll: true },
@@ -29,50 +39,49 @@ const navItems = [
 </script>
 
 <template>
-  <header class="bg-dtu-white shadow-lg sticky top-0 z-50">
-    <div class="container mx-auto px-4">
+  <header class="bg-background shadow-lg sticky top-0 z-50">
+    <div class="container mx-auto px-3 sm:px-4">
       <div class="flex items-center justify-between h-16">
-        <NuxtLink to="/" class="flex items-center space-x-3" @click="closeMenu">
-          <div class="w-10 h-10 bg-dtu-red rounded-lg flex items-center justify-center">
-            <img :src="logoDtu" alt="DTU Logo" class="w-8 h-8 object-contain">
+        <NuxtLink to="/" class="flex items-center space-x-2 sm:space-x-3 min-w-0 flex-shrink-0" @click="closeMenu">
+          <div class="w-8 h-8 sm:w-10 sm:h-10 bg-primary rounded-lg flex items-center justify-center border-0 flex-shrink-0">
+            <img :src="logoDtu" alt="DTU Logo" class="w-6 h-6 sm:w-8 sm:h-8 object-contain">
           </div>
-          <div>
-            <h1 class="text-xl font-bold text-gray-900">DTU Help Center</h1>
-            <p class="text-xs text-gray-600">Duy Tân University</p>
+          <div class="hidden sm:block flex-shrink-0 min-w-0">
+            <h1 class="text-lg sm:text-xl font-bold text-foreground truncate">DTU Help Center</h1>
+            <p class="text-xs text-muted-foreground truncate">Duy Tân University</p>
+          </div>
+          <div class="sm:hidden flex-shrink-0">
+            <h1 class="text-sm font-bold text-foreground">DTU</h1>
           </div>
         </NuxtLink>
 
-        <nav class="hidden md:flex items-center space-x-8">
+        <nav class="hidden xl:flex items-center space-x-4 2xl:space-x-6">
           <NuxtLink
             v-for="item in navItems"
             :key="item.to"
-            :to="item.to"
-            class="text-gray-700 hover:text-dtu-red transition-colors duration-200 font-medium"
-            active-class="text-dtu-red"
-            @click="item.scroll ? scrollToSection(item.to) : null"
+            :to="item.scroll ? route.path : item.to"
+            class="text-muted-foreground hover:text-foreground hover:bg-[hsl(var(--accent)/0.16)] rounded-md px-2 py-1 transition-colors duration-150 font-medium text-sm whitespace-nowrap"
+            active-class="text-primary"
+            @click="handleNavClick($event, item)"
           >
             {{ item.label }}
           </NuxtLink>
         </nav>
 
-        <div class="hidden md:flex items-center space-x-3">
-          <NuxtLink
-            to="/login"
-            class="text-gray-700 hover:text-dtu-red transition-colors duration-200 font-medium px-4 py-2"
-          >
-            Đăng nhập
-          </NuxtLink>
-          <NuxtLink
-            to="/register"
-            class="bg-dtu-red text-dtu-white px-6 py-2 rounded-lg font-semibold hover:bg-dtu-red/90 transition-colors duration-200"
-          >
-            Đăng ký
-          </NuxtLink>
+        <div class="hidden lg:flex items-center space-x-2 flex-shrink-0">
+          <SU.Theme />
+          <div class="h-6 w-px bg-border"></div>
+          <SU.Button as="NuxtLink" to="/login" variant="outline" size="sm" class="text-sm whitespace-nowrap">Đăng nhập</SU.Button>
+          <SU.Button as="NuxtLink" to="/register" size="sm" class="text-sm whitespace-nowrap">Đăng ký</SU.Button>
         </div>
 
-        <button
+        <SU.Button
+          as="button"
+          variant="ghost"
+          size="icon"
           @click="toggleMenu"
-          class="md:hidden p-2 rounded-lg text-gray-700 hover:bg-gray-100 transition-colors duration-200"
+          class="xl:hidden text-foreground rounded-lg w-10 h-10 hover:bg-[hsl(var(--accent)/0.12)] active:bg-[hsl(var(--accent)/0.16)] transition-colors duration-150 flex items-center flex-shrink-0"
+          aria-label="Toggle menu"
         >
           <svg v-if="!isMenuOpen" class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16"></path>
@@ -80,39 +89,35 @@ const navItems = [
           <svg v-else class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"></path>
           </svg>
-        </button>
+        </SU.Button>
       </div>
 
-        <div v-if="isMenuOpen" class="md:hidden border-t border-gray-200 py-4">
-          <nav class="flex flex-col space-y-4">
+        <div v-if="isMenuOpen" class="xl:hidden border-t border-border bg-background">
+          <nav class="py-4 space-y-2">
             <NuxtLink
               v-for="item in navItems"
               :key="item.to"
-              :to="item.to"
-              class="text-gray-700 hover:text-dtu-red transition-colors duration-200 font-medium py-2"
-              active-class="text-dtu-red"
-              @click="item.scroll ? scrollToSection(item.to) : closeMenu()"
+              :to="item.scroll ? route.path : item.to"
+              class="block text-muted-foreground hover:text-foreground hover:bg-[hsl(var(--accent)/0.16)] rounded-md px-3 py-2 transition-colors duration-150 font-medium"
+              active-class="text-primary bg-accent/10"
+              @click="handleNavClick($event, item); if (!item.scroll) closeMenu()"
             >
               {{ item.label }}
             </NuxtLink>
-          <div class="pt-4 border-t border-gray-200 space-y-3">
-            <NuxtLink
-              to="/login"
-              class="block text-gray-700 hover:text-dtu-red transition-colors duration-200 font-medium text-center py-2"
-              @click="closeMenu"
-            >
-              Đăng nhập
-            </NuxtLink>
-            <NuxtLink
-              to="/register"
-              class="block bg-dtu-red text-dtu-white px-6 py-3 rounded-lg font-semibold text-center hover:bg-dtu-red/90 transition-colors duration-200"
-              @click="closeMenu"
-            >
-              Đăng ký
-            </NuxtLink>
-          </div>
-        </nav>
-      </div>
+
+            <div class="pt-4 border-t border-border space-y-3">
+              <div class="flex justify-start pb-2 pl-3">
+                <SU.Theme />
+              </div>
+              <SU.Button as="NuxtLink" to="/login" variant="outline" class="w-full justify-center" @click="closeMenu">
+                Đăng nhập
+              </SU.Button>
+              <SU.Button as="NuxtLink" to="/register" class="w-full justify-center" @click="closeMenu">
+                Đăng ký
+              </SU.Button>
+            </div>
+          </nav>
+        </div>
     </div>
   </header>
 </template>
