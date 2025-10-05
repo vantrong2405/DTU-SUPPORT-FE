@@ -111,11 +111,7 @@ Cho mỗi file liệt kê:
 - APIs/props/methods/chỗ mở rộng quan trọng
 - Phát hiện mâu thuẫn / duplicate logic / chỗ mơ hồ
 
-### 5. Kiểm tra build setup
-- Kiểm tra shadcn, Tailwind, dark mode class, componentDir.
-- Nếu thiếu config cần thiết → đề xuất chỉnh (không tự xoá file đặc biệt trừ khi được yêu cầu).
-
-### 6. Performance & Security Check (front-end)
+### 5. Performance & Security Check (front-end)
 - Unused deps, bundle bloat, lazy-load cần thiết
 - Auth guard route (nếu có), bảo vệ dữ liệu nhạy cảm trong client
 - Input validation cơ bản phía client
