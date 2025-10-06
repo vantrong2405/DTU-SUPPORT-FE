@@ -1,0 +1,70 @@
+home:
+  about:
+    title: "About DTU Helper"
+    description: "DTU Helper provides tools and resources for students."
+    cta: "Learn more"
+    teamTitle: "Development Team"
+    teamSubtitle: "A diverse team with deep expertise in technology and marketing"
+
+  whatWeDo:
+    title: "What is DTU Help Center?"
+    subtitle: "A comprehensive learning support platform designed for DTU students"
+    helpTitle: "How do we help you?"
+    paragraphs:
+      - "DTU Help Center is a platform developed by DTU students, dedicated to the DTU student community to support effective learning."
+      - "We provide tools for GPA calculation, study planning, and a study materials marketplace to help you achieve the best results."
+      - "All tools are designed based on DTU's academic regulations to ensure accuracy and suitability."
+    visual:
+      audience: "DTU Students"
+      trust: "Over 1000+ students trust our tools"
+      metrics:
+        accuracy: "Accuracy"
+        support: "Support"
+        free: "Free"
+    features:
+      - icon: "📊"
+        title: "GPA Calculator"
+        description: "Accurate cumulative GPA calculator to track your academic performance."
+        benefits:
+          - "Accurate GPA"
+          - "Degree classification prediction"
+          - "Study planning"
+      - icon: "📅"
+        title: "Study Scheduling"
+        description: "Credit registration and schedule optimization to avoid conflicts."
+        benefits:
+          - "Course suggestions"
+          - "Timetable arrangement"
+          - "Prerequisite checks"
+      - icon: "📚"
+        title: "Materials Marketplace"
+        description: "A platform for buying and selling study materials, exams, and assignments."
+        benefits:
+          - "Quality materials"
+          - "Sample exams"
+          - "Rating system"
+
+  testimonials:
+    title: "What students say about us"
+    subtitle: "Authentic feedback from DTU students"
+    trustBadge: "Over 1000+ students trust us"
+
+  faq:
+    title: "Frequently Asked Questions"
+    subtitle: "Common questions about our learning support tools"
+    items:
+      - question: "Is the GPA calculator accurate?"
+        answer: "The tool uses DTU's official formula. Enter correct scores and credits for precise results."
+      - question: "How to predict the degree classification?"
+        answer: "Based on current GPA and accumulated credits, the tool suggests your level and goals."
+      - question: "How does the credit roadmap work?"
+        answer: "Enter total credits completed; the system suggests additional credits to reach your target degree."
+      - question: "Is the materials marketplace reliable?"
+        answer: "It's a community marketplace. Check contents before buying and use ratings for transparency."
+      - question: "Do I need to log in to use the tools?"
+        answer: "GPA, classification, and roadmap tools are free to use. Marketplace requires login to buy/sell."
+  hero:
+    title: "DTU Help Center"
+    subtitle: "A comprehensive learning support platform for DTU students"
+    primaryCta: "Explore tools"
+    secondaryCta: "Learn more"

@@ -1,0 +1,63 @@
+header:
+  title: "Welcome to the website"
+  menu:
+    home: "Home"
+    about: "About us"
+    whatWeDo: "What is DTU Helper?"
+    testimonials: "Testimonials"
+    faq: "FAQ"
+auth:
+  login: "Login"
+  register: "Register"
+common:
+  header:
+    menu:
+      home: "Home"
+      about: "About us"
+      whatWeDo: "What is DTU Helper?"
+      testimonials: "Testimonials"
+      faq: "FAQ"
+  auth:
+    login: "Login"
+    register: "Register"
+  ui:
+    language:
+      label: "Language"
+      selectLabel: "Select language"
+    theme:
+      label: "Theme"
+      selectLabel: "Select theme"
+      names:
+        red: "Red"
+        blue: "Blue"
+        green: "Green"
+        purple: "Purple"
+        orange: "Orange"
+        pink: "Pink"
+  brand:
+    titleFull: "DTU Study Support"
+    subtitle: "Duy Tân University"
+    titleShort: "DTU"
+  footer:
+    intro: "Supporting DTU students on their learning journey."
+    sections:
+      services: "Services"
+      support: "Support"
+      contact: "Contact"
+    links:
+      gpa: "GPA Calculator"
+      predict: "Degree Prediction"
+      schedule: "Credit Roadmap"
+      marketplace: "Marketplace"
+      tools: "Tools"
+      help: "Study Support"
+      faq: "FAQ"
+      payment: "Payment Guide"
+      privacy: "Privacy Policy"
+      terms: "Terms of Service"
+    contact:
+      messenger: "Messenger 24/7"
+      facebook: "Facebook Page"
+      response: "Respond within 30 minutes"
+    copyright: "© {year} DTU Study Support. All rights reserved."
+    crafted: "Crafted with ❤️ for DTU students"

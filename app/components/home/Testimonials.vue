@@ -1,4 +1,8 @@
 <script setup lang="ts">
+import { useI18n } from 'vue-i18n'
+
+const { t } = useI18n()
+
 const testimonials = [
   {
     name: 'Nguyễn Văn An',
@@ -45,10 +49,10 @@ const testimonials = [
     <div class="container mx-auto px-4 relative z-10">
       <div class="text-center mb-16">
         <h2 class="text-4xl md:text-5xl font-black text-foreground mb-6">
-          Sinh viên nói gì về <span class="text-primary">chúng mình</span>
+          {{ t('home.testimonials.title') }}
         </h2>
         <p class="text-xl text-muted-foreground max-w-3xl mx-auto leading-relaxed">
-          Những phản hồi chân thực từ cộng đồng sinh viên DTU
+          {{ t('home.testimonials.subtitle') }}
         </p>
       </div>
 
@@ -76,7 +80,7 @@ const testimonials = [
       <div class="text-center mt-12">
         <div class="inline-flex items-center bg-primary/10 text-primary px-6 py-3 rounded-full">
           <span class="mr-2">💬</span>
-          <span class="font-semibold">Hơn 1000+ sinh viên đã tin tưởng sử dụng</span>
+          <span class="font-semibold">{{ t('home.testimonials.trustBadge') }}</span>
         </div>
       </div>
     </div>
