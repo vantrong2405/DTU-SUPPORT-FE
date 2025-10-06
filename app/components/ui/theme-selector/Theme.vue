@@ -1,23 +1,26 @@
 <script setup lang="ts">
 import { Palette } from 'lucide-vue-next'
 import * as SU from '@/components/ui'
+import { useI18n } from 'vue-i18n'
+
+const { t } = useI18n()
 
 const themes = {
   light: [
-    { name: 'Đỏ DTU', value: 'red-light', color: '#C8102E' },
-    { name: 'Xanh Dương', value: 'blue-light', color: '#3B82F6' },
-    { name: 'Xanh Lá', value: 'green-light', color: '#10B981' },
-    { name: 'Tím Hoàng Gia', value: 'purple-light', color: '#8B5CF6' },
-    { name: 'Cam Hoàng Hôn', value: 'orange-light', color: '#F97316' },
-    { name: 'Hồng Hoa Hồng', value: 'pink-light', color: '#EC4899' }
+    { value: 'red-light', color: '#C8102E' },
+    { value: 'blue-light', color: '#3B82F6' },
+    { value: 'green-light', color: '#10B981' },
+    { value: 'purple-light', color: '#8B5CF6' },
+    { value: 'orange-light', color: '#F97316' },
+    { value: 'pink-light', color: '#EC4899' }
   ],
   dark: [
-    { name: 'Đỏ DTU', value: 'red-dark', color: '#EF4444' },
-    { name: 'Xanh Dương', value: 'blue-dark', color: '#60A5FA' },
-    { name: 'Xanh Lá', value: 'green-dark', color: '#34D399' },
-    { name: 'Tím Hoàng Gia', value: 'purple-dark', color: '#A78BFA' },
-    { name: 'Cam Hoàng Hôn', value: 'orange-dark', color: '#FB923C' },
-    { name: 'Hồng Hoa Hồng', value: 'pink-dark', color: '#F472B6' }
+    { value: 'red-dark', color: '#EF4444' },
+    { value: 'blue-dark', color: '#60A5FA' },
+    { value: 'green-dark', color: '#34D399' },
+    { value: 'purple-dark', color: '#A78BFA' },
+    { value: 'orange-dark', color: '#FB923C' },
+    { value: 'pink-dark', color: '#F472B6' }
   ]
 }
 
@@ -42,6 +45,11 @@ const applyTheme = (themeValue: string) => {
   router.push({ query: { ...route.query, theme: themeValue } })
 }
 
+const getThemeLabel = (value: string) => {
+  const base = (value || '').split('-')[0] as 'red' | 'blue' | 'green' | 'purple' | 'orange' | 'pink'
+  return t(`common.ui.theme.names.${base}`)
+}
+
 useHead(() => ({
   htmlAttrs: {
     'data-theme': currentTheme.value || 'red-light',
@@ -52,15 +60,15 @@ useHead(() => ({
 
 <template>
   <SU.DropdownMenu>
-    <SU.DropdownMenuTrigger as-child>
+      <SU.DropdownMenuTrigger as-child>
       <SU.Button variant="outline" size="sm" class="gap-2 rounded-lg">
         <Palette class="h-[1.2rem] w-[1.2rem]" :style="{ color: iconColor }" />
-        <span class="hidden sm:inline">Màu sắc</span>
+        <span class="hidden sm:inline">{{ $t('common.ui.theme.label') }}</span>
       </SU.Button>
     </SU.DropdownMenuTrigger>
       <SU.DropdownMenuContent class="w-56 bg-card text-card-foreground border border-border rounded-xl shadow-2xl ring-1 ring-border backdrop-blur-sm z-[9999]" align="end">
-        <SU.DropdownMenuLabel class="text-card-foreground">Chọn giao diện</SU.DropdownMenuLabel>
-      <SU.DropdownMenuSeparator class="bg-border" />
+        <SU.DropdownMenuLabel class="text-card-foreground">{{ $t('common.ui.theme.selectLabel') }}</SU.DropdownMenuLabel>
+      <div class="border-t border-border mt-1" />
 
       <div class="p-2">
         <div class="flex items-center gap-2 px-2 pb-3">
@@ -71,7 +79,7 @@ useHead(() => ({
         <div v-if="showingMode === 'light'" class="grid grid-cols-2 gap-1">
           <SU.Button
             as="button"
-            variant="ghost"                 
+            variant="ghost"
             size="sm"
             v-for="theme in themes.light"
             :key="theme.value"
@@ -82,7 +90,7 @@ useHead(() => ({
             ]"
           >
             <div class="w-3 h-3 rounded-full border border-border" :style="{ backgroundColor: theme.color }" />
-            <span class="truncate">{{ theme.name }}</span>
+            <span class="truncate">{{ getThemeLabel(theme.value) }}</span>
           </SU.Button>
         </div>
 
@@ -100,7 +108,7 @@ useHead(() => ({
             ]"
           >
             <div class="w-3 h-3 rounded-full border border-border" :style="{ backgroundColor: theme.color }" />
-            <span class="truncate">{{ theme.name }}</span>
+            <span class="truncate">{{ getThemeLabel(theme.value) }}</span>
           </SU.Button>
         </div>
       </div>

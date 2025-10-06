@@ -1,0 +1,63 @@
+tools:
+  hero:
+    title: "Study Support Tools"
+    subtitle: "A collection of tools designed for DTU students"
+  benefits:
+    titlePrefix: "Why"
+    titlePrimary: "use it?"
+    titleSuffix: ""
+    subtitle: "Practical benefits to improve your learning outcomes"
+    items:
+      - { icon: "📈", title: "Optimize Results", description: "Achieve higher GPA with scientific study planning" }
+      - { icon: "⏰", title: "Save Time", description: "Automate complex calculations, reduce manual work" }
+      - { icon: "🧠", title: "Smart Decisions", description: "Data-driven insights for better study choices" }
+      - { icon: "🎯", title: "Clear Goals", description: "Set concrete goals and roadmaps to reach them" }
+      - { icon: "🏆", title: "Excellent Outcomes", description: "Support scholarships and academic achievements" }
+      - { icon: "📖", title: "Effective Learning", description: "Optimize schedule, balance study and rest" }
+  cta:
+    title: "Ready to study more effectively?"
+    subtitle: "Pick a tool and start your learning journey today."
+  grid:
+    titlePrefix: "Choose the right"
+    titlePrimary: "tool"
+    titleSuffix: ""
+    subtitle: "Explore study tools tailored for DTU students"
+    featuresHeading: "Key features:"
+    badgeComing: "Coming Soon"
+    button:
+      useNow: "→ Use Now"
+      coming: "In Development"
+    items:
+      - icon: "📊"
+        status: "available"
+        to: "/gpa"
+        title: "Study Support & GPA Calculator"
+        desc: "Comprehensive tool to manage and optimize academic results"
+        features:
+          - "Accurate cumulative GPA calculation"
+          - "Classify performance: Excellent/Good/Average/Below"
+          - "Predict performance with remaining credits"
+          - "Recommend prioritized courses"
+          - "Track progress by semester"
+      - icon: "📅"
+        status: "coming-soon"
+        to: "/schedule"
+        title: "Credit Registration & Schedule Planner"
+        desc: "Smart planning and timetable arrangement"
+        features:
+          - "Suggest courses by major"
+          - "Auto-optimize timetable"
+          - "Check prerequisites"
+          - "Avoid schedule conflicts"
+          - "Forecast workload per semester"
+      - icon: "📚"
+        status: "coming-soon"
+        to: "/marketplace"
+        title: "Study Materials Marketplace"
+        desc: "Share and trade materials, exams, assignments"
+        features:
+          - "Quality study materials"
+          - "Sample exams and assignments"
+          - "Ratings and feedback"
+          - "Search by subject and major"
+          - "Secure payments"

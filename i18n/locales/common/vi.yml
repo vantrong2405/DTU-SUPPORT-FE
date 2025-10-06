@@ -1,0 +1,63 @@
+header:
+  title: "Chào mừng đến với trang web"
+  menu:
+    home: "Trang chủ"
+    about: "Về chúng tôi"
+    whatWeDo: "DTU Helper là gì?"
+    testimonials: "Sinh viên nói gì"
+    faq: "FAQ"
+auth:
+  login: "Đăng nhập"
+  register: "Đăng ký"
+common:
+  header:
+    menu:
+      home: "Trang chủ"
+      about: "Về chúng tôi"
+      whatWeDo: "DTU Helper là gì?"
+      testimonials: "Sinh viên nói gì"
+      faq: "FAQ"
+  auth:
+    login: "Đăng nhập"
+    register: "Đăng ký"
+  ui:
+    language:
+      label: "Ngôn ngữ"
+      selectLabel: "Chọn ngôn ngữ"
+    theme:
+      label: "Giao diện"
+      selectLabel: "Chọn giao diện"
+      names:
+        red: "Đỏ DTU"
+        blue: "Xanh Dương"
+        green: "Xanh Lá"
+        purple: "Tím Hoàng Gia"
+        orange: "Cam Hoàng Hôn"
+        pink: "Hồng Hoa Hồng"
+  brand:
+    titleFull: "DTU Study Support"
+    subtitle: "Duy Tân University"
+    titleShort: "DTU"
+  footer:
+    intro: "Đồng hành cùng sinh viên DTU trong hành trình học tập và phát triển sự nghiệp."
+    sections:
+      services: "Dịch vụ"
+      support: "Hỗ trợ"
+      contact: "Liên hệ"
+    links:
+      gpa: "Tính toán GPA"
+      predict: "Dự đoán xếp loại"
+      schedule: "Lộ trình tín chỉ"
+      marketplace: "Marketplace"
+      tools: "Công cụ hỗ trợ"
+      help: "Hỗ trợ học tập"
+      faq: "Câu hỏi thường gặp"
+      payment: "Hướng dẫn thanh toán"
+      privacy: "Chính sách bảo mật"
+      terms: "Điều khoản dịch vụ"
+    contact:
+      messenger: "Messenger 24/7"
+      facebook: "Facebook Page"
+      response: "Phản hồi trong 30 phút"
+    copyright: "© {year} DTU Study Support. Tất cả quyền được bảo lưu."
+    crafted: "Được thiết kế với ❤️ cho sinh viên Duy Tân"

@@ -1,4 +1,8 @@
 <script setup lang="ts">
+import { useI18n } from 'vue-i18n'
+
+const { t } = useI18n()
+
 const teamMembers = [
   {
     name: 'Nguyễn Minh Tuấn',
@@ -43,19 +47,19 @@ const teamMembers = [
     <div class="container mx-auto px-4 relative z-10 max-w-8xl">
       <div class="text-center mb-16">
         <h2 class="text-4xl md:text-5xl font-black text-foreground mb-6">
-          Về <span class="text-primary">chúng tôi</span>
+          {{ t('home.about.title') }}
         </h2>
         <p class="text-xl text-muted-foreground max-w-3xl mx-auto leading-relaxed">
-          Chúng tôi là nhóm sinh viên chuyên build các công cụ để phục vụ cho sinh viên <span class="whitespace-nowrap">Duy Tân</span>
+          {{ t('home.about.description') }}
         </p>
       </div>
 
       <div class="max-w-7xl mx-auto">
         <div class="bg-card rounded-3xl p-8 md:p-12 shadow-2xl">
           <div class="text-center mb-8">
-            <h3 class="text-2xl font-bold text-card-foreground mb-4">Đội ngũ phát triển</h3>
+            <h3 class="text-2xl font-bold text-card-foreground mb-4">{{ t('home.about.teamTitle') }}</h3>
             <p class="text-muted-foreground leading-relaxed">
-              Đội ngũ đa dạng với chuyên môn sâu về công nghệ và marketing
+              {{ t('home.about.teamSubtitle') }}
             </p>
           </div>
 

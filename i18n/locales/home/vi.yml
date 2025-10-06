@@ -1,0 +1,70 @@
+home:
+  about:
+    title: "Về DTU Helper"
+    description: "DTU Helper cung cấp công cụ và tài nguyên cho sinh viên."
+    cta: "Tìm hiểu thêm"
+    teamTitle: "Đội ngũ phát triển"
+    teamSubtitle: "Đội ngũ đa dạng với chuyên môn sâu về công nghệ và marketing"
+
+  whatWeDo:
+    title: "DTU Help Center là gì?"
+    subtitle: "Nền tảng hỗ trợ học tập toàn diện được thiết kế đặc biệt cho sinh viên Đại học Duy Tân"
+    helpTitle: "Chúng tôi giúp gì cho bạn?"
+    paragraphs:
+      - "DTU Help Center là nền tảng được phát triển bởi sinh viên DTU, dành riêng cho cộng đồng sinh viên Duy Tân với mục tiêu hỗ trợ quá trình học tập hiệu quả."
+      - "Chúng tôi cung cấp các công cụ tính toán GPA, lập kế hoạch học tập, và marketplace tài liệu học tập để giúp bạn đạt được kết quả học tập tốt nhất."
+      - "Tất cả các công cụ đều được thiết kế dựa trên quy chế đào tạo của Đại học Duy Tân, đảm bảo tính chính xác và phù hợp với chương trình học của bạn."
+    visual:
+      audience: "Sinh viên DTU"
+      trust: "Hơn 1000+ sinh viên đã tin tưởng sử dụng các công cụ của chúng tôi"
+      metrics:
+        accuracy: "Độ chính xác"
+        support: "Hỗ trợ"
+        free: "Miễn phí"
+    features:
+      - icon: "📊"
+        title: "Tính toán GPA"
+        description: "Công cụ tính điểm trung bình tích lũy chính xác, giúp bạn theo dõi kết quả học tập một cách khoa học."
+        benefits:
+          - "Tính GPA chính xác"
+          - "Dự đoán xếp loại"
+          - "Lập kế hoạch học tập"
+      - icon: "📅"
+        title: "Lập lịch học"
+        description: "Hỗ trợ đăng ký tín chỉ và sắp xếp thời khóa biểu tối ưu, tránh xung đột lịch học."
+        benefits:
+          - "Gợi ý học phần"
+          - "Xếp thời khóa biểu"
+          - "Kiểm tra điều kiện"
+      - icon: "📚"
+        title: "Marketplace tài liệu"
+        description: "Nền tảng mua bán tài liệu học tập, đề thi, bài tập từ sinh viên các khóa."
+        benefits:
+          - "Tài liệu chất lượng"
+          - "Đề thi mẫu"
+          - "Hệ thống đánh giá"
+
+  testimonials:
+    title: "Sinh viên nói gì về chúng mình"
+    subtitle: "Những phản hồi chân thực từ cộng đồng sinh viên DTU"
+    trustBadge: "Hơn 1000+ sinh viên đã tin tưởng sử dụng"
+
+  faq:
+    title: "Câu hỏi thường gặp"
+    subtitle: "Những thắc mắc phổ biến về các công cụ hỗ trợ học tập"
+    items:
+      - question: "Công cụ tính GPA có chính xác không?"
+        answer: "Công cụ dựa trên công thức tính điểm trung bình tích lũy theo quy định của DTU. Bạn chỉ cần nhập đúng điểm và số tín chỉ, hệ thống sẽ cho kết quả chính xác."
+      - question: "Làm sao để dự đoán xếp loại bằng tốt nghiệp?"
+        answer: "Dựa vào GPA hiện tại và số tín chỉ đã tích lũy, công cụ sẽ gợi ý bạn đang ở mức nào (Giỏi, Khá, Trung bình) và mục tiêu cần phấn đấu."
+      - question: "Lộ trình tín chỉ hoạt động như thế nào?"
+        answer: "Bạn nhập tổng số tín chỉ đã học, hệ thống sẽ gợi ý số tín chỉ cần hoàn thành thêm để đạt mục tiêu bằng mong muốn."
+      - question: "Marketplace tài liệu có đảm bảo chất lượng không?"
+        answer: "Đây là nơi sinh viên mua/bán và chia sẻ tài liệu. Bạn nên kiểm tra nội dung trước khi mua, và có thể đánh giá, phản hồi để cộng đồng minh bạch hơn."
+      - question: "Tôi có cần đăng nhập để sử dụng không?"
+        answer: "Các công cụ tính toán (GPA, xếp loại, lộ trình) có thể dùng ngay. Marketplace cần đăng nhập để đăng bán hoặc mua tài liệu."
+  hero:
+    title: "DTU Help Center"
+    subtitle: "Nền tảng hỗ trợ học tập toàn diện cho sinh viên Đại học Duy Tân"
+    primaryCta: "Khám phá các công cụ"
+    secondaryCta: "Tìm hiểu thêm"

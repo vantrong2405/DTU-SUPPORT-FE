@@ -1,31 +1,13 @@
 <script setup lang="ts">
+import { useI18n } from 'vue-i18n'
 import Accordion from '@/components/ui/accordion/Accordion.vue'
 import AccordionContent from '@/components/ui/accordion/AccordionContent.vue'
 import AccordionItem from '@/components/ui/accordion/AccordionItem.vue'
 import AccordionTrigger from '@/components/ui/accordion/AccordionTrigger.vue'
 
-const faqs = [
-  {
-    question: 'Công cụ tính GPA có chính xác không?',
-    answer: 'Công cụ dựa trên công thức tính điểm trung bình tích lũy theo quy định của DTU. Bạn chỉ cần nhập đúng điểm và số tín chỉ, hệ thống sẽ cho kết quả chính xác.'
-  },
-  {
-    question: 'Làm sao để dự đoán xếp loại bằng tốt nghiệp?',
-    answer: 'Dựa vào GPA hiện tại và số tín chỉ đã tích lũy, công cụ sẽ gợi ý bạn đang ở mức nào (Giỏi, Khá, Trung bình) và mục tiêu cần phấn đấu.'
-  },
-  {
-    question: 'Lộ trình tín chỉ hoạt động như thế nào?',
-    answer: 'Bạn nhập tổng số tín chỉ đã học, hệ thống sẽ gợi ý số tín chỉ cần hoàn thành thêm để đạt mục tiêu bằng mong muốn.'
-  },
-  {
-    question: 'Marketplace tài liệu có đảm bảo chất lượng không?',
-    answer: 'Đây là nơi sinh viên mua/bán và chia sẻ tài liệu. Bạn nên kiểm tra nội dung trước khi mua, và có thể đánh giá, phản hồi để cộng đồng minh bạch hơn.'
-  },
-  {
-    question: 'Tôi có cần đăng nhập để sử dụng không?',
-    answer: 'Các công cụ tính toán (GPA, xếp loại, lộ trình) có thể dùng ngay. Marketplace cần đăng nhập để đăng bán hoặc mua tài liệu.'
-  }
-]
+const { t } = useI18n()
+
+const SCOPE = 'home.faq'
 </script>
 
 <template>
@@ -37,31 +19,27 @@ const faqs = [
 
     <div class="container mx-auto px-4 relative z-10">
       <div class="text-center mb-16">
-        <h2 class="text-4xl md:text-5xl font-black text-foreground mb-6">
-          ❓ Câu hỏi <span class="text-primary">thường gặp</span>
-        </h2>
-        <p class="text-xl text-muted-foreground max-w-3xl mx-auto leading-relaxed">
-          Những thắc mắc phổ biến về các công cụ hỗ trợ học tập
-        </p>
+        <h2 class="text-4xl md:text-5xl font-black text-foreground mb-6">{{ t(`${SCOPE}.title`) }}</h2>
+        <p class="text-xl text-muted-foreground max-w-3xl mx-auto leading-relaxed">{{ t(`${SCOPE}.subtitle`) }}</p>
       </div>
 
       <div class="max-w-4xl mx-auto">
         <Accordion type="single" collapsible class="space-y-4">
           <AccordionItem
-            v-for="(faq, index) in faqs"
+            v-for="index in [0,1,2,3,4]"
             :key="index"
             :value="`item-${index}`"
             class="bg-card rounded-2xl shadow-lg border border-border overflow-hidden hover:shadow-xl transition-shadow duration-300"
           >
             <AccordionTrigger class="px-8 py-6 text-left hover:bg-muted transition-colors duration-300 [&[data-state=open]>svg]:rotate-180">
               <h3 class="text-lg font-bold text-card-foreground pr-4 group-hover:text-primary transition-colors duration-300">
-                {{ faq.question }}
+                {{ t(`${SCOPE}.items.${index}.question`) }}
               </h3>
             </AccordionTrigger>
             <AccordionContent class="px-8 pb-6 border-t border-border">
               <div class="pt-4">
                 <p class="text-muted-foreground leading-relaxed">
-                  👉 {{ faq.answer }}
+                  👉 {{ t(`${SCOPE}.items.${index}.answer`) }}
                 </p>
               </div>
             </AccordionContent>
