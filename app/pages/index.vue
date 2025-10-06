@@ -1,4 +1,6 @@
 <script setup lang="ts">
+import { useI18n } from 'vue-i18n'
+const { t } = useI18n()
 import Hero from '@/components/common/Hero.vue'
 import WhatWeDo from '@/components/home/WhatWeDo.vue'
 import AboutUs from '@/components/home/AboutUs.vue'
@@ -10,8 +12,8 @@ import ScrollToTop from '@/components/common/ScrollToTop.vue'
 <template>
   <div>
     <Hero
-      title="DTU Help Center"
-      subtitle="Nền tảng hỗ trợ học tập toàn diện cho sinh viên Đại học Duy Tân"
+      :title="t('home.hero.title')"
+      :subtitle="t('home.hero.subtitle')"
     />
     <WhatWeDo />
     <AboutUs />

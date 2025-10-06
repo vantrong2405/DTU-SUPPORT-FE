@@ -1,6 +1,9 @@
 <script setup lang="ts">
 import logoDtu from '@/assets/images/logo-dtu.png'
-import * as SU from '@/components/ui'
+import { Button } from '@/components/ui/button'
+import { useI18n } from 'vue-i18n'
+
+const { t } = useI18n()
 
 interface IProps {
   title: string
@@ -19,14 +22,17 @@ interface IProps {
 const props = withDefaults(defineProps<IProps>(), {
   showButtons: true,
   primaryCta: () => ({
-    label: 'Khám phá các công cụ',
+    label: '',
     to: '/tools'
   }),
   secondaryCta: () => ({
-    label: 'Tìm hiểu thêm',
+    label: '',
     to: '/about'
   })
 })
+
+const primaryCtaLabel = computed(() => props.primaryCta?.label || t('home.hero.primaryCta'))
+const secondaryCtaLabel = computed(() => props.secondaryCta?.label || t('home.hero.secondaryCta'))
 </script>
 
 <template>
@@ -51,12 +57,12 @@ const props = withDefaults(defineProps<IProps>(), {
           </p>
 
           <div v-if="props.showButtons" class="flex flex-col sm:flex-row gap-4 justify-center items-center">
-            <SU.Button as="NuxtLink" :to="props.primaryCta.to" class="px-8 py-4 text-lg font-semibold">
-              {{ props.primaryCta.label }}
-            </SU.Button>
-            <SU.Button as="NuxtLink" :to="props.secondaryCta.to" variant="outline" class="px-8 py-4 text-lg font-semibold">
-              {{ props.secondaryCta.label }}
-            </SU.Button>
+            <Button as="NuxtLink" :to="props.primaryCta.to" class="px-8 py-4 text-lg font-semibold">
+              {{ primaryCtaLabel }}
+            </Button>
+            <Button as="NuxtLink" :to="props.secondaryCta.to" variant="outline" class="px-8 py-4 text-lg font-semibold">
+              {{ secondaryCtaLabel }}
+            </Button>
           </div>
         </div>
       </div>

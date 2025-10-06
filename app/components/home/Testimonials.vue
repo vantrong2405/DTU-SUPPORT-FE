@@ -1,38 +1,23 @@
 <script setup lang="ts">
-const testimonials = [
-  {
-    name: 'Nguyễn Văn An',
-    major: 'Công nghệ thông tin',
-    year: 'Năm 3',
-    avatar: '👨‍🎓',
-    content: 'DTU Help Center giúp mình tính GPA rất chính xác và dự đoán xếp loại bằng rất hữu ích. Công cụ này đã giúp mình lập kế hoạch học tập tốt hơn.',
-    rating: 5
-  },
-  {
-    name: 'Trần Thị Bình',
-    major: 'Kinh tế',
-    year: 'Năm 4',
-    avatar: '👩‍🎓',
-    content: 'Marketplace tài liệu học tập rất tiện lợi! Mình đã mua được nhiều tài liệu ôn thi chất lượng từ các anh chị khóa trên.',
-    rating: 5
-  },
-  {
-    name: 'Lê Minh Cường',
-    major: 'Điện tử viễn thông',
-    year: 'Năm 2',
-    avatar: '👨‍🎓',
-    content: 'Giao diện đẹp, dễ sử dụng. Tính năng lộ trình tín chỉ giúp mình biết cần học những môn gì để đạt mục tiêu GPA.',
-    rating: 5
-  },
-  {
-    name: 'Phạm Thị Dung',
-    major: 'Quản trị kinh doanh',
-    year: 'Năm 3',
-    avatar: '👩‍🎓',
-    content: 'Công cụ dự đoán xếp loại bằng rất chính xác. Mình đã sử dụng để lập kế hoạch học tập và đạt được mục tiêu.',
-    rating: 5
+import { useI18n } from 'vue-i18n'
+
+const { t } = useI18n()
+
+const testimonials = computed(() => {
+  const items = []
+  for (let i = 0; i < 4; i++) {
+    const ratingValue = t(`home.testimonials.items.${i}.rating`)
+    items.push({
+      name: t(`home.testimonials.items.${i}.name`),
+      major: t(`home.testimonials.items.${i}.major`),
+      year: t(`home.testimonials.items.${i}.year`),
+      avatar: t(`home.testimonials.items.${i}.avatar`),
+      content: t(`home.testimonials.items.${i}.content`),
+      rating: typeof ratingValue === 'number' ? ratingValue : parseInt(ratingValue) || 5
+    })
   }
-]
+  return items
+})
 </script>
 
 <template>
@@ -45,10 +30,10 @@ const testimonials = [
     <div class="container mx-auto px-4 relative z-10">
       <div class="text-center mb-16">
         <h2 class="text-4xl md:text-5xl font-black text-foreground mb-6">
-          Sinh viên nói gì về <span class="text-primary">chúng mình</span>
+          {{ t('home.testimonials.title') }}
         </h2>
         <p class="text-xl text-muted-foreground max-w-3xl mx-auto leading-relaxed">
-          Những phản hồi chân thực từ cộng đồng sinh viên DTU
+          {{ t('home.testimonials.subtitle') }}
         </p>
       </div>
 
@@ -76,7 +61,7 @@ const testimonials = [
       <div class="text-center mt-12">
         <div class="inline-flex items-center bg-primary/10 text-primary px-6 py-3 rounded-full">
           <span class="mr-2">💬</span>
-          <span class="font-semibold">Hơn 1000+ sinh viên đã tin tưởng sử dụng</span>
+          <span class="font-semibold">{{ t('home.testimonials.trustBadge') }}</span>
         </div>
       </div>
     </div>

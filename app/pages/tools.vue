@@ -1,4 +1,6 @@
 <script setup lang="ts">
+import { useI18n } from 'vue-i18n'
+const { t } = useI18n()
 import Hero from '@/components/common/Hero.vue'
 import ToolsGrid from '@/components/tools/ToolsGrid.vue'
 import BenefitsSection from '@/components/tools/BenefitsSection.vue'
@@ -8,8 +10,8 @@ import ToolsCTA from '@/components/tools/ToolsCTA.vue'
 <template>
   <div>
     <Hero
-      title="Công cụ hỗ trợ học tập"
-      subtitle="Bộ sưu tập các công cụ được thiết kế đặc biệt cho sinh viên DTU"
+      :title="t('tools.hero.title')"
+      :subtitle="t('tools.hero.subtitle')"
       :show-buttons="false"
     />
     <ToolsGrid />

@@ -1,9 +1,14 @@
 <script setup lang="ts">
 import logoDtu from '@/assets/images/logo-dtu.png'
-import * as SU from '@/components/ui'
+import { Button } from '@/components/ui/button'
+import { Theme } from '@/components/ui/theme-selector'
+import LocaleSwitcher from './LocaleSwitcher.vue'
+import { useI18n } from 'vue-i18n'
+import { NAV_ITEMS, HOME_SECTIONS } from '@/constants/features/home'
+
+const { t } = useI18n()
 
 const isMenuOpen = ref(false)
-
 const route = useRoute()
 
 const toggleMenu = () => {
@@ -16,7 +21,7 @@ const closeMenu = () => {
 
 const scrollToSection = (sectionId: string) => {
   closeMenu()
-  const element = document.querySelector(sectionId)
+  const element = document.querySelector(`#${sectionId.replace('#', '')}`)
   if (element) {
     element.scrollIntoView({ behavior: 'smooth' })
   }
@@ -29,13 +34,13 @@ const handleNavClick = (event: MouseEvent, item: { to: string; scroll?: boolean 
   }
 }
 
-const navItems = [
-  { label: 'Trang chủ', to: '/' },
-  { label: 'DTU Helper là gì?', to: '#what-we-do', scroll: true },
-  { label: 'Về chúng tôi', to: '#about-us', scroll: true },
-  { label: 'Sinh viên nói gì', to: '#testimonials', scroll: true },
-  { label: 'FAQ', to: '#faq', scroll: true }
-]
+const navItems = computed(() =>
+  NAV_ITEMS.map(item => ({
+    label: t(`common.header.menu.${item.key}`),
+    to: item.to,
+    scroll: 'scroll' in item ? item.scroll : false
+  }))
+)
 </script>
 
 <template>
@@ -47,13 +52,15 @@ const navItems = [
             <img :src="logoDtu" alt="DTU Logo" class="w-6 h-6 sm:w-8 sm:h-8 object-contain">
           </div>
           <div class="hidden sm:block flex-shrink-0 min-w-0">
-            <h1 class="text-lg sm:text-xl font-bold text-foreground truncate">DTU Help Center</h1>
-            <p class="text-xs text-muted-foreground truncate">Duy Tân University</p>
+            <h1 class="text-lg sm:text-xl font-bold text-foreground truncate">{{ t('common.brand.titleFull') }}</h1>
+            <p class="text-xs text-muted-foreground truncate">{{ t('common.brand.subtitle') }}</p>
           </div>
           <div class="sm:hidden flex-shrink-0">
-            <h1 class="text-sm font-bold text-foreground">DTU</h1>
+            <h1 class="text-sm font-bold text-foreground">{{ t('common.brand.titleShort') }}</h1>
           </div>
         </NuxtLink>
+        <div>
+    </div>
 
         <nav class="hidden xl:flex items-center space-x-4 2xl:space-x-6">
           <NuxtLink
@@ -69,13 +76,14 @@ const navItems = [
         </nav>
 
         <div class="hidden lg:flex items-center space-x-2 flex-shrink-0">
-          <SU.Theme />
+          <Theme />
+          <LocaleSwitcher />
           <div class="h-6 w-px bg-border"></div>
-          <SU.Button as="NuxtLink" to="/login" variant="outline" size="sm" class="text-sm whitespace-nowrap">Đăng nhập</SU.Button>
-          <SU.Button as="NuxtLink" to="/register" size="sm" class="text-sm whitespace-nowrap">Đăng ký</SU.Button>
+          <Button as="NuxtLink" to="/login" variant="outline" size="sm" class="text-sm whitespace-nowrap">{{ t('common.auth.login') }}</Button>
+          <Button as="NuxtLink" to="/register" size="sm" class="text-sm whitespace-nowrap">{{ t('common.auth.register') }}</Button>
         </div>
 
-        <SU.Button
+        <Button
           as="button"
           variant="ghost"
           size="icon"
@@ -89,7 +97,7 @@ const navItems = [
           <svg v-else class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"></path>
           </svg>
-        </SU.Button>
+        </Button>
       </div>
 
         <div v-if="isMenuOpen" class="xl:hidden border-t border-border bg-background">
@@ -106,15 +114,16 @@ const navItems = [
             </NuxtLink>
 
             <div class="pt-4 border-t border-border space-y-3">
-              <div class="flex justify-start pb-2 pl-3">
-                <SU.Theme />
+              <div class="flex items-center gap-2 pb-2 pl-3">
+                <Theme />
+                <LocaleSwitcher />
               </div>
-              <SU.Button as="NuxtLink" to="/login" variant="outline" class="w-full justify-center" @click="closeMenu">
-                Đăng nhập
-              </SU.Button>
-              <SU.Button as="NuxtLink" to="/register" class="w-full justify-center" @click="closeMenu">
-                Đăng ký
-              </SU.Button>
+              <Button as="NuxtLink" to="/login" variant="outline" class="w-full justify-center" @click="closeMenu">
+                {{ t('common.auth.login') }}
+              </Button>
+              <Button as="NuxtLink" to="/register" class="w-full justify-center" @click="closeMenu">
+                {{ t('common.auth.register') }}
+              </Button>
             </div>
           </nav>
         </div>

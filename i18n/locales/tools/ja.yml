@@ -1,0 +1,63 @@
+tools:
+  hero:
+    title: "学習サポートツール"
+    subtitle: "DTU 学生のために設計されたツール集"
+  benefits:
+    titlePrefix: "なぜ"
+    titlePrimary: "使うべき？"
+    titleSuffix: ""
+    subtitle: "学習成果を高める実用的なメリット"
+    items:
+      - { icon: "📈", title: "結果を最適化", description: "計画的な学習で GPA を向上" }
+      - { icon: "⏰", title: "時間を節約", description: "複雑な計算を自動化し手作業を削減" }
+      - { icon: "🧠", title: "賢い意思決定", description: "データに基づくより良い選択" }
+      - { icon: "🎯", title: "明確な目標", description: "具体的な目標と到達までのロードマップ" }
+      - { icon: "🏆", title: "優れた成果", description: "奨学金や学業実績をサポート" }
+      - { icon: "📖", title: "効果的な学習", description: "時間割を最適化し学習と休息のバランス" }
+  cta:
+    title: "効果的な学習を始めましょう"
+    subtitle: "最適なツールを選んで今すぐ学習をスタート"
+  grid:
+    titlePrefix: "最適な"
+    titlePrimary: "ツール"
+    titleSuffix: "を選ぶ"
+    subtitle: "DTU 学生向けに設計された学習ツールを探索"
+    featuresHeading: "主な機能:"
+    badgeComing: "近日公開"
+    button:
+      useNow: "→ 今すぐ使う"
+      coming: "開発中"
+    items:
+      - icon: "📊"
+        status: "available"
+        to: "/gpa"
+        title: "学習サポート & GPA 計算"
+        desc: "学業成績を管理・最適化する総合ツール"
+        features:
+          - "正確な累積 GPA 計算"
+          - "成績区分: 優/良/可/不可"
+          - "残り単位で成績を予測"
+          - "優先すべき科目を提案"
+          - "学期ごとの進捗を追跡"
+      - icon: "📅"
+        status: "coming-soon"
+        to: "/schedule"
+        title: "単位登録 & 時間割プランナー"
+        desc: "賢い学習計画と時間割の自動作成"
+        features:
+          - "専攻に合わせた科目提案"
+          - "時間割を自動最適化"
+          - "履修条件をチェック"
+          - "時間割や試験の衝突回避"
+          - "各学期の学習負荷を予測"
+      - icon: "📚"
+        status: "coming-soon"
+        to: "/marketplace"
+        title: "学習資料マーケット"
+        desc: "資料・試験・課題の共有と取引"
+        features:
+          - "高品質な学習資料"
+          - "試験・課題のサンプル"
+          - "評価・フィードバック"
+          - "科目・専攻で検索"
+          - "安全な支払い"

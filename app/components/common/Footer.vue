@@ -1,4 +1,8 @@
 <script setup lang="ts">
+import { useI18n } from 'vue-i18n'
+
+const { t } = useI18n()
+
 const currentYear = new Date().getFullYear()
 </script>
 
@@ -12,57 +16,57 @@ const currentYear = new Date().getFullYear()
               <span class="text-primary-foreground text-lg">🎓</span>
             </div>
             <div>
-              <h3 class="text-lg font-bold text-foreground">DTU Help Center</h3>
-              <p class="text-sm text-muted-foreground">Duy Tân University</p>
+              <h3 class="text-lg font-bold text-foreground">{{ t('common.brand.titleFull') }}</h3>
+              <p class="text-sm text-muted-foreground">{{ t('common.brand.subtitle') }}</p>
             </div>
           </div>
           <p class="text-muted-foreground text-sm mb-6 leading-relaxed">
-            Đồng hành cùng sinh viên DTU trong hành trình học tập và phát triển sự nghiệp.
+            {{ t('common.footer.intro') }}
           </p>
         </div>
 
         <div>
-          <h4 class="text-lg font-bold text-foreground mb-4">Dịch vụ</h4>
+          <h4 class="text-lg font-bold text-foreground mb-4">{{ t('common.footer.sections.services') }}</h4>
           <ul class="space-y-3">
-            <li><NuxtLink to="/gpa" class="text-muted-foreground hover:text-foreground transition-colors text-sm">Tính toán GPA</NuxtLink></li>
-            <li><NuxtLink to="/predict" class="text-muted-foreground hover:text-foreground transition-colors text-sm">Dự đoán xếp loại</NuxtLink></li>
-            <li><NuxtLink to="/schedule" class="text-muted-foreground hover:text-foreground transition-colors text-sm">Lộ trình tín chỉ</NuxtLink></li>
-            <li><NuxtLink to="/marketplace" class="text-muted-foreground hover:text-foreground transition-colors text-sm">Marketplace</NuxtLink></li>
-            <li><NuxtLink to="/tools" class="text-muted-foreground hover:text-foreground transition-colors text-sm">Công cụ hỗ trợ</NuxtLink></li>
-            <li><NuxtLink to="/help" class="text-muted-foreground hover:text-foreground transition-colors text-sm">Hỗ trợ học tập</NuxtLink></li>
+            <li><NuxtLink to="#" class="text-muted-foreground hover:text-foreground transition-colors text-sm">{{ t('common.footer.links.gpa') }}</NuxtLink></li>
+            <li><NuxtLink to="#" class="text-muted-foreground hover:text-foreground transition-colors text-sm">{{ t('common.footer.links.predict') }}</NuxtLink></li>
+            <li><NuxtLink to="#" class="text-muted-foreground hover:text-foreground transition-colors text-sm">{{ t('common.footer.links.schedule') }}</NuxtLink></li>
+            <li><NuxtLink to="#" class="text-muted-foreground hover:text-foreground transition-colors text-sm">{{ t('common.footer.links.marketplace') }}</NuxtLink></li>
+            <li><NuxtLink to="#" class="text-muted-foreground hover:text-foreground transition-colors text-sm">{{ t('common.footer.links.tools') }}</NuxtLink></li>
+            <li><NuxtLink to="#" class="text-muted-foreground hover:text-foreground transition-colors text-sm">{{ t('common.footer.links.help') }}</NuxtLink></li>
           </ul>
         </div>
 
         <div>
-          <h4 class="text-lg font-bold text-foreground mb-4">Hỗ trợ</h4>
+          <h4 class="text-lg font-bold text-foreground mb-4">{{ t('common.footer.sections.support') }}</h4>
           <ul class="space-y-3">
-            <li><NuxtLink to="/faq" class="text-muted-foreground hover:text-foreground transition-colors text-sm">Câu hỏi thường gặp</NuxtLink></li>
-            <li><NuxtLink to="/payment" class="text-muted-foreground hover:text-foreground transition-colors text-sm">Hướng dẫn thanh toán</NuxtLink></li>
-            <li><NuxtLink to="/privacy" class="text-muted-foreground hover:text-foreground transition-colors text-sm">Chính sách bảo mật</NuxtLink></li>
-            <li><NuxtLink to="/terms" class="text-muted-foreground hover:text-foreground transition-colors text-sm">Điều khoản dịch vụ</NuxtLink></li>
+            <li><NuxtLink to="#" class="text-muted-foreground hover:text-foreground transition-colors text-sm">{{ t('common.footer.links.faq') }}</NuxtLink></li>
+            <li><NuxtLink to="#" class="text-muted-foreground hover:text-foreground transition-colors text-sm">{{ t('common.footer.links.payment') }}</NuxtLink></li>
+            <li><NuxtLink to="#" class="text-muted-foreground hover:text-foreground transition-colors text-sm">{{ t('common.footer.links.privacy') }}</NuxtLink></li>
+            <li><NuxtLink to="#" class="text-muted-foreground hover:text-foreground transition-colors text-sm">{{ t('common.footer.links.terms') }}</NuxtLink></li>
           </ul>
         </div>
 
         <div>
-          <h4 class="text-lg font-bold text-foreground mb-4">Liên hệ</h4>
+          <h4 class="text-lg font-bold text-foreground mb-4">{{ t('common.footer.sections.contact') }}</h4>
           <ul class="space-y-3">
             <li class="flex items-center justify-center md:justify-start">
               <div class="w-6 h-6 bg-primary rounded-full flex items-center justify-center mr-3">
                 <span class="text-primary-foreground text-xs">💬</span>
               </div>
-              <span class="text-muted-foreground text-sm">Messenger 24/7</span>
+              <span class="text-muted-foreground text-sm">{{ t('common.footer.contact.messenger') }}</span>
             </li>
             <li class="flex items-center justify-center md:justify-start">
               <div class="w-6 h-6 bg-primary rounded-full flex items-center justify-center mr-3">
                 <span class="text-primary-foreground text-xs">f</span>
               </div>
-              <span class="text-muted-foreground text-sm">Facebook Page</span>
+              <span class="text-muted-foreground text-sm">{{ t('common.footer.contact.facebook') }}</span>
             </li>
             <li class="flex items-center justify-center md:justify-start">
               <div class="w-6 h-6 bg-primary rounded-full flex items-center justify-center mr-3">
                 <span class="text-primary-foreground text-xs">⏰</span>
               </div>
-              <span class="text-muted-foreground text-sm">Phản hồi trong 30 phút</span>
+              <span class="text-muted-foreground text-sm">{{ t('common.footer.contact.response') }}</span>
             </li>
           </ul>
         </div>
@@ -70,10 +74,10 @@ const currentYear = new Date().getFullYear()
 
       <div class="border-t border-border mt-12 pt-8 text-center max-w-5xl mx-auto">
         <p class="text-muted-foreground text-sm">
-          © {{ currentYear }} DTU Help Center. Tất cả quyền được bảo lưu.
+          {{ t('common.footer.copyright', { year: currentYear }) }}
         </p>
         <p class="text-muted-foreground text-xs mt-2">
-          Được thiết kế với ❤️ cho sinh viên Duy Tân
+          {{ t('common.footer.crafted') }}
         </p>
       </div>
     </div>

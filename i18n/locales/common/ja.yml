@@ -1,0 +1,63 @@
+header:
+  title: "ウェブサイトへようこそ"
+  menu:
+    home: "ホーム"
+    about: "私たちについて"
+    whatWeDo: "DTU Helper とは？"
+    testimonials: "レビュー"
+    faq: "よくある質問"
+auth:
+  login: "ログイン"
+  register: "登録"
+common:
+  header:
+    menu:
+      home: "ホーム"
+      about: "私たちについて"
+      whatWeDo: "DTU Helper とは？"
+      testimonials: "レビュー"
+      faq: "よくある質問"
+  auth:
+    login: "ログイン"
+    register: "登録"
+  ui:
+    language:
+      label: "言語"
+      selectLabel: "言語を選択"
+    theme:
+      label: "テーマ"
+      selectLabel: "テーマを選択"
+      names:
+        red: "DTU レッド"
+        blue: "ブルー"
+        green: "グリーン"
+        purple: "パープル"
+        orange: "オレンジ"
+        pink: "ピンク"
+  brand:
+    titleFull: "DTU Study Support"
+    subtitle: "Duy Tân University"
+    titleShort: "DTU"
+  footer:
+    intro: "DTU 学生の学習をサポートします。"
+    sections:
+      services: "サービス"
+      support: "サポート"
+      contact: "連絡先"
+    links:
+      gpa: "GPA 計算"
+      predict: "学位区分の予測"
+      schedule: "単位ロードマップ"
+      marketplace: "マーケットプレイス"
+      tools: "ツール"
+      help: "学習サポート"
+      faq: "よくある質問"
+      payment: "支払いガイド"
+      privacy: "プライバシーポリシー"
+      terms: "利用規約"
+    contact:
+      messenger: "Messenger 24/7"
+      facebook: "Facebook ページ"
+      response: "30 分以内に返信"
+    copyright: "© {year} DTU Study Support. 無断転載を禁じます。"
+    crafted: "DTU 学生のために ❤️ を込めて"
