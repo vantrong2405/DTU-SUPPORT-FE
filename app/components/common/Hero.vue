@@ -21,13 +21,13 @@ interface IProps {
 
 const props = withDefaults(defineProps<IProps>(), {
   showButtons: true,
-  primaryCta: () => ({
-    label: '',
-    to: '/tools'
+    primaryCta: () => ({
+      label: '',
+      to: '/tools'
   }),
   secondaryCta: () => ({
     label: '',
-    to: '/about'
+    pCHAT: '/about'
   })
 })
 
@@ -57,9 +57,11 @@ const secondaryCtaLabel = computed(() => props.secondaryCta?.label || t('home.he
           </p>
 
           <div v-if="props.showButtons" class="flex flex-col sm:flex-row gap-4 justify-center items-center">
-            <SU.Button as="NuxtLink" :to="props.primaryCta.to" class="px-8 py-4 text-lg font-semibold">
-              {{ primaryCtaLabel }}
-            </SU.Button>
+            <NuxtLink :to="props.primaryCta.to">
+              <SU.Button as="NuxtLink" :to="props.primaryCta.to" class="px-8 py-4 text-lg font-semibold">
+                {{ primaryCtaLabel }}
+              </SU.Button>
+            </NuxtLink>
             <SU.Button as="NuxtLink" :to="props.secondaryCta.to" variant="outline" class="px-8 py-4 text-lg font-semibold">
               {{ secondaryCtaLabel }}
             </SU.Button>
