@@ -1,6 +1,6 @@
 <script setup lang="ts">
 import logoDtu from '@/assets/images/logo-dtu.png'
-import * as SU from '@/components/ui'
+import { Button } from '@/components/ui/button'
 import { useI18n } from 'vue-i18n'
 
 const { t } = useI18n()
@@ -57,12 +57,12 @@ const secondaryCtaLabel = computed(() => props.secondaryCta?.label || t('home.he
           </p>
 
           <div v-if="props.showButtons" class="flex flex-col sm:flex-row gap-4 justify-center items-center">
-            <SU.Button as="NuxtLink" :to="props.primaryCta.to" class="px-8 py-4 text-lg font-semibold">
+            <Button as="NuxtLink" :to="props.primaryCta.to" class="px-8 py-4 text-lg font-semibold">
               {{ primaryCtaLabel }}
-            </SU.Button>
-            <SU.Button as="NuxtLink" :to="props.secondaryCta.to" variant="outline" class="px-8 py-4 text-lg font-semibold">
+            </Button>
+            <Button as="NuxtLink" :to="props.secondaryCta.to" variant="outline" class="px-8 py-4 text-lg font-semibold">
               {{ secondaryCtaLabel }}
-            </SU.Button>
+            </Button>
           </div>
         </div>
       </div>

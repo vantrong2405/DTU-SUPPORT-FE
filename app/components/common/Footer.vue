@@ -28,22 +28,22 @@ const currentYear = new Date().getFullYear()
         <div>
           <h4 class="text-lg font-bold text-foreground mb-4">{{ t('common.footer.sections.services') }}</h4>
           <ul class="space-y-3">
-            <li><NuxtLink to="/gpa" class="text-muted-foreground hover:text-foreground transition-colors text-sm">{{ t('common.footer.links.gpa') }}</NuxtLink></li>
-            <li><NuxtLink to="/predict" class="text-muted-foreground hover:text-foreground transition-colors text-sm">{{ t('common.footer.links.predict') }}</NuxtLink></li>
-            <li><NuxtLink to="/schedule" class="text-muted-foreground hover:text-foreground transition-colors text-sm">{{ t('common.footer.links.schedule') }}</NuxtLink></li>
-            <li><NuxtLink to="/marketplace" class="text-muted-foreground hover:text-foreground transition-colors text-sm">{{ t('common.footer.links.marketplace') }}</NuxtLink></li>
-            <li><NuxtLink to="/tools" class="text-muted-foreground hover:text-foreground transition-colors text-sm">{{ t('common.footer.links.tools') }}</NuxtLink></li>
-            <li><NuxtLink to="/help" class="text-muted-foreground hover:text-foreground transition-colors text-sm">{{ t('common.footer.links.help') }}</NuxtLink></li>
+            <li><NuxtLink to="#" class="text-muted-foreground hover:text-foreground transition-colors text-sm">{{ t('common.footer.links.gpa') }}</NuxtLink></li>
+            <li><NuxtLink to="#" class="text-muted-foreground hover:text-foreground transition-colors text-sm">{{ t('common.footer.links.predict') }}</NuxtLink></li>
+            <li><NuxtLink to="#" class="text-muted-foreground hover:text-foreground transition-colors text-sm">{{ t('common.footer.links.schedule') }}</NuxtLink></li>
+            <li><NuxtLink to="#" class="text-muted-foreground hover:text-foreground transition-colors text-sm">{{ t('common.footer.links.marketplace') }}</NuxtLink></li>
+            <li><NuxtLink to="#" class="text-muted-foreground hover:text-foreground transition-colors text-sm">{{ t('common.footer.links.tools') }}</NuxtLink></li>
+            <li><NuxtLink to="#" class="text-muted-foreground hover:text-foreground transition-colors text-sm">{{ t('common.footer.links.help') }}</NuxtLink></li>
           </ul>
         </div>
 
         <div>
           <h4 class="text-lg font-bold text-foreground mb-4">{{ t('common.footer.sections.support') }}</h4>
           <ul class="space-y-3">
-            <li><NuxtLink to="/faq" class="text-muted-foreground hover:text-foreground transition-colors text-sm">{{ t('common.footer.links.faq') }}</NuxtLink></li>
-            <li><NuxtLink to="/payment" class="text-muted-foreground hover:text-foreground transition-colors text-sm">{{ t('common.footer.links.payment') }}</NuxtLink></li>
-            <li><NuxtLink to="/privacy" class="text-muted-foreground hover:text-foreground transition-colors text-sm">{{ t('common.footer.links.privacy') }}</NuxtLink></li>
-            <li><NuxtLink to="/terms" class="text-muted-foreground hover:text-foreground transition-colors text-sm">{{ t('common.footer.links.terms') }}</NuxtLink></li>
+            <li><NuxtLink to="#" class="text-muted-foreground hover:text-foreground transition-colors text-sm">{{ t('common.footer.links.faq') }}</NuxtLink></li>
+            <li><NuxtLink to="#" class="text-muted-foreground hover:text-foreground transition-colors text-sm">{{ t('common.footer.links.payment') }}</NuxtLink></li>
+            <li><NuxtLink to="#" class="text-muted-foreground hover:text-foreground transition-colors text-sm">{{ t('common.footer.links.privacy') }}</NuxtLink></li>
+            <li><NuxtLink to="#" class="text-muted-foreground hover:text-foreground transition-colors text-sm">{{ t('common.footer.links.terms') }}</NuxtLink></li>
           </ul>
         </div>
 

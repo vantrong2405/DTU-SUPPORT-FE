@@ -1,5 +1,6 @@
 <script setup lang="ts">
-import * as SU from '@/components/ui'
+import { Button } from '@/components/ui/button'
+import { DropdownMenu, DropdownMenuContent, DropdownMenuLabel, DropdownMenuTrigger } from '@/components/ui/dropdown-menu'
 const { locale, locales } = useI18n()
 const switchLocalePath = useSwitchLocalePath()
 const router = useRouter()
@@ -29,17 +30,17 @@ const handleSwitch = async (code: 'en' | 'vi' | 'ja') => {
 
 <template>
   <div class="flex items-center">
-    <SU.DropdownMenu>
-      <SU.DropdownMenuTrigger as-child>
-        <SU.Button variant="outline" size="sm" class="gap-2 rounded-lg">
-          <span>{{ (resolvedLocales.find(l => isActive(l.code))?.englishName) || 'ENGLISH' }}</span>
-        </SU.Button>
-      </SU.DropdownMenuTrigger>
-      <SU.DropdownMenuContent class="w-56 bg-card text-card-foreground border border-border rounded-xl shadow-2xl ring-1 ring-border backdrop-blur-sm z-[9999]" align="end">
-        <SU.DropdownMenuLabel class="text-card-foreground">{{ $t('common.ui.language.selectLabel') }}</SU.DropdownMenuLabel>
+    <DropdownMenu>
+      <DropdownMenuTrigger as-child>
+        <Button variant="outline" size="sm" class="gap-2 rounded-lg">
+          <span>{{ (resolvedLocales.find((l: any) => isActive(l.code))?.englishName) || 'ENGLISH' }}</span>
+        </Button>
+      </DropdownMenuTrigger>
+      <DropdownMenuContent class="w-56 bg-card text-card-foreground border border-border rounded-xl shadow-2xl ring-1 ring-border backdrop-blur-sm z-[9999]" align="end">
+        <DropdownMenuLabel class="text-card-foreground">{{ $t('common.ui.language.selectLabel') }}</DropdownMenuLabel>
         <div class="border-t border-border mt-1" />
         <div class="p-2 grid grid-cols-3 gap-1">
-          <SU.Button
+          <Button
             as="button"
             variant="ghost"
             size="sm"
@@ -53,9 +54,9 @@ const handleSwitch = async (code: 'en' | 'vi' | 'ja') => {
           >
             <div class="w-3 h-3 rounded-full border border-border bg-primary" />
             <span class="truncate">{{ l.label }}</span>
-          </SU.Button>
+          </Button>
         </div>
-      </SU.DropdownMenuContent>
-    </SU.DropdownMenu>
+      </DropdownMenuContent>
+    </DropdownMenu>
   </div>
 </template>

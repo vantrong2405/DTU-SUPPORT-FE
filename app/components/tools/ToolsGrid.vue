@@ -1,5 +1,6 @@
 <script setup lang="ts">
-import * as SU from '@/components/ui'
+import { Button } from '@/components/ui/button'
+import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card'
 import { useI18n } from 'vue-i18n'
 
 const { t } = useI18n()
@@ -25,14 +26,14 @@ const SCOPE = 'tools.grid'
       </div>
 
       <div class="grid gap-8 md:grid-cols-2 lg:grid-cols-3 max-w-7xl mx-auto">
-        <SU.Card v-for="i in [0,1,2]" :key="i" class="relative overflow-hidden border-border">
+        <Card v-for="i in [0,1,2]" :key="i" class="relative overflow-hidden border-border">
           <!-- Coming Soon Badge -->
           <div v-if="t(`${SCOPE}.items.${i}.status`) === 'coming-soon'"
             class="absolute top-4 right-4 bg-orange-500 text-white text-xs font-bold px-3 py-1 rounded-full z-10">
             {{ t('tools.grid.badgeComing') }}
           </div>
 
-          <SU.CardHeader>
+          <CardHeader>
             <!-- Icon -->
             <div class="flex items-center mb-4">
               <div class="w-12 h-12 bg-primary rounded-lg flex items-center justify-center mr-4">
@@ -40,16 +41,16 @@ const SCOPE = 'tools.grid'
               </div>
             </div>
 
-            <SU.CardTitle class="text-xl font-bold text-foreground">
+            <CardTitle class="text-xl font-bold text-foreground">
               {{ t(`${SCOPE}.items.${i}.title`) }}
-            </SU.CardTitle>
+            </CardTitle>
 
-            <SU.CardDescription class="text-muted-foreground leading-relaxed">
+            <CardDescription class="text-muted-foreground leading-relaxed">
               {{ t(`${SCOPE}.items.${i}.desc`) }}
-            </SU.CardDescription>
-          </SU.CardHeader>
+            </CardDescription>
+          </CardHeader>
 
-          <SU.CardContent>
+          <CardContent>
             <!-- Key Features -->
             <div class="mb-6">
               <div class="flex items-center mb-3">
@@ -67,15 +68,15 @@ const SCOPE = 'tools.grid'
 
             <!-- Button -->
             <div class="mt-auto">
-              <SU.Button
+              <Button
                 v-if="t(`${SCOPE}.items.${i}.status`) === 'available'"
                 as="NuxtLink"
                 :to="t(`${SCOPE}.items.${i}.to`)"
                 class="w-full py-3 px-4 font-medium flex items-center justify-center"
               >
                 {{ t(`${SCOPE}.button.useNow`) }}
-              </SU.Button>
-              <SU.Button
+              </Button>
+              <Button
                 v-else
                 disabled
                 variant="secondary"
@@ -83,10 +84,10 @@ const SCOPE = 'tools.grid'
               >
                 <span class="mr-2">⏰</span>
                 {{ t(`${SCOPE}.button.coming`) }}
-              </SU.Button>
+              </Button>
             </div>
-          </SU.CardContent>
-        </SU.Card>
+          </CardContent>
+        </Card>
       </div>
     </div>
   </section>

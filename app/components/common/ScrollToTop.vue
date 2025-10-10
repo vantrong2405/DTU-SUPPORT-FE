@@ -1,6 +1,6 @@
 <script setup lang="ts">
 import { ref, onMounted, onUnmounted } from 'vue'
-import * as SU from '@/components/ui'
+import { Button } from '@/components/ui/button'
 
 const isVisible = ref(false)
 
@@ -37,7 +37,7 @@ onUnmounted(() => {
     leave-from-class="transform scale-100 opacity-100"
     leave-to-class="transform scale-0 opacity-0"
   >
-    <SU.Button
+    <Button
       v-if="isVisible"
       as="button"
       size="icon"
@@ -48,6 +48,6 @@ onUnmounted(() => {
       <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
         <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 10l7-7m0 0l7 7m-7-7v18" />
       </svg>
-    </SU.Button>
+    </Button>
   </Transition>
 </template>

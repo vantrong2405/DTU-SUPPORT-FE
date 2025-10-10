@@ -1,6 +1,7 @@
 <script setup lang="ts">
 import { Palette } from 'lucide-vue-next'
-import * as SU from '@/components/ui'
+import { Button } from '@/components/ui/button'
+import { DropdownMenu, DropdownMenuContent, DropdownMenuLabel, DropdownMenuTrigger } from '@/components/ui/dropdown-menu'
 import { useI18n } from 'vue-i18n'
 
 const { t } = useI18n()
@@ -59,25 +60,25 @@ useHead(() => ({
 </script>
 
 <template>
-  <SU.DropdownMenu>
-      <SU.DropdownMenuTrigger as-child>
-      <SU.Button variant="outline" size="sm" class="gap-2 rounded-lg">
+  <DropdownMenu>
+      <DropdownMenuTrigger as-child>
+      <Button variant="outline" size="sm" class="gap-2 rounded-lg">
         <Palette class="h-[1.2rem] w-[1.2rem]" :style="{ color: iconColor }" />
         <span class="hidden sm:inline">{{ $t('common.ui.theme.label') }}</span>
-      </SU.Button>
-    </SU.DropdownMenuTrigger>
-      <SU.DropdownMenuContent class="w-56 bg-card text-card-foreground border border-border rounded-xl shadow-2xl ring-1 ring-border backdrop-blur-sm z-[9999]" align="end">
-        <SU.DropdownMenuLabel class="text-card-foreground">{{ $t('common.ui.theme.selectLabel') }}</SU.DropdownMenuLabel>
+      </Button>
+    </DropdownMenuTrigger>
+      <DropdownMenuContent class="w-56 bg-card text-card-foreground border border-border rounded-xl shadow-2xl ring-1 ring-border backdrop-blur-sm z-[9999]" align="end">
+        <DropdownMenuLabel class="text-card-foreground">{{ $t('common.ui.theme.selectLabel') }}</DropdownMenuLabel>
       <div class="border-t border-border mt-1" />
 
       <div class="p-2">
         <div class="flex items-center gap-2 px-2 pb-3">
-          <SU.Button size="sm" :variant="showingMode === 'light' ? 'default' : 'outline'" @click="showingMode = 'light'">Light</SU.Button>
-          <SU.Button size="sm" :variant="showingMode === 'dark' ? 'default' : 'outline'" @click="showingMode = 'dark'">Dark</SU.Button>
+          <Button size="sm" :variant="showingMode === 'light' ? 'default' : 'outline'" @click="showingMode = 'light'">Light</Button>
+          <Button size="sm" :variant="showingMode === 'dark' ? 'default' : 'outline'" @click="showingMode = 'dark'">Dark</Button>
         </div>
 
         <div v-if="showingMode === 'light'" class="grid grid-cols-2 gap-1">
-          <SU.Button
+          <Button
             as="button"
             variant="ghost"
             size="sm"
@@ -91,11 +92,11 @@ useHead(() => ({
           >
             <div class="w-3 h-3 rounded-full border border-border" :style="{ backgroundColor: theme.color }" />
             <span class="truncate">{{ getThemeLabel(theme.value) }}</span>
-          </SU.Button>
+          </Button>
         </div>
 
         <div v-else class="grid grid-cols-2 gap-1">
-          <SU.Button
+          <Button
             as="button"
             variant="ghost"
             size="sm"
@@ -109,9 +110,9 @@ useHead(() => ({
           >
             <div class="w-3 h-3 rounded-full border border-border" :style="{ backgroundColor: theme.color }" />
             <span class="truncate">{{ getThemeLabel(theme.value) }}</span>
-          </SU.Button>
+          </Button>
         </div>
       </div>
-    </SU.DropdownMenuContent>
-  </SU.DropdownMenu>
+    </DropdownMenuContent>
+  </DropdownMenu>
 </template>

@@ -1,6 +1,7 @@
 <script setup lang="ts">
 import logoDtu from '@/assets/images/logo-dtu.png'
-import * as SU from '@/components/ui'
+import { Button } from '@/components/ui/button'
+import { Theme } from '@/components/ui/theme-selector'
 import LocaleSwitcher from './LocaleSwitcher.vue'
 import { useI18n } from 'vue-i18n'
 
@@ -74,14 +75,14 @@ const navItems = computed(() => [
         </nav>
 
         <div class="hidden lg:flex items-center space-x-2 flex-shrink-0">
-          <SU.Theme />
+          <Theme />
           <LocaleSwitcher />
           <div class="h-6 w-px bg-border"></div>
-          <SU.Button as="NuxtLink" to="/login" variant="outline" size="sm" class="text-sm whitespace-nowrap">{{ t('common.auth.login') }}</SU.Button>
-          <SU.Button as="NuxtLink" to="/register" size="sm" class="text-sm whitespace-nowrap">{{ t('common.auth.register') }}</SU.Button>
+          <Button as="NuxtLink" to="/login" variant="outline" size="sm" class="text-sm whitespace-nowrap">{{ t('common.auth.login') }}</Button>
+          <Button as="NuxtLink" to="/register" size="sm" class="text-sm whitespace-nowrap">{{ t('common.auth.register') }}</Button>
         </div>
 
-        <SU.Button
+        <Button
           as="button"
           variant="ghost"
           size="icon"
@@ -95,7 +96,7 @@ const navItems = computed(() => [
           <svg v-else class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"></path>
           </svg>
-        </SU.Button>
+        </Button>
       </div>
 
         <div v-if="isMenuOpen" class="xl:hidden border-t border-border bg-background">
@@ -113,15 +114,15 @@ const navItems = computed(() => [
 
             <div class="pt-4 border-t border-border space-y-3">
               <div class="flex items-center gap-2 pb-2 pl-3">
-                <SU.Theme />
+                <Theme />
                 <LocaleSwitcher />
               </div>
-              <SU.Button as="NuxtLink" to="/login" variant="outline" class="w-full justify-center" @click="closeMenu">
+              <Button as="NuxtLink" to="/login" variant="outline" class="w-full justify-center" @click="closeMenu">
                 {{ t('common.auth.login') }}
-              </SU.Button>
-              <SU.Button as="NuxtLink" to="/register" class="w-full justify-center" @click="closeMenu">
+              </Button>
+              <Button as="NuxtLink" to="/register" class="w-full justify-center" @click="closeMenu">
                 {{ t('common.auth.register') }}
-              </SU.Button>
+              </Button>
             </div>
           </nav>
         </div>

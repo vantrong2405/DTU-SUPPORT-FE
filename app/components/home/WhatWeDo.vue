@@ -1,6 +1,12 @@
 <script setup lang="ts">
 import { useI18n } from 'vue-i18n'
-import * as SU from '@/components/ui'
+import {
+  Card,
+  CardContent,
+  CardDescription,
+  CardHeader,
+  CardTitle
+} from '@/components/ui/card'
 
 const { t } = useI18n()
 
@@ -67,21 +73,21 @@ const SCOPE = 'home.whatWeDo'
 
         <!-- Features Grid -->
         <div class="grid md:grid-cols-3 gap-8">
-          <SU.Card v-for="i in [0,1,2]" :key="i"
+          <Card v-for="i in [0,1,2]" :key="i"
             class="text-center hover:from-primary/5 hover:to-primary/10 transition-all duration-300 hover:shadow-lg border-border">
-            <SU.CardHeader>
+            <CardHeader>
               <div class="w-16 h-16 mx-auto mb-4 rounded-2xl flex items-center justify-center text-2xl bg-gradient-to-br from-primary/10 to-primary/20">
                 {{ t(`${SCOPE}.features.${i}.icon`) }}
               </div>
-              <SU.CardTitle class="text-xl font-bold text-foreground">
+              <CardTitle class="text-xl font-bold text-foreground">
                 {{ t(`${SCOPE}.features.${i}.title`) }}
-              </SU.CardTitle>
-              <SU.CardDescription class="text-muted-foreground leading-relaxed">
+              </CardTitle>
+              <CardDescription class="text-muted-foreground leading-relaxed">
                 {{ t(`${SCOPE}.features.${i}.description`) }}
-              </SU.CardDescription>
-            </SU.CardHeader>
+              </CardDescription>
+            </CardHeader>
 
-            <SU.CardContent>
+            <CardContent>
               <ul class="space-y-1">
                 <li v-for="b in [0,1,2]" :key="b"
                   class="text-sm text-primary flex items-center justify-center">
@@ -89,8 +95,8 @@ const SCOPE = 'home.whatWeDo'
                   {{ t(`${SCOPE}.features.${i}.benefits.${b}`) }}
                 </li>
               </ul>
-            </SU.CardContent>
-          </SU.Card>
+            </CardContent>
+          </Card>
         </div>
       </div>
     </div>
