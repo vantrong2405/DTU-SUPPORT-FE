@@ -1,19 +1,50 @@
-import tailwindcss from "@tailwindcss/vite";
-
+// https://nuxt.com/docs/api/configuration/nuxt-config
 export default defineNuxtConfig({
-  compatibilityDate: "2025-07-15",
+  compatibilityDate: '2025-07-15',
   devtools: { enabled: true },
-  css: ['~/assets/css/main.css'],
-  vite: {
-    plugins: [
-      tailwindcss(),
-    ],
-  },
-  modules: [
-    'shadcn-nuxt'
-  ],
+  modules: ['@nuxtjs/tailwindcss', 'shadcn-nuxt', '@nuxtjs/i18n'],
   shadcn: {
     prefix: '',
-    componentDir: './components/ui'
-  }
-});
+    componentDir: './app/components/ui',
+  },
+  components: [{ path: 'app/components', pathPrefix: false }],
+  vite: {
+    css: {
+      devSourcemap: true,
+    },
+    build: {
+      sourcemap: false,
+    },
+  },
+  tailwindcss: {
+    config: {
+      future: {
+        hoverOnlyWhenSupported: true,
+      },
+    },
+  },
+  i18n: {
+    langDir: 'locales',
+    locales: [
+      {
+        code: 'en',
+        name: 'English',
+        files: ['common/en.yml', 'home/en.yml', 'tools/en.yml', 'gpa/en.yml'],
+        iso: 'en-US',
+      },
+      {
+        code: 'vi',
+        name: 'Vietnamese',
+        files: ['common/vi.yml', 'home/vi.yml', 'tools/vi.yml', 'gpa/vi.yml'],
+        iso: 'vi-VN',
+      },
+      {
+        code: 'ja',
+        name: 'Japanese',
+        files: ['common/ja.yml', 'home/ja.yml', 'tools/ja.yml', 'gpa/ja.yml'],
+        iso: 'ja-JP',
+      },
+    ],
+    defaultLocale: 'en',
+  },
+})

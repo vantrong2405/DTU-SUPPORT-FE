@@ -1,5 +1,9 @@
 {
-  "tabWidth": 2,
+  "semi": false,
   "singleQuote": true,
-  "semi": false
+  "tabWidth": 2,
+  "trailingComma": "es5",
+  "printWidth": 80,
+  "endOfLine": "lf",
+  "vueIndentScriptAndStyle": false
 }
