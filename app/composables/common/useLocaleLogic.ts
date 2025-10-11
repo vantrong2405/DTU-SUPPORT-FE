@@ -8,13 +8,14 @@ export const useLocaleLogic = () => {
 
   const localeList = computed(() => {
     return locales.value.map((localeItem) => {
-      const localeCode = typeof localeItem === 'string' ? localeItem : localeItem.code
-      const localeInfo = LOCALES.find(locale => locale.code === localeCode)
+      const localeCode =
+        typeof localeItem === 'string' ? localeItem : localeItem.code
+      const localeInfo = LOCALES.find((locale) => locale.code === localeCode)
       return {
         code: localeCode as LocaleCode,
         name: localeInfo?.name || localeCode.toUpperCase(),
         label: localeInfo?.name || localeCode.toUpperCase(),
-        englishName: localeInfo?.englishName || localeCode.toUpperCase()
+        englishName: localeInfo?.englishName || localeCode.toUpperCase(),
       }
     })
   })
@@ -34,6 +35,6 @@ export const useLocaleLogic = () => {
   return {
     localeList,
     isLocaleActive,
-    handleLocaleSwitch
+    handleLocaleSwitch,
   }
 }

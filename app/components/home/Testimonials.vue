@@ -13,7 +13,10 @@ const testimonials = computed(() => {
       year: t(`home.testimonials.items.${i}.year`),
       avatar: t(`home.testimonials.items.${i}.avatar`),
       content: t(`home.testimonials.items.${i}.content`),
-      rating: typeof ratingValue === 'number' ? ratingValue : parseInt(ratingValue) || 5
+      rating:
+        typeof ratingValue === 'number'
+          ? ratingValue
+          : parseInt(ratingValue) || 5,
     })
   }
   return items
@@ -21,10 +24,17 @@ const testimonials = computed(() => {
 </script>
 
 <template>
-  <section id="testimonials" class="py-20 md:py-24 bg-gradient-to-br from-primary/5 to-primary/10 relative overflow-hidden">
+  <section
+    id="testimonials"
+    class="py-20 md:py-24 bg-gradient-to-br from-primary/5 to-primary/10 relative overflow-hidden"
+  >
     <div class="absolute top-0 left-0 w-full h-full">
-      <div class="absolute top-10 right-10 w-20 h-20 bg-primary/10 rounded-full blur-xl"></div>
-      <div class="absolute bottom-10 left-10 w-24 h-24 bg-primary/10 rounded-full blur-2xl"></div>
+      <div
+        class="absolute top-10 right-10 w-20 h-20 bg-primary/10 rounded-full blur-xl"
+      ></div>
+      <div
+        class="absolute bottom-10 left-10 w-24 h-24 bg-primary/10 rounded-full blur-2xl"
+      ></div>
     </div>
 
     <div class="container mx-auto px-4 relative z-10">
@@ -32,24 +42,39 @@ const testimonials = computed(() => {
         <h2 class="text-4xl md:text-5xl font-black text-foreground mb-6">
           {{ t('home.testimonials.title') }}
         </h2>
-        <p class="text-xl text-muted-foreground max-w-3xl mx-auto leading-relaxed">
+        <p
+          class="text-xl text-muted-foreground max-w-3xl mx-auto leading-relaxed"
+        >
           {{ t('home.testimonials.subtitle') }}
         </p>
       </div>
 
       <div class="grid gap-8 md:grid-cols-2 lg:grid-cols-4">
-        <div v-for="testimonial in testimonials" :key="testimonial.name"
-          class="bg-card rounded-2xl p-6 shadow-lg hover:shadow-xl transition-all duration-300 border border-border">
+        <div
+          v-for="testimonial in testimonials"
+          :key="testimonial.name"
+          class="bg-card rounded-2xl p-6 shadow-lg hover:shadow-xl transition-all duration-300 border border-border"
+        >
           <div class="flex items-center mb-4">
             <div class="text-3xl mr-3">{{ testimonial.avatar }}</div>
             <div>
-              <h4 class="font-bold text-card-foreground">{{ testimonial.name }}</h4>
-              <p class="text-sm text-muted-foreground">{{ testimonial.major }} - {{ testimonial.year }}</p>
+              <h4 class="font-bold text-card-foreground">
+                {{ testimonial.name }}
+              </h4>
+              <p class="text-sm text-muted-foreground">
+                {{ testimonial.major }} - {{ testimonial.year }}
+              </p>
             </div>
           </div>
 
           <div class="flex mb-3">
-            <div v-for="star in testimonial.rating" :key="star" class="text-yellow-400 text-lg">⭐</div>
+            <div
+              v-for="star in testimonial.rating"
+              :key="star"
+              class="text-yellow-400 text-lg"
+            >
+              ⭐
+            </div>
           </div>
 
           <p class="text-muted-foreground leading-relaxed text-sm">
@@ -59,9 +84,13 @@ const testimonials = computed(() => {
       </div>
 
       <div class="text-center mt-12">
-        <div class="inline-flex items-center bg-primary/10 text-primary px-6 py-3 rounded-full">
+        <div
+          class="inline-flex items-center bg-primary/10 text-primary px-6 py-3 rounded-full"
+        >
           <span class="mr-2">💬</span>
-          <span class="font-semibold">{{ t('home.testimonials.trustBadge') }}</span>
+          <span class="font-semibold">{{
+            t('home.testimonials.trustBadge')
+          }}</span>
         </div>
       </div>
     </div>

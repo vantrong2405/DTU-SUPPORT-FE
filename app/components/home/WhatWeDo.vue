@@ -5,7 +5,7 @@ import {
   CardContent,
   CardDescription,
   CardHeader,
-  CardTitle
+  CardTitle,
 } from '@/components/ui/card'
 
 const { t } = useI18n()
@@ -35,7 +35,7 @@ const SCOPE = 'home.whatWeDo'
               {{ t('home.whatWeDo.helpTitle') }}
             </h3>
             <div class="space-y-4 text-foreground leading-relaxed">
-              <p v-for="i in [0,1,2]" :key="i">
+              <p v-for="i in [0, 1, 2]" :key="i">
                 {{ t(`${SCOPE}.paragraphs.${i}`) }}
               </p>
             </div>
@@ -43,27 +43,39 @@ const SCOPE = 'home.whatWeDo'
 
           <!-- Right: Visual -->
           <div class="relative">
-            <div class="bg-gradient-to-br from-primary/10 to-primary/5 rounded-3xl p-8 border border-border">
+            <div
+              class="bg-gradient-to-br from-primary/10 to-primary/5 rounded-3xl p-8 border border-border"
+            >
               <div class="text-center">
-                <div class="w-20 h-20 mx-auto bg-primary rounded-2xl flex items-center justify-center mb-6">
+                <div
+                  class="w-20 h-20 mx-auto bg-primary rounded-2xl flex items-center justify-center mb-6"
+                >
                   <span class="text-3xl text-primary-foreground">🎓</span>
                 </div>
-                <h4 class="text-2xl font-bold text-foreground mb-4">{{ t('home.whatWeDo.visual.audience') }}</h4>
+                <h4 class="text-2xl font-bold text-foreground mb-4">
+                  {{ t('home.whatWeDo.visual.audience') }}
+                </h4>
                 <p class="text-muted-foreground mb-6">
                   {{ t('home.whatWeDo.visual.trust') }}
                 </p>
                 <div class="grid grid-cols-3 gap-4 text-center">
                   <div>
                     <div class="text-2xl font-bold text-primary">95%</div>
-                    <div class="text-sm text-muted-foreground">{{ t('home.whatWeDo.visual.metrics.accuracy') }}</div>
+                    <div class="text-sm text-muted-foreground">
+                      {{ t('home.whatWeDo.visual.metrics.accuracy') }}
+                    </div>
                   </div>
                   <div>
                     <div class="text-2xl font-bold text-primary">24/7</div>
-                    <div class="text-sm text-muted-foreground">{{ t('home.whatWeDo.visual.metrics.support') }}</div>
+                    <div class="text-sm text-muted-foreground">
+                      {{ t('home.whatWeDo.visual.metrics.support') }}
+                    </div>
                   </div>
                   <div>
                     <div class="text-2xl font-bold text-primary">100%</div>
-                    <div class="text-sm text-muted-foreground">{{ t('home.whatWeDo.visual.metrics.free') }}</div>
+                    <div class="text-sm text-muted-foreground">
+                      {{ t('home.whatWeDo.visual.metrics.free') }}
+                    </div>
                   </div>
                 </div>
               </div>
@@ -73,10 +85,15 @@ const SCOPE = 'home.whatWeDo'
 
         <!-- Features Grid -->
         <div class="grid md:grid-cols-3 gap-8">
-          <Card v-for="i in [0,1,2]" :key="i"
-            class="text-center hover:from-primary/5 hover:to-primary/10 transition-all duration-300 hover:shadow-lg border-border">
+          <Card
+            v-for="i in [0, 1, 2]"
+            :key="i"
+            class="text-center hover:from-primary/5 hover:to-primary/10 transition-all duration-300 hover:shadow-lg border-border"
+          >
             <CardHeader>
-              <div class="w-16 h-16 mx-auto mb-4 rounded-2xl flex items-center justify-center text-2xl bg-gradient-to-br from-primary/10 to-primary/20">
+              <div
+                class="w-16 h-16 mx-auto mb-4 rounded-2xl flex items-center justify-center text-2xl bg-gradient-to-br from-primary/10 to-primary/20"
+              >
                 {{ t(`${SCOPE}.features.${i}.icon`) }}
               </div>
               <CardTitle class="text-xl font-bold text-foreground">
@@ -89,8 +106,11 @@ const SCOPE = 'home.whatWeDo'
 
             <CardContent>
               <ul class="space-y-1">
-                <li v-for="b in [0,1,2]" :key="b"
-                  class="text-sm text-primary flex items-center justify-center">
+                <li
+                  v-for="b in [0, 1, 2]"
+                  :key="b"
+                  class="text-sm text-primary flex items-center justify-center"
+                >
                   <span class="mr-2">✓</span>
                   {{ t(`${SCOPE}.features.${i}.benefits.${b}`) }}
                 </li>
