@@ -5,6 +5,32 @@ home:
     cta: "Learn more"
     teamTitle: "Development Team"
     teamSubtitle: "A diverse team with deep expertise in technology and marketing"
+    teamMembers:
+      0:
+        name: "Nguyễn Minh Tuấn"
+        role: "Frontend Developer"
+        avatar: "👨‍💻"
+        description: "Specialized in React, Vue.js and UI/UX Design"
+      1:
+        name: "Trần Thị Hương"
+        role: "Backend Developer"
+        avatar: "👩‍💻"
+        description: "Specialized in Node.js, Python and Database"
+      2:
+        name: "Lê Đức Anh"
+        role: "Data Analyst"
+        avatar: "👨‍🔬"
+        description: "Specialized in data analysis and AI/ML"
+      3:
+        name: "Phạm Văn Hùng"
+        role: "Backend Developer"
+        avatar: "👨‍💻"
+        description: "Specialized in Java, Spring Boot and Microservices"
+      4:
+        name: "Nguyễn Thị Mai"
+        role: "Marketing Specialist"
+        avatar: "👩‍💼"
+        description: "Specialized in Digital Marketing and Content Creation"
 
   whatWeDo:
     title: "What is DTU Help Center?"
@@ -48,6 +74,35 @@ home:
     title: "What students say about us"
     subtitle: "Authentic feedback from DTU students"
     trustBadge: "Over 1000+ students trust us"
+    items:
+      0:
+        name: "Nguyễn Văn An"
+        major: "Information Technology"
+        year: "Year 3"
+        avatar: "👨‍🎓"
+        content: "DTU Help Center helps me calculate GPA very accurately and predict degree classification very useful. This tool has helped me plan my studies better."
+        rating: "5"
+      1:
+        name: "Trần Thị Bình"
+        major: "Economics"
+        year: "Year 4"
+        avatar: "👩‍🎓"
+        content: "The study materials marketplace is very convenient! I've bought many quality exam materials from upperclassmen."
+        rating: "5"
+      2:
+        name: "Lê Minh Cường"
+        major: "Electronics & Telecommunications"
+        year: "Year 2"
+        avatar: "👨‍🎓"
+        content: "Beautiful interface, easy to use. The credit roadmap feature helps me know what subjects to take to achieve my GPA goals."
+        rating: "5"
+      3:
+        name: "Phạm Thị Dung"
+        major: "Business Administration"
+        year: "Year 3"
+        avatar: "👩‍🎓"
+        content: "The degree classification prediction tool is very accurate. I used it to plan my studies and achieve my goals."
+        rating: "5"
 
   faq:
     title: "Frequently Asked Questions"

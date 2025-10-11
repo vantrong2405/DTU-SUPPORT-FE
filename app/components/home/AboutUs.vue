@@ -3,38 +3,18 @@ import { useI18n } from 'vue-i18n'
 
 const { t } = useI18n()
 
-const teamMembers = [
-  {
-    name: 'Nguyễn Minh Tuấn',
-    role: 'Frontend Developer',
-    avatar: '👨‍💻',
-    description: 'Chuyên về React, Vue.js và UI/UX Design'
-  },
-  {
-    name: 'Trần Thị Hương',
-    role: 'Backend Developer',
-    avatar: '👩‍💻',
-    description: 'Chuyên về Node.js, Python và Database'
-  },
-  {
-    name: 'Lê Đức Anh',
-    role: 'Data Analyst',
-    avatar: '👨‍🔬',
-    description: 'Chuyên về phân tích dữ liệu và AI/ML'
-  },
-  {
-    name: 'Phạm Văn Hùng',
-    role: 'Backend Developer',
-    avatar: '👨‍💻',
-    description: 'Chuyên về Java, Spring Boot và Microservices'
-  },
-  {
-    name: 'Nguyễn Thị Mai',
-    role: 'Marketing Specialist',
-    avatar: '👩‍💼',
-    description: 'Chuyên về Digital Marketing và Content Creation'
+const teamMembers = computed(() => {
+  const members = []
+  for (let i = 0; i < 5; i++) {
+    members.push({
+      name: t(`home.about.teamMembers.${i}.name`),
+      role: t(`home.about.teamMembers.${i}.role`),
+      avatar: t(`home.about.teamMembers.${i}.avatar`),
+      description: t(`home.about.teamMembers.${i}.description`)
+    })
   }
-]
+  return members
+})
 </script>
 
 <template>

@@ -5,6 +5,32 @@ home:
     cta: "詳しく見る"
     teamTitle: "開発チーム"
     teamSubtitle: "テクノロジーとマーケティングに精通した多様なチーム"
+    teamMembers:
+      0:
+        name: "Nguyễn Minh Tuấn"
+        role: "フロントエンド開発者"
+        avatar: "👨‍💻"
+        description: "React、Vue.js、UI/UXデザインを専門とする"
+      1:
+        name: "Trần Thị Hương"
+        role: "バックエンド開発者"
+        avatar: "👩‍💻"
+        description: "Node.js、Python、データベースを専門とする"
+      2:
+        name: "Lê Đức Anh"
+        role: "データアナリスト"
+        avatar: "👨‍🔬"
+        description: "データ分析とAI/MLを専門とする"
+      3:
+        name: "Phạm Văn Hùng"
+        role: "バックエンド開発者"
+        avatar: "👨‍💻"
+        description: "Java、Spring Boot、マイクロサービスを専門とする"
+      4:
+        name: "Nguyễn Thị Mai"
+        role: "マーケティングスペシャリスト"
+        avatar: "👩‍💼"
+        description: "デジタルマーケティングとコンテンツ制作を専門とする"
 
   whatWeDo:
     title: "DTU Help Center とは？"
@@ -48,6 +74,35 @@ home:
     title: "学生の声"
     subtitle: "DTU 学生からのリアルなフィードバック"
     trustBadge: "1000+ 名以上の学生に信頼されています"
+    items:
+      0:
+        name: "Nguyễn Văn An"
+        major: "情報技術"
+        year: "3年生"
+        avatar: "👨‍🎓"
+        content: "DTU Help CenterはGPA計算が非常に正確で、学位区分の予測もとても役立ちます。このツールで学習計画をより良く立てることができました。"
+        rating: "5"
+      1:
+        name: "Trần Thị Bình"
+        major: "経済学"
+        year: "4年生"
+        avatar: "👩‍🎓"
+        content: "学習資料マーケットプレイスはとても便利です！先輩から質の高い試験資料をたくさん購入できました。"
+        rating: "5"
+      2:
+        name: "Lê Minh Cường"
+        major: "電子・通信"
+        year: "2年生"
+        avatar: "👨‍🎓"
+        content: "美しいインターフェースで使いやすいです。単位ロードマップ機能でGPA目標達成に必要な科目が分かります。"
+        rating: "5"
+      3:
+        name: "Phạm Thị Dung"
+        major: "経営管理"
+        year: "3年生"
+        avatar: "👩‍🎓"
+        content: "学位区分予測ツールは非常に正確です。学習計画を立てて目標を達成するのに使用しました。"
+        rating: "5"
 
   faq:
     title: "よくある質問"
