@@ -1,5 +1,5 @@
-@import "tailwindcss";
-@import "tw-animate-css";
+@import 'tailwindcss';
+@import 'tw-animate-css';
 
 /* Base theme variables - Default to Red theme */
 :root {
@@ -39,42 +39,42 @@
 }
 
 /* Light Mode Themes */
-:root[data-theme="red-light"] {
+:root[data-theme='red-light'] {
   --primary: 350 85% 42%;
   --primary-foreground: 210 40% 98%;
   --accent: 352 77% 57%;
   --accent-foreground: 210 40% 98%;
 }
 
-:root[data-theme="blue-light"] {
+:root[data-theme='blue-light'] {
   --primary: 217 91% 60%;
   --primary-foreground: 210 40% 98%;
   --accent: 213 94% 68%;
   --accent-foreground: 210 40% 98%;
 }
 
-:root[data-theme="green-light"] {
+:root[data-theme='green-light'] {
   --primary: 158 64% 38%;
   --primary-foreground: 210 40% 98%;
   --accent: 142 76% 36%;
   --accent-foreground: 210 40% 98%;
 }
 
-:root[data-theme="purple-light"] {
+:root[data-theme='purple-light'] {
   --primary: 262 83% 58%;
   --primary-foreground: 210 40% 98%;
   --accent: 263 70% 50%;
   --accent-foreground: 210 40% 98%;
 }
 
-:root[data-theme="orange-light"] {
+:root[data-theme='orange-light'] {
   --primary: 25 95% 53%;
   --primary-foreground: 210 40% 98%;
   --accent: 20 90% 48%;
   --accent-foreground: 210 40% 98%;
 }
 
-:root[data-theme="pink-light"] {
+:root[data-theme='pink-light'] {
   --primary: 330 81% 60%;
   --primary-foreground: 210 40% 98%;
   --accent: 340 82% 52%;
@@ -82,7 +82,7 @@
 }
 
 /* Dark Mode Themes: neutral dark base + brand primary/accent */
-:root[data-theme="red-dark"] {
+:root[data-theme='red-dark'] {
   --background: 222.2 84% 4.9%;
   --foreground: 210 40% 98%;
   --card: 222.2 84% 7.5%;
@@ -96,7 +96,7 @@
   --border: 217.2 32.6% 17.5%;
 }
 
-:root[data-theme="blue-dark"] {
+:root[data-theme='blue-dark'] {
   --background: 222.2 84% 4.9%;
   --foreground: 210 40% 98%;
   --card: 222.2 84% 7.5%;
@@ -110,7 +110,7 @@
   --border: 217.2 32.6% 17.5%;
 }
 
-:root[data-theme="green-dark"] {
+:root[data-theme='green-dark'] {
   --background: 222.2 84% 4.9%;
   --foreground: 210 40% 98%;
   --card: 222.2 84% 7.5%;
@@ -124,7 +124,7 @@
   --border: 217.2 32.6% 17.5%;
 }
 
-:root[data-theme="purple-dark"] {
+:root[data-theme='purple-dark'] {
   --background: 222.2 84% 4.9%;
   --foreground: 210 40% 98%;
   --card: 222.2 84% 7.5%;
@@ -138,7 +138,7 @@
   --border: 217.2 32.6% 17.5%;
 }
 
-:root[data-theme="orange-dark"] {
+:root[data-theme='orange-dark'] {
   --background: 222.2 84% 4.9%;
   --foreground: 210 40% 98%;
   --card: 222.2 84% 7.5%;
@@ -152,7 +152,7 @@
   --border: 217.2 32.6% 17.5%;
 }
 
-:root[data-theme="pink-dark"] {
+:root[data-theme='pink-dark'] {
   --background: 222.2 84% 4.9%;
   --foreground: 210 40% 98%;
   --card: 222.2 84% 7.5%;

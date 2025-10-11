@@ -5,13 +5,17 @@ export const useThemeLogic = () => {
   const router = useRouter()
   const { t } = useI18n()
 
-  const currentTheme = computed(() => (route.query.theme as string) || 'red-light')
+  const currentTheme = computed(
+    () => (route.query.theme as string) || 'red-light'
+  )
 
   const isShowingLightMode = ref<'light' | 'dark'>('light')
 
   const themeIconColor = computed(() => {
     const allThemeData = [...THEMES.light, ...THEMES.dark]
-    const themeData = allThemeData.find(theme => theme.value === currentTheme.value)
+    const themeData = allThemeData.find(
+      (theme) => theme.value === currentTheme.value
+    )
     return themeData!.color
   })
 
@@ -24,7 +28,8 @@ export const useThemeLogic = () => {
     return t(`common.ui.theme.names.${base}`)
   }
 
-  const setHtmlAttributes = () => useHead(() => ({ htmlAttrs: { 'data-theme': currentTheme.value } }))
+  const setHtmlAttributes = () =>
+    useHead(() => ({ htmlAttrs: { 'data-theme': currentTheme.value } }))
 
   return {
     currentTheme,
@@ -32,6 +37,6 @@ export const useThemeLogic = () => {
     themeIconColor,
     handleThemeSwitch,
     getThemeDisplayLabel,
-    setHtmlAttributes
+    setHtmlAttributes,
   }
 }

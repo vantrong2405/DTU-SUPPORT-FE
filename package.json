@@ -9,8 +9,8 @@
     "preview": "nuxt preview",
     "postinstall": "nuxt prepare",
     "lint:fix": "eslint . --fix",
-    "prettier": "prettier --check \"src/**/(*.tsx|*.ts|*.css|*.scss)\"",
-    "prettier:fix": "prettier --write \"src/**/(*.tsx|*.ts|*.css|*.scss)\""
+    "prettier": "prettier --check \"app/**/*.{vue,ts,js,css}\" \"*.{ts,js,json}\"",
+    "prettier:fix": "prettier --write \"app/**/*.{vue,ts,js,css}\" \"*.{ts,js,json}\""
   },
   "dependencies": {
     "@nuxtjs/i18n": "^10.1.0",
@@ -34,6 +34,7 @@
   "devDependencies": {
     "@iconify-json/radix-icons": "^1.2.5",
     "@iconify/vue": "^5.0.0",
+    "prettier": "^3.6.2",
     "shadcn-nuxt": "^2.2.0",
     "typescript": "^5.9.3"
   }

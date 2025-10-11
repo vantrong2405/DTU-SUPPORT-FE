@@ -5,33 +5,46 @@ export default defineNuxtConfig({
   modules: ['@nuxtjs/tailwindcss', 'shadcn-nuxt', '@nuxtjs/i18n'],
   shadcn: {
     prefix: '',
-    componentDir: './app/components/ui'
+    componentDir: './app/components/ui',
   },
-  components: [
-    { path: 'app/components', pathPrefix: false },
-  ],
+  components: [{ path: 'app/components', pathPrefix: false }],
+  vite: {
+    css: {
+      devSourcemap: true,
+    },
+    build: {
+      sourcemap: false,
+    },
+  },
+  tailwindcss: {
+    config: {
+      future: {
+        hoverOnlyWhenSupported: true,
+      },
+    },
+  },
   i18n: {
     langDir: 'locales',
     locales: [
       {
         code: 'en',
         name: 'English',
-        files: ['common/en.yml', 'home/en.yml', 'tools/en.yml'],
-        iso: 'en-US'
+        files: ['common/en.yml', 'home/en.yml', 'tools/en.yml', 'gpa/en.yml'],
+        iso: 'en-US',
       },
       {
         code: 'vi',
         name: 'Vietnamese',
-        files: ['common/vi.yml', 'home/vi.yml', 'tools/vi.yml'],
-        iso: 'vi-VN'
+        files: ['common/vi.yml', 'home/vi.yml', 'tools/vi.yml', 'gpa/vi.yml'],
+        iso: 'vi-VN',
       },
       {
         code: 'ja',
         name: 'Japanese',
-        files: ['common/ja.yml', 'home/ja.yml', 'tools/ja.yml'],
-        iso: 'ja-JP'
+        files: ['common/ja.yml', 'home/ja.yml', 'tools/ja.yml', 'gpa/ja.yml'],
+        iso: 'ja-JP',
       },
     ],
     defaultLocale: 'en',
-  }
+  },
 })
