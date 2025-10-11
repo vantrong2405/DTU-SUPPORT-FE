@@ -4,6 +4,7 @@ import { Button } from '@/components/ui/button'
 import { Theme } from '@/components/ui/theme-selector'
 import LocaleSwitcher from './LocaleSwitcher.vue'
 import { useI18n } from 'vue-i18n'
+import { NAV_ITEMS, HOME_SECTIONS } from '@/constants/features/home'
 
 const { t } = useI18n()
 
@@ -20,7 +21,7 @@ const closeMenu = () => {
 
 const scrollToSection = (sectionId: string) => {
   closeMenu()
-  const element = document.querySelector(sectionId)
+  const element = document.querySelector(`#${sectionId.replace('#', '')}`)
   if (element) {
     element.scrollIntoView({ behavior: 'smooth' })
   }
@@ -33,13 +34,13 @@ const handleNavClick = (event: MouseEvent, item: { to: string; scroll?: boolean 
   }
 }
 
-const navItems = computed(() => [
-  { label: t('common.header.menu.home'), to: '/' },
-  { label: t('common.header.menu.whatWeDo'), to: '#what-we-do', scroll: true },
-  { label: t('common.header.menu.about'), to: '#about-us', scroll: true },
-  { label: t('common.header.menu.testimonials'), to: '#testimonials', scroll: true },
-  { label: t('common.header.menu.faq'), to: '#faq', scroll: true }
-])
+const navItems = computed(() =>
+  NAV_ITEMS.map(item => ({
+    label: t(`common.header.menu.${item.key}`),
+    to: item.to,
+    scroll: 'scroll' in item ? item.scroll : false
+  }))
+)
 </script>
 
 <template>
