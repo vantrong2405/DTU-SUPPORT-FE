@@ -1,7 +1,9 @@
 <script setup lang="ts">
 import { useI18n } from 'vue-i18n'
+import { useNavigation } from '@/composables/common/useNavigation'
 
 const { t } = useI18n()
+const { navigateTo } = useNavigation()
 </script>
 
 <template>
@@ -38,7 +40,7 @@ const { t } = useI18n()
           <ul class="space-y-3">
             <li>
               <NuxtLink
-                to="#"
+                :to="navigateTo('/gpa')"
                 class="text-muted-foreground hover:text-foreground transition-colors text-sm"
                 >{{ t('common.footer.links.gpa') }}</NuxtLink
               >
@@ -52,21 +54,21 @@ const { t } = useI18n()
             </li>
             <li>
               <NuxtLink
-                to="#"
+                :to="navigateTo('/schedule')"
                 class="text-muted-foreground hover:text-foreground transition-colors text-sm"
                 >{{ t('common.footer.links.schedule') }}</NuxtLink
               >
             </li>
             <li>
               <NuxtLink
-                to="#"
+                :to="navigateTo('/marketplace')"
                 class="text-muted-foreground hover:text-foreground transition-colors text-sm"
                 >{{ t('common.footer.links.marketplace') }}</NuxtLink
               >
             </li>
             <li>
               <NuxtLink
-                to="#"
+                :to="navigateTo('/tools')"
                 class="text-muted-foreground hover:text-foreground transition-colors text-sm"
                 >{{ t('common.footer.links.tools') }}</NuxtLink
               >

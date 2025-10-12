@@ -1,8 +1,10 @@
 <script setup lang="ts">
 import logoDtu from '@/assets/images/logo-dtu.png'
 import { useI18n } from 'vue-i18n'
+import { useNavigation } from '@/composables/common/useNavigation'
 
 const { t } = useI18n()
+const { navigateTo } = useNavigation()
 </script>
 
 <template>
@@ -44,14 +46,14 @@ const { t } = useI18n()
             class="flex flex-col sm:flex-row gap-4 justify-center items-center"
           >
             <NuxtLink
-              to="/tools"
-              class="inline-flex items-center justify-center whitespace-nowrap rounded-md text-sm font-medium ring-offset-background transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:pointer-events-none disabled:opacity-50 bg-primary text-primary-foreground hover:bg-primary/90 h-10 px-8 py-4 text-lg font-semibold"
+              :to="navigateTo('/tools')"
+              class="inline-flex items-center justify-center whitespace-nowrap rounded-md ring-offset-background transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:pointer-events-none disabled:opacity-50 bg-primary text-primary-foreground hover:bg-primary/90 h-10 px-8 py-4 text-lg font-semibold"
             >
               {{ t('home.hero.primaryCta') }}
             </NuxtLink>
             <NuxtLink
-              to="/about"
-              class="inline-flex items-center justify-center whitespace-nowrap rounded-md text-sm font-medium ring-offset-background transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:pointer-events-none disabled:opacity-50 border border-input bg-background hover:bg-accent hover:text-accent-foreground h-10 px-8 py-4 text-lg font-semibold"
+              :to="navigateTo('/about')"
+              class="inline-flex items-center justify-center whitespace-nowrap rounded-md ring-offset-background transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:pointer-events-none disabled:opacity-50 border border-input bg-background hover:bg-accent hover:text-accent-foreground h-10 px-8 py-4 text-lg font-semibold"
             >
               {{ t('home.hero.secondaryCta') }}
             </NuxtLink>

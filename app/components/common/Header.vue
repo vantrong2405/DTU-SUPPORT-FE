@@ -5,8 +5,10 @@ import { Theme } from '@/components/ui/theme-selector'
 import LocaleSwitcher from './LocaleSwitcher.vue'
 import { useI18n } from 'vue-i18n'
 import { NAV_ITEMS } from '@/constants/features/home'
+import { useNavigation } from '@/composables/common/useNavigation'
 
 const { t } = useI18n()
+const { navigateTo } = useNavigation()
 
 const isMenuOpen = ref(false)
 const route = useRoute()
@@ -37,6 +39,13 @@ const handleNavClick = (
   }
 }
 
+const getNavLink = (item: { to: string; scroll?: boolean }) => {
+  if (item.scroll) {
+    return route.path
+  }
+  return navigateTo(item.to)
+}
+
 const handleMobileNavClick = (
   event: MouseEvent,
   item: { to: string; scroll?: boolean }
@@ -59,7 +68,7 @@ const navItems = computed(() =>
     <div class="container mx-auto px-3 sm:px-4">
       <div class="flex items-center justify-between h-16">
         <NuxtLink
-          to="/"
+          :to="navigateTo('/')"
           class="flex items-center space-x-2 sm:space-x-3 min-w-0 flex-shrink-0"
           @click="closeMenu"
         >
@@ -72,6 +81,7 @@ const navItems = computed(() =>
               class="w-6 h-6 sm:w-8 sm:h-8 object-contain"
             />
           </div>
+
           <div class="hidden sm:block flex-shrink-0 min-w-0">
             <h1 class="text-lg sm:text-xl font-bold text-foreground truncate">
               {{ t('common.brand.titleFull') }}
@@ -80,6 +90,7 @@ const navItems = computed(() =>
               {{ t('common.brand.subtitle') }}
             </p>
           </div>
+
           <div class="sm:hidden flex-shrink-0">
             <h1 class="text-sm font-bold text-foreground">
               {{ t('common.brand.titleShort') }}
@@ -88,11 +99,11 @@ const navItems = computed(() =>
         </NuxtLink>
         <div></div>
 
-        <nav class="hidden xl:flex items-center space-x-4 2xl:space-x-6">
+        <nav class="hidden lg:flex items-center space-x-3 xl:space-x-4 2xl:space-x-6">
           <NuxtLink
             v-for="item in navItems"
             :key="item.to"
-            :to="item.scroll ? route.path : item.to"
+            :to="getNavLink(item)"
             class="text-muted-foreground hover:text-foreground hover:bg-[hsl(var(--accent)/0.16)] rounded-md px-2 py-1 transition-colors duration-150 font-medium text-sm whitespace-nowrap"
             active-class="text-primary"
             @click="handleNavClick($event, item)"
@@ -107,18 +118,10 @@ const navItems = computed(() =>
           <div class="h-6 w-px bg-border"></div>
           <Button
             as="NuxtLink"
-            to="/login"
-            variant="outline"
+            :to="navigateTo('/login')"
             size="sm"
             class="text-sm whitespace-nowrap"
             >{{ t('common.auth.login') }}</Button
-          >
-          <Button
-            as="NuxtLink"
-            to="/register"
-            size="sm"
-            class="text-sm whitespace-nowrap"
-            >{{ t('common.auth.register') }}</Button
           >
         </div>
 
@@ -127,7 +130,7 @@ const navItems = computed(() =>
           variant="ghost"
           size="icon"
           @click="toggleMenu"
-          class="xl:hidden text-foreground rounded-lg w-10 h-10 hover:bg-[hsl(var(--accent)/0.12)] active:bg-[hsl(var(--accent)/0.16)] transition-colors duration-150 flex items-center flex-shrink-0"
+          class="lg:hidden text-foreground rounded-lg w-10 h-10 hover:bg-[hsl(var(--accent)/0.12)] active:bg-[hsl(var(--accent)/0.16)] transition-colors duration-150 flex items-center flex-shrink-0"
           aria-label="Toggle menu"
         >
           <svg
@@ -163,13 +166,13 @@ const navItems = computed(() =>
 
       <div
         v-if="isMenuOpen"
-        class="xl:hidden border-t border-border bg-background"
+        class="lg:hidden border-t border-border bg-background"
       >
         <nav class="py-4 space-y-2">
           <NuxtLink
             v-for="item in navItems"
             :key="item.to"
-            :to="item.scroll ? route.path : item.to"
+            :to="getNavLink(item)"
             class="block text-muted-foreground hover:text-foreground hover:bg-[hsl(var(--accent)/0.16)] rounded-md px-3 py-2 transition-colors duration-150 font-medium"
             active-class="text-primary bg-accent/10"
             @click="handleMobileNavClick($event, item)"
@@ -178,27 +181,21 @@ const navItems = computed(() =>
           </NuxtLink>
 
           <div class="pt-4 border-t border-border space-y-3">
-            <div class="flex items-center gap-2 pb-2 pl-3">
+            <div class="flex items-center justify-center gap-3 pb-2">
               <Theme />
               <LocaleSwitcher />
             </div>
-            <Button
-              as="NuxtLink"
-              to="/login"
-              variant="outline"
-              class="w-full justify-center"
-              @click="closeMenu"
-            >
-              {{ t('common.auth.login') }}
-            </Button>
-            <Button
-              as="NuxtLink"
-              to="/register"
-              class="w-full justify-center"
-              @click="closeMenu"
-            >
-              {{ t('common.auth.register') }}
-            </Button>
+
+            <div class="space-y-2 px-3">
+              <Button
+                as="NuxtLink"
+                :to="navigateTo('/login')"
+                class="w-full justify-center"
+                @click="closeMenu"
+              >
+                {{ t('common.auth.login') }}
+              </Button>
+            </div>
           </div>
         </nav>
       </div>

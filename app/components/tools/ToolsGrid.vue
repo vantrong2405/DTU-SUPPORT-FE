@@ -8,8 +8,10 @@ import {
   CardTitle,
 } from '@/components/ui/card'
 import { useI18n } from 'vue-i18n'
+import { useNavigation } from '@/composables/common/useNavigation'
 
 const { t } = useI18n()
+const { navigateTo } = useNavigation()
 
 const SCOPE = 'tools.grid'
 </script>
@@ -102,7 +104,7 @@ const SCOPE = 'tools.grid'
               <Button
                 v-if="t(`${SCOPE}.items.${i}.status`) === 'available'"
                 as="NuxtLink"
-                :to="t(`${SCOPE}.items.${i}.to`)"
+                :to="navigateTo(t(`${SCOPE}.items.${i}.to`))"
                 class="w-full py-3 px-4 font-medium flex items-center justify-center"
               >
                 {{ t(`${SCOPE}.button.useNow`) }}

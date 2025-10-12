@@ -34,6 +34,10 @@ common:
         purple: "パープル"
         orange: "オレンジ"
         pink: "ピンク"
+  loading:
+    title: "DTU Supportを読み込み中"
+    subtitle: "学習ツールを準備しています..."
+    progress: "読み込み中..."
   brand:
     titleFull: "DTU Study Support"
     subtitle: "Duy Tân University"

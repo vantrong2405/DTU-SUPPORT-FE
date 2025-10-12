@@ -34,6 +34,10 @@ common:
         purple: "Purple"
         orange: "Orange"
         pink: "Pink"
+  loading:
+    title: "Loading DTU Support"
+    subtitle: "Preparing your study tools..."
+    progress: "Loading..."
   brand:
     titleFull: "DTU Study Support"
     subtitle: "Duy Tân University"

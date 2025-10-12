@@ -34,6 +34,10 @@ common:
         purple: "Tím Hoàng Gia"
         orange: "Cam Hoàng Hôn"
         pink: "Hồng Hoa Hồng"
+  loading:
+    title: "Đang tải DTU Support"
+    subtitle: "Chuẩn bị công cụ học tập..."
+    progress: "Đang tải..."
   brand:
     titleFull: "DTU Study Support"
     subtitle: "Duy Tân University"
