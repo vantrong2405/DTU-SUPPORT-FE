@@ -101,14 +101,16 @@ const SCOPE = 'tools.grid'
 
             <!-- Button -->
             <div class="mt-auto">
-              <Button
+              <NuxtLink
                 v-if="t(`${SCOPE}.items.${i}.status`) === 'available'"
-                as="NuxtLink"
-                :to="navigateTo(t(`${SCOPE}.items.${i}.to`))"
-                class="w-full py-3 px-4 font-medium flex items-center justify-center"
+                :to="navigateTo(t(`${SCOPE}.items.${i}.to`)).path"
+                :query="navigateTo(t(`${SCOPE}.items.${i}.to`)).query"
+                class="block"
               >
-                {{ t(`${SCOPE}.button.useNow`) }}
-              </Button>
+                <Button class="w-full py-3 px-4 font-medium flex items-center justify-center">
+                  {{ t(`${SCOPE}.button.useNow`) }}
+                </Button>
+              </NuxtLink>
               <Button
                 v-else
                 disabled

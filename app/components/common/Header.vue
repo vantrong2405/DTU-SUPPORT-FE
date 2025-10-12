@@ -23,7 +23,7 @@ const closeMenu = () => {
 
 const scrollToSection = (sectionId: string) => {
   closeMenu()
-  const element = document.querySelector(`#${sectionId.replace('#', '')}`)
+  const element = document.querySelector(sectionId)
   if (element) {
     element.scrollIntoView({ behavior: 'smooth' })
   }

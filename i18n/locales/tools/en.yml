@@ -30,7 +30,7 @@ tools:
     items:
       - icon: "📊"
         status: "available"
-        to: "/gpa"
+        to: "/tools/gpa"
         title: "Study Support & GPA Calculator"
         desc: "Comprehensive tool to manage and optimize academic results"
         features:

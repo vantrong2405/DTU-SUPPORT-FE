@@ -30,7 +30,7 @@ tools:
     items:
       - icon: "📊"
         status: "available"
-        to: "/gpa"
+        to: "/tools/gpa"
         title: "学習サポート & GPA 計算"
         desc: "学業成績を管理・最適化する総合ツール"
         features:

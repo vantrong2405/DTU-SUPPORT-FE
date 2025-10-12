@@ -40,7 +40,7 @@ const { navigateTo } = useNavigation()
           <ul class="space-y-3">
             <li>
               <NuxtLink
-                :to="navigateTo('/gpa')"
+                :to="navigateTo('/tools/gpa')"
                 class="text-muted-foreground hover:text-foreground transition-colors text-sm"
                 >{{ t('common.footer.links.gpa') }}</NuxtLink
               >
@@ -54,14 +54,14 @@ const { navigateTo } = useNavigation()
             </li>
             <li>
               <NuxtLink
-                :to="navigateTo('/schedule')"
+                to="#"
                 class="text-muted-foreground hover:text-foreground transition-colors text-sm"
                 >{{ t('common.footer.links.schedule') }}</NuxtLink
               >
             </li>
             <li>
               <NuxtLink
-                :to="navigateTo('/marketplace')"
+                to="#"
                 class="text-muted-foreground hover:text-foreground transition-colors text-sm"
                 >{{ t('common.footer.links.marketplace') }}</NuxtLink
               >

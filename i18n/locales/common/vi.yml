@@ -1,14 +1,3 @@
-header:
-  title: "Chào mừng đến với trang web"
-  menu:
-    home: "Trang chủ"
-    about: "Về chúng tôi"
-    whatWeDo: "DTU Helper là gì?"
-    testimonials: "Sinh viên nói gì"
-    faq: "FAQ"
-auth:
-  login: "Đăng nhập"
-  register: "Đăng ký"
 common:
   header:
     menu:
@@ -28,40 +17,40 @@ common:
       label: "Giao diện"
       selectLabel: "Chọn giao diện"
       names:
-        red: "Đỏ DTU"
-        blue: "Xanh Dương"
-        green: "Xanh Lá"
-        purple: "Tím Hoàng Gia"
-        orange: "Cam Hoàng Hôn"
-        pink: "Hồng Hoa Hồng"
+        red: "Đỏ"
+        blue: "Xanh dương"
+        green: "Xanh lá"
+        purple: "Tím"
+        orange: "Cam"
+        pink: "Hồng"
   loading:
     title: "Đang tải DTU Support"
     subtitle: "Chuẩn bị công cụ học tập..."
     progress: "Đang tải..."
   brand:
     titleFull: "DTU Study Support"
-    subtitle: "Duy Tân University"
+    subtitle: "Đại học Duy Tân"
     titleShort: "DTU"
   footer:
-    intro: "Đồng hành cùng sinh viên DTU trong hành trình học tập và phát triển sự nghiệp."
+    intro: "Hỗ trợ sinh viên DTU trên hành trình học tập."
     sections:
       services: "Dịch vụ"
       support: "Hỗ trợ"
       contact: "Liên hệ"
     links:
-      gpa: "Tính toán GPA"
-      predict: "Dự đoán xếp loại"
+      gpa: "Máy tính GPA"
+      predict: "Dự đoán bằng cấp"
       schedule: "Lộ trình tín chỉ"
       marketplace: "Marketplace"
-      tools: "Công cụ hỗ trợ"
+      tools: "Công cụ"
       help: "Hỗ trợ học tập"
-      faq: "Câu hỏi thường gặp"
+      faq: "FAQ"
       payment: "Hướng dẫn thanh toán"
       privacy: "Chính sách bảo mật"
       terms: "Điều khoản dịch vụ"
     contact:
       messenger: "Messenger 24/7"
-      facebook: "Facebook Page"
+      facebook: "Trang Facebook"
       response: "Phản hồi trong 30 phút"
     copyright: "© {year} DTU Study Support. Tất cả quyền được bảo lưu."
-    crafted: "Được thiết kế với ❤️ cho sinh viên Duy Tân"
+    crafted: "Được tạo với ❤️ cho sinh viên DTU"

@@ -30,7 +30,7 @@ tools:
     items:
       - icon: "📊"
         status: "available"
-        to: "/gpa"
+        to: "/tools/gpa"
         title: "Hỗ trợ học tập & tính toán GPA"
         desc: "Công cụ toàn diện giúp bạn quản lý và tối ưu hóa kết quả học tập"
         features:
