@@ -154,7 +154,7 @@ DTU-SUPPORT-FE/
 
 ### `app/assets/` - Local Assets (Bundled)
 - **Purpose**: Asset import vào bundle (fonts, css nội bộ, icons nhỏ)
-- **Content**: 
+- **Content**:
   - `css/tailwind.css` - CSS variables, themes, utilities
   - `images/logo-dtu.png` - DTU logo
 - **Rule**: Không chứa ảnh tĩnh nặng (đặt vào `public/`)
@@ -213,6 +213,7 @@ DTU-SUPPORT-FE/
 
 ### Feature-based Organization
 ```
+
 app/components/
 ├── common/               # Shared across features
 │   ├── Header.vue        # Main navigation

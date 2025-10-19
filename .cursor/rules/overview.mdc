@@ -15,7 +15,7 @@ alwaysApply: true
 Quy tắc bắt buộc để Cursor thu thập và xác minh tất cả thông tin trước khi sửa/viết/refactor code. Mọi hành động thay đổi code phải bắt đầu từ bước này.
 
 ## Nguyên tắc chính
-- **Bắt buộc**: dùng Cursor tools (`read_file`, `codebase_search`, `grep`) để đọc các file liên quan trước khi viết bất kỳ code nào.
+- **Bắt buộc**: ưu tiên dùng MCP tools nếu có thể, nếu không có thì dùng Cursor tools (`read_file`, `codebase_search`, `grep`) để đọc các file liên quan trước khi viết bất kỳ code nào.
 - **Giao tiếp**: mọi báo cáo, câu hỏi và xác nhận phải bằng Tiếng Việt. Mở đầu với: "Hi boss Trong".
 - **Code**: khi tạo hoặc sửa file code — code phải viết bằng tiếng Anh và không có comment (trừ trường hợp bắt buộc theo ngôn ngữ).
 
@@ -59,7 +59,6 @@ Quy tắc bắt buộc để Cursor thu thập và xác minh tất cả thông t
 - **Giao tiếp với user**: Bằng Tiếng Việt, luôn mở đầu với *"Hi boss Trong"*
 - **Code**: Luôn viết bằng tiếng Anh (biến, hàm, component names)
 - **Comments**: Không viết comment trừ trường hợp bắt buộc (SSR directives, license headers, logic phức tạp)
-- **Trước khi code**: BẮT BUỘC dùng Cursor tools (`read_file`, `codebase_search`, `grep`) để đọc và hiểu file liên quan
 
 ### Naming Conventions
 
@@ -321,9 +320,7 @@ Trước khi bắt đầu code feature/fix, phải hoàn thành checklist này:
   - [ ] Cần tạo component mới hay sửa component cũ?
 
 - [ ] **Research codebase**:
-  - [ ] Dùng `codebase_search` tìm components liên quan
-  - [ ] Dùng `read_file` đọc components tương tự để hiểu pattern
-  - [ ] Dùng `grep` tìm usage của functions/components sẽ sửa
+  - [ ] Ưu tiên dùng MCP tools nếu có thể, nếu không có thì dùng Cursor tools (`codebase_search`, `read_file`, `grep`) để tìm và đọc components liên quan
 
 - [ ] **Check dependencies**:
   - [ ] Color tokens đã có trong CSS variables chưa?

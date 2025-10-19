@@ -2,6 +2,146 @@ tools:
   hero:
     title: "Công cụ hỗ trợ học tập"
     subtitle: "Bộ sưu tập công cụ được thiết kế cho sinh viên DTU"
+  gpa:
+    badge: "Công cụ tính GPA thông minh"
+    title: "Công cụ tính GPA"
+    titleHighlight: "thông minh"
+    subtitle: "Tính toán GPA & dự đoán kết quả. Hỏi AI để nhận gợi ý học tập thông minh."
+    tabs:
+      target: "Tính toán mục tiêu"
+      targetShort: "Mục tiêu"
+      gpa: "Tính toán GPA"
+      gpaShort: "GPA"
+      pe: "GPA thể dục"
+      peShort: "Thể dục"
+      pass: "Tính điểm qua môn"
+      passShort: "Qua môn"
+      ai: "Hỏi AI"
+      aiShort: "AI"
+    target:
+      inputTitle: "Thông tin đầu vào"
+      inputSubtitle: "Nhập thông tin GPA để tính toán kết quả dự đoán"
+      fields:
+        completedCredits: "Số tín đã học"
+        currentGpa: "GPA hiện tại"
+        targetGpa: "GPA mục tiêu"
+        remainingCredits: "Số tín còn lại"
+      placeholders:
+        completedCredits: "Nhập số tín đã học"
+        currentGpa: "Nhập GPA hiện tại (0–4.00)"
+        targetGpa: "Nhập GPA mục tiêu (0–4.00)"
+        remainingCredits: "Nhập số tín còn lại"
+      buttons:
+        calculate: "Tính toán"
+        calculating: "Đang tính..."
+        reset: "Đặt lại"
+      empty:
+        title: "Sẵn sàng tính toán"
+        description: "Nhập thông tin ở form bên trái và nhấn \"Tính toán\" để xem kết quả dự đoán GPA của bạn"
+      results:
+        title: "Kết quả tính toán"
+        subtitle: "GPA tối đa có thể đạt được"
+        scale: "trên thang điểm 4.0"
+        success:
+          title: "Có thể đạt mục tiêu!"
+          message: "Nếu đạt điểm A (4.0) ở tất cả các môn còn lại, bạn sẽ đạt GPA {gpa}, cao hơn mục tiêu của bạn."
+        warning:
+          title: "Khó đạt mục tiêu"
+          message: "Ngay cả khi đạt điểm A (4.0) ở tất cả các môn còn lại, GPA tối đa chỉ là {gpa}, thấp hơn mục tiêu."
+      classifications:
+        excellent: "Xuất sắc"
+        good: "Giỏi"
+        fair: "Khá"
+        average: "Trung bình"
+        poor: "Yếu"
+      validation:
+        required: "Trường này là bắt buộc"
+        completedCredits:
+          invalid: "Số tín đã học phải là số nguyên dương (≥ 0)"
+        currentGpa:
+          invalid: "GPA hiện tại phải là số từ 0 đến 4.00"
+          min: "GPA hiện tại không thể nhỏ hơn 0"
+          max: "GPA hiện tại không thể lớn hơn 4.00"
+        targetGpa:
+          invalid: "GPA mục tiêu phải là số từ 0.01 đến 4.00"
+          min: "GPA mục tiêu phải lớn hơn 0"
+          max: "GPA mục tiêu không thể lớn hơn 4.00"
+        remainingCredits:
+          invalid: "Số tín còn lại phải là số nguyên dương (≥ 1)"
+          min: "Số tín còn lại phải lớn hơn hoặc bằng 1"
+    gpa:
+      title: "Tính toán GPA"
+      description: "Tính GPA hiện tại hoặc GPA tích lũy theo số tín đã/đang học. Tính năng này sẽ sớm có sẵn."
+    pe:
+      title: "GPA thể dục"
+      description: "Công cụ tính GPA thể dục theo thang điểm DTU. Tính năng này sẽ sớm có sẵn."
+    pass:
+      title: "Tính điểm qua môn"
+      description: "Tính điểm cần ở bài thi cuối để qua môn theo trọng số. Tính năng này sẽ sớm có sẵn."
+    ai:
+      title: "Hỏi AI"
+      description: "Đặt câu hỏi cho AI để nhận lời khuyên học tập thông minh. Tính năng này sẽ sớm có sẵn."
+    graduation:
+      classification:
+        title: "Xếp Loại Tốt Nghiệp Duy Tân"
+        subtitle: "Bảng xếp loại tốt nghiệp chính thức của Đại học Duy Tân"
+        table:
+          rank: "Hạng"
+          gpaRange: "GPA Range (Thang 4)"
+          description: "Mô Tả"
+        ranks:
+          excellent:
+            name: "Xuất sắc"
+            gpaRange: "3.60 – 4.00"
+            description: "Hạng cao nhất, yêu cầu GPA ≥ 3.60"
+          good:
+            name: "Giỏi"
+            gpaRange: "3.20 – 3.59"
+            description: "Hạng tốt, yêu cầu GPA ≥ 3.20"
+          fair:
+            name: "Khá"
+            gpaRange: "2.50 – 3.19"
+            description: "Hạng khá, yêu cầu GPA ≥ 2.50"
+          average:
+            name: "Trung bình"
+            gpaRange: "2.00 – 2.49"
+            description: "Hạng trung bình, yêu cầu GPA ≥ 2.00"
+        notes:
+          title: "Lưu ý quan trọng"
+          note1: "Hạng tốt nghiệp có thể bị giảm nếu có >5% tín chỉ học lại hoặc bị kỷ luật"
+          note2: "Xếp loại dựa trên GPA tích lũy cuối cùng (thang điểm 4.0)"
+      gradingScale:
+        title: "Thang Điểm Duy Tân"
+        subtitle: "Bảng chuyển đổi điểm số giữa các thang điểm của Đại học Duy Tân"
+        table:
+          category: "Xếp Loại"
+          scale10: "Thang Điểm 10"
+          letter: "Điểm Chữ"
+          scale4: "Thang Điểm 4"
+          status: "Trạng Thái"
+        categories:
+          good: "Giỏi"
+          fair: "Khá"
+          average: "Trung bình"
+          averageWeak: "Trung bình yếu"
+          fail: "Không đạt"
+          poor: "Kém"
+        status:
+          pass: "Đạt"
+          conditional: "Có điều kiện"
+          fail: "Không đạt"
+        notes:
+          title1: "Thang điểm 4 là thang điểm đánh giá chính thức để"
+          point1: "Xét học vụ"
+          point2: "Xét tốt nghiệp"
+          point3: "Xếp hạng sinh viên"
+          title2: "Điểm D (1.0) được xem là đạt có điều kiện"
+          point4: "Nếu có >5% tổng tín chỉ đạt điểm D, cần học cải thiện"
+          point5: "Vẫn được tích lũy tín chỉ nhưng ảnh hưởng đến GPA"
+          title3: "Điểm F (0.0)"
+          point6: "Không được tích lũy tín chỉ"
+          point7: "Bắt buộc phải học lại môn học đó"
+          point8: "Không tính vào GPA tích lũy"
   benefits:
     titlePrefix: "Tại sao nên"
     titlePrimary: "sử dụng?"

@@ -1,275 +1,152 @@
 <script setup lang="ts">
-import { ref, computed } from 'vue'
-import * as Icon from '@/components/ui/icon'
-import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card'
+import { useI18n } from 'vue-i18n'
 import { Button } from '@/components/ui/button'
-import { Input } from '@/components/ui/input'
+import * as Icon from '@/components/ui/icon'
+import FieldControl from '@/components/gpa/FieldControl.vue'
+import { useTargetCalculator } from '@/composables/gpa/useTargetCalculator'
+import { cn } from '@/lib/utils'
 
 const { t } = useI18n()
+const SCOPE = 'tools.gpa'
 
-interface TargetCalculationResult {
-  requiredGpa: number
-  difficulty: 'easy' | 'medium' | 'hard' | 'impossible'
-  classification: 'excellent' | 'good' | 'average' | 'belowAverage'
-  warning?: string
-}
+const { targetResult, onTargetSubmit, isSubmitting } = useTargetCalculator()
 
-const completedCredits = ref<number>(0)
-const currentGpa = ref<number>(0)
-const targetGpa = ref<number>(0)
-const remainingCredits = ref<number>(0)
-const isCalculating = ref<boolean>(false)
-const result = ref<TargetCalculationResult | null>(null)
+const getBadgeClasses = (badgeColor: string) => {
+  const baseClasses = 'inline-flex items-center gap-2 px-3 py-1.5 rounded-full text-xs sm:text-sm font-semibold transition-all border'
 
-const isFormValid = computed(() => {
-  return completedCredits.value > 0 &&
-         currentGpa.value > 0 &&
-         targetGpa.value > 0 &&
-         remainingCredits.value > 0
-})
-
-const calculateTarget = async () => {
-  if (!isFormValid.value) return
-
-  isCalculating.value = true
-
-  await new Promise(resolve => setTimeout(resolve, 1000))
-
-  const totalCredits = completedCredits.value + remainingCredits.value
-  const currentPoints = completedCredits.value * currentGpa.value
-  const targetPoints = totalCredits * targetGpa.value
-  const requiredPoints = targetPoints - currentPoints
-  const requiredGpa = requiredPoints / remainingCredits.value
-
-  let difficulty: 'easy' | 'medium' | 'hard' | 'impossible' = 'easy'
-  let classification: 'excellent' | 'good' | 'average' | 'belowAverage' = 'belowAverage'
-  let warning: string | undefined
-
-  if (requiredGpa > 4.0) {
-    difficulty = 'impossible'
-  } else if (requiredGpa > 3.5) {
-    difficulty = 'hard'
-  } else if (requiredGpa > 3.0) {
-    difficulty = 'medium'
+  const colorMap: Record<string, string> = {
+    primary: 'bg-primary/10 text-primary border-primary/20',
+    accent: 'bg-accent/10 text-accent border-accent/20',
+    muted: 'bg-muted text-muted-foreground border-border',
+    destructive: 'bg-destructive/10 text-destructive border-destructive/20',
   }
 
-  if (targetGpa.value >= 3.6) {
-    classification = 'excellent'
-  } else if (targetGpa.value >= 3.2) {
-    classification = 'good'
-  } else if (targetGpa.value >= 2.5) {
-    classification = 'average'
-  }
-
-  if (remainingCredits.value > completedCredits.value * 0.05) {
-    warning = t('gpa.improvementWarning')
-  }
-
-  result.value = {
-    requiredGpa: Math.round(requiredGpa * 100) / 100,
-    difficulty,
-    classification,
-    warning
-  }
-
-  isCalculating.value = false
-}
-
-const resetForm = () => {
-  completedCredits.value = 0
-  currentGpa.value = 0
-  targetGpa.value = 0
-  remainingCredits.value = 0
-  result.value = null
-}
-
-const getDifficultyColor = (difficulty: string) => {
-  switch (difficulty) {
-    case 'easy': return 'text-green-600'
-    case 'medium': return 'text-yellow-600'
-    case 'hard': return 'text-orange-600'
-    case 'impossible': return 'text-red-600'
-    default: return 'text-gray-600'
-  }
-}
-
-const getDifficultyIcon = (difficulty: string) => {
-  switch (difficulty) {
-    case 'easy': return Icon.CheckCircle
-    case 'medium': return Icon.AlertTriangle
-    case 'hard': return Icon.AlertTriangle
-    case 'impossible': return Icon.XCircle
-    default: return Icon.AlertTriangle
-  }
-}
-
-const getClassificationColor = (classification: string) => {
-  switch (classification) {
-    case 'excellent': return 'text-purple-600'
-    case 'good': return 'text-blue-600'
-    case 'average': return 'text-green-600'
-    case 'belowAverage': return 'text-orange-600'
-    default: return 'text-gray-600'
-  }
+  return cn(baseClasses, colorMap[badgeColor])
 }
 </script>
 
 <template>
-  <div class="grid grid-cols-1 lg:grid-cols-2 gap-8">
-    <Card>
-      <CardHeader>
-        <CardTitle class="flex items-center gap-2">
-          <Icon.Target class="w-5 h-5" />
-          {{ t('gpa.calculateTarget') }}
-          <Button variant="ghost" size="sm" class="ml-auto">
-            <Icon.HelpCircle class="w-4 h-4" />
+  <div class="grid grid-cols-1 lg:grid-cols-2 gap-4 sm:gap-6 lg:gap-8">
+    <div class="rounded-xl sm:rounded-2xl border border-border/20 bg-card text-card-foreground p-4 sm:p-5 md:p-6 shadow-md backdrop-blur-sm">
+      <div class="mb-4 sm:mb-5">
+        <h2 class="text-base sm:text-lg md:text-xl font-bold text-foreground mb-1.5 flex items-center gap-2">
+          <Icon.Target class="w-3.5 h-3.5 sm:w-4 sm:h-4 text-primary flex-shrink-0" />
+          {{ t(`${SCOPE}.target.inputTitle`) }}
+        </h2>
+        <p class="text-xs sm:text-xs text-muted-foreground">{{ t(`${SCOPE}.target.inputSubtitle`) }}</p>
+      </div>
+      <form @submit="onTargetSubmit" class="space-y-3 sm:space-y-4">
+        <FieldControl
+          name="completedCredits"
+          :label="t(`${SCOPE}.target.fields.completedCredits`)"
+          type="number"
+          step="1"
+          :placeholder="t(`${SCOPE}.target.placeholders.completedCredits`)"
+          required
+        />
+        <FieldControl
+          name="currentGpa"
+          :label="t(`${SCOPE}.target.fields.currentGpa`)"
+          type="number"
+          step="0.01"
+          :placeholder="t(`${SCOPE}.target.placeholders.currentGpa`)"
+          required
+        />
+        <FieldControl
+          name="targetGpa"
+          :label="t(`${SCOPE}.target.fields.targetGpa`)"
+          type="number"
+          step="0.01"
+          :placeholder="t(`${SCOPE}.target.placeholders.targetGpa`)"
+          required
+        />
+        <FieldControl
+          name="remainingCredits"
+          :label="t(`${SCOPE}.target.fields.remainingCredits`)"
+          type="number"
+          step="1"
+          :placeholder="t(`${SCOPE}.target.placeholders.remainingCredits`)"
+          required
+        />
+        <div class="flex flex-col sm:flex-row gap-2 sm:gap-3 pt-2">
+          <Button type="submit" :disabled="isSubmitting" size="lg" class="flex-1 sm:flex-none">
+            <Icon.Calculator />
+            {{ isSubmitting ? t(`${SCOPE}.target.buttons.calculating`) : t(`${SCOPE}.target.buttons.calculate`) }}
           </Button>
-        </CardTitle>
-        <CardDescription>
-          {{ t('gpa.targetDescription') }}
-        </CardDescription>
-      </CardHeader>
-      <CardContent class="space-y-6">
-        <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
-          <div class="space-y-2">
-            <label class="text-sm font-medium text-foreground">
-              {{ t('gpa.completedCredits') }} *
-            </label>
-            <div class="relative">
-              <Input
-                v-model.number="completedCredits"
-                type="number"
-                :placeholder="t('gpa.completedCreditsPlaceholder')"
-                class="pr-16"
-              />
-              <span class="absolute right-3 top-1/2 -translate-y-1/2 text-sm text-muted-foreground">
-                {{ t('gpa.credits') }}
-              </span>
-            </div>
-          </div>
-
-          <div class="space-y-2">
-            <label class="text-sm font-medium text-foreground">
-              {{ t('gpa.currentGpa') }} *
-            </label>
-            <Input
-              v-model.number="currentGpa"
-              type="number"
-              step="0.01"
-              min="0"
-              max="4"
-              :placeholder="t('gpa.currentGpaPlaceholder')"
-            />
-          </div>
-
-          <div class="space-y-2">
-            <label class="text-sm font-medium text-foreground">
-              {{ t('gpa.targetGpa') }} *
-            </label>
-            <Input
-              v-model.number="targetGpa"
-              type="number"
-              step="0.01"
-              min="0"
-              max="4"
-              :placeholder="t('gpa.targetGpaPlaceholder')"
-            />
-          </div>
-
-          <div class="space-y-2">
-            <label class="text-sm font-medium text-foreground">
-              {{ t('gpa.remainingCredits') }} *
-            </label>
-            <div class="relative">
-              <Input
-                v-model.number="remainingCredits"
-                type="number"
-                :placeholder="t('gpa.remainingCreditsPlaceholder')"
-                class="pr-16"
-              />
-              <span class="absolute right-3 top-1/2 -translate-y-1/2 text-sm text-muted-foreground">
-                {{ t('gpa.credits') }}
-              </span>
-            </div>
-          </div>
-        </div>
-
-        <div class="flex gap-3">
-          <Button
-            @click="calculateTarget"
-            :disabled="!isFormValid || isCalculating"
-            class="flex-1"
-          >
-            <Icon.Target class="w-4 h-4 mr-2" />
-            {{ isCalculating ? t('gpa.calculating') : t('gpa.calculateTargetButton') }}
-          </Button>
-
-          <Button variant="outline" @click="resetForm" :disabled="isCalculating">
-            <Icon.RotateCcw class="w-4 h-4" />
+          <Button type="reset" variant="outline" size="lg" class="flex-1 sm:flex-none">
+            <Icon.RotateCcw />
+            {{ t(`${SCOPE}.target.buttons.reset`) }}
           </Button>
         </div>
-      </CardContent>
-    </Card>
+      </form>
+    </div>
 
-    <Card>
-      <CardHeader>
-        <CardTitle>{{ t('gpa.results') }}</CardTitle>
-        <CardDescription>
-          {{ t('gpa.resultsDescription') }}
-        </CardDescription>
-      </CardHeader>
-      <CardContent>
-        <div v-if="!result" class="text-center py-12">
-          <Icon.Calculator class="w-16 h-16 mx-auto text-muted-foreground mb-4" />
-          <h3 class="text-lg font-semibold mb-2">{{ t('gpa.readyToCalculate') }}</h3>
-          <p class="text-muted-foreground">{{ t('gpa.readyDescription') }}</p>
+    <div class="rounded-xl sm:rounded-2xl border border-border/20 bg-card text-card-foreground p-4 sm:p-5 md:p-6 shadow-md backdrop-blur-sm min-h-[250px] sm:min-h-[300px] flex items-center justify-center">
+      <div v-if="targetResult.maxGpaWithAllA === null" class="w-full flex flex-col items-center justify-center rounded-xl bg-gradient-to-br from-muted/30 to-muted/10 border border-border/20 text-center px-4 sm:px-6 py-6 sm:py-8 transition-all duration-300">
+        <div class="relative mb-3 sm:mb-4">
+          <div class="absolute inset-0 bg-primary/10 rounded-full blur-xl"></div>
+          <Icon.Target class="w-10 h-10 sm:w-12 sm:h-12 text-primary/60 relative z-10" />
+        </div>
+        <h3 class="text-base sm:text-lg font-bold text-foreground mb-1.5 px-2">{{ t(`${SCOPE}.target.empty.title`) }}</h3>
+        <p class="text-xs text-muted-foreground max-w-sm px-2">{{ t(`${SCOPE}.target.empty.description`) }}</p>
+      </div>
+      <div v-else class="w-full space-y-3 sm:space-y-4 animate-in fade-in-0 slide-in-from-bottom-4 duration-500">
+        <div class="text-center mb-3 sm:mb-4">
+          <h3 class="text-base sm:text-lg md:text-xl font-bold text-foreground mb-1">{{ t(`${SCOPE}.target.results.title`) }}</h3>
+          <p class="text-xs text-muted-foreground">{{ t(`${SCOPE}.target.results.subtitle`) }}</p>
         </div>
 
-        <div v-else class="space-y-6">
-          <div class="text-center p-6 bg-muted/50 rounded-lg">
-            <h3 class="text-2xl font-bold text-primary mb-2">
-              {{ result.requiredGpa }}
-            </h3>
-            <p class="text-sm text-muted-foreground">{{ t('gpa.requiredGpa') }}</p>
-          </div>
-
-          <div class="space-y-4">
-            <div class="flex items-center justify-between p-4 border rounded-lg">
-              <div class="flex items-center gap-3">
-                <component
-                  :is="getDifficultyIcon(result.difficulty)"
-                  :class="getDifficultyColor(result.difficulty)"
-                  class="w-5 h-5"
-                />
-                <span class="font-medium">{{ t('gpa.difficulty') }}</span>
-              </div>
-              <span :class="getDifficultyColor(result.difficulty)" class="font-semibold">
-                {{ t(`gpa.difficultyLevels.${result.difficulty}`) }}
-              </span>
-            </div>
-
-            <div class="flex items-center justify-between p-4 border rounded-lg">
-              <div class="flex items-center gap-3">
-                <Icon.GraduationCap class="w-5 h-5 text-primary" />
-                <span class="font-medium">{{ t('gpa.graduationClassification') }}</span>
-              </div>
-              <span :class="getClassificationColor(result.classification)" class="font-semibold">
-                {{ t(`gpa.${result.classification}`) }}
-              </span>
-            </div>
-          </div>
-
-          <div v-if="result.warning" class="p-4 bg-yellow-50 border border-yellow-200 rounded-lg">
-            <div class="flex items-start gap-3">
-              <Icon.AlertTriangle class="w-5 h-5 text-yellow-600 mt-0.5" />
-              <div>
-                <h4 class="font-medium text-yellow-800">{{ t('gpa.warning') }}</h4>
-                <p class="text-sm text-yellow-700 mt-1">{{ result.warning }}</p>
+        <div class="relative">
+          <div class="absolute inset-0 bg-gradient-to-br from-primary/20 via-accent/20 to-primary/10 rounded-xl sm:rounded-2xl blur-2xl"></div>
+          <div class="relative bg-gradient-to-br from-card to-card/50 rounded-xl sm:rounded-2xl border border-primary/20 p-4 sm:p-5 md:p-6 shadow-xl">
+            <div class="flex flex-col items-center justify-center">
+              <div class="mb-3 sm:mb-4">
+                <div class="text-4xl sm:text-5xl md:text-6xl font-extrabold text-primary mb-1 tracking-tight">
+                  {{ targetResult.maxGpaWithAllA.toFixed(3) }}
+                </div>
+                <div class="text-xs text-muted-foreground text-center mt-1 mb-2">{{ t(`${SCOPE}.target.results.scale`) }}</div>
+                <div v-if="targetResult.graduationClassification" :class="getBadgeClasses(targetResult.graduationClassification.badgeColor)">
+                  <component :is="Icon[targetResult.graduationClassification.iconName as keyof typeof Icon]" class="w-4 h-4 sm:w-5 sm:h-5" />
+                  <span>{{ t(`${SCOPE}.target.classifications.${targetResult.graduationClassification.rankKey}`) }}</span>
+                </div>
               </div>
             </div>
           </div>
         </div>
-      </CardContent>
-    </Card>
+
+        <div :class="[
+          'rounded-lg sm:rounded-xl border p-3 sm:p-4 transition-all duration-300',
+          targetResult.canReachTargetWithAllA
+            ? 'bg-primary/5 border-primary/30'
+            : 'bg-accent/5 border-accent/30'
+        ]">
+          <div class="flex items-start gap-2 sm:gap-3">
+            <div :class="[
+              'flex-shrink-0 w-7 h-7 sm:w-8 sm:h-8 rounded-full flex items-center justify-center',
+              targetResult.canReachTargetWithAllA
+                ? 'bg-primary/20 text-primary'
+                : 'bg-accent/20 text-accent'
+            ]">
+              <Icon.CheckCircle v-if="targetResult.canReachTargetWithAllA" class="w-4 h-4 sm:w-5 sm:h-5" />
+              <Icon.AlertTriangle v-else class="w-4 h-4 sm:w-5 sm:h-5" />
+            </div>
+            <div class="flex-1 min-w-0">
+              <h4 :class="[
+                'text-xs sm:text-sm font-semibold mb-1',
+                targetResult.canReachTargetWithAllA ? 'text-primary' : 'text-accent'
+              ]">
+                {{ targetResult.canReachTargetWithAllA ? t(`${SCOPE}.target.results.success.title`) : t(`${SCOPE}.target.results.warning.title`) }}
+              </h4>
+              <p class="text-xs text-muted-foreground leading-relaxed">
+                {{ targetResult.canReachTargetWithAllA
+                  ? t(`${SCOPE}.target.results.success.message`, { gpa: targetResult.maxGpaWithAllA.toFixed(3) })
+                  : t(`${SCOPE}.target.results.warning.message`, { gpa: targetResult.maxGpaWithAllA.toFixed(3) })
+                }}
+              </p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
   </div>
 </template>

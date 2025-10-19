@@ -43,10 +43,10 @@ onUnmounted(() => {
       as="button"
       size="icon"
       @click="scrollToTop"
-      class="fixed bottom-8 right-8 z-50 bg-primary hover:bg-primary/90 text-primary-foreground rounded-full shadow-lg hover:shadow-xl transition-all duration-300 hover:scale-110 w-12 h-12"
+      class="fixed bottom-4 right-4 sm:bottom-6 sm:right-6 md:bottom-8 md:right-8 z-50 bg-primary hover:bg-primary/90 text-primary-foreground rounded-full shadow-lg hover:shadow-xl transition-all duration-300 hover:scale-110 w-10 h-10 sm:w-11 sm:h-11 md:w-12 md:h-12"
       aria-label="Scroll to top"
     >
-      <Icon.ChevronUp class="w-6 h-6" />
+      <Icon.ChevronUp class="w-5 h-5 sm:w-5 sm:h-5 md:w-6 md:h-6" />
     </Button>
   </Transition>
 </template>

@@ -2373,6 +2373,11 @@ alien-signals@^3.0.0:
   resolved "https://registry.yarnpkg.com/alien-signals/-/alien-signals-3.0.0.tgz#e1e5259a3bfcec740a46ee2c67f176184be89457"
   integrity sha512-JHoRJf18Y6HN4/KZALr3iU+0vW9LKG+8FMThQlbn4+gv8utsLIkwpomjElGPccGeNwh0FI2HN6BLnyFLo6OyLQ==
 
+animejs@^4.2.2:
+  version "4.2.2"
+  resolved "https://registry.yarnpkg.com/animejs/-/animejs-4.2.2.tgz#75f2529cb8a5b837109f94591e1f28a0e50f2e09"
+  integrity sha512-Ys3RuvLdAeI14fsdKCQy7ytu4057QX6Bb7m4jwmfd6iKmUmLquTwk1ut0e4NtRQgCeq/s2Lv5+oMBjz6c7ZuIg==
+
 ansi-regex@^5.0.1:
   version "5.0.1"
   resolved "https://registry.yarnpkg.com/ansi-regex/-/ansi-regex-5.0.1.tgz#082cb2c89c9fe8659a311a53bd6a4dc5301db304"

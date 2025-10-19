@@ -13,6 +13,7 @@ export {
   Star,
   MessageCircle,
   GraduationCap,
+  Scale,
   Clock,
   Lightbulb,
   Check,
@@ -25,4 +26,5 @@ export {
   RotateCcw,
   TrendingUp,
   Brain,
+  BookOpen,
 } from 'lucide-vue-next'
