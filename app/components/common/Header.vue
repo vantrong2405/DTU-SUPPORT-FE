@@ -6,6 +6,7 @@ import LocaleSwitcher from './LocaleSwitcher.vue'
 import { useI18n } from 'vue-i18n'
 import { NAV_ITEMS } from '@/constants/features/home'
 import { useNavigation } from '@/composables/common/useNavigation'
+import { Menu, X } from 'lucide-vue-next'
 
 const { t } = useI18n()
 const { navigateTo } = useNavigation()
@@ -54,13 +55,17 @@ const handleMobileNavClick = (
   if (!item.scroll) closeMenu()
 }
 
-const navItems = computed(() =>
-  NAV_ITEMS.map((item) => ({
+const navItems = computed(() => {
+  if (route.path !== '/') {
+    return []
+  }
+
+  return NAV_ITEMS.map((item) => ({
     label: t(`common.header.menu.${item.key}`),
     to: item.to,
     scroll: 'scroll' in item ? item.scroll : false,
   }))
-)
+})
 </script>
 
 <template>
@@ -133,34 +138,8 @@ const navItems = computed(() =>
           class="lg:hidden text-foreground rounded-lg w-10 h-10 hover:bg-[hsl(var(--accent)/0.12)] active:bg-[hsl(var(--accent)/0.16)] transition-colors duration-150 flex items-center flex-shrink-0"
           aria-label="Toggle menu"
         >
-          <svg
-            v-if="!isMenuOpen"
-            class="w-6 h-6"
-            fill="none"
-            stroke="currentColor"
-            viewBox="0 0 24 24"
-          >
-            <path
-              stroke-linecap="round"
-              stroke-linejoin="round"
-              stroke-width="2"
-              d="M4 6h16M4 12h16M4 18h16"
-            ></path>
-          </svg>
-          <svg
-            v-else
-            class="w-6 h-6"
-            fill="none"
-            stroke="currentColor"
-            viewBox="0 0 24 24"
-          >
-            <path
-              stroke-linecap="round"
-              stroke-linejoin="round"
-              stroke-width="2"
-              d="M6 18L18 6M6 6l12 12"
-            ></path>
-          </svg>
+          <Menu v-if="!isMenuOpen" class="w-6 h-6" />
+          <X v-else class="w-6 h-6" />
         </Button>
       </div>
 

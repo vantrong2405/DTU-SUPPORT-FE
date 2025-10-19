@@ -1,5 +1,6 @@
 <script setup lang="ts">
 import { useI18n } from 'vue-i18n'
+import { Star, MessageCircle } from 'lucide-vue-next'
 
 const { t } = useI18n()
 
@@ -68,13 +69,11 @@ const testimonials = computed(() => {
           </div>
 
           <div class="flex mb-3">
-            <div
+            <Star
               v-for="star in testimonial.rating"
               :key="star"
-              class="text-yellow-400 text-lg"
-            >
-              ⭐
-            </div>
+              class="w-5 h-5 text-yellow-400 fill-current"
+            />
           </div>
 
           <p class="text-muted-foreground leading-relaxed text-sm">
@@ -87,7 +86,7 @@ const testimonials = computed(() => {
         <div
           class="inline-flex items-center bg-primary/10 text-primary px-6 py-3 rounded-full"
         >
-          <span class="mr-2">💬</span>
+          <MessageCircle class="w-5 h-5 mr-2" />
           <span class="font-semibold">{{
             t('home.testimonials.trustBadge')
           }}</span>

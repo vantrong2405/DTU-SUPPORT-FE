@@ -7,6 +7,7 @@ import {
   CardHeader,
   CardTitle,
 } from '@/components/ui/card'
+import { GraduationCap, Check } from 'lucide-vue-next'
 
 const { t } = useI18n()
 
@@ -23,7 +24,7 @@ const SCOPE = 'home.whatWeDo'
             {{ t('home.whatWeDo.title') }}
           </h2>
           <p class="text-xl text-foreground max-w-3xl mx-auto leading-relaxed">
-            {{ t('home.whatWeDo.subtitle') }}
+            {{ t('home.whatWeDo.subtitle') }} 
           </p>
         </div>
 
@@ -50,7 +51,7 @@ const SCOPE = 'home.whatWeDo'
                 <div
                   class="w-20 h-20 mx-auto bg-primary rounded-2xl flex items-center justify-center mb-6"
                 >
-                  <span class="text-3xl text-primary-foreground">🎓</span>
+                  <GraduationCap class="w-10 h-10 text-primary-foreground" />
                 </div>
                 <h4 class="text-2xl font-bold text-foreground mb-4">
                   {{ t('home.whatWeDo.visual.audience') }}
@@ -111,7 +112,7 @@ const SCOPE = 'home.whatWeDo'
                   :key="b"
                   class="text-sm text-primary flex items-center justify-center"
                 >
-                  <span class="mr-2">✓</span>
+                  <Check class="w-4 h-4 mr-2" />
                   {{ t(`${SCOPE}.features.${i}.benefits.${b}`) }}
                 </li>
               </ul>

@@ -1,121 +1,49 @@
-gpa:
-  title: 'GPA Calculator'
-  smartTool: 'Smart GPA Calculation Tool'
-  calculateGpa: 'Calculate GPA'
-  predictResults: '& Predict Results'
-  mainDescription: 'Predict academic results, calculate detailed GPA or ask AI for smart study advice'
+title: "Smart GPA Calculator"
+subtitle: "Calculate GPA & Predict Results"
+description: "Predict academic results, calculate detailed GPA or ask AI for smart study advice"
 
-  tabs:
-    calculateTarget: 'Calculate Target'
-    calculateGpa: 'Calculate GPA'
-    peGpa: 'PE GPA'
-    calculatePass: 'Calculate Pass Score'
-    askAi: 'Ask AI'
+tabs:
+  target: "Target Calculation"
+  gpa: "GPA Calculation"
+  pe: "PE GPA"
+  pass: "Pass Grade Calculation"
+  ai: "Ask AI"
 
-  targetCalculator:
-    description: 'Calculate minimum GPA needed in remaining courses to achieve target GPA'
-    completedCredits: 'Completed Credits'
-    completedCreditsPlaceholder: 'e.g.: 84'
-    currentGpa: 'Current GPA'
-    currentGpaPlaceholder: 'e.g.: 3.15'
-    targetGpa: 'Target GPA'
-    targetGpaPlaceholder: 'e.g.: 3.2'
-    remainingCredits: 'Remaining Credits'
-    remainingCreditsPlaceholder: 'e.g.: 36'
-    credits: 'credits'
-    calculating: 'Calculating...'
-    calculateButton: 'Calculate Achievable Target'
-
-  finalExamCalculator:
-    continuousScore: 'Continuous Assessment Score'
-    continuousScorePlaceholder: 'E.g: 8.5'
-    midtermScore: 'Midterm Score'
-    midtermScorePlaceholder: 'E.g: 7.0'
-    continuousWeight: 'Continuous Assessment Weight'
-    continuousWeightPlaceholder: 'E.g: 20'
-    midtermWeight: 'Midterm Weight'
-    midtermWeightPlaceholder: 'E.g: 30'
-    finalWeight: 'Final Exam Weight'
-    finalWeightPlaceholder: 'E.g: 50'
-    calculateButton: 'Calculate Required Final Score'
-    results: 'Results'
-    resultsDescription: 'Final exam score needed to pass the course'
-    readyToCalculate: 'Ready to Calculate'
-    readyDescription: 'Enter information to calculate required final score'
-    requiredFinalScore: 'Required Final Exam Score'
-    currentTotalScore: 'Current Total Score'
-    isPassable: 'Can Pass Course'
-    yes: 'Yes'
-    no: 'No'
-    grade: 'Letter Grade'
-    status: 'Status'
-    warning: 'Warning'
-    impossibleWarning: 'Cannot pass the course with current scores'
-
-  results:
-    title: 'Results'
-    description: 'Enter information or ask questions to see predicted results'
-    readyToCalculate: 'Ready to calculate'
-    readyDescription: 'Enter information or ask questions to see predicted results'
-    requiredGpa: 'Required GPA'
-    difficulty: 'Difficulty Level'
-    difficultyLevels:
-      easy: 'Easy'
-      medium: 'Medium'
-      hard: 'Hard'
-      impossible: 'Impossible'
-    graduationClassification: 'Graduation Classification'
-    warning: 'Warning'
-    improvementWarning: 'You need to improve more than 5% of credits to achieve your goal'
-
-  classification:
-    excellent: 'Excellent'
-    good: 'Good'
-    average: 'Average'
-    belowAverage: 'Below Average'
-
-  descriptions:
-    gpa: 'Calculate GPA from completed courses'
-    pe: 'Calculate GPA specifically for physical education'
-    pass: 'Calculate minimum exam score to pass a course'
-    ai: 'Ask AI for smart study advice'
-    comingSoon: 'Coming Soon'
-    comingSoonDescription: 'This feature is under development and will be available soon'
-
-  validation:
+target:
+  title: "Target Calculation"
+  description: "Calculate the minimum GPA needed to achieve your target"
+  form:
     completedCredits:
-      required: 'Completed credits is required'
-      min: 'Completed credits must be greater than 0'
-      max: 'Completed credits cannot exceed 200'
+      label: "Credits Completed"
+      placeholder: "Enter completed credits"
+      unit: "credits"
     currentGpa:
-      required: 'Current GPA is required'
-      min: 'Current GPA must be greater than or equal to 0'
-      max: 'Current GPA cannot exceed 4.0'
+      label: "Current GPA"
+      placeholder: "Enter current GPA"
+      unit: "points"
     targetGpa:
-      required: 'Target GPA is required'
-      min: 'Target GPA must be greater than or equal to 0'
-      max: 'Target GPA cannot exceed 4.0'
+      label: "Target GPA"
+      placeholder: "Enter target GPA"
+      unit: "points"
     remainingCredits:
-      required: 'Remaining credits is required'
-      min: 'Remaining credits must be greater than 0'
-      max: 'Remaining credits cannot exceed 200'
-    continuousScore:
-      required: 'Continuous assessment score is required'
-      min: 'Continuous assessment score must be greater than or equal to 0'
-      max: 'Continuous assessment score cannot exceed 10'
-    midtermScore:
-      required: 'Midterm score is required'
-      min: 'Midterm score must be greater than or equal to 0'
-      max: 'Midterm score cannot exceed 10'
-    continuousWeight:
-      required: 'Continuous assessment weight is required'
-      min: 'Continuous assessment weight must be greater than or equal to 0'
-      max: 'Continuous assessment weight cannot exceed 100'
-    midtermWeight:
-      required: 'Midterm weight is required'
-      min: 'Midterm weight must be greater than or equal to 0'
-      max: 'Midterm weight cannot exceed 100'
-    finalWeight:
-      required: 'Final exam weight is required'
-      min: 'Final exam weight must be greater than or equal to 0'
-      max: 'Final exam weight cannot exceed 100'
+      label: "Remaining Credits"
+      placeholder: "Enter remaining credits"
+      unit: "credits"
+  button:
+    calculate: "Calculate Target Feasibility"
+    reset: "Reset"
+  result:
+    title: "Results"
+    maxGpaIfAllA: "Maximum GPA if all A:"
+    isFeasible: "Feasible with all A:"
+    yes: "Yes"
+    no: "No"
+  ready:
+    title: "Ready to Calculate"
+    description: "Enter information or ask questions to see prediction results"
+  classification:
+    title: "DTU Graduation Classification"
+    excellent: "Excellent"
+    good: "Good"
+    fair: "Fair"
+    average: "Average"

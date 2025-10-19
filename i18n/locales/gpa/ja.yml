@@ -1,121 +1,49 @@
-gpa:
-  title: 'GPA計算機'
-  smartTool: 'スマートGPA計算ツール'
-  calculateGpa: 'GPA計算'
-  predictResults: '& 結果予測'
-  mainDescription: '学業成績を予測し、詳細なGPAを計算するか、AIに学習に関するスマートなアドバイスを求める'
+title: "スマートGPA計算ツール"
+subtitle: "GPA計算と結果予測"
+description: "学業結果を予測し、詳細なGPAを計算するか、AIに学習に関するスマートなアドバイスを求める"
 
-  tabs:
-    calculateTarget: '目標計算'
-    calculateGpa: 'GPA計算'
-    peGpa: '体育GPA'
-    calculatePass: '合格点計算'
-    askAi: 'AIに質問'
+tabs:
+  target: "目標計算"
+  gpa: "GPA計算"
+  pe: "体育GPA"
+  pass: "合格点計算"
+  ai: "AIに質問"
 
-  targetCalculator:
-    description: '目標GPAを達成するために残りの科目で必要な最小GPAを計算'
-    completedCredits: '修了単位数'
-    completedCreditsPlaceholder: '例: 84'
-    currentGpa: '現在のGPA'
-    currentGpaPlaceholder: '例: 3.15'
-    targetGpa: '目標GPA'
-    targetGpaPlaceholder: '例: 3.2'
-    remainingCredits: '残り単位数'
-    remainingCreditsPlaceholder: '例: 36'
-    credits: '単位'
-    calculating: '計算中...'
-    calculateButton: '達成可能な目標を計算'
-
-  finalExamCalculator:
-    continuousScore: '継続評価スコア'
-    continuousScorePlaceholder: '例: 8.5'
-    midtermScore: '中間試験スコア'
-    midtermScorePlaceholder: '例: 7.0'
-    continuousWeight: '継続評価の重み'
-    continuousWeightPlaceholder: '例: 20'
-    midtermWeight: '中間試験の重み'
-    midtermWeightPlaceholder: '例: 30'
-    finalWeight: '期末試験の重み'
-    finalWeightPlaceholder: '例: 50'
-    calculateButton: '必要な期末試験スコアを計算'
-    results: '結果'
-    resultsDescription: '科目を合格するために必要な期末試験スコア'
-    readyToCalculate: '計算準備完了'
-    readyDescription: '必要な期末試験スコアを計算するために情報を入力してください'
-    requiredFinalScore: '必要な期末試験スコア'
-    currentTotalScore: '現在の総合スコア'
-    isPassable: '科目を合格できるか'
-    yes: 'はい'
-    no: 'いいえ'
-    grade: '成績評価'
-    status: 'ステータス'
-    warning: '警告'
-    impossibleWarning: '現在のスコアでは科目を合格できません'
-
-  results:
-    title: '結果'
-    description: '情報を入力するか質問して予測結果を確認'
-    readyToCalculate: '計算準備完了'
-    readyDescription: '情報を入力するか質問して予測結果を確認'
-    requiredGpa: '必要GPA'
-    difficulty: '難易度'
-    difficultyLevels:
-      easy: '簡単'
-      medium: '普通'
-      hard: '難しい'
-      impossible: '不可能'
-    graduationClassification: '卒業等級'
-    warning: '警告'
-    improvementWarning: '目標達成には5%以上の単位改善が必要です'
-
-  classification:
-    excellent: '優秀'
-    good: '良好'
-    average: '普通'
-    belowAverage: '平均以下'
-
-  descriptions:
-    gpa: '修了科目からGPAを計算'
-    pe: '体育科目専用のGPA計算'
-    pass: '科目合格に必要な最小試験点を計算'
-    ai: 'AIに学習に関するスマートなアドバイスを求める'
-    comingSoon: '近日公開'
-    comingSoonDescription: 'この機能は開発中で、近日中に利用可能になります'
-
-  validation:
+target:
+  title: "目標計算"
+  description: "目標を達成するために必要な最小GPAを計算"
+  form:
     completedCredits:
-      required: '修了単位数は必須です'
-      min: '修了単位数は0より大きくなければなりません'
-      max: '修了単位数は200を超えることはできません'
+      label: "修了単位数"
+      placeholder: "修了単位数を入力"
+      unit: "単位"
     currentGpa:
-      required: '現在のGPAは必須です'
-      min: '現在のGPAは0以上でなければなりません'
-      max: '現在のGPAは4.0を超えることはできません'
+      label: "現在のGPA"
+      placeholder: "現在のGPAを入力"
+      unit: "点"
     targetGpa:
-      required: '目標GPAは必須です'
-      min: '目標GPAは0以上でなければなりません'
-      max: '目標GPAは4.0を超えることはできません'
+      label: "目標GPA"
+      placeholder: "目標GPAを入力"
+      unit: "点"
     remainingCredits:
-      required: '残り単位数は必須です'
-      min: '残り単位数は0より大きくなければなりません'
-      max: '残り単位数は200を超えることはできません'
-    continuousScore:
-      required: '継続評価スコアは必須です'
-      min: '継続評価スコアは0以上でなければなりません'
-      max: '継続評価スコアは10を超えることはできません'
-    midtermScore:
-      required: '中間試験スコアは必須です'
-      min: '中間試験スコアは0以上でなければなりません'
-      max: '中間試験スコアは10を超えることはできません'
-    continuousWeight:
-      required: '継続評価の重みは必須です'
-      min: '継続評価の重みは0以上でなければなりません'
-      max: '継続評価の重みは100を超えることはできません'
-    midtermWeight:
-      required: '中間試験の重みは必須です'
-      min: '中間試験の重みは0以上でなければなりません'
-      max: '中間試験の重みは100を超えることはできません'
-    finalWeight:
-      required: '期末試験の重みは必須です'
-      min: '期末試験の重みは0以上でなければなりません'
-      max: '期末試験の重みは100を超えることはできません'
+      label: "残り単位数"
+      placeholder: "残り単位数を入力"
+      unit: "単位"
+  button:
+    calculate: "目標達成可能性を計算"
+    reset: "リセット"
+  result:
+    title: "結果"
+    maxGpaIfAllA: "全Aの場合の最大GPA:"
+    isFeasible: "全Aで達成可能:"
+    yes: "はい"
+    no: "いいえ"
+  ready:
+    title: "計算準備完了"
+    description: "情報を入力するか質問して予測結果を確認"
+  classification:
+    title: "DTU卒業分類"
+    excellent: "優秀"
+    good: "良好"
+    fair: "普通"
+    average: "平均"

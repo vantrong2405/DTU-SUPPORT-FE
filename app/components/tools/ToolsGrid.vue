@@ -9,6 +9,7 @@ import {
 } from '@/components/ui/card'
 import { useI18n } from 'vue-i18n'
 import { useNavigation } from '@/composables/common/useNavigation'
+import { Lightbulb, Clock, Circle } from 'lucide-vue-next'
 
 const { t } = useI18n()
 const { navigateTo } = useNavigation()
@@ -82,7 +83,7 @@ const SCOPE = 'tools.grid'
             <!-- Key Features -->
             <div class="mb-6">
               <div class="flex items-center mb-3">
-                <span class="text-yellow-500 mr-2">💡</span>
+                <Lightbulb class="w-4 h-4 text-yellow-500 mr-2" />
                 <h4 class="text-sm font-semibold text-foreground">
                   {{ t(`${SCOPE}.featuresHeading`) }}
                 </h4>
@@ -93,7 +94,7 @@ const SCOPE = 'tools.grid'
                   :key="f"
                   class="text-xs text-muted-foreground flex items-start"
                 >
-                  <span class="text-muted-foreground mr-2 mt-1">•</span>
+                  <Circle class="w-2 h-2 text-muted-foreground mr-2 mt-1.5 fill-current" />
                   {{ t(`${SCOPE}.items.${i}.features.${f}`) }}
                 </li>
               </ul>
@@ -117,7 +118,7 @@ const SCOPE = 'tools.grid'
                 variant="secondary"
                 class="w-full py-3 px-4 font-medium cursor-not-allowed flex items-center justify-center"
               >
-                <span class="mr-2">⏰</span>
+                <Clock class="w-4 h-4 mr-2" />
                 {{ t(`${SCOPE}.button.coming`) }}
               </Button>
             </div>

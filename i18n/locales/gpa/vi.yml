@@ -1,121 +1,49 @@
-gpa:
-  title: 'Máy Tính GPA'
-  smartTool: 'Công cụ tính GPA thông minh'
-  calculateGpa: 'Tính toán GPA'
-  predictResults: 'Dự đoán kết quả'
-  mainDescription: 'Dự đoán kết quả học tập, tính toán GPA chi tiết hoặc hỏi AI để có lời khuyên thông minh về việc học'
+title: "Công cụ tính GPA thông minh"
+subtitle: "Tính toán GPA & Dự đoán kết quả"
+description: "Dự đoán kết quả học tập, tính toán GPA chi tiết hoặc hỏi AI để có lời khuyên thông minh về việc học"
 
-  tabs:
-    calculateTarget: 'Tính toán mục tiêu'
-    calculateGpa: 'Tính toán GPA'
-    peGpa: 'GPA thể dục'
-    calculatePass: 'Tính điểm qua môn'
-    askAi: 'Hỏi AI'
+tabs:
+  target: "Tính toán mục tiêu"
+  gpa: "Tính toán GPA"
+  pe: "GPA thể dục"
+  pass: "Tính điểm qua môn"
+  ai: "Hỏi AI"
 
-  targetCalculator:
-    description: 'Tính GPA tối thiểu cần đạt trong các môn còn lại để đạt được GPA mục tiêu'
-    completedCredits: 'Số tín chỉ đã học'
-    completedCreditsPlaceholder: 'VD: 84'
-    currentGpa: 'GPA hiện tại'
-    currentGpaPlaceholder: 'VD: 3.15'
-    targetGpa: 'GPA mục tiêu'
-    targetGpaPlaceholder: 'VD: 3.2'
-    remainingCredits: 'Số tín chỉ còn lại'
-    remainingCreditsPlaceholder: 'VD: 36'
-    credits: 'tín chỉ'
-    calculating: 'Đang tính toán...'
-    calculateButton: 'Tính toán mục tiêu có thể đạt được'
-
-  finalExamCalculator:
-    continuousScore: 'Điểm chuyên cần/quá trình'
-    continuousScorePlaceholder: 'VD: 8.5'
-    midtermScore: 'Điểm giữa kỳ'
-    midtermScorePlaceholder: 'VD: 7.0'
-    continuousWeight: 'Trọng số chuyên cần'
-    continuousWeightPlaceholder: 'VD: 20'
-    midtermWeight: 'Trọng số giữa kỳ'
-    midtermWeightPlaceholder: 'VD: 30'
-    finalWeight: 'Trọng số thi cuối kỳ'
-    finalWeightPlaceholder: 'VD: 50'
-    calculateButton: 'Tính điểm thi cần đạt'
-    results: 'Kết quả'
-    resultsDescription: 'Điểm thi cuối kỳ cần đạt để qua môn'
-    readyToCalculate: 'Sẵn sàng tính toán'
-    readyDescription: 'Nhập thông tin để tính điểm thi cần đạt'
-    requiredFinalScore: 'Điểm thi cuối kỳ cần đạt'
-    currentTotalScore: 'Điểm hiện tại'
-    isPassable: 'Có thể qua môn'
-    yes: 'Có'
-    no: 'Không'
-    grade: 'Điểm chữ'
-    status: 'Trạng thái'
-    warning: 'Cảnh báo'
-    impossibleWarning: 'Không thể qua môn với điểm hiện tại'
-
-  results:
-    title: 'Kết quả'
-    description: 'Nhập thông tin hoặc đặt câu hỏi để xem kết quả dự đoán'
-    readyToCalculate: 'Sẵn sàng tính toán'
-    readyDescription: 'Nhập thông tin hoặc đặt câu hỏi để xem kết quả dự đoán'
-    requiredGpa: 'GPA tối thiểu cần đạt'
-    difficulty: 'Mức độ khó'
-    difficultyLevels:
-      easy: 'Dễ'
-      medium: 'Trung bình'
-      hard: 'Khó'
-      impossible: 'Không thể'
-    graduationClassification: 'Xếp loại tốt nghiệp'
-    warning: 'Cảnh báo'
-    improvementWarning: 'Bạn cần cải thiện hơn 5% số tín chỉ để đạt mục tiêu'
-
-  classification:
-    excellent: 'Xuất sắc'
-    good: 'Giỏi'
-    average: 'Khá'
-    belowAverage: 'Trung bình'
-
-  descriptions:
-    gpa: 'Tính toán GPA từ các môn học đã hoàn thành'
-    pe: 'Tính toán GPA riêng cho môn thể dục'
-    pass: 'Tính điểm thi tối thiểu để qua môn'
-    ai: 'Hỏi AI để có lời khuyên thông minh về việc học'
-    comingSoon: 'Sắp ra mắt'
-    comingSoonDescription: 'Tính năng này đang được phát triển và sẽ sớm có mặt'
-
-  validation:
+target:
+  title: "Tính toán mục tiêu"
+  description: "Tính toán GPA tối thiểu cần đạt để đạt được mục tiêu"
+  form:
     completedCredits:
-      required: 'Số tín chỉ đã học là bắt buộc'
-      min: 'Số tín chỉ đã học phải lớn hơn 0'
-      max: 'Số tín chỉ đã học không được vượt quá 200'
+      label: "Số tín đã học"
+      placeholder: "Nhập số tín đã học"
+      unit: "tín chỉ"
     currentGpa:
-      required: 'GPA hiện tại là bắt buộc'
-      min: 'GPA hiện tại phải lớn hơn hoặc bằng 0'
-      max: 'GPA hiện tại không được vượt quá 4.0'
+      label: "GPA hiện tại"
+      placeholder: "Nhập GPA hiện tại"
+      unit: "điểm"
     targetGpa:
-      required: 'GPA mục tiêu là bắt buộc'
-      min: 'GPA mục tiêu phải lớn hơn hoặc bằng 0'
-      max: 'GPA mục tiêu không được vượt quá 4.0'
+      label: "GPA mục tiêu"
+      placeholder: "Nhập GPA mục tiêu"
+      unit: "điểm"
     remainingCredits:
-      required: 'Số tín chỉ còn lại là bắt buộc'
-      min: 'Số tín chỉ còn lại phải lớn hơn 0'
-      max: 'Số tín chỉ còn lại không được vượt quá 200'
-    continuousScore:
-      required: 'Điểm chuyên cần là bắt buộc'
-      min: 'Điểm chuyên cần phải lớn hơn hoặc bằng 0'
-      max: 'Điểm chuyên cần không được vượt quá 10'
-    midtermScore:
-      required: 'Điểm giữa kỳ là bắt buộc'
-      min: 'Điểm giữa kỳ phải lớn hơn hoặc bằng 0'
-      max: 'Điểm giữa kỳ không được vượt quá 10'
-    continuousWeight:
-      required: 'Trọng số chuyên cần là bắt buộc'
-      min: 'Trọng số chuyên cần phải lớn hơn hoặc bằng 0'
-      max: 'Trọng số chuyên cần không được vượt quá 100'
-    midtermWeight:
-      required: 'Trọng số giữa kỳ là bắt buộc'
-      min: 'Trọng số giữa kỳ phải lớn hơn hoặc bằng 0'
-      max: 'Trọng số giữa kỳ không được vượt quá 100'
-    finalWeight:
-      required: 'Trọng số thi cuối kỳ là bắt buộc'
-      min: 'Trọng số thi cuối kỳ phải lớn hơn hoặc bằng 0'
-      max: 'Trọng số thi cuối kỳ không được vượt quá 100'
+      label: "Số tín còn lại"
+      placeholder: "Nhập số tín còn lại"
+      unit: "tín chỉ"
+  button:
+    calculate: "Tính toán mục tiêu có thể đạt được"
+    reset: "Đặt lại"
+  result:
+    title: "Kết quả"
+    maxGpaIfAllA: "GPA tối đa nếu full A:"
+    isFeasible: "Khả thi với full A:"
+    yes: "Có"
+    no: "Không"
+  ready:
+    title: "Sẵn sàng tính toán"
+    description: "Nhập thông tin hoặc đặt câu hỏi để xem kết quả dự đoán"
+  classification:
+    title: "Xếp loại tốt nghiệp Duy Tân"
+    excellent: "Xuất sắc"
+    good: "Giỏi"
+    fair: "Khá"
+    average: "Trung bình"
