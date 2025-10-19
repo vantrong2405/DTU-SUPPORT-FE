@@ -7,7 +7,7 @@ import {
   CardHeader,
   CardTitle,
 } from '@/components/ui/card'
-import { GraduationCap, Check } from 'lucide-vue-next'
+import * as Icon from '@/components/ui/icon'
 
 const { t } = useI18n()
 
@@ -51,7 +51,7 @@ const SCOPE = 'home.whatWeDo'
                 <div
                   class="w-20 h-20 mx-auto bg-primary rounded-2xl flex items-center justify-center mb-6"
                 >
-                  <GraduationCap class="w-10 h-10 text-primary-foreground" />
+                  <Icon.GraduationCap class="w-10 h-10 text-primary-foreground" />
                 </div>
                 <h4 class="text-2xl font-bold text-foreground mb-4">
                   {{ t('home.whatWeDo.visual.audience') }}
@@ -112,7 +112,7 @@ const SCOPE = 'home.whatWeDo'
                   :key="b"
                   class="text-sm text-primary flex items-center justify-center"
                 >
-                  <Check class="w-4 h-4 mr-2" />
+                  <Icon.Check class="w-4 h-4 mr-2" />
                   {{ t(`${SCOPE}.features.${i}.benefits.${b}`) }}
                 </li>
               </ul>

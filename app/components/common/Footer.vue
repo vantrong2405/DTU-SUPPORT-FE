@@ -1,7 +1,7 @@
 <script setup lang="ts">
 import { useI18n } from 'vue-i18n'
 import { useNavigation } from '@/composables/common/useNavigation'
-import { GraduationCap, MessageCircle, Clock } from 'lucide-vue-next'
+import * as Icon from '@/components/ui/icon'
 
 const { t } = useI18n()
 const { navigateTo } = useNavigation()
@@ -18,7 +18,7 @@ const { navigateTo } = useNavigation()
             <div
               class="w-10 h-10 bg-primary rounded-lg flex items-center justify-center mr-3"
             >
-              <GraduationCap class="w-6 h-6 text-primary-foreground" />
+              <Icon.GraduationCap class="w-6 h-6 text-primary-foreground" />
             </div>
             <div>
               <h3 class="text-lg font-bold text-foreground">
@@ -129,7 +129,7 @@ const { navigateTo } = useNavigation()
               <div
                 class="w-6 h-6 bg-primary rounded-full flex items-center justify-center mr-3"
               >
-                <MessageCircle class="w-4 h-4 text-primary-foreground" />
+                <Icon.MessageCircle class="w-4 h-4 text-primary-foreground" />
               </div>
               <span class="text-muted-foreground text-sm">{{
                 t('common.footer.contact.messenger')
@@ -149,7 +149,7 @@ const { navigateTo } = useNavigation()
               <div
                 class="w-6 h-6 bg-primary rounded-full flex items-center justify-center mr-3"
               >
-                <Clock class="w-4 h-4 text-primary-foreground" />
+                <Icon.Clock class="w-4 h-4 text-primary-foreground" />
               </div>
               <span class="text-muted-foreground text-sm">{{
                 t('common.footer.contact.response')

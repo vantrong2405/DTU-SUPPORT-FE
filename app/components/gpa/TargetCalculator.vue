@@ -1,6 +1,6 @@
 <script setup lang="ts">
 import { ref, computed } from 'vue'
-import { Target, RotateCcw, AlertTriangle, CheckCircle, XCircle, HelpCircle, GraduationCap, Calculator } from 'lucide-vue-next'
+import * as Icon from '@/components/ui/icon'
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card'
 import { Button } from '@/components/ui/button'
 import { Input } from '@/components/ui/input'
@@ -95,11 +95,11 @@ const getDifficultyColor = (difficulty: string) => {
 
 const getDifficultyIcon = (difficulty: string) => {
   switch (difficulty) {
-    case 'easy': return CheckCircle
-    case 'medium': return AlertTriangle
-    case 'hard': return AlertTriangle
-    case 'impossible': return XCircle
-    default: return AlertTriangle
+    case 'easy': return Icon.CheckCircle
+    case 'medium': return Icon.AlertTriangle
+    case 'hard': return Icon.AlertTriangle
+    case 'impossible': return Icon.XCircle
+    default: return Icon.AlertTriangle
   }
 }
 
@@ -119,10 +119,10 @@ const getClassificationColor = (classification: string) => {
     <Card>
       <CardHeader>
         <CardTitle class="flex items-center gap-2">
-          <Target class="w-5 h-5" />
+          <Icon.Target class="w-5 h-5" />
           {{ t('gpa.calculateTarget') }}
           <Button variant="ghost" size="sm" class="ml-auto">
-            <HelpCircle class="w-4 h-4" />
+            <Icon.HelpCircle class="w-4 h-4" />
           </Button>
         </CardTitle>
         <CardDescription>
@@ -200,12 +200,12 @@ const getClassificationColor = (classification: string) => {
             :disabled="!isFormValid || isCalculating"
             class="flex-1"
           >
-            <Target class="w-4 h-4 mr-2" />
+            <Icon.Target class="w-4 h-4 mr-2" />
             {{ isCalculating ? t('gpa.calculating') : t('gpa.calculateTargetButton') }}
           </Button>
 
           <Button variant="outline" @click="resetForm" :disabled="isCalculating">
-            <RotateCcw class="w-4 h-4" />
+            <Icon.RotateCcw class="w-4 h-4" />
           </Button>
         </div>
       </CardContent>
@@ -220,7 +220,7 @@ const getClassificationColor = (classification: string) => {
       </CardHeader>
       <CardContent>
         <div v-if="!result" class="text-center py-12">
-          <Calculator class="w-16 h-16 mx-auto text-muted-foreground mb-4" />
+          <Icon.Calculator class="w-16 h-16 mx-auto text-muted-foreground mb-4" />
           <h3 class="text-lg font-semibold mb-2">{{ t('gpa.readyToCalculate') }}</h3>
           <p class="text-muted-foreground">{{ t('gpa.readyDescription') }}</p>
         </div>
@@ -250,7 +250,7 @@ const getClassificationColor = (classification: string) => {
 
             <div class="flex items-center justify-between p-4 border rounded-lg">
               <div class="flex items-center gap-3">
-                <GraduationCap class="w-5 h-5 text-primary" />
+                <Icon.GraduationCap class="w-5 h-5 text-primary" />
                 <span class="font-medium">{{ t('gpa.graduationClassification') }}</span>
               </div>
               <span :class="getClassificationColor(result.classification)" class="font-semibold">
@@ -261,7 +261,7 @@ const getClassificationColor = (classification: string) => {
 
           <div v-if="result.warning" class="p-4 bg-yellow-50 border border-yellow-200 rounded-lg">
             <div class="flex items-start gap-3">
-              <AlertTriangle class="w-5 h-5 text-yellow-600 mt-0.5" />
+              <Icon.AlertTriangle class="w-5 h-5 text-yellow-600 mt-0.5" />
               <div>
                 <h4 class="font-medium text-yellow-800">{{ t('gpa.warning') }}</h4>
                 <p class="text-sm text-yellow-700 mt-1">{{ result.warning }}</p>

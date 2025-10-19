@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import { Palette } from 'lucide-vue-next'
+import * as Icon from '@/components/ui/icon'
 import { Button } from '@/components/ui/button'
 import {
   DropdownMenu,
@@ -29,7 +29,7 @@ setHtmlAttributes()
   <DropdownMenu>
     <DropdownMenuTrigger as-child>
       <Button variant="outline" size="sm" class="gap-2 rounded-lg">
-        <Palette
+        <Icon.Palette
           class="h-[1.2rem] w-[1.2rem]"
           :style="{ color: themeIconColor }"
         />

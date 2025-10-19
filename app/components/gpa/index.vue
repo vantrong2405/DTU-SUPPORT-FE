@@ -1,10 +1,8 @@
 <script setup lang="ts">
 import { ref } from 'vue'
-import { Calculator, Target, TrendingUp, Brain, GraduationCap } from 'lucide-vue-next'
+import * as Icon from '@/components/ui/icon'
 import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/components/ui/tabs'
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card'
-import { Button } from '@/components/ui/button'
-import { Input } from '@/components/ui/input'
 import TargetCalculator from './TargetCalculator.vue'
 
 const { t } = useI18n()
@@ -17,7 +15,7 @@ const activeTab = ref('target')
     <div class="container mx-auto px-4 py-8">
       <div class="text-center mb-8">
         <div class="inline-flex items-center gap-2 bg-primary/10 text-primary px-4 py-2 rounded-full text-sm font-medium mb-4">
-          <Calculator class="w-4 h-4" />
+          <Icon.Calculator class="w-4 h-4" />
           {{ t('gpa.smartTool') }}
         </div>
 
@@ -35,23 +33,23 @@ const activeTab = ref('target')
         <Tabs v-model="activeTab" class="w-full">
           <TabsList class="grid w-full grid-cols-5 mb-8">
             <TabsTrigger value="target" class="flex items-center gap-2">
-              <Target class="w-4 h-4" />
-              {{ t('gpa.calculateTarget') }}
+              <Icon.Target class="w-4 h-4" />
+              {{ t('gpa.calculateIcon.Target') }}
             </TabsTrigger>
             <TabsTrigger value="gpa" class="flex items-center gap-2">
-              <Calculator class="w-4 h-4" />
+              <Icon.Calculator class="w-4 h-4" />
               {{ t('gpa.calculateGpaTab') }}
             </TabsTrigger>
             <TabsTrigger value="pe" class="flex items-center gap-2">
-              <TrendingUp class="w-4 h-4" />
+              <Icon.TrendingUp class="w-4 h-4" />
               {{ t('gpa.peGpa') }}
             </TabsTrigger>
             <TabsTrigger value="pass" class="flex items-center gap-2">
-              <Target class="w-4 h-4" />
+              <Icon.Target class="w-4 h-4" />
               {{ t('gpa.calculatePass') }}
             </TabsTrigger>
             <TabsTrigger value="ai" class="flex items-center gap-2">
-              <Brain class="w-4 h-4" />
+              <Icon.Brain class="w-4 h-4" />
               {{ t('gpa.askAi') }}
             </TabsTrigger>
           </TabsList>
@@ -64,7 +62,7 @@ const activeTab = ref('target')
             <Card>
               <CardHeader>
                 <CardTitle class="flex items-center gap-2">
-                  <Calculator class="w-5 h-5" />
+                  <Icon.Calculator class="w-5 h-5" />
                   {{ t('gpa.calculateGpa') }}
                 </CardTitle>
                 <CardDescription>
@@ -73,7 +71,7 @@ const activeTab = ref('target')
               </CardHeader>
               <CardContent>
                 <div class="text-center py-12">
-                  <Calculator class="w-16 h-16 mx-auto text-muted-foreground mb-4" />
+                  <Icon.Calculator class="w-16 h-16 mx-auto text-muted-foreground mb-4" />
                   <h3 class="text-lg font-semibold mb-2">{{ t('gpa.comingSoon') }}</h3>
                   <p class="text-muted-foreground">{{ t('gpa.comingSoonDescription') }}</p>
                 </div>
@@ -85,7 +83,7 @@ const activeTab = ref('target')
             <Card>
               <CardHeader>
                 <CardTitle class="flex items-center gap-2">
-                  <TrendingUp class="w-5 h-5" />
+                  <Icon.TrendingUp class="w-5 h-5" />
                   {{ t('gpa.peGpa') }}
                 </CardTitle>
                 <CardDescription>
@@ -94,7 +92,7 @@ const activeTab = ref('target')
               </CardHeader>
               <CardContent>
                 <div class="text-center py-12">
-                  <TrendingUp class="w-16 h-16 mx-auto text-muted-foreground mb-4" />
+                  <Icon.TrendingUp class="w-16 h-16 mx-auto text-muted-foreground mb-4" />
                   <h3 class="text-lg font-semibold mb-2">{{ t('gpa.comingSoon') }}</h3>
                   <p class="text-muted-foreground">{{ t('gpa.comingSoonDescription') }}</p>
                 </div>
@@ -106,7 +104,7 @@ const activeTab = ref('target')
             <Card>
               <CardHeader>
                 <CardTitle class="flex items-center gap-2">
-                  <Target class="w-5 h-5" />
+                  <Icon.Target class="w-5 h-5" />
                   {{ t('gpa.calculatePass') }}
                 </CardTitle>
                 <CardDescription>
@@ -115,7 +113,7 @@ const activeTab = ref('target')
               </CardHeader>
               <CardContent>
                 <div class="text-center py-12">
-                  <Target class="w-16 h-16 mx-auto text-muted-foreground mb-4" />
+                  <Icon.Target class="w-16 h-16 mx-auto text-muted-foreground mb-4" />
                   <h3 class="text-lg font-semibold mb-2">{{ t('gpa.comingSoon') }}</h3>
                   <p class="text-muted-foreground">{{ t('gpa.comingSoonDescription') }}</p>
                 </div>
@@ -127,7 +125,7 @@ const activeTab = ref('target')
             <Card>
               <CardHeader>
                 <CardTitle class="flex items-center gap-2">
-                  <Brain class="w-5 h-5" />
+                  <Icon.Brain class="w-5 h-5" />
                   {{ t('gpa.askAi') }}
                 </CardTitle>
                 <CardDescription>
@@ -136,7 +134,7 @@ const activeTab = ref('target')
               </CardHeader>
               <CardContent>
                 <div class="text-center py-12">
-                  <Brain class="w-16 h-16 mx-auto text-muted-foreground mb-4" />
+                  <Icon.Brain class="w-16 h-16 mx-auto text-muted-foreground mb-4" />
                   <h3 class="text-lg font-semibold mb-2">{{ t('gpa.comingSoon') }}</h3>
                   <p class="text-muted-foreground">{{ t('gpa.comingSoonDescription') }}</p>
                 </div>
@@ -150,7 +148,7 @@ const activeTab = ref('target')
         <Card>
           <CardHeader>
             <CardTitle class="flex items-center gap-2">
-              <GraduationCap class="w-5 h-5" />
+              <Icon.GraduationCap class="w-5 h-5" />
               {{ t('gpa.graduationClassification') }}
             </CardTitle>
             <CardDescription>

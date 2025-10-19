@@ -6,7 +6,7 @@ import LocaleSwitcher from './LocaleSwitcher.vue'
 import { useI18n } from 'vue-i18n'
 import { NAV_ITEMS } from '@/constants/features/home'
 import { useNavigation } from '@/composables/common/useNavigation'
-import { Menu, X } from 'lucide-vue-next'
+import * as Icon from '@/components/ui/icon'
 
 const { t } = useI18n()
 const { navigateTo } = useNavigation()
@@ -56,7 +56,9 @@ const handleMobileNavClick = (
 }
 
 const navItems = computed(() => {
-  if (route.path !== '/') {
+  const path = route.path
+
+  if (path !== '/' && !path.match(/^\/[a-z]{2}$/)) {
     return []
   }
 
@@ -138,8 +140,8 @@ const navItems = computed(() => {
           class="lg:hidden text-foreground rounded-lg w-10 h-10 hover:bg-[hsl(var(--accent)/0.12)] active:bg-[hsl(var(--accent)/0.16)] transition-colors duration-150 flex items-center flex-shrink-0"
           aria-label="Toggle menu"
         >
-          <Menu v-if="!isMenuOpen" class="w-6 h-6" />
-          <X v-else class="w-6 h-6" />
+          <Icon.Menu v-if="!isMenuOpen" class="w-6 h-6" />
+          <Icon.X v-else class="w-6 h-6" />
         </Button>
       </div>
 

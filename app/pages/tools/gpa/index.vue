@@ -1,7 +1,7 @@
 <script setup lang="ts">
 import { Tabs, TabsList, TabsTrigger, TabsContent } from '@/components/ui/tabs'
 import { Button } from '@/components/ui/button'
-import { Target, Calculator, Dumbbell, ClipboardCheck, Bot, FileText } from 'lucide-vue-next'
+import * as Icon from '@/components/ui/icon'
 const DEFAULT_TAB = 'target'
 import { useForm } from 'vee-validate'
 import { toTypedSchema } from '@vee-validate/zod'
@@ -55,7 +55,7 @@ const onTargetSubmit = handleSubmit((values: TargetValues) => {
     <div class="container mx-auto px-4">
       <div class="max-w-5xl mx-auto text-center mb-12 md:mb-16">
         <div class="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-accent/10 text-accent ring-1 ring-accent/20 text-sm mb-4">
-          <Calculator class="w-4 h-4" />
+          <Icon.Calculator class="w-4 h-4" />
           <span>Công cụ tính GPA thông minh</span>
         </div>
         <h1 class="text-4xl md:text-5xl font-extrabold tracking-tight leading-tight">
@@ -71,23 +71,23 @@ const onTargetSubmit = handleSubmit((values: TargetValues) => {
         <Tabs :default-value="DEFAULT_TAB" class="block">
           <TabsList class="inline-flex h-12 items-center justify-center rounded-2xl bg-muted/60 p-1.5 text-muted-foreground overflow-x-auto shadow-sm">
             <TabsTrigger value="target" class="inline-flex items-center justify-center whitespace-nowrap rounded-md px-4 py-2 text-sm font-medium transition-colors duration-150 hover:text-foreground focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary/40 focus-visible:ring-offset-2 focus-visible:ring-offset-background data-[state=active]:bg-primary/10 data-[state=active]:text-primary data-[state=active]:ring-1 data-[state=active]:ring-primary/30">
-              <Target class="w-4 h-4 mr-2" />
+              <Icon.Target class="w-4 h-4 mr-2" />
               Tính toán mục tiêu
             </TabsTrigger>
             <TabsTrigger value="gpa" class="inline-flex items-center justify-center whitespace-nowrap rounded-md px-4 py-2 text-sm font-medium transition-colors duration-150 hover:text-foreground focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary/40 focus-visible:ring-offset-2 focus-visible:ring-offset-background data-[state=active]:bg-primary/10 data-[state=active]:text-primary data-[state=active]:ring-1 data-[state=active]:ring-primary/30">
-              <Calculator class="w-4 h-4 mr-2" />
+              <Icon.Calculator class="w-4 h-4 mr-2" />
               Tính toán GPA
             </TabsTrigger>
             <TabsTrigger value="pe" class="inline-flex items-center justify-center whitespace-nowrap rounded-md px-4 py-2 text-sm font-medium transition-colors duration-150 hover:text-foreground focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary/40 focus-visible:ring-offset-2 focus-visible:ring-offset-background data-[state=active]:bg-primary/10 data-[state=active]:text-primary data-[state=active]:ring-1 data-[state=active]:ring-primary/30">
-              <Dumbbell class="w-4 h-4 mr-2" />
+              <Icon.Dumbbell class="w-4 h-4 mr-2" />
               GPA thể dục
             </TabsTrigger>
             <TabsTrigger value="pass" class="inline-flex items-center justify-center whitespace-nowrap rounded-md px-4 py-2 text-sm font-medium transition-colors duration-150 hover:text-foreground focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary/40 focus-visible:ring-offset-2 focus-visible:ring-offset-background data-[state=active]:bg-primary/10 data-[state=active]:text-primary data-[state=active]:ring-1 data-[state=active]:ring-primary/30">
-              <ClipboardCheck class="w-4 h-4 mr-2" />
+              <Icon.ClipboardCheck class="w-4 h-4 mr-2" />
               Tính điểm qua môn
             </TabsTrigger>
             <TabsTrigger value="ai" class="inline-flex items-center justify-center whitespace-nowrap rounded-md px-4 py-2 text-sm font-medium transition-colors duration-150 hover:text-foreground focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary/40 focus-visible:ring-offset-2 focus-visible:ring-offset-background data-[state=active]:bg-primary/10 data-[state=active]:text-primary data-[state=active]:ring-1 data-[state=active]:ring-primary/30">
-              <Bot class="w-4 h-4 mr-2" />
+              <Icon.Bot class="w-4 h-4 mr-2" />
               Hỏi AI
             </TabsTrigger>
           </TabsList>
@@ -138,7 +138,7 @@ const onTargetSubmit = handleSubmit((values: TargetValues) => {
 
                 <div class="rounded-2xl border border-border bg-card text-card-foreground p-8 flex items-center justify-center shadow-sm ring-1 ring-border/50">
                   <div class="w-full h-80 md:h-96 lg:h-full flex flex-col items-center justify-center rounded-xl bg-muted/40 border border-border text-center px-6">
-                    <FileText class="w-16 h-16 text-muted-foreground mb-4" />
+                    <Icon.FileText class="w-16 h-16 text-muted-foreground mb-4" />
                     <h3 class="text-xl font-semibold text-foreground mb-1">Sẵn sàng tính toán</h3>
                     <p class="text-sm text-muted-foreground max-w-md">Nhập thông tin hoặc đặt câu hỏi để xem kết quả dự đoán.</p>
                   </div>

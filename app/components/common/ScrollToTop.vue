@@ -1,7 +1,7 @@
 <script setup lang="ts">
 import { ref, onMounted, onUnmounted } from 'vue'
 import { Button } from '@/components/ui/button'
-import { ChevronUp } from 'lucide-vue-next'
+import * as Icon from '@/components/ui/icon'
 
 const isVisible = ref(false)
 
@@ -46,7 +46,7 @@ onUnmounted(() => {
       class="fixed bottom-8 right-8 z-50 bg-primary hover:bg-primary/90 text-primary-foreground rounded-full shadow-lg hover:shadow-xl transition-all duration-300 hover:scale-110 w-12 h-12"
       aria-label="Scroll to top"
     >
-      <ChevronUp class="w-6 h-6" />
+      <Icon.ChevronUp class="w-6 h-6" />
     </Button>
   </Transition>
 </template>
