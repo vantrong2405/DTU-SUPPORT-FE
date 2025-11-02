@@ -1,14 +1,3 @@
-header:
-  title: "ウェブサイトへようこそ"
-  menu:
-    home: "ホーム"
-    about: "私たちについて"
-    whatWeDo: "DTU Helper とは？"
-    testimonials: "レビュー"
-    faq: "よくある質問"
-auth:
-  login: "ログイン"
-  register: "登録"
 common:
   header:
     menu:
@@ -28,26 +17,30 @@ common:
       label: "テーマ"
       selectLabel: "テーマを選択"
       names:
-        red: "DTU レッド"
-        blue: "ブルー"
-        green: "グリーン"
-        purple: "パープル"
+        red: "赤"
+        blue: "青"
+        green: "緑"
+        purple: "紫"
         orange: "オレンジ"
         pink: "ピンク"
+  loading:
+    title: "DTU Support を読み込み中"
+    subtitle: "学習ツールを準備中..."
+    progress: "読み込み中..."
   brand:
     titleFull: "DTU Study Support"
     subtitle: "Duy Tân University"
     titleShort: "DTU"
   footer:
-    intro: "DTU 学生の学習をサポートします。"
+    intro: "DTU学生の学習の旅をサポートします。"
     sections:
       services: "サービス"
       support: "サポート"
-      contact: "連絡先"
+      contact: "お問い合わせ"
     links:
-      gpa: "GPA 計算"
-      predict: "学位区分の予測"
-      schedule: "単位ロードマップ"
+      gpa: "GPA計算機"
+      predict: "学位予測"
+      schedule: "クレジットロードマップ"
       marketplace: "マーケットプレイス"
       tools: "ツール"
       help: "学習サポート"
@@ -57,7 +50,7 @@ common:
       terms: "利用規約"
     contact:
       messenger: "Messenger 24/7"
-      facebook: "Facebook ページ"
-      response: "30 分以内に返信"
-    copyright: "© {year} DTU Study Support. 無断転載を禁じます。"
-    crafted: "DTU 学生のために ❤️ を込めて"
+      facebook: "Facebookページ"
+      response: "30分以内に回答"
+    copyright: "© {year} DTU Study Support. 全著作権所有。"
+    crafted: "DTU学生のために❤️で作成"

@@ -1,12 +1,15 @@
 <script setup lang="ts">
-import logoDtu from '@/assets/images/logo-dtu.png'
+import { useI18n } from 'vue-i18n'
 import { Button } from '@/components/ui/button'
 import { Theme } from '@/components/ui/theme-selector'
+import * as Icon from '@/components/ui/icon'
 import LocaleSwitcher from './LocaleSwitcher.vue'
-import { useI18n } from 'vue-i18n'
+import { useNavigation } from '@/composables/common/useNavigation'
 import { NAV_ITEMS } from '@/constants/features/home'
+import logoDtu from '@/assets/images/logo-dtu.png'
 
 const { t } = useI18n()
+const { navigateTo } = useNavigation()
 
 const isMenuOpen = ref(false)
 const route = useRoute()
@@ -21,7 +24,7 @@ const closeMenu = () => {
 
 const scrollToSection = (sectionId: string) => {
   closeMenu()
-  const element = document.querySelector(`#${sectionId.replace('#', '')}`)
+  const element = document.querySelector(sectionId)
   if (element) {
     element.scrollIntoView({ behavior: 'smooth' })
   }
@@ -37,6 +40,13 @@ const handleNavClick = (
   }
 }
 
+const getNavLink = (item: { to: string; scroll?: boolean }) => {
+  if (item.scroll) {
+    return route.path
+  }
+  return navigateTo(item.to)
+}
+
 const handleMobileNavClick = (
   event: MouseEvent,
   item: { to: string; scroll?: boolean }
@@ -45,160 +55,91 @@ const handleMobileNavClick = (
   if (!item.scroll) closeMenu()
 }
 
-const navItems = computed(() =>
-  NAV_ITEMS.map((item) => ({
+const navItems = computed(() => {
+  const path = route.path
+
+  if (path !== '/' && !path.match(/^\/[a-z]{2}$/)) {
+    return []
+  }
+
+  return NAV_ITEMS.map((item) => ({
     label: t(`common.header.menu.${item.key}`),
     to: item.to,
     scroll: 'scroll' in item ? item.scroll : false,
   }))
-)
+})
 </script>
 
 <template>
   <header class="bg-background shadow-lg sticky top-0 z-50">
-    <div class="container mx-auto px-3 sm:px-4">
-      <div class="flex items-center justify-between h-16">
-        <NuxtLink
-          to="/"
-          class="flex items-center space-x-2 sm:space-x-3 min-w-0 flex-shrink-0"
-          @click="closeMenu"
-        >
+    <div class="container mx-auto px-3 sm:px-4 lg:px-6">
+      <div class="flex items-center justify-between h-14 sm:h-16">
+        <NuxtLink :to="navigateTo('/')" class="flex items-center space-x-2 sm:space-x-3 min-w-0 flex-shrink-0 flex-1"
+          @click="closeMenu">
           <div
-            class="w-8 h-8 sm:w-10 sm:h-10 bg-primary rounded-lg flex items-center justify-center border-0 flex-shrink-0"
-          >
-            <img
-              :src="logoDtu"
-              alt="DTU Logo"
-              class="w-6 h-6 sm:w-8 sm:h-8 object-contain"
-            />
+            class="w-7 h-7 sm:w-8 sm:h-8 md:w-10 md:h-10 bg-primary rounded-lg flex items-center justify-center border-0 flex-shrink-0">
+            <img :src="logoDtu" alt="DTU Logo" class="w-5 h-5 sm:w-6 sm:h-6 md:w-8 md:h-8 object-contain" />
           </div>
-          <div class="hidden sm:block flex-shrink-0 min-w-0">
-            <h1 class="text-lg sm:text-xl font-bold text-foreground truncate">
+
+          <div class="hidden sm:block flex-shrink-0 min-w-0 max-w-[200px] md:max-w-none">
+            <h1 class="text-base sm:text-lg md:text-xl font-bold text-foreground truncate">
               {{ t('common.brand.titleFull') }}
             </h1>
-            <p class="text-xs text-muted-foreground truncate">
+            <p class="text-xs sm:text-xs text-muted-foreground truncate">
               {{ t('common.brand.subtitle') }}
             </p>
           </div>
-          <div class="sm:hidden flex-shrink-0">
-            <h1 class="text-sm font-bold text-foreground">
+
+          <div class="sm:hidden flex-shrink-0 min-w-0">
+            <h1 class="text-xs sm:text-sm font-bold text-foreground truncate">
               {{ t('common.brand.titleShort') }}
             </h1>
           </div>
         </NuxtLink>
-        <div></div>
 
-        <nav class="hidden xl:flex items-center space-x-4 2xl:space-x-6">
-          <NuxtLink
-            v-for="item in navItems"
-            :key="item.to"
-            :to="item.scroll ? route.path : item.to"
-            class="text-muted-foreground hover:text-foreground hover:bg-[hsl(var(--accent)/0.16)] rounded-md px-2 py-1 transition-colors duration-150 font-medium text-sm whitespace-nowrap"
-            active-class="text-primary"
-            @click="handleNavClick($event, item)"
-          >
+        <nav class="hidden lg:flex items-center space-x-2 xl:space-x-3 2xl:space-x-4">
+          <NuxtLink v-for="item in navItems" :key="item.to" :to="getNavLink(item)"
+            class="text-muted-foreground hover:text-foreground hover:bg-[hsl(var(--accent)/0.16)] rounded-md px-2 xl:px-3 py-1.5 transition-colors duration-150 font-medium text-sm xl:text-base whitespace-nowrap"
+            active-class="text-primary" @click="handleNavClick($event, item)">
             {{ item.label }}
           </NuxtLink>
         </nav>
 
-        <div class="hidden lg:flex items-center space-x-2 flex-shrink-0">
+        <div class="hidden lg:flex items-center space-x-2 xl:space-x-3 flex-shrink-0">
           <Theme />
           <LocaleSwitcher />
-          <div class="h-6 w-px bg-border"></div>
-          <Button
-            as="NuxtLink"
-            to="/login"
-            variant="outline"
-            size="sm"
-            class="text-sm whitespace-nowrap"
-            >{{ t('common.auth.login') }}</Button
-          >
-          <Button
-            as="NuxtLink"
-            to="/register"
-            size="sm"
-            class="text-sm whitespace-nowrap"
-            >{{ t('common.auth.register') }}</Button
-          >
+          <div class="h-5 xl:h-6 w-px bg-border"></div>
+          <Button as="NuxtLink" :to="navigateTo('/login')" size="sm" class="text-xs xl:text-sm whitespace-nowrap px-3 xl:px-4">{{
+            t('common.auth.login') }}</Button>
         </div>
 
-        <Button
-          as="button"
-          variant="ghost"
-          size="icon"
-          @click="toggleMenu"
-          class="xl:hidden text-foreground rounded-lg w-10 h-10 hover:bg-[hsl(var(--accent)/0.12)] active:bg-[hsl(var(--accent)/0.16)] transition-colors duration-150 flex items-center flex-shrink-0"
-          aria-label="Toggle menu"
-        >
-          <svg
-            v-if="!isMenuOpen"
-            class="w-6 h-6"
-            fill="none"
-            stroke="currentColor"
-            viewBox="0 0 24 24"
-          >
-            <path
-              stroke-linecap="round"
-              stroke-linejoin="round"
-              stroke-width="2"
-              d="M4 6h16M4 12h16M4 18h16"
-            ></path>
-          </svg>
-          <svg
-            v-else
-            class="w-6 h-6"
-            fill="none"
-            stroke="currentColor"
-            viewBox="0 0 24 24"
-          >
-            <path
-              stroke-linecap="round"
-              stroke-linejoin="round"
-              stroke-width="2"
-              d="M6 18L18 6M6 6l12 12"
-            ></path>
-          </svg>
+        <Button as="button" variant="ghost" size="icon" @click="toggleMenu"
+          class="lg:hidden text-foreground rounded-lg w-9 h-9 sm:w-10 sm:h-10 hover:bg-[hsl(var(--accent)/0.12)] active:bg-[hsl(var(--accent)/0.16)] transition-colors duration-150 flex items-center flex-shrink-0"
+          aria-label="Toggle menu">
+          <Icon.Menu v-if="!isMenuOpen" class="w-5 h-5 sm:w-6 sm:h-6" />
+          <Icon.X v-else class="w-5 h-5 sm:w-6 sm:h-6" />
         </Button>
       </div>
 
-      <div
-        v-if="isMenuOpen"
-        class="xl:hidden border-t border-border bg-background"
-      >
-        <nav class="py-4 space-y-2">
-          <NuxtLink
-            v-for="item in navItems"
-            :key="item.to"
-            :to="item.scroll ? route.path : item.to"
-            class="block text-muted-foreground hover:text-foreground hover:bg-[hsl(var(--accent)/0.16)] rounded-md px-3 py-2 transition-colors duration-150 font-medium"
-            active-class="text-primary bg-accent/10"
-            @click="handleMobileNavClick($event, item)"
-          >
+      <div v-if="isMenuOpen" class="lg:hidden border-t border-border bg-background max-h-[calc(100vh-3.5rem)] overflow-y-auto">
+        <nav class="py-3 sm:py-4 space-y-1 sm:space-y-2">
+          <NuxtLink v-for="item in navItems" :key="item.to" :to="getNavLink(item)"
+            class="block text-muted-foreground hover:text-foreground hover:bg-[hsl(var(--accent)/0.16)] rounded-md px-3 sm:px-4 py-2 sm:py-2.5 transition-colors duration-150 font-medium text-sm sm:text-base"
+            active-class="text-primary bg-accent/10" @click="handleMobileNavClick($event, item)">
             {{ item.label }}
           </NuxtLink>
 
-          <div class="pt-4 border-t border-border space-y-3">
-            <div class="flex items-center gap-2 pb-2 pl-3">
+          <div class="pt-3 sm:pt-4 border-t border-border space-y-3 sm:space-y-4 px-3 sm:px-4">
+            <div class="flex items-center justify-center gap-3 pb-2">
               <Theme />
               <LocaleSwitcher />
             </div>
-            <Button
-              as="NuxtLink"
-              to="/login"
-              variant="outline"
-              class="w-full justify-center"
-              @click="closeMenu"
-            >
-              {{ t('common.auth.login') }}
-            </Button>
-            <Button
-              as="NuxtLink"
-              to="/register"
-              class="w-full justify-center"
-              @click="closeMenu"
-            >
-              {{ t('common.auth.register') }}
-            </Button>
+
+            <div class="space-y-2">
+              <Button as="NuxtLink" :to="navigateTo('/login')" class="w-full justify-center text-sm sm:text-base" @click="closeMenu">
+                {{ t('common.auth.login') }}
+              </Button>
+            </div>
           </div>
         </nav>
       </div>
