@@ -7,8 +7,13 @@ common:
       testimonials: "Testimonials"
       faq: "FAQ"
   auth:
-    login: "Login"
     register: "Register"
+    login:
+      button: "Login"
+      title: "Login"
+      subtitle: "Sign in to your account to continue"
+      buttons:
+        google: "Sign in with Google"
   ui:
     language:
       label: "Language"

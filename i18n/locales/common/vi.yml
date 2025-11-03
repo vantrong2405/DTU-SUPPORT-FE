@@ -7,8 +7,13 @@ common:
       testimonials: "Sinh viên nói gì"
       faq: "FAQ"
   auth:
-    login: "Đăng nhập"
     register: "Đăng ký"
+    login:
+      button: "Đăng nhập"
+      title: "Đăng nhập"
+      subtitle: "Đăng nhập vào tài khoản của bạn để tiếp tục"
+      buttons:
+        google: "Đăng nhập với Google"
   ui:
     language:
       label: "Ngôn ngữ"

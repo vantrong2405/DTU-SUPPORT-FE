@@ -109,8 +109,10 @@ const navItems = computed(() => {
           <Theme />
           <LocaleSwitcher />
           <div class="h-5 xl:h-6 w-px bg-border"></div>
-          <Button as="NuxtLink" :to="navigateTo('/login')" size="sm" class="text-xs xl:text-sm whitespace-nowrap px-3 xl:px-4">{{
-            t('common.auth.login') }}</Button>
+          <NuxtLink :to="navigateTo('/login')">
+            <Button size="sm" class="text-xs xl:text-sm whitespace-nowrap px-3 xl:px-4">{{
+              t('common.auth.login.button') }}</Button>
+          </NuxtLink>
         </div>
 
         <Button as="button" variant="ghost" size="icon" @click="toggleMenu"
@@ -136,9 +138,11 @@ const navItems = computed(() => {
             </div>
 
             <div class="space-y-2">
-              <Button as="NuxtLink" :to="navigateTo('/login')" class="w-full justify-center text-sm sm:text-base" @click="closeMenu">
-                {{ t('common.auth.login') }}
-              </Button>
+              <NuxtLink :to="navigateTo('/login')" class="block" @click="closeMenu">
+                <Button class="w-full justify-center text-sm sm:text-base">
+                  {{ t('common.auth.login.button') }}
+                </Button>
+              </NuxtLink>
             </div>
           </div>
         </nav>

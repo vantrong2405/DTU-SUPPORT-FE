@@ -7,8 +7,13 @@ common:
       testimonials: "レビュー"
       faq: "よくある質問"
   auth:
-    login: "ログイン"
     register: "登録"
+    login:
+      button: "ログイン"
+      title: "ログイン"
+      subtitle: "アカウントにサインインして続行"
+      buttons:
+        google: "Googleでログイン"
   ui:
     language:
       label: "言語"

@@ -27,4 +27,6 @@ export {
   TrendingUp,
   Brain,
   BookOpen,
+  LogIn,
+  Lock,
 } from 'lucide-vue-next'
