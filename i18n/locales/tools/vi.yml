@@ -74,7 +74,59 @@ tools:
       description: "Tính GPA hiện tại hoặc GPA tích lũy theo số tín đã/đang học. Tính năng này sẽ sớm có sẵn."
     pe:
       title: "GPA thể dục"
-      description: "Công cụ tính GPA thể dục theo thang điểm DTU. Tính năng này sẽ sớm có sẵn."
+      description: "Công cụ tính GPA thể dục theo thang điểm DTU."
+      inputTitle: "Tính toán GPA thể dục"
+      inputSubtitle: "Đơn giản & nhanh"
+      rules:
+        line1: "Nhập GPA (thang 4.0) của 3 môn thể dục"
+        line2: "Trung bình ≥ 2.0: Đậu"
+        line3: "Trung bình < 2.0: Rớt"
+      fields:
+        pe1: "Thể dục 1 (0–4.00)"
+        pe2: "Thể dục 2 (0–4.00)"
+        pe3: "Thể dục 3 (0–4.00)"
+      placeholders:
+        pe1: "Nhập GPA Thể dục 1"
+        pe2: "Nhập GPA Thể dục 2"
+        pe3: "Nhập GPA Thể dục 3"
+      buttons:
+        calculate: "Tính toán"
+        calculating: "Đang tính..."
+        reset: "Đặt lại"
+      empty:
+        title: "Sẵn sàng tính"
+        description: "Nhập 3 điểm GPA thể dục và nhấn Tính toán để xem kết quả"
+      results:
+        title: "Kết quả"
+        subtitle: "Điểm trung bình của 3 môn thể dục"
+        scale: "trên thang điểm 4.0"
+        pass: "Đậu"
+        fail: "Rớt"
+        headline:
+          pass: "Đậu chương trình thể dục"
+          fail: "Rớt chương trình thể dục"
+        courses:
+          c1: "Môn 1"
+          c2: "Môn 2"
+          c3: "Môn 3"
+        analysis:
+          title: "Phân tích:"
+          pass: "Đậu! Bạn đã hoàn thành chương trình thể dục với GPA {gpa}."
+          fail: "Rớt. GPA trung bình thể dục của bạn là {gpa}. Hãy cố gắng hơn."
+
+      validation:
+        pe1:
+          invalid: "GPA Thể dục 1 phải từ 0 đến 4.00"
+          min: "GPA Thể dục 1 không thể nhỏ hơn 0"
+          max: "GPA Thể dục 1 không thể lớn hơn 4.00"
+        pe2:
+          invalid: "GPA Thể dục 2 phải từ 0 đến 4.00"
+          min: "GPA Thể dục 2 không thể nhỏ hơn 0"
+          max: "GPA Thể dục 2 không thể lớn hơn 4.00"
+        pe3:
+          invalid: "GPA Thể dục 3 phải từ 0 đến 4.00"
+          min: "GPA Thể dục 3 không thể nhỏ hơn 0"
+          max: "GPA Thể dục 3 không thể lớn hơn 4.00"
     pass:
       title: "Tính điểm qua môn"
       description: "Tính điểm cần ở bài thi cuối để qua môn theo trọng số. Tính năng này sẽ sớm có sẵn."

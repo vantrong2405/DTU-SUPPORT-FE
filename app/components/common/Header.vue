@@ -7,12 +7,16 @@ import LocaleSwitcher from './LocaleSwitcher.vue'
 import { useNavigation } from '@/composables/common/useNavigation'
 import { NAV_ITEMS } from '@/constants/features/home'
 import logoDtu from '@/assets/images/logo-dtu.png'
+import { useAuthStore } from '@/stores/auth'
 
 const { t } = useI18n()
 const { navigateTo } = useNavigation()
 
 const isMenuOpen = ref(false)
 const route = useRoute()
+const auth = useAuthStore()
+const showLogin = computed(() => auth.hasSessionChecked && !auth.user)
+const showLogout = computed(() => auth.hasSessionChecked && !!auth.user)
 
 const toggleMenu = () => {
   isMenuOpen.value = !isMenuOpen.value
@@ -109,8 +113,12 @@ const navItems = computed(() => {
           <Theme />
           <LocaleSwitcher />
           <div class="h-5 xl:h-6 w-px bg-border"></div>
-          <Button as="NuxtLink" :to="navigateTo('/login')" size="sm" class="text-xs xl:text-sm whitespace-nowrap px-3 xl:px-4">{{
-            t('common.auth.login') }}</Button>
+          <NuxtLink v-if="showLogin" :to="navigateTo('/login')">
+            <Button size="sm" class="text-xs xl:text-sm whitespace-nowrap px-3 xl:px-4">{{ t('common.auth.login.button') }}</Button>
+          </NuxtLink>
+          <Button v-if="showLogout" size="sm" variant="outline" class="text-xs xl:text-sm whitespace-nowrap px-3 xl:px-4">
+            {{ t('common.auth.logout.button') }}
+          </Button>
         </div>
 
         <Button as="button" variant="ghost" size="icon" @click="toggleMenu"
@@ -136,8 +144,13 @@ const navItems = computed(() => {
             </div>
 
             <div class="space-y-2">
-              <Button as="NuxtLink" :to="navigateTo('/login')" class="w-full justify-center text-sm sm:text-base" @click="closeMenu">
-                {{ t('common.auth.login') }}
+              <NuxtLink v-if="showLogin" :to="navigateTo('/login')" class="block" @click="closeMenu">
+                <Button class="w-full justify-center text-sm sm:text-base">
+                  {{ t('common.auth.login.button') }}
+                </Button>
+              </NuxtLink>
+              <Button v-if="showLogout" class="w-full justify-center text-sm sm:text-base" variant="outline" @click="closeMenu">
+                {{ t('common.auth.logout.button') }}
               </Button>
             </div>
           </div>

@@ -74,7 +74,59 @@ tools:
       description: "現在の GPA または累積 GPA を取得済み/在籍中の単位に基づいて計算。この機能は近日公開予定です。"
     pe:
       title: "体育 GPA"
-      description: "DTU の評価基準に従って体育 GPA を計算。この機能は近日公開予定です。"
+      description: "DTU の評価基準に従って体育 GPA を計算。"
+      inputTitle: "体育 GPA を計算"
+      inputSubtitle: "シンプル＆高速"
+      rules:
+        line1: "3つの体育科目の GPA（4.0 スケール）を入力"
+        line2: "平均 ≥ 2.0: 合格"
+        line3: "平均 < 2.0: 不合格"
+      fields:
+        pe1: "体育 1 (0–4.00)"
+        pe2: "体育 2 (0–4.00)"
+        pe3: "体育 3 (0–4.00)"
+      placeholders:
+        pe1: "体育 1 の GPA を入力"
+        pe2: "体育 2 の GPA を入力"
+        pe3: "体育 3 の GPA を入力"
+      buttons:
+        calculate: "計算"
+        calculating: "計算中..."
+        reset: "リセット"
+      empty:
+        title: "計算の準備完了"
+        description: "3つの体育 GPA を入力し、計算をクリックして結果を表示"
+      results:
+        title: "結果"
+        subtitle: "3つの体育科目の平均 GPA"
+        scale: "4.0 スケールで"
+        pass: "合格"
+        fail: "不合格"
+        headline:
+          pass: "体育プログラムに合格"
+          fail: "体育プログラムに不合格"
+        courses:
+          c1: "科目 1"
+          c2: "科目 2"
+          c3: "科目 3"
+        analysis:
+          title: "分析:"
+          pass: "合格！ 体育プログラムを GPA {gpa} で修了しました。"
+          fail: "不合格。 平均体育 GPA は {gpa} です。 もう少し頑張りましょう。"
+
+      validation:
+        pe1:
+          invalid: "体育1 は 0 から 4.00 の数値である必要があります"
+          min: "体育1 は 0 未満にできません"
+          max: "体育1 は 4.00 を超えることはできません"
+        pe2:
+          invalid: "体育2 は 0 から 4.00 の数値である必要があります"
+          min: "体育2 は 0 未満にできません"
+          max: "体育2 は 4.00 を超えることはできません"
+        pe3:
+          invalid: "体育3 は 0 から 4.00 の数値である必要があります"
+          min: "体育3 は 0 未満にできません"
+          max: "体育3 は 4.00 を超えることはできません"
     pass:
       title: "合格点を計算"
       description: "重みに基づいてコースを通過するために必要な最終試験の点数を計算。この機能は近日公開予定です。"
