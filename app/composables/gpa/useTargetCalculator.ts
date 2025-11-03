@@ -4,6 +4,7 @@ import { toTypedSchema } from '@vee-validate/zod'
 import { useI18n } from 'vue-i18n'
 import { GRADUATION_CLASSIFICATIONS } from '@/constants/gpa/graduation'
 import { createTargetSchema, type TargetValues } from '@/schemas/gpa/target'
+import { useAuthStore } from '@/stores/auth'
 
 export const useTargetCalculator = () => {
   const { t } = useI18n()
@@ -40,6 +41,13 @@ export const useTargetCalculator = () => {
   })
 
   const onTargetSubmit = handleSubmit((values: TargetValues) => {
+    const auth = useAuthStore()
+    const route = useRoute()
+    if (!auth.user) {
+      const redirect = encodeURIComponent(route.fullPath)
+      navigateTo(`/login?redirect=${redirect}`)
+      return
+    }
     const total = values.completedCredits + values.remainingCredits
     if (total <= 0) {
       targetResult.maxGpaWithAllA = null

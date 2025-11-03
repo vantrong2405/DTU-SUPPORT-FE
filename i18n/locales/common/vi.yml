@@ -14,6 +14,8 @@ common:
       subtitle: "Đăng nhập vào tài khoản của bạn để tiếp tục"
       buttons:
         google: "Đăng nhập với Google"
+    logout:
+      button: "Đăng xuất"
     errors:
       unauthorized: "Bạn cần đăng nhập để tiếp tục"
       failed: "Xác thực thất bại. Vui lòng thử lại."

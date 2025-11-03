@@ -2,16 +2,16 @@ import type { User } from '@/types/common'
 
 export const useAuthStore = defineStore('auth', () => {
   const user = ref<User | null>(null)
+  const hasSessionChecked = ref(false)
 
-  const getUser = () => user.value
+  const setUser = (u: User | null) => { user.value = u }
 
-  const setUser = (userData: User | null) => {
-    user.value = userData
-  }
+  const setHasSessionChecked = (v: boolean) => { hasSessionChecked.value = v }
 
   return {
     user,
-    getUser,
+    hasSessionChecked,
     setUser,
+    setHasSessionChecked,
   }
 })

@@ -7,15 +7,19 @@ const router = useRouter()
 
 const isLoading = ref(true)
 const error = ref<string | null>(null)
+const hasRedirected = ref(false)
 
 onMounted(async () => {
   if (import.meta.client) {
     try {
-      const returnUrl = (route.query.return_url as string) || '/'
+      const rawReturnUrl = route.query.return_url
+      const returnUrl = typeof rawReturnUrl === 'string' && rawReturnUrl.length > 0 ? rawReturnUrl : '/'
       const user = await getCurrentUser()
 
       if (user) {
-        await router.push(decodeURIComponent(returnUrl))
+        if (hasRedirected.value) return
+        hasRedirected.value = true
+        window.location.replace(decodeURIComponent(returnUrl))
       } else {
         error.value = 'Authentication failed. Please try again.'
         setTimeout(() => {

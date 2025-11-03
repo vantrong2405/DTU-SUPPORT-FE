@@ -14,6 +14,8 @@ common:
       subtitle: "Sign in to your account to continue"
       buttons:
         google: "Sign in with Google"
+    logout:
+      button: "Logout"
     errors:
       unauthorized: "You need to log in to continue"
       failed: "Authentication failed. Please try again."

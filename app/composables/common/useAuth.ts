@@ -7,22 +7,23 @@ import { ErrorMessage } from '@/constants/common/http'
 
 export const useAuth = () => {
   const config = useRuntimeConfig()
-  const router = useRouter()
   const authStore = useAuthStore()
 
   const isLoading = ref(false)
+  const isRedirecting = ref(false)
 
-  const getBackendUrl = () => {
-    return config.public.backendUrl as string
-  }
+  const redirectToGoogleLogin = () => {
+    if (!import.meta.client) return
+    if (isRedirecting.value) return
+    isRedirecting.value = true
 
-  const redirectToGoogleLogin = (returnUrl?: string) => {
-    if (import.meta.client) {
-      const backendUrl = getBackendUrl()
-      const currentReturnUrl = returnUrl || window.location.href
-      const loginUrl = `${backendUrl}${AUTH_API.googleRedirect(currentReturnUrl)}`
-      window.location.href = loginUrl
-    }
+    const backendUrl = config.public.backendUrl as string
+    const route = useRoute()
+    const redirect = typeof route.query.redirect === 'string' ? route.query.redirect : '/'
+    const targetPath = redirect.startsWith('/') ? redirect : '/'
+    const returnUrl = `${window.location.origin}${targetPath}`
+    const loginUrl = `${backendUrl}${AUTH_API.googleRedirect(returnUrl)}`
+    window.location.replace(loginUrl)
   }
 
   const getCurrentUser = async () => {
@@ -30,8 +31,8 @@ export const useAuth = () => {
       return null
     }
 
-    if (authStore.getUser()) {
-      return authStore.getUser()
+    if (authStore.user) {
+      return authStore.user
     }
 
     isLoading.value = true
@@ -51,32 +52,18 @@ export const useAuth = () => {
       return null
     } finally {
       isLoading.value = false
+    ;(authStore as unknown as { setHasSessionChecked: (v: boolean) => void }).setHasSessionChecked(true)
     }
   }
 
-  const handleLogout = async () => {
-    authStore.setUser(null)
-    await router.push('/login')
-  }
-
-  const checkAuthAndRedirect = async () => {
-    const currentUser = await getCurrentUser()
-    if (!currentUser) {
-      await router.push('/login')
-      return false
-    }
-    return true
-  }
-
-  const isAuthenticated = computed(() => authStore.getUser() !== null)
+  const isAuthenticated = computed(() => !!authStore.user)
 
   return {
     user: authStore.user,
     isLoading,
+    isRedirecting,
     isAuthenticated,
     redirectToGoogleLogin,
     getCurrentUser,
-    handleLogout,
-    checkAuthAndRedirect,
   }
 }
