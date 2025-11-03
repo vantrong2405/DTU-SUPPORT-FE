@@ -2,6 +2,198 @@ tools:
   hero:
     title: "学習サポートツール"
     subtitle: "DTU 学生のために設計されたツール集"
+  gpa:
+    badge: "スマート GPA 計算機"
+    title: "GPA 計算機"
+    titleHighlight: "スマート"
+    subtitle: "GPA を計算し、結果を予測。AI に質問して賢い学習アドバイスを受け取る。"
+    tabs:
+      target: "目標を計算"
+      targetShort: "目標"
+      gpa: "GPA を計算"
+      gpaShort: "GPA"
+      pe: "体育 GPA"
+      peShort: "体育"
+      pass: "合格点を計算"
+      passShort: "合格"
+      ai: "AI に質問"
+      aiShort: "AI"
+    target:
+      inputTitle: "入力情報"
+      inputSubtitle: "GPA 情報を入力して予測結果を計算"
+      fields:
+        completedCredits: "取得済み単位"
+        currentGpa: "現在の GPA"
+        targetGpa: "目標 GPA"
+        remainingCredits: "残り単位"
+      placeholders:
+        completedCredits: "取得済み単位を入力"
+        currentGpa: "現在の GPA を入力 (0–4.00)"
+        targetGpa: "目標 GPA を入力 (0–4.00)"
+        remainingCredits: "残り単位を入力"
+      buttons:
+        calculate: "計算"
+        calculating: "計算中..."
+        reset: "リセット"
+      empty:
+        title: "計算の準備完了"
+        description: "左側のフォームに情報を入力し、「計算」をクリックして予測 GPA 結果を表示"
+      results:
+        title: "計算結果"
+        subtitle: "達成可能な最大 GPA"
+        scale: "4.0 スケールで"
+        success:
+          title: "目標達成可能！"
+          message: "残りのすべての科目で A (4.0) を取得すると、GPA {gpa} を達成し、目標を上回ります。"
+        warning:
+          title: "目標達成困難"
+          message: "残りのすべての科目で A (4.0) を取得しても、最大 GPA は {gpa} のみで、目標を下回ります。"
+      classifications:
+        excellent: "優秀"
+        good: "良"
+        fair: "可"
+        average: "平均"
+        poor: "不可"
+      validation:
+        required: "このフィールドは必須です"
+        completedCredits:
+          invalid: "取得済み単位は0以上の整数である必要があります"
+        currentGpa:
+          invalid: "現在の GPA は 0 から 4.00 の数値である必要があります"
+          min: "現在の GPA は 0 未満にすることはできません"
+          max: "現在の GPA は 4.00 を超えることはできません"
+        targetGpa:
+          invalid: "目標 GPA は 0.01 から 4.00 の数値である必要があります"
+          min: "目標 GPA は 0 より大きい必要があります"
+          max: "目標 GPA は 4.00 を超えることはできません"
+        remainingCredits:
+          invalid: "残り単位は1以上の整数である必要があります"
+          min: "残り単位は1以上である必要があります"
+    gpa:
+      title: "GPA を計算"
+      description: "現在の GPA または累積 GPA を取得済み/在籍中の単位に基づいて計算。この機能は近日公開予定です。"
+    pe:
+      title: "体育 GPA"
+      description: "DTU の評価基準に従って体育 GPA を計算。"
+      inputTitle: "体育 GPA を計算"
+      inputSubtitle: "シンプル＆高速"
+      rules:
+        line1: "3つの体育科目の GPA（4.0 スケール）を入力"
+        line2: "平均 ≥ 2.0: 合格"
+        line3: "平均 < 2.0: 不合格"
+      fields:
+        pe1: "体育 1 (0–4.00)"
+        pe2: "体育 2 (0–4.00)"
+        pe3: "体育 3 (0–4.00)"
+      placeholders:
+        pe1: "体育 1 の GPA を入力"
+        pe2: "体育 2 の GPA を入力"
+        pe3: "体育 3 の GPA を入力"
+      buttons:
+        calculate: "計算"
+        calculating: "計算中..."
+        reset: "リセット"
+      empty:
+        title: "計算の準備完了"
+        description: "3つの体育 GPA を入力し、計算をクリックして結果を表示"
+      results:
+        title: "結果"
+        subtitle: "3つの体育科目の平均 GPA"
+        scale: "4.0 スケールで"
+        pass: "合格"
+        fail: "不合格"
+        headline:
+          pass: "体育プログラムに合格"
+          fail: "体育プログラムに不合格"
+        courses:
+          c1: "科目 1"
+          c2: "科目 2"
+          c3: "科目 3"
+        analysis:
+          title: "分析:"
+          pass: "合格！ 体育プログラムを GPA {gpa} で修了しました。"
+          fail: "不合格。 平均体育 GPA は {gpa} です。 もう少し頑張りましょう。"
+
+      validation:
+        pe1:
+          invalid: "体育1 は 0 から 4.00 の数値である必要があります"
+          min: "体育1 は 0 未満にできません"
+          max: "体育1 は 4.00 を超えることはできません"
+        pe2:
+          invalid: "体育2 は 0 から 4.00 の数値である必要があります"
+          min: "体育2 は 0 未満にできません"
+          max: "体育2 は 4.00 を超えることはできません"
+        pe3:
+          invalid: "体育3 は 0 から 4.00 の数値である必要があります"
+          min: "体育3 は 0 未満にできません"
+          max: "体育3 は 4.00 を超えることはできません"
+    pass:
+      title: "合格点を計算"
+      description: "重みに基づいてコースを通過するために必要な最終試験の点数を計算。この機能は近日公開予定です。"
+    ai:
+      title: "AI に質問"
+      description: "AI に質問して賢い学習アドバイスを受け取る。この機能は近日公開予定です。"
+    graduation:
+      classification:
+        title: "DTU 卒業区分"
+        subtitle: "DTU の公式卒業区分表"
+        table:
+          rank: "ランク"
+          gpaRange: "GPA 範囲 (4スケール)"
+          description: "説明"
+        ranks:
+          excellent:
+            name: "優秀"
+            gpaRange: "3.60 – 4.00"
+            description: "最高ランク、GPA ≥ 3.60 が必要"
+          good:
+            name: "良"
+            gpaRange: "3.20 – 3.59"
+            description: "良いランク、GPA ≥ 3.20 が必要"
+          fair:
+            name: "可"
+            gpaRange: "2.50 – 3.19"
+            description: "可ランク、GPA ≥ 2.50 が必要"
+          average:
+            name: "平均"
+            gpaRange: "2.00 – 2.49"
+            description: "平均ランク、GPA ≥ 2.00 が必要"
+        notes:
+          title: "重要な注意事項"
+          note1: "再履修単位が>5%ある場合、または処分を受けた場合、卒業ランクが下がる可能性があります"
+          note2: "区分は最終累積 GPA（4.0 スケール）に基づきます"
+      gradingScale:
+        title: "DTU 評価基準"
+        subtitle: "DTU の異なる評価基準間の換算表"
+        table:
+          category: "区分"
+          scale10: "10スケール"
+          letter: "レターグレード"
+          scale4: "4スケール"
+          status: "状態"
+        categories:
+          good: "良"
+          fair: "可"
+          average: "平均"
+          averageWeak: "平均未満"
+          fail: "不可"
+          poor: "不良"
+        status:
+          pass: "合格"
+          conditional: "条件付き"
+          fail: "不合格"
+        notes:
+          title1: "4スケールは公式評価基準で"
+          point1: "学業評価"
+          point2: "卒業評価"
+          point3: "学生ランキング"
+          title2: "D (1.0) は条件付き合格と見なされます"
+          point4: "総単位の>5%がD評価の場合、改善が必要です"
+          point5: "単位は累積されますが、GPAに影響します"
+          title3: "F (0.0)"
+          point6: "単位は累積されません"
+          point7: "コースを再履修する必要があります"
+          point8: "累積 GPA にカウントされません"
   benefits:
     titlePrefix: "なぜ"
     titlePrimary: "使うべき？"
@@ -30,7 +222,7 @@ tools:
     items:
       - icon: "📊"
         status: "available"
-        to: "/gpa"
+        to: "/tools/gpa"
         title: "学習サポート & GPA 計算"
         desc: "学業成績を管理・最適化する総合ツール"
         features:

@@ -1,6 +1,7 @@
 <script setup lang="ts">
 import { ref, onMounted, onUnmounted } from 'vue'
 import { Button } from '@/components/ui/button'
+import * as Icon from '@/components/ui/icon'
 
 const isVisible = ref(false)
 
@@ -42,22 +43,10 @@ onUnmounted(() => {
       as="button"
       size="icon"
       @click="scrollToTop"
-      class="fixed bottom-8 right-8 z-50 bg-primary hover:bg-primary/90 text-primary-foreground rounded-full shadow-lg hover:shadow-xl transition-all duration-300 hover:scale-110 w-12 h-12"
+      class="fixed bottom-4 right-4 sm:bottom-6 sm:right-6 md:bottom-8 md:right-8 z-50 bg-primary hover:bg-primary/90 text-primary-foreground rounded-full shadow-lg hover:shadow-xl transition-all duration-300 hover:scale-110 w-10 h-10 sm:w-11 sm:h-11 md:w-12 md:h-12"
       aria-label="Scroll to top"
     >
-      <svg
-        class="w-6 h-6"
-        fill="none"
-        stroke="currentColor"
-        viewBox="0 0 24 24"
-      >
-        <path
-          stroke-linecap="round"
-          stroke-linejoin="round"
-          stroke-width="2"
-          d="M5 10l7-7m0 0l7 7m-7-7v18"
-        />
-      </svg>
+      <Icon.ChevronUp class="w-5 h-5 sm:w-5 sm:h-5 md:w-6 md:h-6" />
     </Button>
   </Transition>
 </template>

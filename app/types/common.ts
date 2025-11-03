@@ -24,3 +24,23 @@ export interface Locale {
   name: string
   englishName: string
 }
+
+export interface User {
+  id: number
+  email: string
+  name: string
+  subscription_plan_id: number | null
+}
+
+export interface ApiResponse<T> {
+  data: T
+}
+
+export interface ApiError {
+  message: string
+  details?: string
+}
+
+export interface ApiErrorResponse {
+  errors: ApiError[]
+}

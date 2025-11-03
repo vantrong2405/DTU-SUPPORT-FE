@@ -1,14 +1,3 @@
-header:
-  title: "Welcome to the website"
-  menu:
-    home: "Home"
-    about: "About us"
-    whatWeDo: "What is DTU Helper?"
-    testimonials: "Testimonials"
-    faq: "FAQ"
-auth:
-  login: "Login"
-  register: "Register"
 common:
   header:
     menu:
@@ -18,8 +7,19 @@ common:
       testimonials: "Testimonials"
       faq: "FAQ"
   auth:
-    login: "Login"
     register: "Register"
+    login:
+      button: "Login"
+      title: "Login"
+      subtitle: "Sign in to your account to continue"
+      buttons:
+        google: "Sign in with Google"
+    logout:
+      button: "Logout"
+    errors:
+      unauthorized: "You need to log in to continue"
+      failed: "Authentication failed. Please try again."
+      occurred: "An error occurred during authentication"
   ui:
     language:
       label: "Language"
@@ -34,6 +34,10 @@ common:
         purple: "Purple"
         orange: "Orange"
         pink: "Pink"
+  loading:
+    title: "Loading DTU Support"
+    subtitle: "Preparing your study tools..."
+    progress: "Loading..."
   brand:
     titleFull: "DTU Study Support"
     subtitle: "Duy Tân University"

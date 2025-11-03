@@ -1,19 +1,49 @@
-title: 'Máy Tính GPA'
-description: 'Tính điểm GPA và dự đoán xếp loại bằng tốt nghiệp'
-currentGpa: 'GPA Hiện Tại'
-targetGpa: 'GPA Mục Tiêu'
-addCourse: 'Thêm Môn Học'
-courseName: 'Tên Môn Học'
-credits: 'Số Tín Chỉ'
-grade: 'Điểm'
-calculate: 'Tính Toán'
-results: 'Kết Quả'
-predictedGpa: 'GPA Dự Đoán'
-degreeClassification: 'Xếp Loại Bằng'
-excellent: 'Xuất Sắc'
-good: 'Giỏi'
-average: 'Khá'
-belowAverage: 'Trung Bình'
-remove: 'Xóa'
-totalCredits: 'Tổng Tín Chỉ'
-weightedGpa: 'GPA Trọng Số'
+title: "Công cụ tính GPA thông minh"
+subtitle: "Tính toán GPA & Dự đoán kết quả"
+description: "Dự đoán kết quả học tập, tính toán GPA chi tiết hoặc hỏi AI để có lời khuyên thông minh về việc học"
+
+tabs:
+  target: "Tính toán mục tiêu"
+  gpa: "Tính toán GPA"
+  pe: "GPA thể dục"
+  pass: "Tính điểm qua môn"
+  ai: "Hỏi AI"
+
+target:
+  title: "Tính toán mục tiêu"
+  description: "Tính toán GPA tối thiểu cần đạt để đạt được mục tiêu"
+  form:
+    completedCredits:
+      label: "Số tín đã học"
+      placeholder: "Nhập số tín đã học"
+      unit: "tín chỉ"
+    currentGpa:
+      label: "GPA hiện tại"
+      placeholder: "Nhập GPA hiện tại"
+      unit: "điểm"
+    targetGpa:
+      label: "GPA mục tiêu"
+      placeholder: "Nhập GPA mục tiêu"
+      unit: "điểm"
+    remainingCredits:
+      label: "Số tín còn lại"
+      placeholder: "Nhập số tín còn lại"
+      unit: "tín chỉ"
+  button:
+    calculate: "Tính toán mục tiêu có thể đạt được"
+    reset: "Đặt lại"
+  result:
+    title: "Kết quả"
+    maxGpaIfAllA: "GPA tối đa nếu full A:"
+    isFeasible: "Khả thi với full A:"
+    yes: "Có"
+    no: "Không"
+  ready:
+    title: "Sẵn sàng tính toán"
+    description: "Nhập thông tin hoặc đặt câu hỏi để xem kết quả dự đoán"
+  classification:
+    title: "Xếp loại tốt nghiệp Duy Tân"
+    excellent: "Xuất sắc"
+    good: "Giỏi"
+    fair: "Khá"
+    average: "Trung bình"

@@ -2,7 +2,7 @@
 export default defineNuxtConfig({
   compatibilityDate: '2025-07-15',
   devtools: { enabled: true },
-  modules: ['@nuxtjs/tailwindcss', 'shadcn-nuxt', '@nuxtjs/i18n'],
+  modules: ['@nuxtjs/tailwindcss', 'shadcn-nuxt', '@nuxtjs/i18n', '@vee-validate/nuxt', '@pinia/nuxt'],
   shadcn: {
     prefix: '',
     componentDir: './app/components/ui',
@@ -46,5 +46,19 @@ export default defineNuxtConfig({
       },
     ],
     defaultLocale: 'en',
+  },
+  veeValidate: {
+    autoImports: true,
+    componentNames: {
+      Form: 'VeeForm',
+      Field: 'VeeField',
+      FieldArray: 'VeeFieldArray',
+      ErrorMessage: 'VeeErrorMessage',
+    },
+  },
+  runtimeConfig: {
+    public: {
+      backendUrl: process.env.NUXT_PUBLIC_BACKEND_URL || 'http://localhost:4000',
+    },
   },
 })
