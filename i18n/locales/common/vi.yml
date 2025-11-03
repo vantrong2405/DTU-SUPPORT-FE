@@ -14,6 +14,10 @@ common:
       subtitle: "Đăng nhập vào tài khoản của bạn để tiếp tục"
       buttons:
         google: "Đăng nhập với Google"
+    errors:
+      unauthorized: "Bạn cần đăng nhập để tiếp tục"
+      failed: "Xác thực thất bại. Vui lòng thử lại."
+      occurred: "Đã xảy ra lỗi trong quá trình xác thực"
   ui:
     language:
       label: "Ngôn ngữ"

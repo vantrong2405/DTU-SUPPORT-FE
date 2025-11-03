@@ -14,6 +14,10 @@ common:
       subtitle: "アカウントにサインインして続行"
       buttons:
         google: "Googleでログイン"
+    errors:
+      unauthorized: "続行するにはログインする必要があります"
+      failed: "認証に失敗しました。もう一度お試しください。"
+      occurred: "認証中にエラーが発生しました"
   ui:
     language:
       label: "言語"

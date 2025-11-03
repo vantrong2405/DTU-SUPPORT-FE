@@ -15,6 +15,7 @@
   "dependencies": {
     "@nuxtjs/i18n": "^10.1.0",
     "@nuxtjs/tailwindcss": "7.0.0-beta.0",
+    "@pinia/nuxt": "^0.11.2",
     "@tailwindcss/vite": "^4.1.14",
     "@vee-validate/nuxt": "^4.15.1",
     "@vee-validate/zod": "^4.15.1",
@@ -24,6 +25,7 @@
     "clsx": "^2.1.1",
     "lucide-vue-next": "^0.544.0",
     "nuxt": "^4.1.2",
+    "pinia": "^3.0.3",
     "radix-vue": "^1.9.17",
     "reka-ui": "^2.5.1",
     "tailwind-merge": "^3.3.1",
@@ -38,6 +40,8 @@
   "devDependencies": {
     "@iconify-json/radix-icons": "^1.2.5",
     "@iconify/vue": "^5.0.0",
+    "@types/node": "^24.10.0",
+    "nuxi": "^3.29.3",
     "prettier": "^3.6.2",
     "shadcn-nuxt": "^2.2.0",
     "typescript": "^5.9.3"

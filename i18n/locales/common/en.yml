@@ -14,6 +14,10 @@ common:
       subtitle: "Sign in to your account to continue"
       buttons:
         google: "Sign in with Google"
+    errors:
+      unauthorized: "You need to log in to continue"
+      failed: "Authentication failed. Please try again."
+      occurred: "An error occurred during authentication"
   ui:
     language:
       label: "Language"
