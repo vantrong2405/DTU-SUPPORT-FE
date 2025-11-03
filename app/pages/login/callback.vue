@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import { useAuth } from '@/composables/common/useAuth'
+import { useAuth } from '@/composables/auth'
 
 const { getCurrentUser } = useAuth()
 const route = useRoute()

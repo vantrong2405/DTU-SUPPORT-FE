@@ -3,7 +3,7 @@ import { useI18n } from 'vue-i18n'
 import { Button } from '@/components/ui/button'
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card'
 import * as Icon from '@/components/ui/icon'
-import { useAuth } from '@/composables/common/useAuth'
+import { useAuth } from '@/composables/auth'
 
 const { t } = useI18n()
 const { redirectToGoogleLogin, isRedirecting } = useAuth()

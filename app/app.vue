@@ -16,7 +16,7 @@ import Header from '@/components/common/Header.vue'
 import Footer from '@/components/common/Footer.vue'
 import LoadingScreen from '@/components/common/LoadingScreen.vue'
 import { useLoadingLogic } from '@/composables/common/useLoadingLogic'
-import { useAuth } from '@/composables/common/useAuth'
+import { useAuth } from '@/composables/auth'
 import { useAuthStore } from '@/stores/auth'
 import { Analytics } from '@vercel/analytics/nuxt';
 

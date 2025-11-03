@@ -1,14 +1,22 @@
 import { useAuthStore } from '@/stores/auth'
-import { createApiClient } from '@/lib/api'
+import { useApiFetch } from '@/lib/api'
 import { USER_API } from '@/constants/api/user.api'
+import type { User } from '@/types/common'
 
 export default defineNuxtRouteMiddleware(async (to) => {
   const auth = useAuthStore()
   if (!auth.user) {
     try {
-      const api = createApiClient()
-      const res = await api.get<import('@/types/common').User>(USER_API.me())
-      auth.setUser(res.data as import('@/types/common').User)
+      const { data, execute } = useApiFetch<User>(USER_API.me(), {
+        method: 'GET',
+        immediate: false,
+      })
+      await execute()
+      if (data.value?.data) {
+        auth.setUser(data.value.data)
+      } else {
+        auth.setUser(null)
+      }
     } catch {
       auth.setUser(null)
     }

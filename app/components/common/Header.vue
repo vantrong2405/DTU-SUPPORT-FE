@@ -8,9 +8,11 @@ import { useNavigation } from '@/composables/common/useNavigation'
 import { NAV_ITEMS } from '@/constants/features/home'
 import logoDtu from '@/assets/images/logo-dtu.png'
 import { useAuthStore } from '@/stores/auth'
+import { useAuth } from '@/composables/auth'
 
 const { t } = useI18n()
 const { navigateTo } = useNavigation()
+const { logout, isLoggingOut } = useAuth()
 
 const isMenuOpen = ref(false)
 const route = useRoute()
@@ -116,7 +118,7 @@ const navItems = computed(() => {
           <NuxtLink v-if="showLogin" :to="navigateTo('/login')">
             <Button size="sm" class="text-xs xl:text-sm whitespace-nowrap px-3 xl:px-4">{{ t('common.auth.login.button') }}</Button>
           </NuxtLink>
-          <Button v-if="showLogout" size="sm" variant="outline" class="text-xs xl:text-sm whitespace-nowrap px-3 xl:px-4">
+          <Button v-if="showLogout" size="sm" variant="outline" class="text-xs xl:text-sm whitespace-nowrap px-3 xl:px-4" :disabled="isLoggingOut" @click="logout('/')">
             {{ t('common.auth.logout.button') }}
           </Button>
         </div>
@@ -149,7 +151,7 @@ const navItems = computed(() => {
                   {{ t('common.auth.login.button') }}
                 </Button>
               </NuxtLink>
-              <Button v-if="showLogout" class="w-full justify-center text-sm sm:text-base" variant="outline" @click="closeMenu">
+              <Button v-if="showLogout" class="w-full justify-center text-sm sm:text-base" variant="destructive" :disabled="isLoggingOut" @click="() => { logout('/'); closeMenu() }">
                 {{ t('common.auth.logout.button') }}
               </Button>
             </div>
