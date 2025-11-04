@@ -76,13 +76,3 @@ target:
         title: "Analysis:"
         pass: "Pass! You completed the PE program with GPA {gpa}."
         fail: "Fail. Your average PE GPA is {gpa}. Keep trying."
-  chat:
-    placeholder: "Type your question..."
-    send: "Send"
-    sending: "Sending..."
-    empty:
-      title: "Hello! 👋"
-      description: "I can help you calculate grades, predict GPA, or answer questions about academic regulations. Let's start a conversation!"
-    error:
-      title: "An error occurred"
-      message: "Sorry, an error occurred. Please try again."

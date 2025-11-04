@@ -1,13 +1,14 @@
 import { ref } from 'vue'
+import { useI18n } from 'vue-i18n'
 import type { Message, ToolResult, ChatMessage } from '@/types/chat'
-import { useGpaChatApi } from './useGpaChatApi'
+import { useChatApi } from './useChatApi'
 import { CHAT_SYSTEM_MESSAGE } from '@/constants/gpa/chat'
 
-export const useGpaChatConversation = () => {
-  const { sendMessage } = useGpaChatApi()
+export const useChatConversation = () => {
+  const { sendChatMessage, isSending, apiError } = useChatApi()
   const messages = ref<Message[]>([])
-  const isLoading = ref(false)
-  const error = ref<string | null>(null)
+  const isLoading = isSending
+  const { t } = useI18n()
 
   const addMessage = (
     role: 'user' | 'assistant',
@@ -23,12 +24,10 @@ export const useGpaChatConversation = () => {
     })
   }
 
-  const sendUserMessage = async (content: string) => {
+  const sendUserMessage = async (content: string, tone?: string) => {
     if (!content.trim() || isLoading.value) return
 
     addMessage('user', content)
-    isLoading.value = true
-    error.value = null
 
     try {
       const chatMessages: ChatMessage[] = [
@@ -42,30 +41,19 @@ export const useGpaChatConversation = () => {
         })),
       ]
 
-      const response = await sendMessage(chatMessages)
+      const response = await sendChatMessage(chatMessages, tone)
 
       addMessage('assistant', response.content, response.toolResult)
     } catch (err) {
-      error.value = err instanceof Error ? err.message : 'An error occurred'
-      addMessage(
-        'assistant',
-        'Xin lỗi, đã có lỗi xảy ra. Vui lòng thử lại.'
-      )
+      addMessage('assistant', t('chat.error.message'))
     } finally {
-      isLoading.value = false
     }
-  }
-
-  const clearConversation = () => {
-    messages.value = []
-    error.value = null
   }
 
   return {
     messages,
     isLoading,
-    error,
+    error: apiError,
     sendUserMessage,
-    clearConversation,
   }
 }

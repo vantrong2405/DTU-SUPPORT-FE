@@ -4,25 +4,38 @@ import { useI18n } from 'vue-i18n'
 import { Button } from '@/components/ui/button'
 import { Input } from '@/components/ui/input'
 import * as Icon from '@/components/ui/icon'
-import { useGpaChatConversation } from '@/composables/gpa/useGpaChatConversation'
+import { useChatConversation } from '@/composables/chat/useChatConversation'
+import { computed } from 'vue'
+import { DropdownMenu, DropdownMenuTrigger, DropdownMenuContent, DropdownMenuItem } from '@/components/ui/dropdown-menu'
 import { cn } from '@/lib/utils'
 import type { ToolResult, UiComponent } from '@/types/chat'
-import GpaResultCard from './GpaResultCard.vue'
-import PeResultCard from './PeResultCard.vue'
+import GpaResultCard from '@/components/gpa/GpaResultCard.vue'
+import PeResultCard from '@/components/gpa/PeResultCard.vue'
 
 const { t } = useI18n()
-const SCOPE = 'tools.gpa'
+const SCOPE = 'chat'
 
-const { messages, isLoading, error, sendUserMessage, clearConversation } = useGpaChatConversation()
+const { messages, isLoading, error, sendUserMessage } = useChatConversation()
 const inputValue = ref('')
 const messagesContainer = ref<HTMLElement | null>(null)
+const selectedTone = ref<string | undefined>(undefined)
+const tones = [
+  { value: undefined, labelKey: 'default' },
+  { value: 'Anime/Wibu', labelKey: 'anime' },
+  { value: 'Banter', labelKey: 'banter' },
+  { value: 'Formal', labelKey: 'formal' },
+  { value: 'Friendly', labelKey: 'friendly' },
+]
+const currentToneLabel = computed(() => {
+  const found = tones.find(tone => tone.value === selectedTone.value)
+  return found ? t(`chat.tones.${found.labelKey}`) : t('chat.tones.button')
+})
 
 const handleSend = async () => {
   if (!inputValue.value.trim() || isLoading.value) return
-
   const content = inputValue.value.trim()
   inputValue.value = ''
-  await sendUserMessage(content)
+  await sendUserMessage(content, selectedTone.value)
 }
 
 const handleKeyDown = (event: KeyboardEvent) => {
@@ -50,10 +63,17 @@ const getToolComponent = (uiComponent: UiComponent) => {
   }
   return componentMap[uiComponent]
 }
+
+
+const emit = defineEmits<{ close: [] }>()
+const handleClose = () => {
+  emit('close')
+}
+
 </script>
 
 <template>
-  <div class="flex flex-col h-[600px] sm:h-[700px] rounded-xl sm:rounded-2xl border border-border/30 bg-card text-card-foreground shadow-lg backdrop-blur-sm overflow-hidden bg-gradient-to-b from-card to-card/95">
+  <div class="flex flex-col h-full rounded-xl sm:rounded-2xl border border-border/30 bg-card text-card-foreground shadow-lg backdrop-blur-sm overflow-hidden bg-gradient-to-b from-card to-card/95">
     <div class="flex items-center justify-between px-4 sm:px-6 py-3 border-b border-border/30 bg-card/60 backdrop-blur-sm">
       <div class="inline-flex items-center gap-2">
         <div class="w-8 h-8 rounded-full bg-accent/15 ring-2 ring-accent/20 flex items-center justify-center">
@@ -61,9 +81,10 @@ const getToolComponent = (uiComponent: UiComponent) => {
         </div>
         <span class="text-sm font-semibold text-foreground/90">Assistant</span>
       </div>
-      <Button variant="secondary" size="sm" class="h-8 px-2.5" @click="clearConversation">
-        <Icon.Trash class="w-4 h-4" />
+      <Button variant="secondary" size="sm" class="h-8 px-2.5" @click="handleClose">
+        <Icon.X class="w-4 h-4" />
       </Button>
+
     </div>
 
     <div class="flex-1 overflow-y-auto p-3 sm:p-5 space-y-4 scrollbar-thin scrollbar-thumb-border scrollbar-track-transparent" ref="messagesContainer">
@@ -75,10 +96,10 @@ const getToolComponent = (uiComponent: UiComponent) => {
           </div>
         </div>
         <h3 class="text-xl sm:text-2xl font-bold text-foreground mb-3 bg-gradient-to-r from-foreground to-foreground/70 bg-clip-text">
-          {{ t(`${SCOPE}.chat.empty.title`) }}
+          {{ t(`${SCOPE}.empty.title`) }}
         </h3>
         <p class="text-sm sm:text-base text-muted-foreground max-w-md leading-relaxed">
-          {{ t(`${SCOPE}.chat.empty.description`) }}
+          {{ t(`${SCOPE}.empty.description`) }}
         </p>
       </div>
 
@@ -142,27 +163,35 @@ const getToolComponent = (uiComponent: UiComponent) => {
         </div>
       </Transition>
 
-      <Transition name="fade" mode="out-in">
-        <div v-if="error" class="flex gap-3 max-w-[75%] mr-auto items-start">
-          <div class="flex-shrink-0 w-9 h-9 rounded-full bg-destructive/10 flex items-center justify-center ring-2 ring-destructive/20 shadow-sm">
-            <Icon.AlertCircle class="w-5 h-5 text-destructive" />
-          </div>
-          <div class="bg-destructive/10 text-destructive rounded-2xl rounded-tl-sm px-4 py-3 border border-destructive/30 shadow-sm backdrop-blur-sm">
-            <p class="text-sm font-medium">{{ t(`${SCOPE}.chat.error.message`) }}</p>
-          </div>
-        </div>
-      </Transition>
     </div>
 
     <div class="border-t border-border/30 p-3 sm:p-4 bg-gradient-to-t from-muted/50 to-transparent backdrop-blur-sm">
       <div class="flex gap-2 sm:gap-3 items-center">
         <Input
           v-model="inputValue"
-          :placeholder="t(`${SCOPE}.chat.placeholder`)"
+          :placeholder="t(`${SCOPE}.placeholder`)"
           :disabled="isLoading"
           @keydown="handleKeyDown"
           class="flex-1 border-border/30 focus-visible:ring-primary/20 shadow-sm"
         />
+        <DropdownMenu>
+          <DropdownMenuTrigger as-child>
+            <Button variant="secondary" size="lg" class="shadow-sm">
+              <Icon.Palette class="w-4 h-4" />
+              <span class="hidden sm:inline ml-2">{{ currentToneLabel }}</span>
+            </Button>
+          </DropdownMenuTrigger>
+          <DropdownMenuContent align="end" class="min-w-[10rem] bg-popover text-popover-foreground border border-border/30 shadow-lg rounded-md p-1 z-[60]">
+            <DropdownMenuItem
+              v-for="tone in tones"
+              :key="String(tone.value)"
+              @click="selectedTone = tone.value"
+              class="rounded-sm px-2 py-1.5 text-sm hover:bg-accent/10 hover:text-foreground focus:bg-accent/20 focus:text-foreground cursor-pointer"
+            >
+              {{ t(`chat.tones.${tone.labelKey}`) }}
+            </DropdownMenuItem>
+          </DropdownMenuContent>
+        </DropdownMenu>
         <Button
           @click="handleSend"
           :disabled="isLoading || !inputValue.trim()"
@@ -171,7 +200,7 @@ const getToolComponent = (uiComponent: UiComponent) => {
         >
           <Icon.ChevronRight class="w-4 h-4" />
           <span class="hidden sm:inline ml-2">
-            {{ isLoading ? t(`${SCOPE}.chat.sending`) : t(`${SCOPE}.chat.send`) }}
+            {{ isLoading ? t(`${SCOPE}.sending`) : t(`${SCOPE}.send`) }}
           </span>
         </Button>
       </div>
@@ -184,81 +213,24 @@ const getToolComponent = (uiComponent: UiComponent) => {
 .message-leave-active {
   transition: all 0.3s ease;
 }
-
-.message-enter-from {
-  opacity: 0;
-  transform: translateY(10px);
-}
-
-.message-enter-to {
-  opacity: 1;
-  transform: translateY(0);
-}
-
-.message-leave-from {
-  opacity: 1;
-  transform: translateY(0);
-}
-
-.message-leave-to {
-  opacity: 0;
-  transform: translateY(-10px);
-}
+.message-enter-from { opacity: 0; transform: translateY(10px); }
+.message-enter-to { opacity: 1; transform: translateY(0); }
+.message-leave-from { opacity: 1; transform: translateY(0); }
+.message-leave-to { opacity: 0; transform: translateY(-10px); }
 
 .fade-enter-active,
-.fade-leave-active {
-  transition: opacity 0.2s ease;
-}
-
+.fade-leave-active { transition: opacity 0.2s ease; }
 .fade-enter-from,
-.fade-leave-to {
-  opacity: 0;
-}
+.fade-leave-to { opacity: 0; }
 
-@keyframes fade-in {
-  from {
-    opacity: 0;
-    transform: translateY(10px);
-  }
-  to {
-    opacity: 1;
-    transform: translateY(0);
-  }
-}
+@keyframes fade-in { from { opacity: 0; transform: translateY(10px); } to { opacity: 1; transform: translateY(0); } }
+.animate-fade-in { animation: fade-in 0.5s ease-out; }
 
-.animate-fade-in {
-  animation: fade-in 0.5s ease-out;
-}
+@keyframes slide-up { from { opacity: 0; transform: translateY(15px); } to { opacity: 1; transform: translateY(0); } }
+.animate-slide-up { animation: slide-up 0.4s ease-out; }
 
-@keyframes slide-up {
-  from {
-    opacity: 0;
-    transform: translateY(15px);
-  }
-  to {
-    opacity: 1;
-    transform: translateY(0);
-  }
-}
-
-.animate-slide-up {
-  animation: slide-up 0.4s ease-out;
-}
-
-.scrollbar-thin::-webkit-scrollbar {
-  width: 6px;
-}
-
-.scrollbar-thin::-webkit-scrollbar-track {
-  background: transparent;
-}
-
-.scrollbar-thin::-webkit-scrollbar-thumb {
-  background-color: hsl(var(--border));
-  border-radius: 3px;
-}
-
-.scrollbar-thin::-webkit-scrollbar-thumb:hover {
-  background-color: hsl(var(--border) / 0.8);
-}
+.scrollbar-thin::-webkit-scrollbar { width: 6px; }
+.scrollbar-thin::-webkit-scrollbar-track { background: transparent; }
+.scrollbar-thin::-webkit-scrollbar-thumb { background-color: hsl(var(--border)); border-radius: 3px; }
+.scrollbar-thin::-webkit-scrollbar-thumb:hover { background-color: hsl(var(--border) / 0.8); }
 </style>

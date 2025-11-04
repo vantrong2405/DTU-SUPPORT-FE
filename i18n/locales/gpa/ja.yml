@@ -76,13 +76,3 @@ target:
         title: "分析:"
         pass: "合格！ 体育プログラムを GPA {gpa} で修了しました。"
         fail: "不合格。 平均体育 GPA は {gpa} です。 もう少し頑張りましょう。"
-  chat:
-    placeholder: "質問を入力..."
-    send: "送信"
-    sending: "送信中..."
-    empty:
-      title: "こんにちは！👋"
-      description: "成績の計算、GPAの予測、または学則に関する質問にお答えします。会話を始めましょう！"
-    error:
-      title: "エラーが発生しました"
-      message: "申し訳ございませんが、エラーが発生しました。もう一度お試しください。"

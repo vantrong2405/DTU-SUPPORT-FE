@@ -1,7 +1,7 @@
 <script setup lang="ts">
 import { ref, onMounted, onBeforeUnmount } from 'vue'
 import * as Icon from '@/components/ui/icon'
-import ChatBox from '@/components/gpa/ChatBox.vue'
+import ChatBox from '@/components/chat/index.vue'
 
 const isOpen = ref(false)
 
@@ -29,11 +29,11 @@ onBeforeUnmount(() => {
   <div class="fixed right-4 z-50 sm:right-6" :style="{ bottom: 'calc(env(safe-area-inset-bottom, 0px) + 16px)' }">
     <Transition name="dock">
       <div
-        v-if="isOpen"
-        class="mb-3 w-[92vw] max-w-sm sm:max-w-md md:max-w-lg rounded-xl border border-border/30 bg-card text-card-foreground shadow-xl overflow-hidden"
+        v-show="isOpen"
+        class="mb-3 w-[92vw] max-w-sm sm:max-w-md md:max-w-md rounded-2xl border border-border/30 bg-card text-card-foreground shadow-2xl overflow-hidden ring-1 ring-border/30"
       >
-        <div class="h-[65vh] sm:h-[70vh] max-h-[520px] sm:max-h-[640px] w-full">
-          <ChatBox />
+        <div class="h-[55vh] sm:h-[60vh] min-h-[420px] max-h-[560px] w-full">
+          <ChatBox @close="isOpen = false" />
         </div>
       </div>
     </Transition>
@@ -43,9 +43,9 @@ onBeforeUnmount(() => {
       aria-label="Toggle AI Chat"
       class="inline-flex items-center justify-center h-12 w-12 rounded-full bg-primary text-primary-foreground shadow-lg hover:shadow-xl transition-shadow focus:outline-none focus:ring-2 focus:ring-primary/40"
       @click="handleToggle"
+      v-show="!isOpen"
     >
-      <Icon.Bot v-if="!isOpen" class="w-6 h-6" />
-      <Icon.X v-else class="w-6 h-6" />
+      <Icon.Bot class="w-6 h-6" />
     </button>
   </div>
   </Teleport>
@@ -53,14 +53,7 @@ onBeforeUnmount(() => {
 
 <style scoped>
 .dock-enter-active,
-.dock-leave-active {
-  transition: all 0.2s ease;
-}
+.dock-leave-active { transition: all 0.2s ease; }
 .dock-enter-from,
-.dock-leave-to {
-  opacity: 0;
-  transform: translateY(8px) scale(0.98);
-}
+.dock-leave-to { opacity: 0; transform: translateY(8px) scale(0.98); }
 </style>
-
-
