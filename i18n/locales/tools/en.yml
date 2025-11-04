@@ -72,6 +72,94 @@ tools:
     gpa:
       title: "Calculate GPA"
       description: "Calculate current GPA or cumulative GPA based on credits completed/currently enrolled. This feature will be available soon."
+    simulation:
+      inputTitle: "Detailed GPA Calculation"
+      inputSubtitle: "Simulate grade distribution to see final GPA after entire course"
+      help: "Usage guide"
+      fields:
+        completedCredits: "Credits Completed"
+        currentGpa: "Current GPA"
+        remainingCredits: "Remaining Credits"
+      placeholders:
+        completedCredits: "Enter completed credits"
+        currentGpa: "Enter current GPA"
+        remainingCredits: "Enter remaining credits"
+      distribution:
+        title: "Credit Distribution"
+        credits: "credits"
+        creditsLabel: "Credits"
+        creditsPlaceholder: "Enter credits"
+        gradeLabel: "Expected Grade"
+        addButton: "Add Distribution"
+        removeButton: "Remove"
+        successMessage: "Correctly distributed {credits} credits. Ready to calculate!"
+        empty: "No grade distribution yet. Click 'Add Distribution' to start."
+      grades:
+        "A+":
+          label: "A+ ({point})"
+          category: "Excellent"
+        "A":
+          label: "A ({point})"
+          category: "Excellent"
+        "A-":
+          label: "A− ({point})"
+          category: "Good"
+        "B+":
+          label: "B+ ({point})"
+          category: "Good"
+        "B":
+          label: "B ({point})"
+          category: "Good"
+        "B-":
+          label: "B− ({point})"
+          category: "Average"
+        "C+":
+          label: "C+ ({point})"
+          category: "Average"
+        "C":
+          label: "C ({point})"
+          category: "Average"
+        "C-":
+          label: "C− ({point})"
+          category: "Below Average"
+        "D":
+          label: "D ({point})"
+          category: "Pass"
+      buttons:
+        calculate: "Calculate Detailed GPA"
+        calculating: "Calculating..."
+        reset: "Reset"
+      results:
+        title: "Detailed GPA Results"
+        subtitle: "Expected Final GPA"
+        scale: "Scale 4.0"
+        summary: "You assumed to achieve {summary} → Final GPA {gpa} → Classification {rank}."
+        empty:
+          title: "No Results Yet"
+          description: "Enter information and calculate to see results"
+        warning:
+          title: "Weak Result - Need Improvement"
+          message: "Your final GPA is below 2.0. Please improve your grades to meet graduation requirements."
+        boxes:
+          currentGpa: "Current GPA"
+          finalGpa: "Final GPA"
+          afterCompletion: "After completion"
+          additionalCredits: "Additional Credits"
+          totalCredits: "Total Credits"
+        analysis:
+          title: "Analysis:"
+      validation:
+        completedCredits:
+          invalid: "Completed credits is invalid"
+        currentGpa:
+          invalid: "Current GPA is invalid"
+          min: "Current GPA must be >= 0"
+          max: "Current GPA must be <= 4"
+        remainingCredits:
+          invalid: "Remaining credits is invalid"
+          min: "Remaining credits must be >= 1"
+        creditDistributions:
+          min: "At least 1 grade distribution is required"
     pe:
       title: "PE GPA"
       description: "Calculate PE GPA according to DTU grading scale."
@@ -176,6 +264,7 @@ tools:
           fair: "Fair"
           average: "Average"
           averageWeak: "Below Average"
+          conditional: "Pass"
           fail: "Fail"
           poor: "Poor"
         status:
@@ -187,9 +276,6 @@ tools:
           point1: "Academic evaluation"
           point2: "Graduation evaluation"
           point3: "Student ranking"
-          title2: "Grade D (1.0) is considered conditional pass"
-          point4: "If >5% of total credits have grade D, improvement is required"
-          point5: "Credits are still accumulated but affect GPA"
           title3: "Grade F (0.0)"
           point6: "Credits are not accumulated"
           point7: "Course must be retaken"

@@ -3,7 +3,8 @@ import { useI18n } from 'vue-i18n'
 import { Tabs, TabsList, TabsTrigger, TabsContent } from '@/components/ui/tabs'
 import * as Icon from '@/components/ui/icon'
 import TargetCalculator from '@/components/gpa/TargetCalculator.vue'
-import GraduationInfo from '@/components/gpa/GraduationInfo.vue'
+import GpaCalculator from '@/components/gpa/GpaCalculator.vue'
+import GraduationInfo from '@/components/gpa/common/GraduationInfo.vue'
 import PeCalculator from '@/components/gpa/PeCalculator.vue'
 
 const { t } = useI18n()
@@ -64,16 +65,7 @@ const DEFAULT_TAB = 'target'
             </TabsContent>
 
             <TabsContent value="gpa" class="mt-6 sm:mt-8">
-              <div class="rounded-xl sm:rounded-2xl border border-border/20 bg-card text-card-foreground p-6 sm:p-7 md:p-8 shadow-md backdrop-blur-sm">
-                <div class="flex flex-col items-center justify-center text-center">
-                  <div class="relative mb-3 sm:mb-4">
-                    <div class="absolute inset-0 bg-primary/10 rounded-full blur-xl"></div>
-                    <Icon.Calculator class="w-10 h-10 sm:w-12 sm:h-12 text-primary/60 relative z-10" />
-                  </div>
-                  <h3 class="text-base sm:text-lg font-bold text-foreground mb-1.5 px-2">{{ t(`${SCOPE}.gpa.title`) }}</h3>
-                  <p class="text-xs sm:text-sm text-muted-foreground max-w-md px-4">{{ t(`${SCOPE}.gpa.description`) }}</p>
-                </div>
-              </div>
+              <GpaCalculator />
             </TabsContent>
 
             <TabsContent value="pe" class="mt-6 sm:mt-8">
