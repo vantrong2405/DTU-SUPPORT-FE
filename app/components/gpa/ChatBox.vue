@@ -54,7 +54,19 @@ const getToolComponent = (uiComponent: UiComponent) => {
 
 <template>
   <div class="flex flex-col h-[600px] sm:h-[700px] rounded-xl sm:rounded-2xl border border-border/30 bg-card text-card-foreground shadow-lg backdrop-blur-sm overflow-hidden bg-gradient-to-b from-card to-card/95">
-    <div class="flex-1 overflow-y-auto p-4 sm:p-6 space-y-4 scrollbar-thin scrollbar-thumb-border scrollbar-track-transparent" ref="messagesContainer">
+    <div class="flex items-center justify-between px-4 sm:px-6 py-3 border-b border-border/30 bg-card/60 backdrop-blur-sm">
+      <div class="inline-flex items-center gap-2">
+        <div class="w-8 h-8 rounded-full bg-accent/15 ring-2 ring-accent/20 flex items-center justify-center">
+          <Icon.Bot class="w-4.5 h-4.5 text-accent" />
+        </div>
+        <span class="text-sm font-semibold text-foreground/90">Assistant</span>
+      </div>
+      <Button variant="secondary" size="sm" class="h-8 px-2.5" @click="clearConversation">
+        <Icon.Trash class="w-4 h-4" />
+      </Button>
+    </div>
+
+    <div class="flex-1 overflow-y-auto p-3 sm:p-5 space-y-4 scrollbar-thin scrollbar-thumb-border scrollbar-track-transparent" ref="messagesContainer">
       <div v-if="messages.length === 0" class="flex flex-col items-center justify-center h-full text-center px-4 animate-fade-in">
         <div class="relative mb-6">
           <div class="absolute inset-0 bg-accent/20 rounded-full blur-2xl animate-pulse"></div>
@@ -74,7 +86,7 @@ const getToolComponent = (uiComponent: UiComponent) => {
         <div v-for="msg in messages" :key="msg.id" class="flex flex-col gap-2 animate-slide-up">
           <div
             :class="cn(
-              'flex gap-3 max-w-[85%] sm:max-w-[75%] transition-all duration-300',
+              'flex gap-3 max-w-[82%] sm:max-w-[72%] md:max-w-[68%] transition-all duration-300',
               msg.role === 'user' ? 'ml-auto items-end' : 'mr-auto items-start'
             )"
           >
@@ -88,10 +100,10 @@ const getToolComponent = (uiComponent: UiComponent) => {
             <div class="flex flex-col gap-2">
               <div
                 :class="cn(
-                  'rounded-2xl px-4 py-3 text-sm sm:text-base shadow-sm transition-all duration-200',
+                  'rounded-2xl px-3.5 py-2.5 sm:px-4 sm:py-3 text-sm sm:text-base shadow-sm transition-all duration-200 leading-relaxed',
                   msg.role === 'user'
                     ? 'bg-gradient-to-br from-primary to-primary/90 text-primary-foreground rounded-tr-sm shadow-primary/20'
-                    : 'bg-muted/80 backdrop-blur-sm text-muted-foreground rounded-tl-sm border border-border/30'
+                    : 'bg-muted/70 backdrop-blur-sm text-foreground/90 rounded-tl-sm border border-border/30'
                 )"
               >
                 <p class="whitespace-pre-wrap break-words leading-relaxed">{{ msg.content }}</p>
@@ -116,7 +128,7 @@ const getToolComponent = (uiComponent: UiComponent) => {
       </TransitionGroup>
 
       <Transition name="fade" mode="out-in">
-        <div v-if="isLoading" class="flex gap-3 max-w-[75%] mr-auto items-start">
+        <div v-if="isLoading" class="flex gap-3 max-w-[72%] mr-auto items-start">
           <div class="flex-shrink-0 w-9 h-9 rounded-full bg-gradient-to-br from-accent/20 to-accent/10 flex items-center justify-center ring-2 ring-accent/20 shadow-sm animate-pulse">
             <Icon.Bot class="w-5 h-5 text-accent" />
           </div>
@@ -142,8 +154,8 @@ const getToolComponent = (uiComponent: UiComponent) => {
       </Transition>
     </div>
 
-    <div class="border-t border-border/30 p-4 sm:p-6 bg-gradient-to-t from-muted/50 to-transparent backdrop-blur-sm">
-      <div class="flex gap-2 sm:gap-3">
+    <div class="border-t border-border/30 p-3 sm:p-4 bg-gradient-to-t from-muted/50 to-transparent backdrop-blur-sm">
+      <div class="flex gap-2 sm:gap-3 items-center">
         <Input
           v-model="inputValue"
           :placeholder="t(`${SCOPE}.chat.placeholder`)"
