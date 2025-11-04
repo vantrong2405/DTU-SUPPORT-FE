@@ -6,7 +6,6 @@ import TargetCalculator from '@/components/gpa/TargetCalculator.vue'
 import GpaCalculator from '@/components/gpa/GpaCalculator.vue'
 import GraduationInfo from '@/components/gpa/common/GraduationInfo.vue'
 import PeCalculator from '@/components/gpa/PeCalculator.vue'
-import ChatBox from '@/components/gpa/ChatBox.vue'
 
 const { t } = useI18n()
 const SCOPE = 'tools.gpa'
@@ -53,11 +52,6 @@ const DEFAULT_TAB = 'target'
               <span class="hidden sm:inline">{{ t(`${SCOPE}.tabs.pass`) }}</span>
               <span class="sm:hidden">{{ t(`${SCOPE}.tabs.passShort`) }}</span>
             </TabsTrigger>
-            <TabsTrigger value="ai" class="inline-flex items-center justify-center whitespace-nowrap rounded-md px-2.5 sm:px-3 py-1.5 sm:py-2 text-xs sm:text-sm font-medium transition-all duration-150 hover:text-foreground hover:bg-primary/5 focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-primary/40 focus-visible:ring-offset-1 data-[state=active]:bg-primary data-[state=active]:text-primary-foreground data-[state=active]:font-semibold data-[state=active]:shadow-md flex-shrink-0">
-              <Icon.Bot class="w-3.5 h-3.5 sm:w-4 sm:h-4 mr-1.5" />
-              <span class="hidden sm:inline">{{ t(`${SCOPE}.tabs.ai`) }}</span>
-              <span class="sm:hidden">{{ t(`${SCOPE}.tabs.aiShort`) }}</span>
-            </TabsTrigger>
           </TabsList>
 
           <div class="mt-6 sm:mt-8">
@@ -86,9 +80,6 @@ const DEFAULT_TAB = 'target'
               </div>
             </TabsContent>
 
-            <TabsContent value="ai" class="mt-6 sm:mt-8">
-              <ChatBox />
-            </TabsContent>
           </div>
         </Tabs>
 
