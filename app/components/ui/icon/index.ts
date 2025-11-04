@@ -29,4 +29,8 @@ export {
   BookOpen,
   LogIn,
   Lock,
+  BarChart3,
+  Plus,
+  Trash2,
+  AlertCircle,
 } from 'lucide-vue-next'

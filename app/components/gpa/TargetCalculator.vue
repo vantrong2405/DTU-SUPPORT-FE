@@ -2,7 +2,7 @@
 import { useI18n } from 'vue-i18n'
 import { Button } from '@/components/ui/button'
 import * as Icon from '@/components/ui/icon'
-import FieldControl from '@/components/gpa/FieldControl.vue'
+import FieldControl from '@/components/common/FieldControl.vue'
 import { useTargetCalculator } from '@/composables/gpa/useTargetCalculator'
 import { cn } from '@/lib/utils'
 

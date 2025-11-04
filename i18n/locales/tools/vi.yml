@@ -72,6 +72,94 @@ tools:
     gpa:
       title: "Tính toán GPA"
       description: "Tính GPA hiện tại hoặc GPA tích lũy theo số tín đã/đang học. Tính năng này sẽ sớm có sẵn."
+    simulation:
+      inputTitle: "Tính toán GPA chi tiết"
+      inputSubtitle: "Giả lập phân bố điểm để xem GPA cuối cùng sau toàn khóa học"
+      help: "Hướng dẫn sử dụng"
+      fields:
+        completedCredits: "Số tín chỉ đã học"
+        currentGpa: "GPA hiện tại"
+        remainingCredits: "Số tín chỉ còn lại"
+      placeholders:
+        completedCredits: "Nhập số tín chỉ đã học"
+        currentGpa: "Nhập GPA hiện tại"
+        remainingCredits: "Nhập số tín chỉ còn lại"
+      distribution:
+        title: "Phân bổ tín chỉ"
+        credits: "tín chỉ"
+        creditsLabel: "Tín chỉ"
+        creditsPlaceholder: "Nhập số tín chỉ"
+        gradeLabel: "Điểm dự kiến"
+        addButton: "Thêm phân bổ"
+        removeButton: "Xóa"
+        successMessage: "Đã phân bố đúng {credits} tín chỉ. Sẵn sàng tính toán!"
+        empty: "Chưa có phân bổ điểm nào. Nhấn 'Thêm phân bổ' để bắt đầu."
+      grades:
+        "A+":
+          label: "A+ ({point})"
+          category: "Giỏi"
+        "A":
+          label: "A ({point})"
+          category: "Giỏi"
+        "A-":
+          label: "A− ({point})"
+          category: "Khá"
+        "B+":
+          label: "B+ ({point})"
+          category: "Khá"
+        "B":
+          label: "B ({point})"
+          category: "Khá"
+        "B-":
+          label: "B− ({point})"
+          category: "Trung bình"
+        "C+":
+          label: "C+ ({point})"
+          category: "Trung bình"
+        "C":
+          label: "C ({point})"
+          category: "Trung bình"
+        "C-":
+          label: "C− ({point})"
+          category: "Trung bình yếu"
+        "D":
+          label: "D ({point})"
+          category: "Đạt"
+      buttons:
+        calculate: "Tính toán GPA chi tiết"
+        calculating: "Đang tính toán..."
+        reset: "Đặt lại"
+      results:
+        title: "Kết quả GPA chi tiết"
+        subtitle: "GPA toàn khóa dự kiến"
+        scale: "Thang điểm 4"
+        summary: "Bạn giả định đạt {summary} → GPA toàn khóa {gpa} → Xếp loại {rank}."
+        empty:
+          title: "Chưa có kết quả"
+          description: "Nhập thông tin và tính toán để xem kết quả"
+        warning:
+          title: "Kết quả yếu - cần cải thiện ngay"
+          message: "GPA cuối cùng của bạn dưới 2.0. Hãy cố gắng cải thiện điểm số để đạt yêu cầu tốt nghiệp."
+        boxes:
+          currentGpa: "GPA hiện tại"
+          finalGpa: "GPA cuối cùng"
+          afterCompletion: "Sau khi hoàn thành"
+          additionalCredits: "Tín chỉ học thêm"
+          totalCredits: "Tổng tín chỉ"
+        analysis:
+          title: "Phân tích:"
+      validation:
+        completedCredits:
+          invalid: "Số tín chỉ đã học không hợp lệ"
+        currentGpa:
+          invalid: "GPA hiện tại không hợp lệ"
+          min: "GPA hiện tại phải >= 0"
+          max: "GPA hiện tại phải <= 4"
+        remainingCredits:
+          invalid: "Số tín chỉ còn lại không hợp lệ"
+          min: "Số tín chỉ còn lại phải >= 1"
+        creditDistributions:
+          min: "Cần ít nhất 1 phân bổ điểm"
     pe:
       title: "GPA thể dục"
       description: "Công cụ tính GPA thể dục theo thang điểm DTU."
@@ -176,6 +264,7 @@ tools:
           fair: "Khá"
           average: "Trung bình"
           averageWeak: "Trung bình yếu"
+          conditional: "Đạt"
           fail: "Không đạt"
           poor: "Kém"
         status:
@@ -187,9 +276,6 @@ tools:
           point1: "Xét học vụ"
           point2: "Xét tốt nghiệp"
           point3: "Xếp hạng sinh viên"
-          title2: "Điểm D (1.0) được xem là đạt có điều kiện"
-          point4: "Nếu có >5% tổng tín chỉ đạt điểm D, cần học cải thiện"
-          point5: "Vẫn được tích lũy tín chỉ nhưng ảnh hưởng đến GPA"
           title3: "Điểm F (0.0)"
           point6: "Không được tích lũy tín chỉ"
           point7: "Bắt buộc phải học lại môn học đó"

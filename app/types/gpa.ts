@@ -5,3 +5,9 @@ export interface GraduationClassification {
   badgeColor: string
   iconName: string
 }
+
+export interface CreditDistribution {
+  id: string
+  credits: number
+  gradeValue: string
+}

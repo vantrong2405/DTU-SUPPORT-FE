@@ -3,7 +3,8 @@ import { useI18n } from 'vue-i18n'
 import { Tabs, TabsList, TabsTrigger, TabsContent } from '@/components/ui/tabs'
 import * as Icon from '@/components/ui/icon'
 import TargetCalculator from '@/components/gpa/TargetCalculator.vue'
-import GraduationInfo from '@/components/gpa/GraduationInfo.vue'
+import GpaCalculator from '@/components/gpa/GpaCalculator.vue'
+import GraduationInfo from '@/components/gpa/common/GraduationInfo.vue'
 import PeCalculator from '@/components/gpa/PeCalculator.vue'
 
 const { t } = useI18n()
@@ -51,11 +52,6 @@ const DEFAULT_TAB = 'target'
               <span class="hidden sm:inline">{{ t(`${SCOPE}.tabs.pass`) }}</span>
               <span class="sm:hidden">{{ t(`${SCOPE}.tabs.passShort`) }}</span>
             </TabsTrigger>
-            <TabsTrigger value="ai" class="inline-flex items-center justify-center whitespace-nowrap rounded-md px-2.5 sm:px-3 py-1.5 sm:py-2 text-xs sm:text-sm font-medium transition-all duration-150 hover:text-foreground hover:bg-primary/5 focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-primary/40 focus-visible:ring-offset-1 data-[state=active]:bg-primary data-[state=active]:text-primary-foreground data-[state=active]:font-semibold data-[state=active]:shadow-md flex-shrink-0">
-              <Icon.Bot class="w-3.5 h-3.5 sm:w-4 sm:h-4 mr-1.5" />
-              <span class="hidden sm:inline">{{ t(`${SCOPE}.tabs.ai`) }}</span>
-              <span class="sm:hidden">{{ t(`${SCOPE}.tabs.aiShort`) }}</span>
-            </TabsTrigger>
           </TabsList>
 
           <div class="mt-6 sm:mt-8">
@@ -64,16 +60,7 @@ const DEFAULT_TAB = 'target'
             </TabsContent>
 
             <TabsContent value="gpa" class="mt-6 sm:mt-8">
-              <div class="rounded-xl sm:rounded-2xl border border-border/20 bg-card text-card-foreground p-6 sm:p-7 md:p-8 shadow-md backdrop-blur-sm">
-                <div class="flex flex-col items-center justify-center text-center">
-                  <div class="relative mb-3 sm:mb-4">
-                    <div class="absolute inset-0 bg-primary/10 rounded-full blur-xl"></div>
-                    <Icon.Calculator class="w-10 h-10 sm:w-12 sm:h-12 text-primary/60 relative z-10" />
-                  </div>
-                  <h3 class="text-base sm:text-lg font-bold text-foreground mb-1.5 px-2">{{ t(`${SCOPE}.gpa.title`) }}</h3>
-                  <p class="text-xs sm:text-sm text-muted-foreground max-w-md px-4">{{ t(`${SCOPE}.gpa.description`) }}</p>
-                </div>
-              </div>
+              <GpaCalculator />
             </TabsContent>
 
             <TabsContent value="pe" class="mt-6 sm:mt-8">
@@ -93,18 +80,6 @@ const DEFAULT_TAB = 'target'
               </div>
             </TabsContent>
 
-            <TabsContent value="ai" class="mt-6 sm:mt-8">
-              <div class="rounded-xl sm:rounded-2xl border border-border/20 bg-card text-card-foreground p-6 sm:p-7 md:p-8 shadow-md backdrop-blur-sm">
-                <div class="flex flex-col items-center justify-center text-center">
-                  <div class="relative mb-3 sm:mb-4">
-                    <div class="absolute inset-0 bg-accent/10 rounded-full blur-xl"></div>
-                    <Icon.Bot class="w-10 h-10 sm:w-12 sm:h-12 text-accent/60 relative z-10" />
-                  </div>
-                  <h3 class="text-base sm:text-lg font-bold text-foreground mb-1.5 px-2">{{ t(`${SCOPE}.ai.title`) }}</h3>
-                  <p class="text-xs sm:text-sm text-muted-foreground max-w-md px-4">{{ t(`${SCOPE}.ai.description`) }}</p>
-                </div>
-              </div>
-            </TabsContent>
           </div>
         </Tabs>
 

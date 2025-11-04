@@ -72,6 +72,94 @@ tools:
     gpa:
       title: "GPA を計算"
       description: "現在の GPA または累積 GPA を取得済み/在籍中の単位に基づいて計算。この機能は近日公開予定です。"
+    simulation:
+      inputTitle: "詳細GPA計算"
+      inputSubtitle: "成績分布をシミュレートして、全コース終了後の最終GPAを確認"
+      help: "使用ガイド"
+      fields:
+        completedCredits: "修了単位数"
+        currentGpa: "現在のGPA"
+        remainingCredits: "残り単位数"
+      placeholders:
+        completedCredits: "修了単位数を入力"
+        currentGpa: "現在のGPAを入力"
+        remainingCredits: "残り単位数を入力"
+      distribution:
+        title: "単位数配分"
+        credits: "単位"
+        creditsLabel: "単位数"
+        creditsPlaceholder: "単位数を入力"
+        gradeLabel: "予想成績"
+        addButton: "配分を追加"
+        removeButton: "削除"
+        successMessage: "{credits}単位を正しく配分しました。計算準備完了！"
+        empty: "成績配分がまだありません。「配分を追加」をクリックして開始してください。"
+      grades:
+        "A+":
+          label: "A+ ({point})"
+          category: "優秀"
+        "A":
+          label: "A ({point})"
+          category: "優秀"
+        "A-":
+          label: "A− ({point})"
+          category: "良好"
+        "B+":
+          label: "B+ ({point})"
+          category: "良好"
+        "B":
+          label: "B ({point})"
+          category: "良好"
+        "B-":
+          label: "B− ({point})"
+          category: "普通"
+        "C+":
+          label: "C+ ({point})"
+          category: "普通"
+        "C":
+          label: "C ({point})"
+          category: "普通"
+        "C-":
+          label: "C− ({point})"
+          category: "やや劣る"
+        "D":
+          label: "D ({point})"
+          category: "合格"
+      buttons:
+        calculate: "詳細GPA計算"
+        calculating: "計算中..."
+        reset: "リセット"
+      results:
+        title: "詳細GPA結果"
+        subtitle: "予想最終GPA"
+        scale: "4.0スケール"
+        summary: "{summary}を達成すると仮定 → 最終GPA {gpa} → 分類 {rank}。"
+        empty:
+          title: "結果がまだありません"
+          description: "情報を入力して計算すると結果が表示されます"
+        warning:
+          title: "結果が弱い - 改善が必要"
+          message: "最終GPAが2.0未満です。卒業要件を満たすため、成績を改善してください。"
+        boxes:
+          currentGpa: "現在のGPA"
+          finalGpa: "最終GPA"
+          afterCompletion: "完了後"
+          additionalCredits: "追加単位数"
+          totalCredits: "総単位数"
+        analysis:
+          title: "分析:"
+      validation:
+        completedCredits:
+          invalid: "修了単位数が無効です"
+        currentGpa:
+          invalid: "現在のGPAが無効です"
+          min: "現在のGPAは0以上である必要があります"
+          max: "現在のGPAは4以下である必要があります"
+        remainingCredits:
+          invalid: "残り単位数が無効です"
+          min: "残り単位数は1以上である必要があります"
+        creditDistributions:
+          min: "少なくとも1つの成績配分が必要です"
     pe:
       title: "体育 GPA"
       description: "DTU の評価基準に従って体育 GPA を計算。"
@@ -176,6 +264,7 @@ tools:
           fair: "可"
           average: "平均"
           averageWeak: "平均未満"
+          conditional: "合格"
           fail: "不可"
           poor: "不良"
         status:
@@ -187,9 +276,6 @@ tools:
           point1: "学業評価"
           point2: "卒業評価"
           point3: "学生ランキング"
-          title2: "D (1.0) は条件付き合格と見なされます"
-          point4: "総単位の>5%がD評価の場合、改善が必要です"
-          point5: "単位は累積されますが、GPAに影響します"
           title3: "F (0.0)"
           point6: "単位は累積されません"
           point7: "コースを再履修する必要があります"

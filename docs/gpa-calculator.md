@@ -45,7 +45,7 @@ Bảng chuyển đổi điểm số giữa các thang điểm của Đại học
 | | 6.0 - 6.4 | C+ | 2.33 | Đạt |
 | | 5.5 - 5.9 | C | 2.0 | Đạt |
 | **Trung bình yếu** | 4.5 - 5.4 | C- | 1.65 | Đạt |
-| **Không đạt** | 4.0 - 4.4 | D | 1.0 | Có điều kiện |
+| **Trung bình yếu** | 4.0 - 4.4 | D | 1.0 | Đạt |
 | **Kém** | 0.0 - 3.9 | F | 0.0 | Không đạt |
 
 **Lưu ý quan trọng:**
@@ -55,11 +55,7 @@ Bảng chuyển đổi điểm số giữa các thang điểm của Đại học
    - Xét tốt nghiệp
    - Xếp hạng sinh viên
 
-2. **Điểm D (1.0)** được xem là **đạt có điều kiện**:
-   - Nếu có **>5% tổng tín chỉ** đạt điểm D, cần học cải thiện
-   - Vẫn được tích lũy tín chỉ nhưng ảnh hưởng đến GPA
-
-3. **Điểm F (0.0)**:
+2. **Điểm F (0.0)**:
    - **Không được tích lũy** tín chỉ
    - **Bắt buộc phải học lại** môn học đó
    - Không tính vào GPA tích lũy
@@ -155,23 +151,134 @@ Hệ thống hiển thị:
 
 ---
 
-## 🟦 TAB 2 – TÍNH TOÁN GPA (Coming Soon)
+## 🟦 TAB 2 – TÍNH TOÁN GPA CHI TIẾT (GIẢ LẬP ĐIỂM)
 
 ### 🎯 Mục Đích
 
-Tính GPA hiện tại hoặc GPA tích lũy theo số tín đã/đang học từ danh sách các môn học chi tiết.
+Giúp sinh viên tự giả lập kết quả học tập tương lai bằng cách phân bổ loại điểm (A, B, C...) cho số tín chỉ còn lại, để biết GPA cuối cùng sau toàn khóa học là bao nhiêu.
 
-### 📥 Dữ Liệu Đầu Vào (Dự Kiến)
+=> Mục đích là xem trước kết quả 4 năm học nếu họ dự đoán mình đạt kết quả như vậy.
 
-- Danh sách các môn học đã học
-- Mỗi môn: Tên môn, Số tín chỉ, Điểm (thang 10 hoặc thang 4)
-- Tự động tính GPA tích lũy
+### 📥 Dữ Liệu Đầu Vào
 
-### ⚙️ Cách Tính (Dự Kiến)
+Sinh viên sẽ nhập các giá trị sau:
 
-```
-GPA = Σ(điểm_môn × số_tín_chỉ) / Σ(số_tín_chỉ)
-```
+| Trường | Label | Ý Nghĩa | Type | Validation | Ví Dụ |
+|--------|-------|---------|------|------------|-------|
+| `completedCredits` | Số tín chỉ đã học | Tổng số tín chỉ đã hoàn thành | Number (int) | ≥ 0 | 60 |
+| `currentGpa` | GPA hiện tại | GPA tích lũy hiện tại (thang 4) | Number (float) | 0 ≤ value ≤ 4.0 | 3.0 |
+| `remainingCredits` | Số tín chỉ còn lại | Số tín chỉ chưa học | Number (int) | ≥ 1 | 60 |
+
+👉 **Sinh viên sẽ nhập phân bố điểm giả định cho phần còn lại**, ví dụ:
+
+| Loại điểm | Số tín chỉ | Thang điểm 4 tương ứng | Trạng thái |
+|-----------|------------|------------------------|------------|
+| A+ | 5 | 4.0 | Đạt |
+| A | 10 | 4.0 | Đạt |
+| A− | 5 | 3.65 | Đạt |
+| B+ | 10 | 3.33 | Đạt |
+| B | 10 | 3.0 | Đạt |
+| B− | 5 | 2.65 | Đạt |
+| C+ | 5 | 2.33 | Đạt |
+| C | 5 | 2.0 | Đạt |
+| C− | 3 | 1.65 | Đạt |
+| D | 2 | 1.0 | Đạt |
+| **(Tổng cộng = 60 tín còn lại)** | | | |
+
+**Lưu ý quan trọng:**
+- Tổng số tín chỉ trong phân bố điểm phải bằng `remainingCredits`.
+- **Điểm F (0.0)**:
+  - **Không được tích lũy** tín chỉ
+  - **Bắt buộc phải học lại** môn học đó
+  - **Không tính vào GPA tích lũy** (nên không nên nhập trong phân bố điểm giả định)
+
+### ⚙️ Cách Tính
+
+Hệ thống sẽ:
+
+1. **Tính điểm quy đổi cho phần còn lại:**
+
+   ```
+   GPA_remaining = Σ(tín chỉ từng loại × điểm thang 4 tương ứng)
+                  ────────────────────────────────────────────
+                            tổng tín chỉ còn lại
+   ```
+
+   **Ví dụ:**
+   - 5 tín A+ (4.0) = 5 × 4.0 = 20.0
+   - 10 tín A (4.0) = 10 × 4.0 = 40.0
+   - 5 tín A− (3.65) = 5 × 3.65 = 18.25
+   - 10 tín B+ (3.33) = 10 × 3.33 = 33.3
+   - 10 tín B (3.0) = 10 × 3.0 = 30.0
+   - 5 tín B− (2.65) = 5 × 2.65 = 13.25
+   - 5 tín C+ (2.33) = 5 × 2.33 = 11.65
+   - 5 tín C (2.0) = 5 × 2.0 = 10.0
+   - 3 tín C− (1.65) = 3 × 1.65 = 4.95
+   - 2 tín D (1.0) = 2 × 1.0 = 2.0
+   - **Tổng điểm quy đổi** = 20.0 + 40.0 + 18.25 + 33.3 + 30.0 + 13.25 + 11.65 + 10.0 + 4.95 + 2.0 = **183.4**
+   - **GPA_remaining** = 183.4 / 60 = **3.057**
+
+2. **Tính GPA toàn khóa (sau khi học xong):**
+
+   ```
+   GPA_final = (current_gpa × credits_completed) + (GPA_remaining × credits_remaining)
+               ────────────────────────────────────────────────────────────────────────
+                              credits_completed + credits_remaining
+   ```
+
+   **Ví dụ:**
+   - `completedCredits` = 60
+   - `currentGpa` = 3.0
+   - `GPA_remaining` = 3.057
+   - `remainingCredits` = 60
+
+   ```
+   GPA_final = (3.0 × 60) + (3.057 × 60)
+               ───────────────────────────
+                        60 + 60
+
+            = 180 + 183.42
+              ────────────
+                 120
+
+            = 363.42 / 120
+            = 3.0285 ≈ 3.029
+   ```
+
+3. **Xác định loại bằng tốt nghiệp dự kiến** dựa trên `GPA_final`:
+
+   | Hạng | GPA (thang 4) |
+   |------|---------------|
+   | **Xuất sắc** | 3.60 – 4.00 |
+   | **Giỏi** | 3.20 – 3.59 |
+   | **Khá** | 2.50 – 3.19 |
+   | **Trung bình** | 2.00 – 2.49 |
+
+### 📤 Kết Quả Đầu Ra
+
+Hệ thống hiển thị:
+
+1. **GPA toàn khóa dự kiến** (`GPA_final`) - hiển thị với 3 chữ số thập phân
+
+2. **Xếp loại tốt nghiệp tương ứng**:
+   - Badge với màu sắc và icon phù hợp
+   - Hiển thị tên hạng (Xuất sắc, Giỏi, Khá, Trung bình)
+
+3. **Tóm tắt giả lập**:
+   - Ví dụ: "Bạn giả định đạt 15 tín A/A+, 20 tín B/B+, 10 tín C/C+, 5 tín C−/D → GPA toàn khóa 3.029 → Xếp loại Khá."
+   - Hiển thị breakdown chi tiết phân bố điểm đã nhập
+
+### 🧩 Mục Tiêu Của Tab Này
+
+- Cho phép sinh viên chủ động thử nhiều kịch bản khác nhau (ví dụ: "Nếu mình đạt nhiều điểm B hơn thì GPA giảm thế nào?")
+- Là mô phỏng thực tế hơn so với tab 1 (tab 1 chỉ giả định toàn A)
+- Giúp sinh viên hiểu tác động của từng loại điểm lên GPA cuối cùng
+
+### ✅ Tóm Tắt Ngắn Gọn
+
+Tab 2 là nơi sinh viên giả lập phân bố điểm (A, B, C, D...) cho các tín chỉ còn lại.
+
+Hệ thống dùng công thức cố định để tính GPA trung bình sau toàn khóa và hiển thị xếp loại dự kiến.
 
 ---
 
