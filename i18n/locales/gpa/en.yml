@@ -47,3 +47,42 @@ target:
     good: "Good"
     fair: "Fair"
     average: "Average"
+  results:
+    title: "Results"
+    subtitle: "Maximum achievable GPA"
+    scale: "Scale 4.0"
+    success:
+      title: "Target achievable"
+      message: "You can achieve GPA {gpa} if you get all A's for remaining credits."
+    warning:
+      title: "Target difficult"
+      message: "Your maximum GPA is {gpa}, may not be enough to reach target."
+  simulation:
+    distribution:
+      title: "Grade Distribution"
+  pe:
+    results:
+      headline:
+        pass: "Passed the PE program"
+        fail: "Failed the PE program"
+      scale: "on a 4.0 scale"
+      pass: "Pass"
+      fail: "Fail"
+      courses:
+        c1: "Course 1"
+        c2: "Course 2"
+        c3: "Course 3"
+      analysis:
+        title: "Analysis:"
+        pass: "Pass! You completed the PE program with GPA {gpa}."
+        fail: "Fail. Your average PE GPA is {gpa}. Keep trying."
+  chat:
+    placeholder: "Type your question..."
+    send: "Send"
+    sending: "Sending..."
+    empty:
+      title: "Hello! 👋"
+      description: "I can help you calculate grades, predict GPA, or answer questions about academic regulations. Let's start a conversation!"
+    error:
+      title: "An error occurred"
+      message: "Sorry, an error occurred. Please try again."

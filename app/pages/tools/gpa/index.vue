@@ -6,6 +6,7 @@ import TargetCalculator from '@/components/gpa/TargetCalculator.vue'
 import GpaCalculator from '@/components/gpa/GpaCalculator.vue'
 import GraduationInfo from '@/components/gpa/common/GraduationInfo.vue'
 import PeCalculator from '@/components/gpa/PeCalculator.vue'
+import ChatBox from '@/components/gpa/ChatBox.vue'
 
 const { t } = useI18n()
 const SCOPE = 'tools.gpa'
@@ -86,16 +87,7 @@ const DEFAULT_TAB = 'target'
             </TabsContent>
 
             <TabsContent value="ai" class="mt-6 sm:mt-8">
-              <div class="rounded-xl sm:rounded-2xl border border-border/20 bg-card text-card-foreground p-6 sm:p-7 md:p-8 shadow-md backdrop-blur-sm">
-                <div class="flex flex-col items-center justify-center text-center">
-                  <div class="relative mb-3 sm:mb-4">
-                    <div class="absolute inset-0 bg-accent/10 rounded-full blur-xl"></div>
-                    <Icon.Bot class="w-10 h-10 sm:w-12 sm:h-12 text-accent/60 relative z-10" />
-                  </div>
-                  <h3 class="text-base sm:text-lg font-bold text-foreground mb-1.5 px-2">{{ t(`${SCOPE}.ai.title`) }}</h3>
-                  <p class="text-xs sm:text-sm text-muted-foreground max-w-md px-4">{{ t(`${SCOPE}.ai.description`) }}</p>
-                </div>
-              </div>
+              <ChatBox />
             </TabsContent>
           </div>
         </Tabs>
