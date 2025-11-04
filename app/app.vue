@@ -6,7 +6,7 @@
       <Header />
       <Analytics />
       <NuxtPage />
-      <ChatDock />
+      <ChatDock v-if="showChatDock" />
       <Footer />
     </div>
   </div>
@@ -21,6 +21,8 @@ import { useLoadingLogic } from '@/composables/common/useLoadingLogic'
 import { useAuth } from '@/composables/auth'
 import { useAuthStore } from '@/stores/auth'
 import { Analytics } from '@vercel/analytics/nuxt';
+import { computed } from 'vue'
+import { useRoute } from 'vue-router'
 
 const { isLoading, progress, initLoading } = useLoadingLogic()
 
@@ -32,4 +34,7 @@ onMounted(() => {
     getCurrentUser()
   }
 })
+
+const route = useRoute()
+const showChatDock = computed(() => route.path.startsWith('/tools/gpa'))
 </script>

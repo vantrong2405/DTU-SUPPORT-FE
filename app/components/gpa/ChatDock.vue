@@ -25,13 +25,14 @@ onBeforeUnmount(() => {
 </script>
 
 <template>
-  <div class="fixed bottom-4 right-4 z-50 sm:bottom-6 sm:right-6">
+  <Teleport to="body">
+  <div class="fixed right-4 z-50 sm:right-6" :style="{ bottom: 'calc(env(safe-area-inset-bottom, 0px) + 16px)' }">
     <Transition name="dock">
       <div
         v-if="isOpen"
-        class="mb-3 w-[90vw] max-w-md sm:max-w-lg rounded-xl border border-border/30 bg-card text-card-foreground shadow-xl overflow-hidden"
+        class="mb-3 w-[92vw] max-w-sm sm:max-w-md md:max-w-lg rounded-xl border border-border/30 bg-card text-card-foreground shadow-xl overflow-hidden"
       >
-        <div class="h-[70vh] max-h-[640px] w-full">
+        <div class="h-[65vh] sm:h-[70vh] max-h-[520px] sm:max-h-[640px] w-full">
           <ChatBox />
         </div>
       </div>
@@ -47,6 +48,7 @@ onBeforeUnmount(() => {
       <Icon.X v-else class="w-6 h-6" />
     </button>
   </div>
+  </Teleport>
 </template>
 
 <style scoped>
