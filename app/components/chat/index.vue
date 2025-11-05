@@ -9,8 +9,9 @@ import { computed } from 'vue'
 import { DropdownMenu, DropdownMenuTrigger, DropdownMenuContent, DropdownMenuItem } from '@/components/ui/dropdown-menu'
 import { cn } from '@/lib/utils'
 import type { ToolResult, UiComponent } from '@/types/chat'
-import GpaResultCard from '@/components/gpa/GpaResultCard.vue'
-import PeResultCard from '@/components/gpa/PeResultCard.vue'
+import GpaResultCard from '@/components/gpa/common/GpaResultCard.vue'
+import PeResultCard from '@/components/gpa/common/PeResultCard.vue'
+import FinalScoreResultCard from '@/components/gpa/common/FinalScoreResultCard.vue'
 
 const { t } = useI18n()
 const SCOPE = 'chat'
@@ -60,6 +61,7 @@ const getToolComponent = (uiComponent: UiComponent) => {
   const componentMap: Record<UiComponent, any> = {
     GpaResultCard,
     PeResultCard,
+    FinalScoreResultCard,
   }
   return componentMap[uiComponent]
 }

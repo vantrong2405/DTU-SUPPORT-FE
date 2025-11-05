@@ -218,6 +218,82 @@ tools:
     pass:
       title: "Tính điểm qua môn"
       description: "Tính điểm cần ở bài thi cuối để qua môn theo trọng số. Tính năng này sẽ sớm có sẵn."
+  pass:
+    inputTitle: "Tính điểm cuối kỳ để qua môn"
+    inputSubtitle: "Nhập thông tin các cột điểm và trọng số để tính điểm thi cuối kỳ cần thiết"
+    progress:
+      total: "Tổng"
+      remaining: "Còn lại"
+    components:
+      title: "Các cột điểm"
+      addButton: "Thêm cột điểm"
+      empty: "Chưa có cột điểm nào. Nhấn 'Thêm cột điểm' để bắt đầu."
+      removeButton: "Xóa"
+      nameLabel: "Tên cột"
+      namePlaceholder: "Ví dụ: Điểm giữa kỳ"
+      weightLabel: "Tỷ lệ"
+      weightPlaceholder: "Nhập tỷ lệ (%)"
+      scoreLabel: "Điểm hiện có"
+      scorePlaceholder: "Nhập điểm (0-10)"
+    fields:
+      finalExamWeight: "Trọng số thi cuối kỳ (%)"
+      minPassingScore: "Điểm tối thiểu để qua môn"
+    placeholders:
+      finalExamWeight: "Nhập trọng số thi cuối kỳ (%)"
+      minPassingScore: "Nhập điểm tối thiểu (0-10)"
+    buttons:
+      calculate: "Tính điểm cuối kỳ để qua môn"
+      calculating: "Đang tính..."
+      reset: "Đặt lại"
+    empty:
+      title: "Sẵn sàng tính toán"
+      description: "Nhập thông tin ở form bên trái và nhấn \"Tính toán\" để xem kết quả"
+    results:
+      title: "Kết quả tính toán"
+      cannotPass:
+        title: "Không thể qua môn"
+        message: "Ngay cả khi đạt điểm tối đa (10.0) ở thi cuối kỳ, bạn vẫn không thể đạt điểm tối thiểu để qua môn."
+      requiredMessage: "Bạn cần ít nhất {score} điểm cuối kỳ ({weight}%) để qua môn"
+      requiredSubMessage: "Điểm này dựa trên điểm hiện tại và trọng số thi cuối kỳ của bạn"
+      cards:
+        currentScore: "Điểm hiện tại"
+        finalExamContribution: "Đóng góp cuối kỳ"
+        requiredScore: "Điểm cần thiết"
+      details:
+        title: "Chi tiết các cột điểm"
+        table:
+          name: "Tên cột"
+          weight: "Tỷ lệ (%)"
+          score: "Điểm"
+          contribution: "Đóng góp (%)"
+          currentTotal: "Tổng hiện tại"
+          finalExam: "Thi cuối kỳ"
+          grandTotal: "Tổng cộng"
+    prediction:
+      title: "Dự đoán kết quả cuối kỳ"
+      placeholder: "Nhập điểm dự đoán thi cuối kỳ"
+      button: "Dự đoán"
+      finalScore: "Điểm tổng kết"
+      gpa4: "GPA (thang 4)"
+      letterGrade: "Điểm chữ"
+      status: "Trạng thái"
+      pass: "Đậu"
+      fail: "Rớt"
+    validation:
+      components:
+        min: "Cần ít nhất 1 cột điểm"
+      finalExamWeight:
+        invalid: "Trọng số thi cuối kỳ không hợp lệ"
+        min: "Trọng số thi cuối kỳ không thể nhỏ hơn 0"
+        max: "Trọng số thi cuối kỳ không thể lớn hơn 100"
+      minPassingScore:
+        invalid: "Điểm tối thiểu không hợp lệ"
+        min: "Điểm tối thiểu không thể nhỏ hơn 0"
+        max: "Điểm tối thiểu không thể lớn hơn 10"
+      finalExamScore:
+        invalid: "Điểm thi cuối kỳ không hợp lệ"
+        min: "Điểm thi cuối kỳ không thể nhỏ hơn 0"
+        max: "Điểm thi cuối kỳ không thể lớn hơn 10"
     ai:
       title: "Hỏi AI"
       description: "Đặt câu hỏi cho AI để nhận lời khuyên học tập thông minh. Tính năng này sẽ sớm có sẵn."

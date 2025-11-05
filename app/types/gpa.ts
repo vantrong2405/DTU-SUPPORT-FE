@@ -11,3 +11,10 @@ export interface CreditDistribution {
   credits: number
   gradeValue: string
 }
+
+export interface ScoreComponent {
+  id: string
+  name: string
+  weight: number
+  score: number
+}

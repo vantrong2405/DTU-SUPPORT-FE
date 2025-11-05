@@ -218,6 +218,82 @@ tools:
     pass:
       title: "合格点を計算"
       description: "重みに基づいてコースを通過するために必要な最終試験の点数を計算。この機能は近日公開予定です。"
+  pass:
+    inputTitle: "合格するための期末試験の点数を計算"
+    inputSubtitle: "各評価項目と重みを入力して、必要な期末試験の点数を計算"
+    progress:
+      total: "合計"
+      remaining: "残り"
+    components:
+      title: "評価項目"
+      addButton: "項目を追加"
+      empty: "評価項目がありません。「項目を追加」をクリックして開始してください。"
+      removeButton: "削除"
+      nameLabel: "項目名"
+      namePlaceholder: "例: 中間試験"
+      weightLabel: "重み"
+      weightPlaceholder: "重みを入力 (%)"
+      scoreLabel: "現在の点数"
+      scorePlaceholder: "点数を入力 (0-10)"
+    fields:
+      finalExamWeight: "期末試験の重み (%)"
+      minPassingScore: "合格に必要な最低点数"
+    placeholders:
+      finalExamWeight: "期末試験の重みを入力 (%)"
+      minPassingScore: "最低点数を入力 (0-10)"
+    buttons:
+      calculate: "期末試験の点数を計算"
+      calculating: "計算中..."
+      reset: "リセット"
+    empty:
+      title: "計算の準備完了"
+      description: "左側のフォームに情報を入力し、「計算」をクリックして結果を表示"
+    results:
+      title: "計算結果"
+      cannotPass:
+        title: "合格不可"
+        message: "期末試験で満点（10.0）を取っても、合格に必要な最低点数に達することはできません。"
+      requiredMessage: "合格するには、期末試験で少なくとも {score} 点（{weight}%）が必要です"
+      requiredSubMessage: "この点数は、現在の点数と期末試験の重みに基づいています"
+      cards:
+        currentScore: "現在の点数"
+        finalExamContribution: "期末試験の貢献度"
+        requiredScore: "必要な点数"
+      details:
+        title: "評価項目の詳細"
+        table:
+          name: "項目名"
+          weight: "重み (%)"
+          score: "点数"
+          contribution: "貢献度 (%)"
+          currentTotal: "現在の合計"
+          finalExam: "期末試験"
+          grandTotal: "合計"
+    prediction:
+      title: "期末結果を予測"
+      placeholder: "予想される期末試験の点数を入力"
+      button: "予測"
+      finalScore: "最終点数"
+      gpa4: "GPA (4.0 スケール)"
+      letterGrade: "文字成績"
+      status: "状態"
+      pass: "合格"
+      fail: "不合格"
+    validation:
+      components:
+        min: "少なくとも 1 つの項目が必要です"
+      finalExamWeight:
+        invalid: "無効な期末試験の重み"
+        min: "期末試験の重みは 0 未満にできません"
+        max: "期末試験の重みは 100 を超えることはできません"
+      minPassingScore:
+        invalid: "無効な最低合格点数"
+        min: "最低合格点数は 0 未満にできません"
+        max: "最低合格点数は 10 を超えることはできません"
+      finalExamScore:
+        invalid: "無効な期末試験の点数"
+        min: "期末試験の点数は 0 未満にできません"
+        max: "期末試験の点数は 10 を超えることはできません"
     ai:
       title: "AI に質問"
       description: "AI に質問して賢い学習アドバイスを受け取る。この機能は近日公開予定です。"

@@ -27,17 +27,6 @@ const graduationClassification = computed(() => {
   } | undefined
 })
 
-const canReachTarget = computed(() => {
-  return props.data.canReachTarget as boolean || props.data.canReachTargetWithAllA as boolean
-})
-
-const distributionSummary = computed(() => {
-  return props.data.distributionSummary as string | undefined
-})
-
-const isSimulation = computed(() => {
-  return !!props.data.finalGpa
-})
 
 const getBadgeClasses = (badgeColor: string) => {
   const baseClasses = 'inline-flex items-center gap-2 px-2.5 py-1 rounded-full text-xs font-semibold transition-all border'
@@ -67,25 +56,25 @@ const getBadgeClasses = (badgeColor: string) => {
         </div>
       </div>
 
-      <div v-if="canReachTarget !== undefined" :class="[
+      <div v-if="(props.data.canReachTarget ?? props.data.canReachTargetWithAllA) !== undefined" :class="[
         'rounded-lg border p-3 transition-all',
-        canReachTarget
+        (props.data.canReachTarget ?? props.data.canReachTargetWithAllA)
           ? 'bg-primary/5 border-primary/30'
           : 'bg-accent/5 border-accent/30'
       ]">
         <div class="flex items-start gap-2">
           <div :class="[
             'flex-shrink-0 w-6 h-6 rounded-full flex items-center justify-center',
-            canReachTarget
+            (props.data.canReachTarget ?? props.data.canReachTargetWithAllA)
               ? 'bg-primary/20 text-primary'
               : 'bg-accent/20 text-accent'
           ]">
-            <Icon.CheckCircle v-if="canReachTarget" class="w-4 h-4" />
+            <Icon.CheckCircle v-if="(props.data.canReachTarget ?? props.data.canReachTargetWithAllA)" class="w-4 h-4" />
             <Icon.AlertTriangle v-else class="w-4 h-4" />
           </div>
           <div class="flex-1 min-w-0">
               <p class="text-xs text-muted-foreground leading-relaxed">
-                {{ canReachTarget
+                {{ (props.data.canReachTarget ?? props.data.canReachTargetWithAllA)
                   ? t(`${SCOPE}.results.success.message`, { gpa: maxGpa.toFixed(3) })
                   : t(`${SCOPE}.results.warning.message`, { gpa: maxGpa.toFixed(3) })
                 }}
@@ -94,12 +83,12 @@ const getBadgeClasses = (badgeColor: string) => {
         </div>
       </div>
 
-      <div v-if="distributionSummary && isSimulation" class="rounded-lg border border-border/30 bg-muted/10 p-3">
+      <div v-if="props.data.distributionSummary && props.data.finalGpa" class="rounded-lg border border-border/30 bg-muted/10 p-3">
         <div class="flex items-start gap-2">
           <Icon.Lightbulb class="w-4 h-4 text-primary mt-0.5 flex-shrink-0" />
           <div class="flex-1 min-w-0">
             <div class="text-xs font-semibold text-foreground mb-1">{{ t(`${SCOPE}.simulation.distribution.title`) }}</div>
-            <div class="text-xs text-muted-foreground">{{ distributionSummary }}</div>
+            <div class="text-xs text-muted-foreground">{{ props.data.distributionSummary }}</div>
           </div>
         </div>
       </div>

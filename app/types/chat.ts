@@ -3,9 +3,9 @@ export interface ChatMessage {
   content: string
 }
 
-export type ToolName = 'calculateTargetGpa' | 'calculateSimulationGpa' | 'calculatePeGpa'
+export type ToolName = 'calculateTargetGpa' | 'calculateSimulationGpa' | 'calculatePeGpa' | 'calculateRequiredFinalScore' | 'calculateFinalScore'
 
-export type UiComponent = 'GpaResultCard' | 'PeResultCard'
+export type UiComponent = 'GpaResultCard' | 'PeResultCard' | 'FinalScoreResultCard'
 
 export interface ToolResult {
   toolName: ToolName

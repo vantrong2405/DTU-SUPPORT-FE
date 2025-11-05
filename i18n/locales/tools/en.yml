@@ -218,6 +218,82 @@ tools:
     pass:
       title: "Calculate Pass Score"
       description: "Calculate required final exam score to pass the course based on weights. This feature will be available soon."
+  pass:
+    inputTitle: "Calculate Final Exam Score to Pass"
+    inputSubtitle: "Enter score components and weights to calculate required final exam score"
+    progress:
+      total: "Total"
+      remaining: "Remaining"
+    components:
+      title: "Score Components"
+      addButton: "Add Component"
+      empty: "No score components yet. Click 'Add Component' to start."
+      removeButton: "Remove"
+      nameLabel: "Component Name"
+      namePlaceholder: "e.g., Midterm Score"
+      weightLabel: "Weight"
+      weightPlaceholder: "Enter weight (%)"
+      scoreLabel: "Current Score"
+      scorePlaceholder: "Enter score (0-10)"
+    fields:
+      finalExamWeight: "Final Exam Weight (%)"
+      minPassingScore: "Minimum Passing Score"
+    placeholders:
+      finalExamWeight: "Enter final exam weight (%)"
+      minPassingScore: "Enter minimum score (0-10)"
+    buttons:
+      calculate: "Calculate Final Exam Score"
+      calculating: "Calculating..."
+      reset: "Reset"
+    empty:
+      title: "Ready to Calculate"
+      description: "Enter information in the form on the left and click \"Calculate\" to see results"
+    results:
+      title: "Calculation Results"
+      cannotPass:
+        title: "Cannot Pass"
+        message: "Even if you get the maximum score (10.0) on the final exam, you still cannot reach the minimum passing score."
+      requiredMessage: "You need at least {score} points on the final exam ({weight}%) to pass"
+      requiredSubMessage: "This score is based on your current score and final exam weight"
+      cards:
+        currentScore: "Current Score"
+        finalExamContribution: "Final Exam Contribution"
+        requiredScore: "Required Score"
+      details:
+        title: "Score Component Details"
+        table:
+          name: "Component Name"
+          weight: "Weight (%)"
+          score: "Score"
+          contribution: "Contribution (%)"
+          currentTotal: "Current Total"
+          finalExam: "Final Exam"
+          grandTotal: "Grand Total"
+    prediction:
+      title: "Predict Final Result"
+      placeholder: "Enter predicted final exam score"
+      button: "Predict"
+      finalScore: "Final Score"
+      gpa4: "GPA (4.0 scale)"
+      letterGrade: "Letter Grade"
+      status: "Status"
+      pass: "Pass"
+      fail: "Fail"
+    validation:
+      components:
+        min: "At least 1 component is required"
+      finalExamWeight:
+        invalid: "Invalid final exam weight"
+        min: "Final exam weight cannot be less than 0"
+        max: "Final exam weight cannot be greater than 100"
+      minPassingScore:
+        invalid: "Invalid minimum passing score"
+        min: "Minimum passing score cannot be less than 0"
+        max: "Minimum passing score cannot be greater than 10"
+      finalExamScore:
+        invalid: "Invalid final exam score"
+        min: "Final exam score cannot be less than 0"
+        max: "Final exam score cannot be greater than 10"
     ai:
       title: "Ask AI"
       description: "Ask AI questions to receive smart study advice. This feature will be available soon."

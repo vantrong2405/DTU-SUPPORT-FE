@@ -20,6 +20,7 @@ export {
   Circle,
   Palette,
   AlertTriangle,
+  AlertCircle,
   CheckCircle,
   XCircle,
   HelpCircle,
@@ -32,5 +33,5 @@ export {
   BarChart3,
   Plus,
   Trash2,
-  AlertCircle,
+  List,
 } from 'lucide-vue-next'
