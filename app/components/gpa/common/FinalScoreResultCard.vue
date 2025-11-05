@@ -57,9 +57,9 @@ const getLetterGradeColor = (letterGrade: string) => {
             </div>
             <div class="text-xs text-muted-foreground mb-2">{{ t(`${SCOPE}.results.cards.requiredScore`) }}</div>
             <div class="rounded-lg border border-primary/20 bg-primary/5 p-3">
-              <p class="text-xs text-muted-foreground mb-1">{{ t(`${SCOPE}.results.requiredMessage`, { 
-                score: (props.data.requiredFinalScore as number)?.toFixed(2), 
-                weight: (props.data.finalExamWeight as number)?.toFixed(0) 
+              <p class="text-xs text-muted-foreground mb-1">{{ t(`${SCOPE}.results.requiredMessage`, {
+                score: (props.data.requiredFinalScore as number)?.toFixed(2),
+                weight: (props.data.finalExamWeight as number)?.toFixed(0)
               }) }}</p>
               <p class="text-xs text-muted-foreground/80">{{ props.data.formula as string }}</p>
             </div>
