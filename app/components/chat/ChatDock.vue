@@ -26,7 +26,7 @@ onBeforeUnmount(() => {
 
 <template>
   <Teleport to="body">
-  <div class="fixed right-4 z-50 sm:right-6" :style="{ bottom: 'calc(env(safe-area-inset-bottom, 0px) + 16px)' }">
+  <div class="fixed right-4 sm:right-6 md:right-8 z-50" :style="{ bottom: 'calc(env(safe-area-inset-bottom, 0px) + 88px)' }">
     <Transition name="dock">
       <div
         v-show="isOpen"
