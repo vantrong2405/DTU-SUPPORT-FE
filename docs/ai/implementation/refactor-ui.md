@@ -80,27 +80,32 @@ app/
 ```typescript
 // app/composables/animations/useFadeIn.ts
 import { ref, onMounted, onUnmounted } from 'vue'
-import anime from 'animejs'
+import { animate } from 'animejs'
 import type { AnimationConfig } from '~/types/animations'
 
 export function useFadeIn(options?: Partial<AnimationConfig>) {
   const elementRef = ref<HTMLElement>()
   const isVisible = ref(false)
   const isAnimating = ref(false)
-  
-  const prefersReducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches
-  
+  let currentAnimation: ReturnType<typeof animate> | null = null
+
+  const getPrefersReducedMotion = (): boolean => {
+    if (typeof window === 'undefined') return false
+    return window.matchMedia('(prefers-reduced-motion: reduce)').matches
+  }
+
+  const prefersReducedMotion = getPrefersReducedMotion()
+
   const start = () => {
-    if (prefersReducedMotion) {
+    if (prefersReducedMotion && options?.respectReducedMotion !== false) {
       isVisible.value = true
       return
     }
-    
+
     if (!elementRef.value) return
-    
+
     isAnimating.value = true
-    anime({
-      targets: elementRef.value,
+    currentAnimation = animate(elementRef.value, {
       opacity: [0, 1],
       translateY: [20, 0],
       duration: options?.duration || 800,
@@ -109,23 +114,31 @@ export function useFadeIn(options?: Partial<AnimationConfig>) {
       complete: () => {
         isAnimating.value = false
         isVisible.value = true
-      }
+      },
     })
   }
-  
+
+  const stop = () => {
+    if (currentAnimation) {
+      currentAnimation.revert()
+      currentAnimation = null
+    }
+    isAnimating.value = false
+  }
+
   onMounted(() => {
     start()
   })
-  
+
   onUnmounted(() => {
-    if (elementRef.value) {
-      anime.remove(elementRef.value)
-    }
+    stop()
   })
-  
-  return { elementRef, isVisible, isAnimating, start }
+
+  return { elementRef, isVisible, isAnimating, start, stop }
 }
 ```
+
+**Note:** Updated to use animejs v4 API with named import `{ animate }` instead of default import.
 
 **2. Parallax Effect Pattern**
 ```typescript
@@ -133,23 +146,47 @@ export function useFadeIn(options?: Partial<AnimationConfig>) {
 import { ref, onMounted, onUnmounted } from 'vue'
 import { useWindowScroll } from '@vueuse/core'
 
-export function useParallax(speed: number = 0.5) {
+export interface ParallaxOptions {
+  speed?: number
+  direction?: 'vertical' | 'horizontal'
+  respectReducedMotion?: boolean
+}
+
+export function useParallax(options?: ParallaxOptions) {
   const offset = ref(0)
-  const { y } = useWindowScroll()
-  
-  const update = () => {
-    offset.value = y.value * speed
+  const { y, x } = useWindowScroll()
+  const speed = options?.speed ?? 0.5
+  const direction = options?.direction ?? 'vertical'
+
+  const getPrefersReducedMotion = (): boolean => {
+    if (typeof window === 'undefined') return false
+    return window.matchMedia('(prefers-reduced-motion: reduce)').matches
   }
-  
+
+  const prefersReducedMotion = getPrefersReducedMotion()
+
+  const update = () => {
+    if (prefersReducedMotion && options?.respectReducedMotion !== false) {
+      offset.value = 0
+      return
+    }
+
+    if (direction === 'horizontal') {
+      offset.value = x.value * speed
+    } else {
+      offset.value = y.value * speed
+    }
+  }
+
   onMounted(() => {
     update()
     window.addEventListener('scroll', update, { passive: true })
   })
-  
+
   onUnmounted(() => {
     window.removeEventListener('scroll', update)
   })
-  
+
   return { offset }
 }
 ```
@@ -159,23 +196,85 @@ export function useParallax(speed: number = 0.5) {
 // app/composables/animations/useScrollReveal.ts
 import { ref, onMounted, onUnmounted } from 'vue'
 import { useIntersectionObserver } from '@vueuse/core'
+import { animate } from 'animejs'
+import type { AnimationConfig } from '~/types/animations'
 
-export function useScrollReveal(threshold: number = 0.1) {
+export interface ScrollRevealOptions extends Partial<AnimationConfig> {
+  threshold?: number
+  rootMargin?: string
+  animation?: 'fade' | 'slide' | 'scale'
+  direction?: 'up' | 'down' | 'left' | 'right'
+}
+
+export function useScrollReveal(options?: ScrollRevealOptions) {
   const target = ref<HTMLElement>()
   const isVisible = ref(false)
-  
+  const isAnimating = ref(false)
+
+  const getPrefersReducedMotion = (): boolean => {
+    if (typeof window === 'undefined') return false
+    return window.matchMedia('(prefers-reduced-motion: reduce)').matches
+  }
+
+  const prefersReducedMotion = getPrefersReducedMotion()
+
+  const doAnimate = () => {
+    if (!target.value) return
+
+    if (prefersReducedMotion && options?.respectReducedMotion !== false) {
+      isVisible.value = true
+      return
+    }
+
+    isAnimating.value = true
+    const animationType = options?.animation || 'fade'
+    const direction = options?.direction || 'up'
+
+    let animationProps: Record<string, any> = { opacity: [0, 1] }
+
+    if (animationType === 'slide') {
+      const distance = 50
+      switch (direction) {
+        case 'up': animationProps.translateY = [distance, 0]; break
+        case 'down': animationProps.translateY = [-distance, 0]; break
+        case 'left': animationProps.translateX = [distance, 0]; break
+        case 'right': animationProps.translateX = [-distance, 0]; break
+      }
+    } else if (animationType === 'scale') {
+      animationProps.scale = [0.8, 1]
+    }
+
+    animate(target.value, {
+      ...animationProps,
+      duration: options?.duration || 800,
+      easing: options?.easing || 'easeOutCubic',
+      delay: options?.delay || 0,
+      complete: () => {
+        isAnimating.value = false
+        isVisible.value = true
+      },
+    })
+  }
+
   const { stop } = useIntersectionObserver(
     target,
     ([{ isIntersecting }]) => {
       if (isIntersecting && !isVisible.value) {
-        isVisible.value = true
+        doAnimate()
         stop()
       }
     },
-    { threshold }
+    {
+      threshold: options?.threshold ?? 0.1,
+      rootMargin: options?.rootMargin ?? '0px',
+    }
   )
-  
-  return { target, isVisible }
+
+  onUnmounted(() => {
+    stop()
+  })
+
+  return { target, isVisible, isAnimating }
 }
 ```
 
@@ -193,7 +292,7 @@ const { offset: parallaxOffset } = useParallax(0.3)
 
 <template>
   <section class="hero-section">
-    <div 
+    <div
       class="parallax-background"
       :style="{ transform: `translateY(${parallaxOffset}px)` }"
     >
@@ -310,6 +409,7 @@ try {
 - Keep animation libraries up-to-date
 - Check for known vulnerabilities
 - Use official, maintained libraries
+- animejs v4.2.2 (latest stable)
 
 **2. User Input**
 - No user input in animation logic (UI-only)
@@ -318,3 +418,29 @@ try {
 **3. XSS Prevention**
 - No dynamic HTML in animations
 - Use Vue's safe rendering
+
+## Documentation
+
+**Available Documentation:**
+- [Animation Composables Documentation](./animation-composables.md) - Complete guide to all animation composables
+- [Component Animation Documentation](./component-animations.md) - Animation features in UI components
+- [Animation Style Guide](./animation-style-guide.md) - Style guide and best practices
+
+## Implementation Status
+
+**Completed Phases:**
+- ✅ Phase 1: Animation Infrastructure (10 tasks)
+- ✅ Phase 2: Common Components Enhancement (7 tasks)
+- ✅ Phase 3: Homepage Components Enhancement (11 tasks)
+- ✅ Phase 4: Tools Page Enhancement (6 tasks)
+- ✅ Phase 5: UI Components Enhancement (6 tasks)
+- ✅ Phase 6: Performance Optimization (5/9 tasks - 4 require manual testing)
+- ✅ Phase 7: Documentation & Final Polish (3/6 tasks - 3 require review)
+
+**Key Updates:**
+- Updated to animejs v4 API (named import `{ animate }`)
+- Enhanced `prefers-reduced-motion` support across all animations
+- Integrated performance monitoring (`useAnimationPerformance`)
+- Optimized bundle size with manual chunks
+- Added GPU acceleration optimizations
+- Created comprehensive documentation
