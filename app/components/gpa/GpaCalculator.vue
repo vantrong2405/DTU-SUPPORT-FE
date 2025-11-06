@@ -13,7 +13,7 @@ import { Input } from '@/components/ui/input'
 import FieldControl from '@/components/common/FieldControl.vue'
 import { useSimulationCalculator } from '@/composables/gpa/useSimulationCalculator'
 import { GRADE_OPTIONS, getGradeByValue } from '@/constants/gpa/grades'
-import { cn } from '@/lib/utils'
+import { getBadgeClasses } from '@/lib/ui'
 
 const { t } = useI18n()
 const SCOPE = 'tools.gpa'
@@ -31,18 +31,6 @@ const {
   values,
 } = useSimulationCalculator()
 
-const getBadgeClasses = (badgeColor: string) => {
-  const baseClasses = 'inline-flex items-center gap-2 px-2.5 py-1 rounded-full text-xs font-semibold transition-all border'
-
-  const colorMap: Record<string, string> = {
-    primary: 'bg-primary/10 text-primary border-primary/20',
-    accent: 'bg-accent/10 text-accent border-accent/20',
-    muted: 'bg-muted text-muted-foreground border-border',
-    destructive: 'bg-destructive/10 text-destructive border-destructive/20',
-  }
-
-  return cn(baseClasses, colorMap[badgeColor])
-}
 
 const getGradeLabel = (gradeValue: string) => {
   const grade = getGradeByValue(gradeValue)
@@ -223,7 +211,7 @@ const handleSelectChange = (id: string, value: unknown) => {
                 </div>
               </div>
 
-              <div v-if="getGradeByValue(dist.gradeValue)" :class="getBadgeClasses(getGradeByValue(dist.gradeValue)!.badgeColor)">
+              <div v-if="getGradeByValue(dist.gradeValue)" :class="getBadgeClasses(getGradeByValue(dist.gradeValue)!.badgeColor as 'primary'|'accent'|'muted'|'destructive')">
                 <span>{{ getGradeByValue(dist.gradeValue)!.label }} ({{ getGradeByValue(dist.gradeValue)!.point }})</span>
               </div>
             </div>

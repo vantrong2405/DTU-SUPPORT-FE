@@ -8,10 +8,8 @@ import { useChatConversation } from '@/composables/chat/useChatConversation'
 import { computed } from 'vue'
 import { DropdownMenu, DropdownMenuTrigger, DropdownMenuContent, DropdownMenuItem } from '@/components/ui/dropdown-menu'
 import { cn } from '@/lib/utils'
-import type { ToolResult, UiComponent } from '@/types/chat'
-import GpaResultCard from '@/components/gpa/common/GpaResultCard.vue'
-import PeResultCard from '@/components/gpa/common/PeResultCard.vue'
-import FinalScoreResultCard from '@/components/gpa/common/FinalScoreResultCard.vue'
+import type { ToolResult } from '@/types/chat'
+import { CHAT_TONES } from '@/constants/chat/tones'
 
 const { t } = useI18n()
 const SCOPE = 'chat'
@@ -20,15 +18,8 @@ const { messages, isLoading, error, sendUserMessage } = useChatConversation()
 const inputValue = ref('')
 const messagesContainer = ref<HTMLElement | null>(null)
 const selectedTone = ref<string | undefined>(undefined)
-const tones = [
-  { value: undefined, labelKey: 'default' },
-  { value: 'Anime/Wibu', labelKey: 'anime' },
-  { value: 'Banter', labelKey: 'banter' },
-  { value: 'Formal', labelKey: 'formal' },
-  { value: 'Friendly', labelKey: 'friendly' },
-]
 const currentToneLabel = computed(() => {
-  const found = tones.find(tone => tone.value === selectedTone.value)
+  const found = CHAT_TONES.find(tone => tone.value === selectedTone.value)
   return found ? t(`chat.tones.${found.labelKey}`) : t('chat.tones.button')
 })
 
@@ -57,14 +48,7 @@ watch(messages, () => {
   scrollToBottom()
 }, { deep: true })
 
-const getToolComponent = (uiComponent: UiComponent) => {
-  const componentMap: Record<UiComponent, any> = {
-    GpaResultCard,
-    PeResultCard,
-    FinalScoreResultCard,
-  }
-  return componentMap[uiComponent]
-}
+// uiHtml rendering only; component mapping removed
 
 
 const emit = defineEmits<{ close: [] }>()
@@ -132,11 +116,10 @@ const handleClose = () => {
                 <p class="whitespace-pre-wrap break-words leading-relaxed">{{ msg.content }}</p>
               </div>
 
-              <component
-                v-if="msg.toolResult && msg.toolResult.uiComponent"
-                :is="getToolComponent(msg.toolResult.uiComponent)"
-                :data="msg.toolResult.data"
+              <div
+                v-if="msg.toolResult && msg.toolResult.uiHtml"
                 class="max-w-full"
+                v-html="msg.toolResult.uiHtml"
               />
             </div>
 
@@ -185,7 +168,7 @@ const handleClose = () => {
           </DropdownMenuTrigger>
           <DropdownMenuContent align="end" class="min-w-[10rem] bg-popover text-popover-foreground border border-border/30 shadow-lg rounded-md p-1 z-[60]">
             <DropdownMenuItem
-              v-for="tone in tones"
+              v-for="tone in CHAT_TONES"
               :key="String(tone.value)"
               @click="selectedTone = tone.value"
               class="rounded-sm px-2 py-1.5 text-sm hover:bg-accent/10 hover:text-foreground focus:bg-accent/20 focus:text-foreground cursor-pointer"

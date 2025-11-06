@@ -3,7 +3,7 @@ import { useForm } from 'vee-validate'
 import { toTypedSchema } from '@vee-validate/zod'
 import { useI18n } from 'vue-i18n'
 import { createPassSchema, type PassValues, type ScoreComponentValues } from '@/schemas/gpa/pass'
-import type { ScoreComponent } from '@/types/gpa'
+import type { ScoreComponent, PassResult, PassResultPrediction } from '@/types/gpa'
 import { useAuthStore } from '@/stores/auth'
 
 const convertScore10ToLetter = (score: number): { letter: string; gpa4: number; badgeColor: string; status: 'pass' | 'fail' } => {
@@ -24,21 +24,7 @@ export const usePassCalculator = () => {
   const { t } = useI18n()
 
   const passSchema = createPassSchema(t)
-  const passResult = reactive<{
-    requiredFinalScore: number | null
-    canPass: boolean | null
-    currentScore: number | null
-    currentTotalWeight: number | null
-    remainingWeight: number | null
-    formula: string | null
-    predictionResult: {
-      finalScore: number | null
-      letterGrade: string | null
-      gpa4: number | null
-      badgeColor: string | null
-      status: 'pass' | 'fail' | null
-    } | null
-  }>({
+  const passResult = reactive<PassResult>({
     requiredFinalScore: null,
     canPass: null,
     currentScore: null,
@@ -55,7 +41,7 @@ export const usePassCalculator = () => {
     totalWeight.value = scoreComponents.value.reduce((sum, comp) => sum + comp.weight, 0)
   }
 
-  const addComponent = () => {
+  const addScoreComponent = () => {
     const newId = `comp-${Date.now()}-${Math.random().toString(36).substr(2, 9)}`
     scoreComponents.value.push({
       id: newId,
@@ -66,12 +52,12 @@ export const usePassCalculator = () => {
     updateTotalWeight()
   }
 
-  const removeComponent = (id: string) => {
+  const removeScoreComponent = (id: string) => {
     scoreComponents.value = scoreComponents.value.filter((comp) => comp.id !== id)
     updateTotalWeight()
   }
 
-  const updateComponent = (id: string, updates: Partial<ScoreComponent>) => {
+  const updateScoreComponent = (id: string, updates: Partial<ScoreComponent>) => {
     const index = scoreComponents.value.findIndex((comp) => comp.id === id)
     if (index !== -1) {
       const current = scoreComponents.value[index]
@@ -198,9 +184,9 @@ export const usePassCalculator = () => {
     passResult,
     scoreComponents,
     totalWeight,
-    addComponent,
-    removeComponent,
-    updateComponent,
+    addScoreComponent,
+    removeScoreComponent,
+    updateScoreComponent,
     onPassSubmit,
     calculatePrediction,
     resetForm,

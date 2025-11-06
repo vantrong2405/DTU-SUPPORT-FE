@@ -7,6 +7,7 @@ import * as Icon from '@/components/ui/icon'
 import FieldControl from '@/components/common/FieldControl.vue'
 import { usePassCalculator } from '@/composables/gpa/usePassCalculator'
 import { cn } from '@/lib/utils'
+import { getBadgeClasses } from '@/lib/ui'
 
 const { t } = useI18n()
 const SCOPE = 'tools.pass'
@@ -15,9 +16,9 @@ const {
   passResult,
   scoreComponents,
   totalWeight,
-  addComponent,
-  removeComponent,
-  updateComponent,
+  addScoreComponent,
+  removeScoreComponent,
+  updateScoreComponent,
   onPassSubmit,
   calculatePrediction,
   resetForm,
@@ -27,38 +28,27 @@ const {
 
 const predictedScoreInput = ref<number | undefined>(undefined)
 
-const getBadgeClasses = (badgeColor: string) => {
-  const baseClasses = 'inline-flex items-center gap-2 px-2.5 py-1 rounded-full text-xs font-semibold transition-all border'
-
-  const colorMap: Record<string, string> = {
-    primary: 'bg-primary/10 text-primary border-primary/20',
-    accent: 'bg-accent/10 text-accent border-accent/20',
-    muted: 'bg-muted text-muted-foreground border-border',
-    destructive: 'bg-destructive/10 text-destructive border-destructive/20',
+const updateComponentField = (id: string, field: 'name' | 'weight' | 'score', value: string | number) => {
+  switch (field) {
+    case 'name':
+      updateScoreComponent(id, { name: String(value) })
+      break
+    case 'weight':
+      updateScoreComponent(id, { weight: Number(value) })
+      break
+    case 'score':
+      updateScoreComponent(id, { score: Number(value) })
+      break
   }
-
-  return cn(baseClasses, colorMap[badgeColor] || colorMap.primary)
 }
 
-const handleComponentNameChange = (id: string, name: string) => {
-  updateComponent(id, { name })
-}
-
-const handleComponentWeightChange = (id: string, weight: number) => {
-  updateComponent(id, { weight })
-}
-
-const handleComponentScoreChange = (id: string, score: number) => {
-  updateComponent(id, { score })
-}
-
-const handlePrediction = () => {
+const calculatePredictedScore = () => {
   if (predictedScoreInput.value !== undefined) {
     calculatePrediction(predictedScoreInput.value)
   }
 }
 
-const handleReset = () => {
+const resetCalculatorForm = () => {
   resetForm()
   predictedScoreInput.value = undefined
 }
@@ -85,7 +75,7 @@ const handleReset = () => {
             <span class="text-muted-foreground">{{ t(`${SCOPE}.progress.remaining`) }}:</span>
             <span class="font-semibold text-foreground">{{ (100 - (totalWeight + values.finalExamWeight)).toFixed(1) }}%</span>
           </div>
-          <Button type="button" variant="ghost" size="sm" @click="handleReset">
+          <Button type="button" variant="ghost" size="sm" @click="resetCalculatorForm">
             <Icon.RotateCcw class="w-4 h-4" />
             {{ t(`${SCOPE}.buttons.reset`) }}
           </Button>
@@ -101,7 +91,7 @@ const handleReset = () => {
               type="button"
               variant="default"
               size="sm"
-              @click="addComponent"
+              @click="addScoreComponent"
             >
               <Icon.Plus class="w-4 h-4" />
               {{ t(`${SCOPE}.components.addButton`) }}
@@ -125,7 +115,7 @@ const handleReset = () => {
                 <button
                   type="button"
                   class="w-6 h-6 rounded hover:bg-destructive/10 flex items-center justify-center transition-colors"
-                  @click="removeComponent(comp.id)"
+                  @click="removeScoreComponent(comp.id)"
                   :title="t(`${SCOPE}.components.removeButton`)"
                 >
                   <Icon.Trash2 class="w-4 h-4 text-destructive" />
@@ -140,7 +130,7 @@ const handleReset = () => {
                   <Input
                     type="text"
                     :model-value="comp.name"
-                    @update:model-value="(val: string | number) => handleComponentNameChange(comp.id, String(val))"
+                    @update:model-value="(val: string | number) => updateComponentField(comp.id, 'name', val)"
                     class="h-11"
                     :placeholder="t(`${SCOPE}.components.namePlaceholder`)"
                   />
@@ -156,7 +146,7 @@ const handleReset = () => {
                     min="0"
                     max="100"
                     :model-value="comp.weight"
-                    @update:model-value="(val: string | number) => handleComponentWeightChange(comp.id, Number(val))"
+                    @update:model-value="(val: string | number) => updateComponentField(comp.id, 'weight', val)"
                     class="h-11"
                     :placeholder="t(`${SCOPE}.components.weightPlaceholder`)"
                   />
@@ -172,7 +162,7 @@ const handleReset = () => {
                     min="0"
                     max="10"
                     :model-value="comp.score"
-                    @update:model-value="(val: string | number) => handleComponentScoreChange(comp.id, Number(val))"
+                    @update:model-value="(val: string | number) => updateComponentField(comp.id, 'score', val)"
                     class="h-11"
                     :placeholder="t(`${SCOPE}.components.scorePlaceholder`)"
                   />
@@ -205,7 +195,7 @@ const handleReset = () => {
             <Icon.Calculator />
             {{ isSubmitting ? t(`${SCOPE}.buttons.calculating`) : t(`${SCOPE}.buttons.calculate`) }}
           </Button>
-          <Button type="button" variant="outline" size="lg" class="flex-1 sm:flex-none" @click="handleReset">
+          <Button type="button" variant="outline" size="lg" class="flex-1 sm:flex-none" @click="resetCalculatorForm">
             <Icon.RotateCcw />
             {{ t(`${SCOPE}.buttons.reset`) }}
           </Button>
@@ -364,7 +354,7 @@ const handleReset = () => {
                 class="flex-1 h-11"
                 :placeholder="t(`${SCOPE}.prediction.placeholder`)"
               />
-              <Button type="button" @click="handlePrediction" :disabled="!predictedScoreInput">
+              <Button type="button" @click="calculatePredictedScore" :disabled="!predictedScoreInput">
                 <Icon.Calculator class="w-4 h-4" />
                 {{ t(`${SCOPE}.prediction.button`) }}
               </Button>
@@ -380,7 +370,7 @@ const handleReset = () => {
               </div>
               <div class="flex items-center justify-between">
                 <span class="text-xs text-muted-foreground">{{ t(`${SCOPE}.prediction.letterGrade`) }}:</span>
-                <span :class="getBadgeClasses(passResult.predictionResult.badgeColor || 'primary')">
+                <span :class="getBadgeClasses((passResult.predictionResult.badgeColor as 'primary'|'accent'|'muted'|'destructive') || 'primary')">
                   {{ passResult.predictionResult.letterGrade }}
                 </span>
               </div>
