@@ -8,7 +8,6 @@ import { useChatConversation } from '@/composables/chat/useChatConversation'
 import { computed } from 'vue'
 import { DropdownMenu, DropdownMenuTrigger, DropdownMenuContent, DropdownMenuItem } from '@/components/ui/dropdown-menu'
 import { cn } from '@/lib/utils'
-import type { ToolResult } from '@/types/chat'
 import { CHAT_TONES } from '@/constants/chat/tones'
 
 const { t } = useI18n()
@@ -47,9 +46,6 @@ const scrollToBottom = async () => {
 watch(messages, () => {
   scrollToBottom()
 }, { deep: true })
-
-// uiHtml rendering only; component mapping removed
-
 
 const emit = defineEmits<{ close: [] }>()
 const handleClose = () => {
