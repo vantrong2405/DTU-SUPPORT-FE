@@ -10,11 +10,15 @@ import {
 } from '@/components/ui/card'
 import * as Icon from '@/components/ui/icon'
 import { useNavigation } from '@/composables/common/useNavigation'
+import { useScrollReveal } from '@/composables/animations/useScrollReveal'
 
 const { t } = useI18n()
 const { navigateTo } = useNavigation()
 
 const SCOPE = 'tools.grid'
+
+const { target: headerRef } = useScrollReveal({ threshold: 0.1, animation: 'fade' })
+const { target: gridRef } = useScrollReveal({ threshold: 0.1, animation: 'slide', direction: 'up' })
 </script>
 
 <template>
@@ -31,7 +35,7 @@ const SCOPE = 'tools.grid'
     </div>
 
     <div class="container mx-auto px-4 sm:px-6 relative z-10">
-      <div class="text-center mb-10 sm:mb-12 md:mb-16">
+      <div ref="headerRef" class="text-center mb-10 sm:mb-12 md:mb-16">
         <h2 class="text-3xl sm:text-4xl md:text-5xl font-black text-foreground mb-4 sm:mb-6 px-2">
           {{ t(`${SCOPE}.titlePrefix`) }}
           <span class="text-primary">{{ t(`${SCOPE}.titlePrimary`) }}</span>
@@ -44,11 +48,11 @@ const SCOPE = 'tools.grid'
         </p>
       </div>
 
-      <div class="grid gap-4 sm:gap-6 md:gap-8 grid-cols-1 md:grid-cols-2 lg:grid-cols-3 max-w-7xl mx-auto">
+      <div ref="gridRef" class="grid gap-4 sm:gap-6 md:gap-8 grid-cols-1 md:grid-cols-2 lg:grid-cols-3 max-w-7xl mx-auto">
         <Card
           v-for="i in [0, 1, 2]"
           :key="i"
-          class="relative overflow-hidden border-border"
+          class="relative overflow-hidden border-border hover:shadow-lg transition-all duration-300 hover:scale-[1.02] will-change-transform"
         >
           <!-- Coming Soon Badge -->
           <div

@@ -8,10 +8,16 @@ import {
   CardTitle,
 } from '@/components/ui/card'
 import * as Icon from '@/components/ui/icon'
+import { useScrollReveal } from '@/composables/animations/useScrollReveal'
+import { useHoverEffect } from '@/composables/animations/useHoverEffect'
 
 const { t } = useI18n()
 
 const SCOPE = 'home.whatWeDo'
+
+const { target: headerRef } = useScrollReveal({ threshold: 0.1, animation: 'fade' })
+const { target: contentRef } = useScrollReveal({ threshold: 0.1, animation: 'slide', direction: 'up' })
+const { target: featuresRef } = useScrollReveal({ threshold: 0.1, animation: 'fade' })
 </script>
 
 <template>
@@ -19,7 +25,7 @@ const SCOPE = 'home.whatWeDo'
     <div class="container mx-auto px-4 sm:px-6">
       <div class="max-w-6xl mx-auto">
         <!-- Header -->
-        <div class="text-center mb-10 sm:mb-12 md:mb-16">
+        <div ref="headerRef" class="text-center mb-10 sm:mb-12 md:mb-16">
           <h2 class="text-3xl sm:text-4xl md:text-5xl font-black text-foreground mb-4 sm:mb-6 px-2">
             {{ t('home.whatWeDo.title') }}
           </h2>
@@ -29,7 +35,7 @@ const SCOPE = 'home.whatWeDo'
         </div>
 
         <!-- Main Content -->
-        <div class="grid lg:grid-cols-2 gap-8 sm:gap-10 md:gap-12 items-center mb-10 sm:mb-12 md:mb-16">
+        <div ref="contentRef" class="grid lg:grid-cols-2 gap-8 sm:gap-10 md:gap-12 items-center mb-10 sm:mb-12 md:mb-16">
           <!-- Left: Description -->
           <div class="order-2 lg:order-1">
             <h3 class="text-2xl sm:text-3xl font-bold text-foreground mb-4 sm:mb-6">
@@ -85,11 +91,11 @@ const SCOPE = 'home.whatWeDo'
         </div>
 
         <!-- Features Grid -->
-        <div class="grid sm:grid-cols-2 md:grid-cols-3 gap-4 sm:gap-6 md:gap-8">
+        <div ref="featuresRef" class="grid sm:grid-cols-2 md:grid-cols-3 gap-4 sm:gap-6 md:gap-8">
           <Card
             v-for="i in [0, 1, 2]"
             :key="i"
-            class="text-center hover:from-primary/5 hover:to-primary/10 transition-all duration-300 hover:shadow-lg border-border"
+            class="text-center hover:from-primary/5 hover:to-primary/10 transition-all duration-300 hover:shadow-lg border-border hover:scale-105 will-change-transform"
           >
             <CardHeader class="p-4 sm:p-6">
               <div

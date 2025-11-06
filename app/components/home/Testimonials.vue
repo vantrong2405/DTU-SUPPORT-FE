@@ -1,6 +1,8 @@
 <script setup lang="ts">
 import { useI18n } from 'vue-i18n'
 import * as Icon from '@/components/ui/icon'
+import { useScrollReveal } from '@/composables/animations/useScrollReveal'
+import { useHoverEffect } from '@/composables/animations/useHoverEffect'
 
 const { t } = useI18n()
 
@@ -22,6 +24,9 @@ const testimonials = computed(() => {
   }
   return items
 })
+
+const { target: headerRef } = useScrollReveal({ threshold: 0.1, animation: 'fade' })
+const { target: cardsRef } = useScrollReveal({ threshold: 0.1, animation: 'slide', direction: 'up' })
 </script>
 
 <template>
@@ -39,7 +44,7 @@ const testimonials = computed(() => {
     </div>
 
     <div class="container mx-auto px-4 sm:px-6 relative z-10">
-      <div class="text-center mb-10 sm:mb-12 md:mb-16">
+      <div ref="headerRef" class="text-center mb-10 sm:mb-12 md:mb-16">
         <h2 class="text-3xl sm:text-4xl md:text-5xl font-black text-foreground mb-4 sm:mb-6 px-2">
           {{ t('home.testimonials.title') }}
         </h2>
@@ -50,11 +55,11 @@ const testimonials = computed(() => {
         </p>
       </div>
 
-      <div class="grid gap-4 sm:gap-6 md:gap-8 grid-cols-1 sm:grid-cols-2 lg:grid-cols-4">
+      <div ref="cardsRef" class="grid gap-4 sm:gap-6 md:gap-8 grid-cols-1 sm:grid-cols-2 lg:grid-cols-4">
         <div
           v-for="testimonial in testimonials"
           :key="testimonial.name"
-          class="bg-card rounded-xl sm:rounded-2xl p-4 sm:p-5 md:p-6 shadow-lg hover:shadow-xl transition-all duration-300 border border-border"
+          class="bg-card rounded-xl sm:rounded-2xl p-4 sm:p-5 md:p-6 shadow-lg hover:shadow-xl transition-all duration-300 border border-border hover:scale-105 will-change-transform"
         >
           <div class="flex items-center mb-3 sm:mb-4">
             <div class="text-2xl sm:text-3xl mr-2 sm:mr-3 flex-shrink-0">{{ testimonial.avatar }}</div>

@@ -34,4 +34,5 @@ export {
   Plus,
   Trash2,
   List,
+  Loader2,
 } from 'lucide-vue-next'
