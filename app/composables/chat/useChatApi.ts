@@ -33,9 +33,5 @@ export const useChatApi = () => {
     return payload
   }
 
-  return {
-    isSending,
-    apiError,
-    sendChatMessage,
-  }
+  return { isSending, apiError, sendChatMessage }
 }

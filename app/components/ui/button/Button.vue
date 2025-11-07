@@ -32,8 +32,11 @@ const props = withDefaults(defineProps<Props>(), {
     <span v-if="loading" class="absolute inset-0 flex items-center justify-center">
       <Loader2 class="w-4 h-4 animate-spin" />
     </span>
-    <span :class="loading && 'invisible'">
+    <span v-if="loading" class="invisible">
       <slot />
     </span>
+    <template v-else>
+      <slot />
+    </template>
   </Primitive>
 </template>

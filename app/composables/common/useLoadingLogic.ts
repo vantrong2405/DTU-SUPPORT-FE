@@ -60,9 +60,5 @@ export const useLoadingLogic = () => {
     finishLoading()
   }
 
-  return {
-    isLoading: readonly(isLoading),
-    progress: readonly(progress),
-    initLoading
-  }
+  return { isLoading: readonly(isLoading), progress: readonly(progress), initLoading }
 }

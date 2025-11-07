@@ -3,6 +3,7 @@ import { useI18n } from 'vue-i18n'
 import { useNavigation } from '@/composables/common/useNavigation'
 import logoDtu from '@/assets/images/logo-dtu.png'
 import { useFadeIn } from '@/composables/animations/useFadeIn'
+import { useTextAnimation } from '@/composables/animations/useTextAnimation'
 import { useSlideIn } from '@/composables/animations/useSlideIn'
 import { useParallax } from '@/composables/animations/useParallax'
 
@@ -10,9 +11,9 @@ const { t } = useI18n()
 const { navigateTo } = useNavigation()
 
 const { elementRef: logoRef } = useFadeIn({ delay: 100 })
-const { elementRef: titleRef } = useSlideIn({ direction: 'bottom', delay: 200 })
-const { elementRef: subtitleRef } = useSlideIn({ direction: 'bottom', delay: 400 })
-const { elementRef: ctaRef } = useSlideIn({ direction: 'bottom', delay: 600 })
+const { elementRef: titleRef } = useTextAnimation({ splitBy: 'words', direction: 'up', stagger: 50, delay: 200, duration: 5000 })
+const { elementRef: subtitleRef } = useTextAnimation({ splitBy: 'words', direction: 'up', stagger: 30, delay: 600, duration: 5000 })
+const { elementRef: ctaRef } = useSlideIn({ direction: 'bottom', delay: 1000 })
 const { offset: parallaxOffset } = useParallax({ speed: 0.3 })
 </script>
 

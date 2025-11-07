@@ -15,7 +15,7 @@ const { localeList, isLocaleActive, handleLocaleSwitch } = useLocaleLogic()
   <div class="flex items-center">
     <DropdownMenu>
       <DropdownMenuTrigger as-child>
-        <Button variant="outline" size="sm" class="gap-2 rounded-lg">
+        <Button variant="outline" size="sm" class="gap-2 rounded-lg whitespace-nowrap">
           <span>{{
             localeList.find((localeItem) => isLocaleActive(localeItem.code))
               ?.englishName || 'ENGLISH'

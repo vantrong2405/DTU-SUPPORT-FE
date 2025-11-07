@@ -31,12 +31,5 @@ export const useThemeLogic = () => {
   const setHtmlAttributes = () =>
     useHead(() => ({ htmlAttrs: { 'data-theme': currentTheme.value } }))
 
-  return {
-    currentTheme,
-    isShowingLightMode,
-    themeIconColor,
-    handleThemeSwitch,
-    getThemeDisplayLabel,
-    setHtmlAttributes,
-  }
+  return { currentTheme, isShowingLightMode, themeIconColor, handleThemeSwitch, getThemeDisplayLabel, setHtmlAttributes }
 }

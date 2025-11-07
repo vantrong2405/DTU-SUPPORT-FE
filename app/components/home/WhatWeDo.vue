@@ -9,7 +9,6 @@ import {
 } from '@/components/ui/card'
 import * as Icon from '@/components/ui/icon'
 import { useScrollReveal } from '@/composables/animations/useScrollReveal'
-import { useHoverEffect } from '@/composables/animations/useHoverEffect'
 
 const { t } = useI18n()
 

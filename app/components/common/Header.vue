@@ -10,7 +10,6 @@ import logoDtu from '@/assets/images/logo-dtu.png'
 import { useAuthStore } from '@/stores/auth'
 import { useAuth } from '@/composables/auth'
 import { useFadeIn } from '@/composables/animations/useFadeIn'
-import { useHoverEffect } from '@/composables/animations/useHoverEffect'
 
 const { t } = useI18n()
 const { navigateTo } = useNavigation()
@@ -50,7 +49,7 @@ const handleNavClick = (
 
 const getNavLink = (item: { to: string; scroll?: boolean }) => {
   if (item.scroll) {
-    return route.path
+    return { path: route.path, query: route.query }
   }
   return navigateTo(item.to)
 }
@@ -84,7 +83,7 @@ const { elementRef: headerRef } = useFadeIn({ delay: 100 })
   <header ref="headerRef" class="bg-background shadow-lg sticky top-0 z-50">
     <div class="container mx-auto px-3 sm:px-4 lg:px-6">
       <div class="flex items-center justify-between h-14 sm:h-16">
-        <NuxtLink :to="navigateTo('/')" class="flex items-center space-x-2 sm:space-x-3 min-w-0 flex-shrink-0 flex-1"
+        <NuxtLink :to="navigateTo('/')" class="flex items-center space-x-2 sm:space-x-3 min-w-0 flex-shrink-0"
           @click="closeMenu">
           <div
             class="w-7 h-7 sm:w-8 sm:h-8 md:w-10 md:h-10 bg-primary rounded-lg flex items-center justify-center border-0 flex-shrink-0">
@@ -107,7 +106,7 @@ const { elementRef: headerRef } = useFadeIn({ delay: 100 })
           </div>
         </NuxtLink>
 
-        <nav class="hidden lg:flex items-center space-x-2 xl:space-x-3 2xl:space-x-4">
+        <nav class="hidden lg:flex items-center justify-center flex-1 space-x-2 xl:space-x-3 2xl:space-x-4">
           <NuxtLink
             v-for="item in navItems"
             :key="item.to"

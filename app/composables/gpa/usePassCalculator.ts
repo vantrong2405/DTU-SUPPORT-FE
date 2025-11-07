@@ -124,17 +124,17 @@ export const usePassCalculator = () => {
     passResult.remainingWeight = remainingWeight
 
     const requiredScore = (values.minPassingScore - currentScore) / (remainingWeight / 100)
-    const requiredFinalScore = Math.max(1.0, Math.min(10.0, requiredScore))
 
-    if (requiredFinalScore > 10.0) {
+    if (requiredScore > 10.0) {
       passResult.requiredFinalScore = null
       passResult.canPass = false
+      passResult.formula = `(${values.minPassingScore} - ${currentScore.toFixed(2)}) / ${(remainingWeight / 100).toFixed(2)} = ${requiredScore.toFixed(2)} (> 10.0, không thể đậu)`
     } else {
+      const requiredFinalScore = Math.max(1.0, Math.min(10.0, requiredScore))
       passResult.requiredFinalScore = Math.round(requiredFinalScore * 100) / 100
       passResult.canPass = true
+      passResult.formula = `(${values.minPassingScore} - ${currentScore.toFixed(2)}) / ${(remainingWeight / 100).toFixed(2)} = ${requiredFinalScore.toFixed(2)}`
     }
-
-    passResult.formula = `(${values.minPassingScore} - ${currentScore.toFixed(2)}) / ${(remainingWeight / 100).toFixed(2)} = ${requiredFinalScore.toFixed(2)}`
 
     if (values.finalExamScore !== undefined) {
       const finalScore = currentScore + (values.finalExamScore * remainingWeight / 100)

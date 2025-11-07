@@ -108,8 +108,7 @@ const { target: gridRef } = useScrollReveal({ threshold: 0.1, animation: 'slide'
             <div class="mt-auto">
               <NuxtLink
                 v-if="t(`${SCOPE}.items.${i}.status`) === 'available'"
-                :to="navigateTo(t(`${SCOPE}.items.${i}.to`)).path"
-                :query="navigateTo(t(`${SCOPE}.items.${i}.to`)).query"
+                :to="navigateTo(t(`${SCOPE}.items.${i}.to`))"
                 class="block"
               >
                 <Button class="w-full py-2.5 sm:py-3 px-3 sm:px-4 text-sm sm:text-base font-medium flex items-center justify-center">

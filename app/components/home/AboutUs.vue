@@ -1,7 +1,6 @@
 <script setup lang="ts">
 import { useI18n } from 'vue-i18n'
 import { useScrollReveal } from '@/composables/animations/useScrollReveal'
-import { useHoverEffect } from '@/composables/animations/useHoverEffect'
 
 const { t } = useI18n()
 
