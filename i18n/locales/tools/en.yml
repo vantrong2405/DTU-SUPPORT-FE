@@ -218,6 +218,68 @@ tools:
     pass:
       title: "Calculate Pass Score"
       description: "Calculate required final exam score to pass the course based on weights. This feature will be available soon."
+    ai:
+      title: "Ask AI"
+      description: "Ask AI questions to receive smart study advice. This feature will be available soon."
+    graduation:
+      classification:
+        title: "Duy Tan Graduation Classification"
+        subtitle: "Official graduation classification table of Duy Tan University"
+        table:
+          rank: "Rank"
+          gpaRange: "GPA Range (Scale 4)"
+          description: "Description"
+        ranks:
+          excellent:
+            name: "Excellent"
+            gpaRange: "3.60 – 4.00"
+            description: "Highest rank, requires GPA ≥ 3.60"
+          good:
+            name: "Good"
+            gpaRange: "3.20 – 3.59"
+            description: "Good rank, requires GPA ≥ 3.20"
+          fair:
+            name: "Fair"
+            gpaRange: "2.50 – 3.19"
+            description: "Fair rank, requires GPA ≥ 2.50"
+          average:
+            name: "Average"
+            gpaRange: "2.00 – 2.49"
+            description: "Average rank, requires GPA ≥ 2.00"
+        notes:
+          title: "Important Notes"
+          note1: "Graduation rank may be reduced if >5% credits are retaken or disciplinary action is taken"
+          note2: "Classification is based on final cumulative GPA (4.0 scale)"
+      gradingScale:
+        title: "Duy Tan Grading Scale"
+        subtitle: "Grade conversion table between different grading scales of Duy Tan University"
+        table:
+          category: "Category"
+          scale10: "Scale 10"
+          letter: "Letter Grade"
+          scale4: "Scale 4"
+          status: "Status"
+        categories:
+          good: "Good"
+          fair: "Fair"
+          average: "Average"
+          averageWeak: "Below Average"
+          conditional: "Pass"
+          fail: "Fail"
+          poor: "Poor"
+        status:
+          pass: "Pass"
+          conditional: "Conditional"
+          fail: "Fail"
+        notes:
+          title1: "Scale 4 is the official evaluation scale for"
+          point1: "Academic evaluation"
+          point2: "Graduation evaluation"
+          point3: "Student ranking"
+          title3: "Grade F (0.0)"
+          point6: "Credits are not accumulated"
+          point7: "Course must be retaken"
+          point8: "Not counted in cumulative GPA"
   pass:
     inputTitle: "Calculate Final Exam Score to Pass"
     inputSubtitle: "Enter score components and weights to calculate required final exam score"
@@ -294,68 +356,6 @@ tools:
         invalid: "Invalid final exam score"
         min: "Final exam score cannot be less than 0"
         max: "Final exam score cannot be greater than 10"
-    ai:
-      title: "Ask AI"
-      description: "Ask AI questions to receive smart study advice. This feature will be available soon."
-    graduation:
-      classification:
-        title: "Duy Tan Graduation Classification"
-        subtitle: "Official graduation classification table of Duy Tan University"
-        table:
-          rank: "Rank"
-          gpaRange: "GPA Range (Scale 4)"
-          description: "Description"
-        ranks:
-          excellent:
-            name: "Excellent"
-            gpaRange: "3.60 – 4.00"
-            description: "Highest rank, requires GPA ≥ 3.60"
-          good:
-            name: "Good"
-            gpaRange: "3.20 – 3.59"
-            description: "Good rank, requires GPA ≥ 3.20"
-          fair:
-            name: "Fair"
-            gpaRange: "2.50 – 3.19"
-            description: "Fair rank, requires GPA ≥ 2.50"
-          average:
-            name: "Average"
-            gpaRange: "2.00 – 2.49"
-            description: "Average rank, requires GPA ≥ 2.00"
-        notes:
-          title: "Important Notes"
-          note1: "Graduation rank may be reduced if >5% credits are retaken or disciplinary action is taken"
-          note2: "Classification is based on final cumulative GPA (4.0 scale)"
-      gradingScale:
-        title: "Duy Tan Grading Scale"
-        subtitle: "Grade conversion table between different grading scales of Duy Tan University"
-        table:
-          category: "Category"
-          scale10: "Scale 10"
-          letter: "Letter Grade"
-          scale4: "Scale 4"
-          status: "Status"
-        categories:
-          good: "Good"
-          fair: "Fair"
-          average: "Average"
-          averageWeak: "Below Average"
-          conditional: "Pass"
-          fail: "Fail"
-          poor: "Poor"
-        status:
-          pass: "Pass"
-          conditional: "Conditional"
-          fail: "Fail"
-        notes:
-          title1: "Scale 4 is the official evaluation scale for"
-          point1: "Academic evaluation"
-          point2: "Graduation evaluation"
-          point3: "Student ranking"
-          title3: "Grade F (0.0)"
-          point6: "Credits are not accumulated"
-          point7: "Course must be retaken"
-          point8: "Not counted in cumulative GPA"
   benefits:
     titlePrefix: "Why"
     titlePrimary: "use it?"

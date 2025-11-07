@@ -218,6 +218,68 @@ tools:
     pass:
       title: "合格点を計算"
       description: "重みに基づいてコースを通過するために必要な最終試験の点数を計算。この機能は近日公開予定です。"
+    ai:
+      title: "AI に質問"
+      description: "AI に質問して賢い学習アドバイスを受け取る。この機能は近日公開予定です。"
+    graduation:
+      classification:
+        title: "DTU 卒業区分"
+        subtitle: "DTU の公式卒業区分表"
+        table:
+          rank: "ランク"
+          gpaRange: "GPA 範囲 (4スケール)"
+          description: "説明"
+        ranks:
+          excellent:
+            name: "優秀"
+            gpaRange: "3.60 – 4.00"
+            description: "最高ランク、GPA ≥ 3.60 が必要"
+          good:
+            name: "良"
+            gpaRange: "3.20 – 3.59"
+            description: "良いランク、GPA ≥ 3.20 が必要"
+          fair:
+            name: "可"
+            gpaRange: "2.50 – 3.19"
+            description: "可ランク、GPA ≥ 2.50 が必要"
+          average:
+            name: "平均"
+            gpaRange: "2.00 – 2.49"
+            description: "平均ランク、GPA ≥ 2.00 が必要"
+        notes:
+          title: "重要な注意事項"
+          note1: "再履修単位が>5%ある場合、または処分を受けた場合、卒業ランクが下がる可能性があります"
+          note2: "区分は最終累積 GPA（4.0 スケール）に基づきます"
+      gradingScale:
+        title: "DTU 評価基準"
+        subtitle: "DTU の異なる評価基準間の換算表"
+        table:
+          category: "区分"
+          scale10: "10スケール"
+          letter: "レターグレード"
+          scale4: "4スケール"
+          status: "状態"
+        categories:
+          good: "良"
+          fair: "可"
+          average: "平均"
+          averageWeak: "平均未満"
+          conditional: "合格"
+          fail: "不可"
+          poor: "不良"
+        status:
+          pass: "合格"
+          conditional: "条件付き"
+          fail: "不合格"
+        notes:
+          title1: "4スケールは公式評価基準で"
+          point1: "学業評価"
+          point2: "卒業評価"
+          point3: "学生ランキング"
+          title3: "F (0.0)"
+          point6: "単位は累積されません"
+          point7: "コースを再履修する必要があります"
+          point8: "累積 GPA にカウントされません"
   pass:
     inputTitle: "合格するための期末試験の点数を計算"
     inputSubtitle: "各評価項目と重みを入力して、必要な期末試験の点数を計算"
@@ -294,68 +356,6 @@ tools:
         invalid: "無効な期末試験の点数"
         min: "期末試験の点数は 0 未満にできません"
         max: "期末試験の点数は 10 を超えることはできません"
-    ai:
-      title: "AI に質問"
-      description: "AI に質問して賢い学習アドバイスを受け取る。この機能は近日公開予定です。"
-    graduation:
-      classification:
-        title: "DTU 卒業区分"
-        subtitle: "DTU の公式卒業区分表"
-        table:
-          rank: "ランク"
-          gpaRange: "GPA 範囲 (4スケール)"
-          description: "説明"
-        ranks:
-          excellent:
-            name: "優秀"
-            gpaRange: "3.60 – 4.00"
-            description: "最高ランク、GPA ≥ 3.60 が必要"
-          good:
-            name: "良"
-            gpaRange: "3.20 – 3.59"
-            description: "良いランク、GPA ≥ 3.20 が必要"
-          fair:
-            name: "可"
-            gpaRange: "2.50 – 3.19"
-            description: "可ランク、GPA ≥ 2.50 が必要"
-          average:
-            name: "平均"
-            gpaRange: "2.00 – 2.49"
-            description: "平均ランク、GPA ≥ 2.00 が必要"
-        notes:
-          title: "重要な注意事項"
-          note1: "再履修単位が>5%ある場合、または処分を受けた場合、卒業ランクが下がる可能性があります"
-          note2: "区分は最終累積 GPA（4.0 スケール）に基づきます"
-      gradingScale:
-        title: "DTU 評価基準"
-        subtitle: "DTU の異なる評価基準間の換算表"
-        table:
-          category: "区分"
-          scale10: "10スケール"
-          letter: "レターグレード"
-          scale4: "4スケール"
-          status: "状態"
-        categories:
-          good: "良"
-          fair: "可"
-          average: "平均"
-          averageWeak: "平均未満"
-          conditional: "合格"
-          fail: "不可"
-          poor: "不良"
-        status:
-          pass: "合格"
-          conditional: "条件付き"
-          fail: "不合格"
-        notes:
-          title1: "4スケールは公式評価基準で"
-          point1: "学業評価"
-          point2: "卒業評価"
-          point3: "学生ランキング"
-          title3: "F (0.0)"
-          point6: "単位は累積されません"
-          point7: "コースを再履修する必要があります"
-          point8: "累積 GPA にカウントされません"
   benefits:
     titlePrefix: "なぜ"
     titlePrimary: "使うべき？"
