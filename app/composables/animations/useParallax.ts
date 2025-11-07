@@ -1,11 +1,7 @@
 import { ref, onMounted, onUnmounted } from 'vue'
 import { useWindowScroll } from '@vueuse/core'
-
-export interface ParallaxOptions {
-  speed?: number
-  direction?: 'vertical' | 'horizontal'
-  respectReducedMotion?: boolean
-}
+import type { ParallaxOptions } from '~/types/animations'
+import { shouldSkipAnimation } from './helpers'
 
 export function useParallax(options?: ParallaxOptions) {
   const offset = ref(0)
@@ -13,15 +9,8 @@ export function useParallax(options?: ParallaxOptions) {
   const speed = options?.speed ?? 0.5
   const direction = options?.direction ?? 'vertical'
 
-  const getPrefersReducedMotion = (): boolean => {
-    if (typeof window === 'undefined') return false
-    return window.matchMedia('(prefers-reduced-motion: reduce)').matches
-  }
-
-  const prefersReducedMotion = getPrefersReducedMotion()
-
   const update = () => {
-    if (prefersReducedMotion && options?.respectReducedMotion !== false) {
+    if (shouldSkipAnimation(options?.respectReducedMotion)) {
       offset.value = 0
       return
     }

@@ -1,13 +1,7 @@
 import { ref, onMounted, onUnmounted } from 'vue'
 import { animate } from 'animejs'
-import type { AnimationConfig } from '~/types/animations'
-
-export interface HoverEffectOptions extends Partial<AnimationConfig> {
-  scale?: number
-  translateY?: number
-  translateX?: number
-  rotate?: number
-}
+import type { HoverEffectOptions } from '~/types/animations'
+import { shouldSkipAnimation } from './helpers'
 
 export function useHoverEffect(options?: HoverEffectOptions) {
   const elementRef = ref<HTMLElement>()
@@ -15,72 +9,50 @@ export function useHoverEffect(options?: HoverEffectOptions) {
   const isAnimating = ref(false)
   let currentAnimation: ReturnType<typeof animate> | null = null
 
-  const getPrefersReducedMotion = (): boolean => {
-    if (typeof window === 'undefined') return false
-    return window.matchMedia('(prefers-reduced-motion: reduce)').matches
+  const duration = options?.duration ?? 300
+  const easing = options?.easing ?? 'easeOutCubic'
+  const scale = options?.scale ?? 1.05
+  const translateY = options?.translateY ?? -5
+  const translateX = options?.translateX ?? 0
+  const rotate = options?.rotate ?? 0
+
+  const runAnimation = (props: Record<string, any>) => {
+    if (!elementRef.value) return
+
+    isAnimating.value = true
+
+    if (currentAnimation) {
+      currentAnimation.revert()
+    }
+
+    currentAnimation = animate(elementRef.value, {
+      ...props,
+      duration,
+      easing,
+      complete: () => {
+        isAnimating.value = false
+      },
+    })
   }
 
-  const prefersReducedMotion = getPrefersReducedMotion()
-
   const handleMouseEnter = () => {
-    if (prefersReducedMotion && options?.respectReducedMotion !== false) {
+    if (shouldSkipAnimation(options?.respectReducedMotion)) {
       isHovered.value = true
       return
     }
 
-    if (!elementRef.value) return
-
-    isAnimating.value = true
     isHovered.value = true
-
-    const scale = options?.scale ?? 1.05
-    const translateY = options?.translateY ?? -5
-    const translateX = options?.translateX ?? 0
-    const rotate = options?.rotate ?? 0
-
-    if (currentAnimation) {
-      currentAnimation.revert()
-    }
-
-    currentAnimation = animate(elementRef.value, {
-      scale,
-      translateY,
-      translateX,
-      rotate,
-      duration: options?.duration || 300,
-      easing: options?.easing || 'easeOutCubic',
-      complete: () => {
-        isAnimating.value = false
-      },
-    })
+    runAnimation({ scale, translateY, translateX, rotate })
   }
 
   const handleMouseLeave = () => {
-    if (prefersReducedMotion && options?.respectReducedMotion !== false) {
+    if (shouldSkipAnimation(options?.respectReducedMotion)) {
       isHovered.value = false
       return
     }
 
-    if (!elementRef.value) return
-
-    isAnimating.value = true
     isHovered.value = false
-
-    if (currentAnimation) {
-      currentAnimation.revert()
-    }
-
-    currentAnimation = animate(elementRef.value, {
-      scale: 1,
-      translateY: 0,
-      translateX: 0,
-      rotate: 0,
-      duration: options?.duration || 300,
-      easing: options?.easing || 'easeOutCubic',
-      complete: () => {
-        isAnimating.value = false
-      },
-    })
+    runAnimation({ scale: 1, translateY: 0, translateX: 0, rotate: 0 })
   }
 
   onMounted(() => {

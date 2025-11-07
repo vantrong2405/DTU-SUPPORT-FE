@@ -1,13 +1,37 @@
-import { ref, onMounted, onUnmounted } from 'vue'
+import { ref, onUnmounted } from 'vue'
 import { useIntersectionObserver } from '@vueuse/core'
 import { animate } from 'animejs'
-import type { AnimationConfig } from '~/types/animations'
+import type { ScrollRevealOptions } from '~/types/animations'
+import { shouldSkipAnimation, getDefaultAnimationConfig } from './helpers'
 
-export interface ScrollRevealOptions extends Partial<AnimationConfig> {
-  threshold?: number
-  rootMargin?: string
-  animation?: 'fade' | 'slide' | 'scale'
-  direction?: 'up' | 'down' | 'left' | 'right'
+const getSlideAnimationProps = (direction: string) => {
+  const distance = 50
+  switch (direction) {
+    case 'up':
+      return { translateY: [distance, 0] }
+    case 'down':
+      return { translateY: [-distance, 0] }
+    case 'left':
+      return { translateX: [distance, 0] }
+    case 'right':
+      return { translateX: [-distance, 0] }
+    default:
+      return {}
+  }
+}
+
+const getAnimationProps = (animationType: string, direction: string) => {
+  const baseProps = { opacity: [0, 1] }
+
+  if (animationType === 'slide') {
+    return { ...baseProps, ...getSlideAnimationProps(direction) }
+  }
+
+  if (animationType === 'scale') {
+    return { ...baseProps, scale: [0.8, 1] }
+  }
+
+  return baseProps
 }
 
 export function useScrollReveal(options?: ScrollRevealOptions) {
@@ -15,54 +39,29 @@ export function useScrollReveal(options?: ScrollRevealOptions) {
   const isVisible = ref(false)
   const isAnimating = ref(false)
 
-  const getPrefersReducedMotion = (): boolean => {
-    if (typeof window === 'undefined') return false
-    return window.matchMedia('(prefers-reduced-motion: reduce)').matches
-  }
-
-  const prefersReducedMotion = getPrefersReducedMotion()
+  const config = getDefaultAnimationConfig()
+  const duration = options?.duration ?? config.duration
+  const easing = options?.easing ?? config.easing
+  const delay = options?.delay ?? config.delay
+  const animationType = options?.animation ?? 'fade'
+  const direction = options?.direction ?? 'up'
 
   const doAnimate = () => {
     if (!target.value) return
 
-    if (prefersReducedMotion && options?.respectReducedMotion !== false) {
+    if (shouldSkipAnimation(options?.respectReducedMotion)) {
       isVisible.value = true
       return
     }
 
     isAnimating.value = true
-    const animationType = options?.animation || 'fade'
-    const direction = options?.direction || 'up'
-
-    let animationProps: Record<string, any> = {
-      opacity: [0, 1],
-    }
-
-    if (animationType === 'slide') {
-      const distance = 50
-      switch (direction) {
-        case 'up':
-          animationProps.translateY = [distance, 0]
-          break
-        case 'down':
-          animationProps.translateY = [-distance, 0]
-          break
-        case 'left':
-          animationProps.translateX = [distance, 0]
-          break
-        case 'right':
-          animationProps.translateX = [-distance, 0]
-          break
-      }
-    } else if (animationType === 'scale') {
-      animationProps.scale = [0.8, 1]
-    }
+    const animationProps = getAnimationProps(animationType, direction)
 
     animate(target.value, {
       ...animationProps,
-      duration: options?.duration || 800,
-      easing: options?.easing || 'easeOutCubic',
-      delay: options?.delay || 0,
+      duration,
+      easing,
+      delay,
       complete: () => {
         isAnimating.value = false
         isVisible.value = true
@@ -72,16 +71,14 @@ export function useScrollReveal(options?: ScrollRevealOptions) {
 
   const { stop } = useIntersectionObserver(
     target,
-    ([{ isIntersecting }]) => {
-      if (isIntersecting && !isVisible.value) {
+    (entries) => {
+      const entry = entries[0]
+      if (entry?.isIntersecting && !isVisible.value) {
         doAnimate()
         stop()
       }
     },
-    {
-      threshold: options?.threshold ?? 0.1,
-      rootMargin: options?.rootMargin ?? '0px',
-    }
+    { threshold: options?.threshold ?? 0.1, rootMargin: options?.rootMargin ?? '0px' }
   )
 
   onUnmounted(() => {

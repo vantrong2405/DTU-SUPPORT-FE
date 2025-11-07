@@ -1,24 +1,8 @@
 import { ref, readonly, onMounted, onUnmounted } from 'vue'
-
-export interface PerformanceMetrics {
-  frameRate: number
-  averageFrameTime: number
-  droppedFrames: number
-}
-
-export interface PerformanceOptions {
-  enabled?: boolean
-  warningThreshold?: number
-  onWarning?: (metrics: PerformanceMetrics) => void
-}
+import type { PerformanceMetrics, PerformanceOptions } from '~/types/animations'
 
 export function useAnimationPerformance(options?: PerformanceOptions) {
-  const metrics = ref<PerformanceMetrics>({
-    frameRate: 0,
-    averageFrameTime: 0,
-    droppedFrames: 0,
-  })
-
+  const metrics = ref<PerformanceMetrics>({ frameRate: 0, averageFrameTime: 0, droppedFrames: 0 })
   const isMonitoring = ref(false)
   const enabled = options?.enabled ?? true
   const warningThreshold = options?.warningThreshold ?? 30
@@ -43,11 +27,7 @@ export function useAnimationPerformance(options?: PerformanceOptions) {
     const frameRate = 1000 / averageFrameTime
     const droppedFrames = frameTimes.filter((time) => time > 20).length
 
-    metrics.value = {
-      frameRate: Math.round(frameRate),
-      averageFrameTime: Math.round(averageFrameTime * 100) / 100,
-      droppedFrames,
-    }
+    metrics.value = { frameRate: Math.round(frameRate), averageFrameTime: Math.round(averageFrameTime * 100) / 100, droppedFrames }
 
     if (frameRate < warningThreshold && options?.onWarning) {
       options.onWarning(metrics.value)
@@ -85,10 +65,5 @@ export function useAnimationPerformance(options?: PerformanceOptions) {
     stop()
   })
 
-  return {
-    metrics: readonly(metrics),
-    isMonitoring: readonly(isMonitoring),
-    start,
-    stop,
-  }
+  return { metrics: readonly(metrics), isMonitoring: readonly(isMonitoring), start, stop }
 }

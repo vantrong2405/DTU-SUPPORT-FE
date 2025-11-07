@@ -1,12 +1,20 @@
 import { ref, onMounted, onUnmounted } from 'vue'
 import { animate } from 'animejs'
-import type { AnimationConfig } from '~/types/animations'
+import type { SlideInOptions, SlideDirection } from '~/types/animations'
+import { shouldSkipAnimation, getDefaultAnimationConfig } from './helpers'
 
-export type SlideDirection = 'left' | 'right' | 'top' | 'bottom'
-
-export interface SlideInOptions extends Partial<AnimationConfig> {
-  direction?: SlideDirection
-  distance?: number
+const getSlidePosition = (direction: SlideDirection, distance: number) => {
+  switch (direction) {
+    case 'left':
+      return { translateX: [-distance, 0], translateY: 0 }
+    case 'right':
+      return { translateX: [distance, 0], translateY: 0 }
+    case 'top':
+      return { translateX: 0, translateY: [-distance, 0] }
+    case 'bottom':
+    default:
+      return { translateX: 0, translateY: [distance, 0] }
+  }
 }
 
 export function useSlideIn(options?: SlideInOptions) {
@@ -15,29 +23,15 @@ export function useSlideIn(options?: SlideInOptions) {
   const isAnimating = ref(false)
   let currentAnimation: ReturnType<typeof animate> | null = null
 
-  const getPrefersReducedMotion = (): boolean => {
-    if (typeof window === 'undefined') return false
-    return window.matchMedia('(prefers-reduced-motion: reduce)').matches
-  }
-
-  const prefersReducedMotion = getPrefersReducedMotion()
-
-  const getInitialPosition = (direction: SlideDirection = 'bottom', distance: number = 50) => {
-    switch (direction) {
-      case 'left':
-        return { translateX: [-distance, 0], translateY: 0 }
-      case 'right':
-        return { translateX: [distance, 0], translateY: 0 }
-      case 'top':
-        return { translateX: 0, translateY: [-distance, 0] }
-      case 'bottom':
-      default:
-        return { translateX: 0, translateY: [distance, 0] }
-    }
-  }
+  const config = getDefaultAnimationConfig()
+  const duration = options?.duration ?? config.duration
+  const easing = options?.easing ?? config.easing
+  const delay = options?.delay ?? config.delay
+  const direction = options?.direction ?? 'bottom'
+  const distance = options?.distance ?? 50
 
   const start = () => {
-    if (prefersReducedMotion && options?.respectReducedMotion !== false) {
+    if (shouldSkipAnimation(options?.respectReducedMotion)) {
       isVisible.value = true
       return
     }
@@ -45,20 +39,18 @@ export function useSlideIn(options?: SlideInOptions) {
     if (!elementRef.value) return
 
     isAnimating.value = true
-    const direction = options?.direction || 'bottom'
-    const distance = options?.distance || 50
-    const position = getInitialPosition(direction, distance)
 
     if (currentAnimation) {
       currentAnimation.revert()
     }
 
+    const position = getSlidePosition(direction, distance)
     currentAnimation = animate(elementRef.value, {
       opacity: [0, 1],
       ...position,
-      duration: options?.duration || 800,
-      easing: options?.easing || 'easeOutCubic',
-      delay: options?.delay || 0,
+      duration,
+      easing,
+      delay,
       complete: () => {
         isAnimating.value = false
         isVisible.value = true

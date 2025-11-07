@@ -1,6 +1,7 @@
 import { ref, onMounted, onUnmounted } from 'vue'
 import { animate } from 'animejs'
 import type { AnimationConfig } from '~/types/animations'
+import { shouldSkipAnimation, getDefaultAnimationConfig } from './helpers'
 
 export function useFadeIn(options?: Partial<AnimationConfig>) {
   const elementRef = ref<HTMLElement>()
@@ -8,15 +9,13 @@ export function useFadeIn(options?: Partial<AnimationConfig>) {
   const isAnimating = ref(false)
   let currentAnimation: ReturnType<typeof animate> | null = null
 
-  const getPrefersReducedMotion = (): boolean => {
-    if (typeof window === 'undefined') return false
-    return window.matchMedia('(prefers-reduced-motion: reduce)').matches
-  }
-
-  const prefersReducedMotion = getPrefersReducedMotion()
+  const config = getDefaultAnimationConfig()
+  const duration = options?.duration ?? config.duration
+  const easing = options?.easing ?? config.easing
+  const delay = options?.delay ?? config.delay
 
   const start = () => {
-    if (prefersReducedMotion && options?.respectReducedMotion !== false) {
+    if (shouldSkipAnimation(options?.respectReducedMotion)) {
       isVisible.value = true
       return
     }
@@ -27,9 +26,9 @@ export function useFadeIn(options?: Partial<AnimationConfig>) {
     currentAnimation = animate(elementRef.value, {
       opacity: [0, 1],
       translateY: [20, 0],
-      duration: options?.duration || 800,
-      easing: options?.easing || 'easeOutCubic',
-      delay: options?.delay || 0,
+      duration,
+      easing,
+      delay,
       complete: () => {
         isAnimating.value = false
         isVisible.value = true

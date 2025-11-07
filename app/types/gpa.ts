@@ -36,3 +36,24 @@ export interface PassResult {
   formula: string | null
   predictionResult: PassResultPrediction | null
 }
+
+export interface TargetResult {
+  maxGpaWithAllA: number | null
+  canReachTargetWithAllA: boolean | null
+  graduationClassification: GraduationClassification | null
+}
+
+export interface SimulationResult {
+  finalGpa: number | null
+  remainingGpa: number | null
+  graduationClassification: GraduationClassification | null
+  distributionSummary: string | null
+  totalCredits: number | null
+  isWeakResult: boolean
+}
+
+export interface PeResult {
+  average: number | null
+  isPass: boolean | null
+  inputs: { pe1: number; pe2: number; pe3: number } | null
+}

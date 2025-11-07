@@ -1,12 +1,23 @@
 import { ref, onMounted, onUnmounted, nextTick } from 'vue'
 import { animate } from 'animejs'
 import { splitText } from 'animejs/text'
-import type { AnimationConfig } from '~/types/animations'
+import type { TextAnimationOptions } from '~/types/animations'
+import { shouldSkipAnimation } from './helpers'
 
-export interface TextAnimationOptions extends Omit<Partial<AnimationConfig>, 'direction'> {
-  splitBy?: 'words' | 'chars'
-  stagger?: number
-  direction?: 'up' | 'down' | 'left' | 'right'
+const getTextDirectionProps = (direction: string): Record<string, any> => {
+  const distance = 30
+  switch (direction) {
+    case 'up':
+      return { translateY: [distance, 0] }
+    case 'down':
+      return { translateY: [-distance, 0] }
+    case 'left':
+      return { translateX: [distance, 0] }
+    case 'right':
+      return { translateX: [-distance, 0] }
+    default:
+      return {}
+  }
 }
 
 export function useTextAnimation(options?: TextAnimationOptions) {
@@ -16,15 +27,14 @@ export function useTextAnimation(options?: TextAnimationOptions) {
   let currentAnimation: ReturnType<typeof animate> | null = null
   let splitResult: ReturnType<typeof splitText> | null = null
 
-  const getPrefersReducedMotion = (): boolean => {
-    if (typeof window === 'undefined') return false
-    return window.matchMedia('(prefers-reduced-motion: reduce)').matches
-  }
-
-  const prefersReducedMotion = getPrefersReducedMotion()
+  const duration = options?.duration ?? 1000
+  const easing = options?.easing ?? 'easeOutExpo'
+  const splitBy = options?.splitBy ?? 'words'
+  const direction = options?.direction ?? 'up'
+  const staggerDelay = options?.stagger ?? 50
 
   const start = async () => {
-    if (prefersReducedMotion && options?.respectReducedMotion !== false) {
+    if (shouldSkipAnimation(options?.respectReducedMotion)) {
       isVisible.value = true
       return
     }
@@ -33,15 +43,8 @@ export function useTextAnimation(options?: TextAnimationOptions) {
 
     await nextTick()
 
-    const splitBy = options?.splitBy || 'words'
-    const direction = options?.direction || 'up'
-    const staggerDelay = options?.stagger || 50
-
     try {
-      splitResult = splitText(elementRef.value, {
-        words: splitBy === 'words',
-        chars: splitBy === 'chars',
-      })
+      splitResult = splitText(elementRef.value, { words: splitBy === 'words', chars: splitBy === 'chars' })
 
       const targets = splitBy === 'words' ? splitResult.words : splitResult.chars
 
@@ -49,33 +52,15 @@ export function useTextAnimation(options?: TextAnimationOptions) {
 
       isAnimating.value = true
 
-      let animationProps: Record<string, any> = {
-        opacity: [0, 1],
-      }
-
-      const distance = 30
-      switch (direction) {
-        case 'up':
-          animationProps.translateY = [distance, 0]
-          break
-        case 'down':
-          animationProps.translateY = [-distance, 0]
-          break
-        case 'left':
-          animationProps.translateX = [distance, 0]
-          break
-        case 'right':
-          animationProps.translateX = [-distance, 0]
-          break
-      }
+      const animationProps = { opacity: [0, 1], ...getTextDirectionProps(direction) }
 
       currentAnimation = animate(targets, {
         ...animationProps,
-        duration: options?.duration || 1000,
-        easing: options?.easing || 'easeOutExpo',
+        duration,
+        easing,
         delay: (el: any, i: number) => i * staggerDelay,
         loop: true,
-        direction: 'alternate',
+        alternate: true,
         complete: () => {
           isAnimating.value = false
           isVisible.value = true

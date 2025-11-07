@@ -4,25 +4,18 @@ import { toTypedSchema } from '@vee-validate/zod'
 import { useI18n } from 'vue-i18n'
 import { createPeSchema, type PeValues } from '@/schemas/gpa/pe'
 import { useAuthStore } from '@/stores/auth'
+import type { PeResult } from '@/types/gpa'
 
 export const usePeCalculator = () => {
   const { t } = useI18n()
 
   const peSchema = createPeSchema(t)
-  const peResult = reactive<{ average: number | null; isPass: boolean | null; inputs: { pe1: number; pe2: number; pe3: number } | null }>({
-    average: null,
-    isPass: null,
-    inputs: null,
-  })
+  const peResult = reactive<PeResult>({ average: null, isPass: null, inputs: null })
 
   const { handleSubmit, isSubmitting, resetForm, values } = useForm<PeValues>({
     validationSchema: toTypedSchema(peSchema),
     validateOnMount: false,
-    initialValues: {
-      pe1: 0,
-      pe2: 0,
-      pe3: 0,
-    },
+    initialValues: { pe1: 0, pe2: 0, pe3: 0 },
   })
 
   const onPeSubmit = handleSubmit((values: PeValues) => {
