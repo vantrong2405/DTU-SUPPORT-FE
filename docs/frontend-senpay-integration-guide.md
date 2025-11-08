@@ -24,7 +24,7 @@ Hướng dẫn tích hợp SenPay payment gateway vào Frontend application. Fro
 
 ### 1. Tạo Payment Request
 
-**Endpoint:** `POST /api/payments`
+**Endpoint:** `POST /payments`
 
 **Authentication:** Required (user token)
 
@@ -53,7 +53,7 @@ Hướng dẫn tích hợp SenPay payment gateway vào Frontend application. Fro
       "order_invoice_number": "123",
       "order_description": "Subscription: Pro Plan",
       "return_url": "http://localhost:3000/payment/return",
-      "ipn_url": "https://xxxx.ngrok.io/api/webhooks/senpay",
+      "ipn_url": "https://xxxx.ngrok.io/webhooks/senpay",
       "signature": "BASE64_ENCODED_SIGNATURE"
     },
     "expires_at": "2025-11-07T00:15:00Z",
@@ -86,7 +86,7 @@ Hướng dẫn tích hợp SenPay payment gateway vào Frontend application. Fro
 
 ### 2. Kiểm tra Payment Status
 
-**Endpoint:** `GET /api/payments/:id`
+**Endpoint:** `GET /payments/:id`
 
 **Authentication:** Required (user token)
 
@@ -131,7 +131,7 @@ Hướng dẫn tích hợp SenPay payment gateway vào Frontend application. Fro
 // Example: React/Next.js
 async function createPayment(subscriptionPlanId) {
   try {
-    const response = await fetch('/api/payments', {
+    const response = await fetch('/payments', {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json',
@@ -254,7 +254,7 @@ function PaymentReturnPage() {
 
   async function checkPaymentStatus(paymentId) {
     try {
-      const response = await fetch(`/api/payments/${paymentId}`, {
+      const response = await fetch(`/payments/${paymentId}`, {
         headers: {
           'Authorization': `Bearer ${userToken}`
         }
@@ -288,7 +288,7 @@ function PaymentReturnPage() {
   function pollPaymentStatus(paymentId) {
     // Poll payment status mỗi 3 giây
     const interval = setInterval(async () => {
-      const response = await fetch(`/api/payments/${paymentId}`, {
+      const response = await fetch(`/payments/${paymentId}`, {
         headers: {
           'Authorization': `Bearer ${userToken}`
         }
@@ -482,7 +482,7 @@ requiredFields.forEach(field => {
 
 ## Summary
 
-1. **Tạo Payment:** Gọi `POST /api/payments` với `subscription_plan_id`
+1. **Tạo Payment:** Gọi `POST /payments` với `subscription_plan_id`
 2. **Submit Form:** Tạo HTML form với `form_data` và submit đến `checkout_url`
 3. **Handle Redirect:** Parse query params từ SenPay redirect và check payment status
 4. **Poll Status:** Nếu payment vẫn pending, poll status mỗi 3 giây
@@ -492,12 +492,12 @@ requiredFields.forEach(field => {
 
 ## API Reference
 
-### POST /api/payments
+### POST /payments
 - **Auth:** Required
 - **Body:** `{ payment: { subscription_plan_id, payment_method } }`
 - **Response:** Payment object với `checkout_url` và `form_data`
 
-### GET /api/payments/:id
+### GET /payments/:id
 - **Auth:** Required
 - **Response:** Payment object với current status
 

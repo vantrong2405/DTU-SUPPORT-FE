@@ -35,4 +35,8 @@ export {
   Trash2,
   List,
   Loader2,
+  CreditCard,
+  Crown,
+  Sparkles,
+  Zap,
 } from 'lucide-vue-next'
