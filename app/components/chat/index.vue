@@ -7,7 +7,7 @@ import * as Icon from '@/components/ui/icon'
 import { useChatConversation } from '@/composables/chat/useChatConversation'
 import { computed } from 'vue'
 import { DropdownMenu, DropdownMenuTrigger, DropdownMenuContent, DropdownMenuItem } from '@/components/ui/dropdown-menu'
-import { cn } from '@/lib/utils'
+import { cn, sanitizeHtml, handleKey } from '@/lib/utils'
 import { CHAT_TONES } from '@/constants/chat/tones'
 
 const { t } = useI18n()
@@ -30,10 +30,10 @@ const handleSend = async () => {
 }
 
 const handleKeyDown = (event: KeyboardEvent) => {
-  if (event.key === 'Enter' && !event.shiftKey) {
-    event.preventDefault()
-    handleSend()
-  }
+  handleKey(event, handleSend, {
+    key: 'Enter',
+    shiftKey: false,
+  })
 }
 
 const scrollToBottom = async () => {
@@ -52,6 +52,11 @@ const handleClose = () => {
   emit('close')
 }
 
+const getSanitizedHtml = (html: string | undefined): string => {
+  if (!html) return ''
+  return sanitizeHtml(html)
+}
+
 </script>
 
 <template>
@@ -66,11 +71,10 @@ const handleClose = () => {
       <Button variant="secondary" size="sm" class="h-8 px-2.5" @click="handleClose">
         <Icon.X class="w-4 h-4" />
       </Button>
-
     </div>
 
     <div class="flex-1 overflow-y-auto p-3 sm:p-5 space-y-4 scrollbar-thin scrollbar-thumb-border scrollbar-track-transparent" ref="messagesContainer">
-      <div v-if="messages.length === 0" class="flex flex-col items-center justify-center h-full text-center px-4 animate-fade-in">
+      <div v-if="messages.length === 0" class="flex flex-col items-center justify-center h-full text-center px-4 animate-in fade-in-0 slide-in-from-bottom-4 duration-500">
         <div class="relative mb-6">
           <div class="absolute inset-0 bg-accent/20 rounded-full blur-2xl animate-pulse"></div>
           <div class="relative bg-accent/10 rounded-full p-4 ring-2 ring-accent/20">
@@ -85,12 +89,21 @@ const handleClose = () => {
         </p>
       </div>
 
-      <TransitionGroup name="message" tag="div" class="space-y-4">
-        <div v-for="msg in messages" :key="msg.id" class="flex flex-col gap-2 animate-slide-up">
+      <TransitionGroup
+        tag="div"
+        class="space-y-4"
+        enter-active-class="transition duration-300 ease-out"
+        enter-from-class="opacity-0 transform translate-y-2.5"
+        enter-to-class="opacity-100 transform translate-y-0"
+        leave-active-class="transition duration-300 ease-in"
+        leave-from-class="opacity-100 transform translate-y-0"
+        leave-to-class="opacity-0 transform -translate-y-2.5"
+      >
+        <div v-for="msg in messages" :key="msg.id" class="flex flex-col gap-2">
           <div
             :class="cn(
               'flex gap-3 max-w-[82%] sm:max-w-[72%] md:max-w-[68%] transition-all duration-300',
-              msg.role === 'user' ? 'ml-auto items-end' : 'mr-auto items-start'
+              msg.role === 'user' ? 'ml-auto items-end ' : 'mr-auto items-start'
             )"
           >
             <div
@@ -105,7 +118,7 @@ const handleClose = () => {
                 :class="cn(
                   'rounded-2xl px-3.5 py-2.5 sm:px-4 sm:py-3 text-sm sm:text-base shadow-sm transition-all duration-200 leading-relaxed',
                   msg.role === 'user'
-                    ? 'bg-gradient-to-br from-primary to-primary/90 text-primary-foreground rounded-tr-sm shadow-primary/20'
+                    ? 'bg-primary text-primary-foreground rounded-tr-sm shadow-primary/20'
                     : 'bg-muted/70 backdrop-blur-sm text-foreground/90 rounded-tl-sm border border-border/30'
                 )"
               >
@@ -115,7 +128,7 @@ const handleClose = () => {
               <div
                 v-if="msg.toolResult && msg.toolResult.uiHtml"
                 class="max-w-full"
-                v-html="msg.toolResult.uiHtml"
+                v-html="getSanitizedHtml(msg.toolResult.uiHtml)"
               />
             </div>
 
@@ -129,7 +142,15 @@ const handleClose = () => {
         </div>
       </TransitionGroup>
 
-      <Transition name="fade" mode="out-in">
+      <Transition
+        mode="out-in"
+        enter-active-class="transition duration-200 ease-out"
+        enter-from-class="opacity-0"
+        enter-to-class="opacity-100"
+        leave-active-class="transition duration-200 ease-in"
+        leave-from-class="opacity-100"
+        leave-to-class="opacity-0"
+      >
         <div v-if="isLoading" class="flex gap-3 max-w-[72%] mr-auto items-start">
           <div class="flex-shrink-0 w-9 h-9 rounded-full bg-gradient-to-br from-accent/20 to-accent/10 flex items-center justify-center ring-2 ring-accent/20 shadow-sm animate-pulse">
             <Icon.Bot class="w-5 h-5 text-accent" />
@@ -190,26 +211,6 @@ const handleClose = () => {
 </template>
 
 <style scoped>
-.message-enter-active,
-.message-leave-active {
-  transition: all 0.3s ease;
-}
-.message-enter-from { opacity: 0; transform: translateY(10px); }
-.message-enter-to { opacity: 1; transform: translateY(0); }
-.message-leave-from { opacity: 1; transform: translateY(0); }
-.message-leave-to { opacity: 0; transform: translateY(-10px); }
-
-.fade-enter-active,
-.fade-leave-active { transition: opacity 0.2s ease; }
-.fade-enter-from,
-.fade-leave-to { opacity: 0; }
-
-@keyframes fade-in { from { opacity: 0; transform: translateY(10px); } to { opacity: 1; transform: translateY(0); } }
-.animate-fade-in { animation: fade-in 0.5s ease-out; }
-
-@keyframes slide-up { from { opacity: 0; transform: translateY(15px); } to { opacity: 1; transform: translateY(0); } }
-.animate-slide-up { animation: slide-up 0.4s ease-out; }
-
 .scrollbar-thin::-webkit-scrollbar { width: 6px; }
 .scrollbar-thin::-webkit-scrollbar-track { background: transparent; }
 .scrollbar-thin::-webkit-scrollbar-thumb { background-color: hsl(var(--border)); border-radius: 3px; }

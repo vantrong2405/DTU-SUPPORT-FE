@@ -41,11 +41,5 @@ export const usePeCalculator = () => {
     peResult.inputs = null
   }
 
-  return {
-    peResult,
-    onPeSubmit,
-    onPeReset,
-    isSubmitting,
-    values,
-  }
+  return { peResult, onPeSubmit, onPeReset, isSubmitting, values }
 }

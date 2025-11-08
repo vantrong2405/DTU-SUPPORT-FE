@@ -53,9 +53,5 @@ export const useTargetCalculator = () => {
     targetResult.graduationClassification = getGraduationClassification(rounded)
   })
 
-  return {
-    targetResult,
-    onTargetSubmit,
-    isSubmitting,
-  }
+  return { targetResult, onTargetSubmit, isSubmitting }
 }

@@ -59,8 +59,6 @@ export function useTextAnimation(options?: TextAnimationOptions) {
         duration,
         easing,
         delay: (el: any, i: number) => i * staggerDelay,
-        loop: true,
-        alternate: true,
         complete: () => {
           isAnimating.value = false
           isVisible.value = true

@@ -2,6 +2,7 @@
 import { ref, onMounted, onBeforeUnmount } from 'vue'
 import * as Icon from '@/components/ui/icon'
 import ChatBox from '@/components/chat/index.vue'
+import { handleKey } from '@/lib/utils'
 
 const isOpen = ref(false)
 
@@ -10,9 +11,11 @@ const handleToggle = () => {
 }
 
 const handleKeydown = (e: KeyboardEvent) => {
-  if (e.key === 'Escape') {
+  handleKey(e, () => {
     isOpen.value = false
-  }
+  }, {
+    key: 'Escape',
+  })
 }
 
 onMounted(() => {
