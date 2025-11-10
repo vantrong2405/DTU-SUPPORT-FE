@@ -44,3 +44,12 @@ export interface ApiError {
 export interface ApiErrorResponse {
   errors: ApiError[]
 }
+
+export interface HandleKeyOptions {
+  key?: string | string[]
+  shiftKey?: boolean
+  ctrlKey?: boolean
+  altKey?: boolean
+  metaKey?: boolean
+  preventDefault?: boolean
+}

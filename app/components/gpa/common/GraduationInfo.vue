@@ -88,7 +88,7 @@ const SCOPE = 'tools.gpa.graduation'
                 { category: 'average', scale10: '6.0-6.4', letter: 'C+', scale4: '2.33', status: 'pass', showCategory: false },
                 { category: 'average', scale10: '5.5-5.9', letter: 'C', scale4: '2.0', status: 'pass', showCategory: false },
                 { category: 'averageWeak', scale10: '4.5-5.4', letter: 'C-', scale4: '1.65', status: 'pass', showCategory: true },
-                { category: 'fail', scale10: '4.0-4.4', letter: 'D', scale4: '1.0', status: 'conditional', showCategory: true },
+                { category: 'averageWeak', scale10: '4.0-4.4', letter: 'D', scale4: '1.0', status: 'pass', showCategory: true },
                 { category: 'poor', scale10: '0.0-3.9', letter: 'F', scale4: '0.0', status: 'fail', showCategory: true },
               ]" :key="index">
                 <tr class="hover:bg-muted/50 transition-colors">
@@ -120,13 +120,6 @@ const SCOPE = 'tools.gpa.graduation'
               <li class="list-disc">{{ t(`${SCOPE}.gradingScale.notes.point1`) }}</li>
               <li class="list-disc">{{ t(`${SCOPE}.gradingScale.notes.point2`) }}</li>
               <li class="list-disc">{{ t(`${SCOPE}.gradingScale.notes.point3`) }}</li>
-            </ul>
-          </div>
-          <div>
-            <p class="text-xs sm:text-sm font-semibold text-foreground mb-2">{{ t(`${SCOPE}.gradingScale.notes.title2`) }}</p>
-            <ul class="space-y-1.5 text-xs sm:text-sm text-muted-foreground ml-4">
-              <li class="list-disc">{{ t(`${SCOPE}.gradingScale.notes.point4`) }}</li>
-              <li class="list-disc">{{ t(`${SCOPE}.gradingScale.notes.point5`) }}</li>
             </ul>
           </div>
           <div>

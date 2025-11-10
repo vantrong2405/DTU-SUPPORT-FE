@@ -1,0 +1,28 @@
+pricing:
+  badge: Pricing Plans
+  title: Choose Your Plan
+  titleHighlight: Unlock Premium Features
+  subtitle: Select the perfect subscription plan that fits your needs and budget
+  popular: Popular
+  perMonth: per month
+  currentPlan: Current Plan
+  processing: Processing...
+  subscribe: Subscribe Now
+  noPlans: No subscription plans available at the moment
+  plans:
+    basic:
+      name: Basic Plan
+      description: Perfect for beginners
+    premium:
+      name: Premium Plan
+      description: Most popular plan with many features
+    pro:
+      name: Pro Plan
+      description: Premium plan with all features
+  features:
+    aiLimit: "{count} AI chat messages per month"
+    marketplace: "Full marketplace access"
+    courseRegistration: "Course registration assistance"
+    prioritySupport: "Priority customer support"
+  errors:
+    failed: "Failed to create payment. Please try again."

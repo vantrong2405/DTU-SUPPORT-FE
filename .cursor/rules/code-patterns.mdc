@@ -1,0 +1,839 @@
+---
+description: Pattern code và quy tắc viết code cho DTU Support FE
+globs:
+  - "**/*.ts"
+  - "**/*.vue"
+  - "**/*.js"
+alwaysApply: true
+---
+
+# DTU Support FE - Code Patterns & Guidelines
+
+## Mục đích
+Tài liệu này mô tả các pattern code chuẩn của dự án, giúp developers và AI assistants viết code nhất quán và dễ maintain.
+
+---
+
+## 1. Pattern API Call
+
+### 1.1. Định nghĩa API Endpoints
+
+**Location**: `app/constants/api/{feature}.api.ts`
+
+**Pattern**:
+```typescript
+export const FEATURE_API = {
+  list: () => '/api/feature/items',
+  getById: (id: number) => `/api/feature/items/${id}`,
+  create: () => '/api/feature/items',
+  update: (id: number) => `/api/feature/items/${id}`,
+  delete: (id: number) => `/api/feature/items/${id}`,
+} as const
+```
+
+**Ví dụ thực tế**:
+```typescript:app/constants/api/user.api.ts
+export const USER_API = {
+  me: () => '/users/me',
+  logout: () => '/users/logout',
+} as const
+```
+
+### 1.2. Sử dụng `useApiFetch`
+
+**Location**: `app/lib/api.ts`
+
+**Pattern**:
+```typescript
+import type { ApiResponse } from '@/types/common'
+import { useApiFetch } from '@/lib/api'
+import { FEATURE_API } from '@/constants/api/feature.api'
+
+export const useFeatureApi = () => {
+  const requestPayload = ref<{ name: string } | null>(null)
+
+  const {
+    pending: isLoading,
+    error: apiError,
+    data: response,
+    execute: executeRequest,
+  } = useApiFetch<FeatureType>(FEATURE_API.create(), {
+    method: 'POST',
+    immediate: false,
+    body: requestPayload,
+    watch: false,
+  })
+
+  const createFeature = async (name: string): Promise<FeatureType> => {
+    requestPayload.value = { name }
+    await executeRequest()
+
+    if (apiError.value) {
+      throw new Error(apiError.value.message || 'Failed to create feature')
+    }
+
+    const payload = response.value?.data
+    if (!payload) {
+      throw new Error('Invalid response from server')
+    }
+
+    return payload
+  }
+
+  return { isLoading, apiError, createFeature }
+}
+```
+
+**Ví dụ thực tế**:
+```typescript:app/composables/auth/useCurrentUser.ts
+import type { User, ApiResponse } from '@/types/common'
+import { useApiFetch } from '@/lib/api'
+import { USER_API } from '@/constants/api/user.api'
+
+export const useCurrentUser = () => {
+  const { data, error, execute } = useApiFetch<User>(USER_API.me(), {
+    method: 'GET',
+    immediate: false,
+  })
+
+  const getCurrentUser = async () => {
+    await execute()
+    // ... handle response
+  }
+
+  return { getCurrentUser }
+}
+```
+
+### 1.3. Error Handling
+
+- Luôn check `apiError.value` trước khi sử dụng `response.value`
+- Throw error với message rõ ràng
+- Return `null` hoặc empty array nếu không có data
+
+---
+
+## 2. Pattern Component
+
+### 2.1. Component Structure
+
+**Location**: `app/components/{feature}/{ComponentName}.vue`
+
+**Standard Structure**:
+```vue
+<script setup lang="ts">
+// 1. Imports
+import { ref, computed } from 'vue'
+import { useI18n } from 'vue-i18n'
+import { Button } from '@/components/ui/button'
+import * as Icon from '@/components/ui/icon'
+import type { Feature } from '@/types/feature'
+
+// 2. Props & Emits
+interface Props {
+  featureId: string
+}
+const props = defineProps<Props>()
+const emit = defineEmits<{ update: [feature: Feature] }>()
+
+// 3. Composables
+const { t } = useI18n()
+const SCOPE = 'feature'
+const { data, isLoading } = useFeatureApi()
+
+// 4. Reactive state
+const isExpanded = ref(false)
+
+// 5. Computed properties
+const displayName = computed(() => data.value?.name || '')
+
+// 6. Methods
+const handleUpdate = () => {
+  emit('update', data.value)
+}
+
+// 7. Lifecycle hooks
+onMounted(() => {
+  // initialization
+})
+</script>
+
+<template>
+  <div class="rounded-xl border border-border/20 bg-card p-4">
+    <h2 class="text-lg font-bold text-foreground mb-2">
+      {{ t(`${SCOPE}.title`) }}
+    </h2>
+    <Button @click="handleUpdate" :disabled="isLoading">
+      <Icon.Check />
+      {{ t(`${SCOPE}.buttons.submit`) }}
+    </Button>
+  </div>
+</template>
+```
+
+### 2.2. Component Naming
+
+- **Component files**: PascalCase (`FeatureList.vue`, `GpaCalculator.vue`)
+- **Props**: camelCase (`featureId`, `isLoading`)
+- **Events**: kebab-case (`@user-updated`, `@form-submitted`)
+- **i18n scope**: snake_case (`tools.gpa`, `common.auth`)
+
+### 2.3. Component Organization
+
+```
+app/components/
+├── common/               # Shared components
+│   ├── Header.vue
+│   ├── Footer.vue
+│   └── FieldControl.vue
+├── feature/             # Feature-specific components
+│   ├── FeatureList.vue
+│   ├── FeatureForm.vue
+│   ├── FeatureDetail.vue
+│   └── index.vue         # Main component (imports các component con)
+└── ui/                   # shadcn-vue components
+    ├── button/
+    ├── card/
+    └── input/
+```
+
+---
+
+## 3. Pattern Page
+
+### 3.1. Simple Page (Import Component)
+
+**Location**: `app/pages/{feature}/index.vue`
+
+**Pattern**:
+```vue
+<script setup lang="ts">
+import FeaturePage from '@/components/feature/index.vue'
+</script>
+
+<template>
+  <div>
+    <FeaturePage />
+  </div>
+</template>
+```
+
+**Ví dụ thực tế**:
+```vue:app/pages/index.vue
+<script setup lang="ts">
+import HomePage from '@/components/home/index.vue'
+import ScrollToTop from '@/components/common/ScrollToTop.vue'
+</script>
+
+<template>
+  <div>
+    <HomePage />
+    <ScrollToTop />
+  </div>
+</template>
+```
+
+### 3.2. Complex Page (Inline Logic)
+
+**Location**: `app/pages/{feature}/detail.vue` hoặc `app/pages/{feature}/{subfeature}/index.vue`
+
+**Pattern**:
+```vue
+<script setup lang="ts">
+import { useI18n } from 'vue-i18n'
+import { Tabs, TabsList, TabsTrigger, TabsContent } from '@/components/ui/tabs'
+import * as Icon from '@/components/ui/icon'
+import FeatureForm from '@/components/feature/FeatureForm.vue'
+
+const { t } = useI18n()
+const SCOPE = 'feature'
+const DEFAULT_TAB = 'form'
+</script>
+
+<template>
+  <section class="bg-background text-foreground py-12">
+    <div class="container mx-auto px-4">
+      <div class="max-w-5xl mx-auto text-center mb-8">
+        <h1 class="text-3xl font-extrabold text-foreground">
+          {{ t(`${SCOPE}.title`) }}
+        </h1>
+      </div>
+
+      <div class="max-w-5xl mx-auto">
+        <Tabs :default-value="DEFAULT_TAB">
+          <TabsList>
+            <TabsTrigger value="form">
+              <Icon.Form class="w-4 h-4 mr-1.5" />
+              {{ t(`${SCOPE}.tabs.form`) }}
+            </TabsTrigger>
+          </TabsList>
+
+          <TabsContent value="form">
+            <FeatureForm />
+          </TabsContent>
+        </Tabs>
+      </div>
+    </div>
+  </section>
+</template>
+```
+
+**Ví dụ thực tế**:
+```vue:app/pages/tools/gpa/index.vue
+<script setup lang="ts">
+import { useI18n } from 'vue-i18n'
+import { Tabs, TabsList, TabsTrigger, TabsContent } from '@/components/ui/tabs'
+import * as Icon from '@/components/ui/icon'
+import TargetCalculator from '@/components/gpa/TargetCalculator.vue'
+import PeCalculator from '@/components/gpa/PeCalculator.vue'
+import PassCalculator from '@/components/gpa/PassCalculator.vue'
+
+const { t } = useI18n()
+const SCOPE = 'tools.gpa'
+const DEFAULT_TAB = 'target'
+</script>
+```
+
+### 3.3. Quy tắc Import cho Page
+
+**QUAN TRỌNG**: Page `index.vue` chỉ import component `index.vue` cùng feature, không import component con.
+
+```vue
+<!-- ✅ ĐÚNG: pages/feature/index.vue -->
+<script setup lang="ts">
+import FeaturePage from '@/components/feature/index.vue'
+</script>
+
+<!-- ❌ SAI: pages/feature/index.vue -->
+<script setup lang="ts">
+import FeatureList from '@/components/feature/FeatureList.vue'
+import FeatureForm from '@/components/feature/FeatureForm.vue'
+</script>
+```
+
+**Component `index.vue` trong `components/feature/` sẽ import các component con:**
+
+```vue
+<!-- ✅ ĐÚNG: components/feature/index.vue -->
+<script setup lang="ts">
+import FeatureList from './FeatureList.vue'
+import FeatureForm from './FeatureForm.vue'
+import FeatureDetail from './FeatureDetail.vue'
+</script>
+
+<template>
+  <div>
+    <FeatureList />
+    <FeatureForm />
+    <FeatureDetail />
+  </div>
+</template>
+```
+
+---
+
+## 4. Pattern Composable
+
+### 4.1. API Composable
+
+**Location**: `app/composables/{feature}/use{Feature}Api.ts`
+
+**Pattern**:
+```typescript
+import type { Feature, ApiResponse } from '@/types/feature'
+import { useApiFetch } from '@/lib/api'
+import { FEATURE_API } from '@/constants/api/feature.api'
+
+export const useFeatureApi = () => {
+  const requestPayload = ref<{ name: string } | null>(null)
+
+  const {
+    pending: isLoading,
+    error: apiError,
+    data: response,
+    execute: executeRequest,
+  } = useApiFetch<Feature>(FEATURE_API.create(), {
+    method: 'POST',
+    immediate: false,
+    body: requestPayload,
+    watch: false,
+  })
+
+  const createFeature = async (name: string): Promise<Feature> => {
+    requestPayload.value = { name }
+    await executeRequest()
+
+    if (apiError.value) {
+      throw new Error(apiError.value.message || 'Failed to create feature')
+    }
+
+    return response.value?.data
+  }
+
+  return { isLoading, apiError, createFeature }
+}
+```
+
+### 4.2. Business Logic Composable
+
+**Location**: `app/composables/{feature}/use{Feature}Logic.ts`
+
+**Pattern**:
+```typescript
+import { ref, computed, reactive } from 'vue'
+import { useI18n } from 'vue-i18n'
+import { useForm } from 'vee-validate'
+import { toTypedSchema } from '@vee-validate/zod'
+import { createFeatureSchema, type FeatureValues } from '@/schemas/feature/feature'
+import type { FeatureResult } from '@/types/feature'
+
+export const useFeatureLogic = () => {
+  const { t } = useI18n()
+
+  const featureSchema = createFeatureSchema(t)
+  const featureResult = reactive<FeatureResult>({ data: null })
+
+  const { handleSubmit, isSubmitting } = useForm<FeatureValues>({
+    validationSchema: toTypedSchema(featureSchema),
+    validateOnMount: false,
+    initialValues: { name: '' },
+  })
+
+  const onFeatureSubmit = handleSubmit((values: FeatureValues) => {
+    // Business logic here
+    featureResult.data = { name: values.name }
+  })
+
+  return { featureResult, onFeatureSubmit, isSubmitting }
+}
+```
+
+**Ví dụ thực tế**:
+```typescript:app/composables/gpa/useTargetCalculator.ts
+import { reactive } from 'vue'
+import { useForm } from 'vee-validate'
+import { toTypedSchema } from '@vee-validate/zod'
+import { useI18n } from 'vue-i18n'
+import { createTargetSchema, type TargetValues } from '@/schemas/gpa/target'
+import type { TargetResult } from '@/types/gpa'
+
+export const useTargetCalculator = () => {
+  const { t } = useI18n()
+  const targetSchema = createTargetSchema(t)
+  const targetResult = reactive<TargetResult>({ maxGpaWithAllA: null })
+
+  const { handleSubmit, isSubmitting } = useForm<TargetValues>({
+    validationSchema: toTypedSchema(targetSchema),
+    validateOnMount: false,
+    initialValues: { completedCredits: 0, currentGpa: 0, targetGpa: 0, remainingCredits: 1 },
+  })
+
+  const onTargetSubmit = handleSubmit((values: TargetValues) => {
+    // Calculation logic
+  })
+
+  return { targetResult, onTargetSubmit, isSubmitting }
+}
+```
+
+### 4.3. Composable Naming
+
+- **API composables**: `use{Feature}Api` (vd: `useMarketplaceApi`, `useChatApi`)
+- **Logic composables**: `use{Feature}Logic` hoặc `use{Feature}{Action}` (vd: `useTargetCalculator`, `usePassCalculator`)
+- **Common composables**: `use{Feature}Logic` (vd: `useThemeLogic`, `useLocaleLogic`)
+
+---
+
+## 5. Ví dụ: Tạo Page Mới
+
+### 5.1. File Structure
+
+```
+app/
+├── constants/
+│   └── api/
+│       └── marketplace.api.ts          # API endpoints
+├── types/
+│   └── marketplace.ts                   # TypeScript types
+├── composables/
+│   └── marketplace/
+│       └── useMarketplaceApi.ts         # API calls
+│       └── useMarketplaceLogic.ts      # Business logic
+├── components/
+│   └── marketplace/
+│       ├── MarketplaceList.vue          # List component
+│       ├── MarketplaceForm.vue         # Form component
+│       ├── MarketplaceDetail.vue        # Detail component
+│       └── index.vue                    # Main component (imports các component con)
+├── pages/
+│   └── marketplace/
+│       └── index.vue                    # Page route (chỉ import @/components/marketplace/index.vue)
+└── schemas/
+    └── marketplace/
+        └── marketplace.ts               # Zod schemas (nếu cần validation)
+
+i18n/locales/
+└── marketplace/
+    ├── en.yml
+    ├── vi.yml
+    └── ja.yml
+```
+
+### 5.2. Step-by-Step Guide
+
+#### Bước 1: Tạo API Constants
+
+```typescript:app/constants/api/marketplace.api.ts
+export const MARKETPLACE_API = {
+  list: () => '/api/marketplace/items',
+  getById: (id: number) => `/api/marketplace/items/${id}`,
+  create: () => '/api/marketplace/items',
+} as const
+```
+
+#### Bước 2: Tạo Types
+
+```typescript:app/types/marketplace.ts
+export interface MarketplaceItem {
+  id: number
+  title: string
+  description: string
+  price: number
+}
+
+export interface MarketplaceListResponse {
+  items: MarketplaceItem[]
+  total: number
+}
+```
+
+#### Bước 3: Tạo Composable
+
+```typescript:app/composables/marketplace/useMarketplaceApi.ts
+import type { MarketplaceItem, MarketplaceListResponse } from '@/types/marketplace'
+import { useApiFetch } from '@/lib/api'
+import { MARKETPLACE_API } from '@/constants/api/marketplace.api'
+
+export const useMarketplaceApi = () => {
+  const {
+    pending: isLoading,
+    error: apiError,
+    data: response,
+    execute: executeRequest,
+  } = useApiFetch<MarketplaceListResponse>(MARKETPLACE_API.list(), {
+    method: 'GET',
+    immediate: false,
+  })
+
+  const fetchItems = async (): Promise<MarketplaceItem[]> => {
+    await executeRequest()
+
+    if (apiError.value) {
+      throw new Error(apiError.value.message || 'Failed to fetch items')
+    }
+
+    return response.value?.data?.items || []
+  }
+
+  return { isLoading, apiError, fetchItems }
+}
+```
+
+#### Bước 4: Tạo Components
+
+```vue:app/components/marketplace/MarketplaceList.vue
+<script setup lang="ts">
+import { useI18n } from 'vue-i18n'
+import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card'
+import { useMarketplaceApi } from '@/composables/marketplace/useMarketplaceApi'
+
+const { t } = useI18n()
+const SCOPE = 'marketplace'
+
+const { isLoading, fetchItems } = useMarketplaceApi()
+const items = ref([])
+
+onMounted(async () => {
+  items.value = await fetchItems()
+})
+</script>
+
+<template>
+  <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
+    <Card v-for="item in items" :key="item.id">
+      <CardHeader>
+        <CardTitle>{{ item.title }}</CardTitle>
+        <CardDescription>{{ item.description }}</CardDescription>
+      </CardHeader>
+      <CardContent>
+        <p class="text-primary font-bold">{{ item.price }} VND</p>
+      </CardContent>
+    </Card>
+  </div>
+</template>
+```
+
+```vue:app/components/marketplace/index.vue
+<script setup lang="ts">
+import MarketplaceList from './MarketplaceList.vue'
+import MarketplaceForm from './MarketplaceForm.vue'
+</script>
+
+<template>
+  <section class="bg-background text-foreground py-12">
+    <div class="container mx-auto px-4">
+      <div class="max-w-7xl mx-auto">
+        <MarketplaceForm />
+        <div class="mt-8">
+          <MarketplaceList />
+        </div>
+      </div>
+    </div>
+  </section>
+</template>
+```
+
+#### Bước 5: Tạo Page Route
+
+```vue:app/pages/marketplace/index.vue
+<script setup lang="ts">
+import MarketplacePage from '@/components/marketplace/index.vue'
+</script>
+
+<template>
+  <div>
+    <MarketplacePage />
+  </div>
+</template>
+```
+
+#### Bước 6: Thêm i18n Translations
+
+```yaml:i18n/locales/marketplace/en.yml
+marketplace:
+  title: Marketplace
+  subtitle: Buy and sell study materials
+  form:
+    title: Create New Item
+    fields:
+      title: Title
+      description: Description
+      price: Price
+    buttons:
+      submit: Submit
+```
+
+```yaml:i18n/locales/marketplace/vi.yml
+marketplace:
+  title: Chợ Tài Liệu
+  subtitle: Mua và bán tài liệu học tập
+  form:
+    title: Tạo Mục Mới
+    fields:
+      title: Tiêu đề
+      description: Mô tả
+      price: Giá
+    buttons:
+      submit: Gửi
+```
+
+```yaml:i18n/locales/marketplace/ja.yml
+marketplace:
+  title: マーケットプレイス
+  subtitle: 学習資料の購入と販売
+  form:
+    title: 新しいアイテムを作成
+    fields:
+      title: タイトル
+      description: 説明
+      price: 価格
+    buttons:
+      submit: 送信
+```
+
+#### Bước 7: Cập nhật `nuxt.config.ts`
+
+```typescript:nuxt.config.ts
+i18n: {
+  locales: [
+    {
+      code: 'en',
+      files: ['common/en.yml', 'home/en.yml', 'tools/en.yml', 'gpa/en.yml', 'chat/en.yml', 'marketplace/en.yml'],
+    },
+    {
+      code: 'vi',
+      files: ['common/vi.yml', 'home/vi.yml', 'tools/vi.yml', 'gpa/vi.yml', 'chat/vi.yml', 'marketplace/vi.yml'],
+    },
+    {
+      code: 'ja',
+      files: ['common/ja.yml', 'home/ja.yml', 'tools/ja.yml', 'gpa/ja.yml', 'chat/ja.yml', 'marketplace/ja.yml'],
+    },
+  ],
+}
+```
+
+---
+
+## 6. Naming Conventions
+
+### 6.1. Files & Folders
+
+- **Components**: PascalCase (`UserProfile.vue`, `GpaCalculator.vue`)
+- **Files**: kebab-case (`user-profile.vue`, `gpa-calculator.ts`)
+- **Folders**: kebab-case (`marketplace/`, `gpa-calculator/`)
+
+### 6.2. Variables & Functions
+
+- **Variables**: camelCase (`isLoading`, `userData`, `apiResponse`)
+- **Functions**: camelCase (`handleClick`, `fetchData`, `calculateGpa`)
+- **Constants**: UPPER_SNAKE_CASE (`MAX_CREDITS`, `API_BASE_URL`, `MARKETPLACE_API`)
+
+### 6.3. Types & Interfaces
+
+- **Types**: PascalCase (`User`, `GpaResult`, `CourseGrade`)
+- **Interfaces**: PascalCase (`ApiResponse`, `MarketplaceItem`)
+
+### 6.4. Composables
+
+- **Pattern**: `use` + PascalCase (`useGpaCalculator`, `useAuth`, `useMarketplaceApi`)
+
+### 6.5. i18n Keys
+
+- **Scope**: snake_case (`tools.gpa`, `common.auth`, `marketplace.form`)
+- **Keys**: camelCase (`title`, `subtitle`, `buttons.submit`)
+
+---
+
+## 7. Best Practices
+
+### 7.1. Import Order
+
+1. Vue core imports (`ref`, `computed`, `onMounted`)
+2. Third-party imports (`useI18n`, `useForm`)
+3. UI components (`@/components/ui/button`)
+4. Feature components (`@/components/feature/FeatureList`)
+5. Composables (`@/composables/feature/useFeatureApi`)
+6. Types (`@/types/feature`)
+7. Constants (`@/constants/api/feature.api`)
+8. Utils (`@/lib/utils`)
+
+### 7.2. Error Handling
+
+- Luôn check `apiError.value` trước khi sử dụng `response.value`
+- Throw error với message rõ ràng
+- Return `null` hoặc empty array nếu không có data
+- Log errors trong dev mode
+
+### 7.3. TypeScript
+
+- Strict mode enabled (no implicit any)
+- Không dùng `any`, dùng `unknown` nếu thực sự cần
+- Interfaces cho object shapes, Type cho unions/intersections
+- Annotate function returns khi không rõ ràng
+
+### 7.4. Styling
+
+- Dùng semantic tokens, không hardcode colors
+- Utility-first approach với Tailwind
+- Responsive: mobile-first
+- Dark mode: sử dụng class `dark`
+
+### 7.5. Performance
+
+- Lazy load components nặng
+- Code splitting theo feature/route
+- Optimize images
+- Monitor bundle size
+
+---
+
+## 8. Checklist Tạo Feature Mới
+
+- [ ] Tạo API constants trong `app/constants/api/`
+- [ ] Tạo types trong `app/types/`
+- [ ] Tạo composables trong `app/composables/{feature}/`
+- [ ] Tạo components trong `app/components/{feature}/`
+- [ ] Tạo component `index.vue` import các component con
+- [ ] Tạo page route trong `app/pages/{feature}/index.vue` (chỉ import component `index.vue`)
+- [ ] Thêm i18n translations cho 3 ngôn ngữ (vi, en, ja)
+- [ ] Cập nhật `nuxt.config.ts` với i18n files mới
+- [ ] Test responsive design
+- [ ] Test dark mode
+- [ ] Verify TypeScript types
+- [ ] Check error handling
+
+---
+
+## 9. Common Patterns
+
+### 9.1. Form với Validation
+
+```vue
+<script setup lang="ts">
+import { useForm } from 'vee-validate'
+import { toTypedSchema } from '@vee-validate/zod'
+import { createFeatureSchema, type FeatureValues } from '@/schemas/feature/feature'
+
+const { handleSubmit, isSubmitting } = useForm<FeatureValues>({
+  validationSchema: toTypedSchema(createFeatureSchema(t)),
+  validateOnMount: false,
+  initialValues: { name: '' },
+})
+
+const onSubmit = handleSubmit((values) => {
+  // Submit logic
+})
+</script>
+
+<template>
+  <form @submit="onSubmit">
+    <FieldControl name="name" :label="t('feature.form.fields.name')" required />
+    <Button type="submit" :disabled="isSubmitting">
+      {{ t('feature.form.buttons.submit') }}
+    </Button>
+  </form>
+</template>
+```
+
+### 9.2. Loading State
+
+```vue
+<script setup lang="ts">
+const { isLoading, data } = useFeatureApi()
+</script>
+
+<template>
+  <div v-if="isLoading">Loading...</div>
+  <div v-else>{{ data }}</div>
+</template>
+```
+
+### 9.3. Error State
+
+```vue
+<script setup lang="ts">
+const { apiError, data } = useFeatureApi()
+</script>
+
+<template>
+  <div v-if="apiError" class="text-destructive">
+    {{ apiError.message }}
+  </div>
+  <div v-else>{{ data }}</div>
+</template>
+```
+
+---
+
+## 10. References
+
+- [Nuxt 4 Documentation](https://nuxt.com/docs/4.x)
+- [Vue 3 Composition API](https://vuejs.org/guide/extras/composition-api-faq.html)
+- [Tailwind CSS 4](https://tailwindcss.com/docs)
+- [shadcn-vue](https://www.shadcn-vue.com/)
+- [VeeValidate](https://vee-validate.logaretm.com/v4/)
+
+---
+
+**Last Updated**: 2025-01-XX
+**Maintained By**: DTU Support FE Team

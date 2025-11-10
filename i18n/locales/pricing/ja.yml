@@ -1,0 +1,28 @@
+pricing:
+  badge: 料金プラン
+  title: プランを選択
+  titleHighlight: プレミアム機能を解除
+  subtitle: ニーズと予算に合ったサブスクリプションプランを選択してください
+  popular: 人気
+  perMonth: 月額
+  currentPlan: 現在のプラン
+  processing: 処理中...
+  subscribe: 今すぐ登録
+  noPlans: 現在利用可能なサブスクリプションプランはありません
+  plans:
+    basic:
+      name: ベーシックプラン
+      description: 初心者に最適
+    premium:
+      name: プレミアムプラン
+      description: 多くの機能を備えた最も人気のあるプラン
+    pro:
+      name: プロプラン
+      description: すべての機能を備えたプレミアムプラン
+  features:
+    aiLimit: "月額{count}件のAIチャットメッセージ"
+    marketplace: "マーケットプレイスへの完全アクセス"
+    courseRegistration: "コース登録サポート"
+    prioritySupport: "優先カスタマーサポート"
+  errors:
+    failed: "支払いの作成に失敗しました。もう一度お試しください。"

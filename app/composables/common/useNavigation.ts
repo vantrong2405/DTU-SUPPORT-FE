@@ -10,14 +10,8 @@ export const useNavigation = () => {
 
     const targetPath = currentLocale === 'en' ? path : `/${currentLocale}${path}`
     const query = currentTheme ? { theme: currentTheme } : {}
-
-    return {
-      path: targetPath,
-      query
-    }
+    return { path: targetPath, query }
   }
 
-  return {
-    navigateTo
-  }
+  return { navigateTo }
 }

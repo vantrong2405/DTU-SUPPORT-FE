@@ -4,10 +4,14 @@ import Accordion from '@/components/ui/accordion/Accordion.vue'
 import AccordionContent from '@/components/ui/accordion/AccordionContent.vue'
 import AccordionItem from '@/components/ui/accordion/AccordionItem.vue'
 import AccordionTrigger from '@/components/ui/accordion/AccordionTrigger.vue'
+import { useScrollReveal } from '@/composables/animations/useScrollReveal'
 
 const { t } = useI18n()
 
 const SCOPE = 'home.faq'
+
+const { target: headerRef } = useScrollReveal({ threshold: 0.1, animation: 'fade' })
+const { target: accordionRef } = useScrollReveal({ threshold: 0.1, animation: 'slide', direction: 'up' })
 </script>
 
 <template>
@@ -25,7 +29,7 @@ const SCOPE = 'home.faq'
     </div>
 
     <div class="container mx-auto px-4 sm:px-6 relative z-10">
-      <div class="text-center mb-10 sm:mb-12 md:mb-16">
+      <div ref="headerRef" class="text-center mb-10 sm:mb-12 md:mb-16">
         <h2 class="text-3xl sm:text-4xl md:text-5xl font-black text-foreground mb-4 sm:mb-6 px-2">
           {{ t(`${SCOPE}.title`) }}
         </h2>
@@ -36,7 +40,7 @@ const SCOPE = 'home.faq'
         </p>
       </div>
 
-      <div class="max-w-4xl mx-auto">
+      <div ref="accordionRef" class="max-w-4xl mx-auto">
         <Accordion type="single" collapsible class="space-y-3 sm:space-y-4">
           <AccordionItem
             v-for="index in [0, 1, 2, 3, 4]"

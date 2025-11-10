@@ -1,0 +1,28 @@
+pricing:
+  badge: Gói Đăng Ký
+  title: Chọn Gói Của Bạn
+  titleHighlight: Mở Khóa Tính Năng Premium
+  subtitle: Chọn gói đăng ký phù hợp với nhu cầu và ngân sách của bạn
+  popular: Phổ Biến
+  perMonth: mỗi tháng
+  currentPlan: Gói Hiện Tại
+  processing: Đang xử lý...
+  subscribe: Đăng Ký Ngay
+  noPlans: Hiện tại không có gói đăng ký nào
+  plans:
+    basic:
+      name: Gói Cơ Bản
+      description: Phù hợp cho người mới bắt đầu
+    premium:
+      name: Gói Premium
+      description: Gói phổ biến nhất với nhiều tính năng
+    pro:
+      name: Gói Pro
+      description: Gói cao cấp với đầy đủ tính năng
+  features:
+    aiLimit: "{count} tin nhắn AI chat mỗi tháng"
+    marketplace: "Truy cập đầy đủ marketplace"
+    courseRegistration: "Hỗ trợ đăng ký tín chỉ"
+    prioritySupport: "Hỗ trợ khách hàng ưu tiên"
+  errors:
+    failed: "Không thể tạo thanh toán. Vui lòng thử lại."

@@ -9,6 +9,7 @@ import { NAV_ITEMS } from '@/constants/features/home'
 import logoDtu from '@/assets/images/logo-dtu.png'
 import { useAuthStore } from '@/stores/auth'
 import { useAuth } from '@/composables/auth'
+import { useFadeIn } from '@/composables/animations/useFadeIn'
 
 const { t } = useI18n()
 const { navigateTo } = useNavigation()
@@ -48,7 +49,7 @@ const handleNavClick = (
 
 const getNavLink = (item: { to: string; scroll?: boolean }) => {
   if (item.scroll) {
-    return route.path
+    return { path: route.path, query: route.query }
   }
   return navigateTo(item.to)
 }
@@ -74,13 +75,15 @@ const navItems = computed(() => {
     scroll: 'scroll' in item ? item.scroll : false,
   }))
 })
+
+const { elementRef: headerRef } = useFadeIn({ delay: 100 })
 </script>
 
 <template>
-  <header class="bg-background shadow-lg sticky top-0 z-50">
+  <header ref="headerRef" class="bg-background shadow-lg sticky top-0 z-50">
     <div class="container mx-auto px-3 sm:px-4 lg:px-6">
       <div class="flex items-center justify-between h-14 sm:h-16">
-        <NuxtLink :to="navigateTo('/')" class="flex items-center space-x-2 sm:space-x-3 min-w-0 flex-shrink-0 flex-1"
+        <NuxtLink :to="navigateTo('/')" class="flex items-center space-x-2 sm:space-x-3 min-w-0 flex-shrink-0"
           @click="closeMenu">
           <div
             class="w-7 h-7 sm:w-8 sm:h-8 md:w-10 md:h-10 bg-primary rounded-lg flex items-center justify-center border-0 flex-shrink-0">
@@ -103,10 +106,15 @@ const navItems = computed(() => {
           </div>
         </NuxtLink>
 
-        <nav class="hidden lg:flex items-center space-x-2 xl:space-x-3 2xl:space-x-4">
-          <NuxtLink v-for="item in navItems" :key="item.to" :to="getNavLink(item)"
-            class="text-muted-foreground hover:text-foreground hover:bg-[hsl(var(--accent)/0.16)] rounded-md px-2 xl:px-3 py-1.5 transition-colors duration-150 font-medium text-sm xl:text-base whitespace-nowrap"
-            active-class="text-primary" @click="handleNavClick($event, item)">
+        <nav class="hidden lg:flex items-center justify-center flex-1 space-x-2 xl:space-x-3 2xl:space-x-4">
+          <NuxtLink
+            v-for="item in navItems"
+            :key="item.to"
+            :to="getNavLink(item)"
+            class="text-muted-foreground hover:text-foreground hover:bg-[hsl(var(--accent)/0.16)] rounded-md px-2 xl:px-3 py-1.5 transition-all duration-200 font-medium text-sm xl:text-base whitespace-nowrap hover:scale-105"
+            active-class="text-primary"
+            @click="handleNavClick($event, item)"
+          >
             {{ item.label }}
           </NuxtLink>
         </nav>
@@ -131,7 +139,15 @@ const navItems = computed(() => {
         </Button>
       </div>
 
-      <div v-if="isMenuOpen" class="lg:hidden border-t border-border bg-background max-h-[calc(100vh-3.5rem)] overflow-y-auto">
+      <Transition
+        enter-active-class="transition duration-300 ease-out"
+        enter-from-class="opacity-0 transform -translate-y-2"
+        enter-to-class="opacity-100 transform translate-y-0"
+        leave-active-class="transition duration-200 ease-in"
+        leave-from-class="opacity-100 transform translate-y-0"
+        leave-to-class="opacity-0 transform -translate-y-2"
+      >
+        <div v-if="isMenuOpen" class="lg:hidden border-t border-border bg-background max-h-[calc(100vh-3.5rem)] overflow-y-auto">
         <nav class="py-3 sm:py-4 space-y-1 sm:space-y-2">
           <NuxtLink v-for="item in navItems" :key="item.to" :to="getNavLink(item)"
             class="block text-muted-foreground hover:text-foreground hover:bg-[hsl(var(--accent)/0.16)] rounded-md px-3 sm:px-4 py-2 sm:py-2.5 transition-colors duration-150 font-medium text-sm sm:text-base"
@@ -157,7 +173,8 @@ const navItems = computed(() => {
             </div>
           </div>
         </nav>
-      </div>
+        </div>
+      </Transition>
     </div>
   </header>
 </template>

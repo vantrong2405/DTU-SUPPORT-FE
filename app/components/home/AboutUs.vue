@@ -1,5 +1,6 @@
 <script setup lang="ts">
 import { useI18n } from 'vue-i18n'
+import { useScrollReveal } from '@/composables/animations/useScrollReveal'
 
 const { t } = useI18n()
 
@@ -15,6 +16,9 @@ const teamMembers = computed(() => {
   }
   return members
 })
+
+const { target: headerRef } = useScrollReveal({ threshold: 0.1, animation: 'fade' })
+const { target: contentRef } = useScrollReveal({ threshold: 0.1, animation: 'slide', direction: 'up' })
 </script>
 
 <template>
@@ -32,7 +36,7 @@ const teamMembers = computed(() => {
     </div>
 
     <div class="container mx-auto px-4 sm:px-6 relative z-10 max-w-8xl">
-      <div class="text-center mb-10 sm:mb-12 md:mb-16">
+      <div ref="headerRef" class="text-center mb-10 sm:mb-12 md:mb-16">
         <h2 class="text-3xl sm:text-4xl md:text-5xl font-black text-foreground mb-4 sm:mb-6 px-2">
           {{ t('home.about.title') }}
         </h2>
@@ -54,11 +58,11 @@ const teamMembers = computed(() => {
             </p>
           </div>
 
-          <div class="grid gap-4 sm:gap-5 md:gap-6 grid-cols-2 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-5">
+          <div ref="contentRef" class="grid gap-4 sm:gap-5 md:gap-6 grid-cols-2 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-5">
             <div
               v-for="member in teamMembers"
               :key="member.name"
-              class="text-center p-3 sm:p-4 md:p-6 rounded-xl sm:rounded-2xl bg-gradient-to-br from-primary/5 to-primary/5 hover:from-primary/10 hover:to-primary/10 transition-all duration-300 border border-border shadow-md hover:shadow-lg"
+              class="text-center p-3 sm:p-4 md:p-6 rounded-xl sm:rounded-2xl bg-gradient-to-br from-primary/5 to-primary/5 hover:from-primary/10 hover:to-primary/10 transition-all duration-300 border border-border shadow-md hover:shadow-lg hover:scale-105 will-change-transform"
             >
               <div class="text-2xl sm:text-3xl md:text-4xl mb-2 sm:mb-3 md:mb-4">{{ member.avatar }}</div>
               <h4 class="text-sm sm:text-base md:text-lg font-bold text-card-foreground mb-1 sm:mb-2">

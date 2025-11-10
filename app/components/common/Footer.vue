@@ -2,13 +2,15 @@
 import { useI18n } from 'vue-i18n'
 import * as Icon from '@/components/ui/icon'
 import { useNavigation } from '@/composables/common/useNavigation'
+import { useScrollReveal } from '@/composables/animations/useScrollReveal'
 
 const { t } = useI18n()
 const { navigateTo } = useNavigation()
+const { target: footerRef } = useScrollReveal({ threshold: 0.1, animation: 'fade' })
 </script>
 
 <template>
-  <footer class="bg-muted text-foreground">
+  <footer ref="footerRef" class="bg-muted text-foreground">
     <div class="container mx-auto px-4 sm:px-6 py-8 sm:py-10 md:py-12">
       <div
         class="grid gap-6 sm:gap-8 md:grid-cols-2 lg:grid-cols-4 justify-items-center md:justify-items-start text-center md:text-left max-w-5xl mx-auto"

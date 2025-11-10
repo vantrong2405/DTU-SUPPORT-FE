@@ -2,27 +2,17 @@
 import { useI18n } from 'vue-i18n'
 import { Button } from '@/components/ui/button'
 import * as Icon from '@/components/ui/icon'
-import FieldControl from '@/components/gpa/FieldControl.vue'
+import FieldControl from '@/components/common/FieldControl.vue'
 import { useTargetCalculator } from '@/composables/gpa/useTargetCalculator'
 import { cn } from '@/lib/utils'
+import { getBadgeClasses } from '@/lib/ui'
 
 const { t } = useI18n()
 const SCOPE = 'tools.gpa'
 
 const { targetResult, onTargetSubmit, isSubmitting } = useTargetCalculator()
 
-const getBadgeClasses = (badgeColor: string) => {
-  const baseClasses = 'inline-flex items-center gap-2 px-3 py-1.5 rounded-full text-xs sm:text-sm font-semibold transition-all border'
-
-  const colorMap: Record<string, string> = {
-    primary: 'bg-primary/10 text-primary border-primary/20',
-    accent: 'bg-accent/10 text-accent border-accent/20',
-    muted: 'bg-muted text-muted-foreground border-border',
-    destructive: 'bg-destructive/10 text-destructive border-destructive/20',
-  }
-
-  return cn(baseClasses, colorMap[badgeColor])
-}
+// moved to '@/lib/ui'
 </script>
 
 <template>
