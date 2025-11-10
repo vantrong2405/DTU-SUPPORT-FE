@@ -218,6 +218,68 @@ tools:
     pass:
       title: "Tính điểm qua môn"
       description: "Tính điểm cần ở bài thi cuối để qua môn theo trọng số. Tính năng này sẽ sớm có sẵn."
+    ai:
+      title: "Hỏi AI"
+      description: "Đặt câu hỏi cho AI để nhận lời khuyên học tập thông minh. Tính năng này sẽ sớm có sẵn."
+    graduation:
+      classification:
+        title: "Xếp Loại Tốt Nghiệp Duy Tân"
+        subtitle: "Bảng xếp loại tốt nghiệp chính thức của Đại học Duy Tân"
+        table:
+          rank: "Hạng"
+          gpaRange: "GPA Range (Thang 4)"
+          description: "Mô Tả"
+        ranks:
+          excellent:
+            name: "Xuất sắc"
+            gpaRange: "3.60 – 4.00"
+            description: "Hạng cao nhất, yêu cầu GPA ≥ 3.60"
+          good:
+            name: "Giỏi"
+            gpaRange: "3.20 – 3.59"
+            description: "Hạng tốt, yêu cầu GPA ≥ 3.20"
+          fair:
+            name: "Khá"
+            gpaRange: "2.50 – 3.19"
+            description: "Hạng khá, yêu cầu GPA ≥ 2.50"
+          average:
+            name: "Trung bình"
+            gpaRange: "2.00 – 2.49"
+            description: "Hạng trung bình, yêu cầu GPA ≥ 2.00"
+        notes:
+          title: "Lưu ý quan trọng"
+          note1: "Hạng tốt nghiệp có thể bị giảm nếu có >5% tín chỉ học lại hoặc bị kỷ luật"
+          note2: "Xếp loại dựa trên GPA tích lũy cuối cùng (thang điểm 4.0)"
+      gradingScale:
+        title: "Thang Điểm Duy Tân"
+        subtitle: "Bảng chuyển đổi điểm số giữa các thang điểm của Đại học Duy Tân"
+        table:
+          category: "Xếp Loại"
+          scale10: "Thang Điểm 10"
+          letter: "Điểm Chữ"
+          scale4: "Thang Điểm 4"
+          status: "Trạng Thái"
+        categories:
+          good: "Giỏi"
+          fair: "Khá"
+          average: "Trung bình"
+          averageWeak: "Trung bình yếu"
+          conditional: "Đạt"
+          fail: "Không đạt"
+          poor: "Kém"
+        status:
+          pass: "Đạt"
+          conditional: "Có điều kiện"
+          fail: "Không đạt"
+        notes:
+          title1: "Thang điểm 4 là thang điểm đánh giá chính thức để"
+          point1: "Xét học vụ"
+          point2: "Xét tốt nghiệp"
+          point3: "Xếp hạng sinh viên"
+          title3: "Điểm F (0.0)"
+          point6: "Không được tích lũy tín chỉ"
+          point7: "Bắt buộc phải học lại môn học đó"
+          point8: "Không tính vào GPA tích lũy"
   pass:
     inputTitle: "Tính điểm cuối kỳ để qua môn"
     inputSubtitle: "Nhập thông tin các cột điểm và trọng số để tính điểm thi cuối kỳ cần thiết"
@@ -294,68 +356,6 @@ tools:
         invalid: "Điểm thi cuối kỳ không hợp lệ"
         min: "Điểm thi cuối kỳ không thể nhỏ hơn 0"
         max: "Điểm thi cuối kỳ không thể lớn hơn 10"
-    ai:
-      title: "Hỏi AI"
-      description: "Đặt câu hỏi cho AI để nhận lời khuyên học tập thông minh. Tính năng này sẽ sớm có sẵn."
-    graduation:
-      classification:
-        title: "Xếp Loại Tốt Nghiệp Duy Tân"
-        subtitle: "Bảng xếp loại tốt nghiệp chính thức của Đại học Duy Tân"
-        table:
-          rank: "Hạng"
-          gpaRange: "GPA Range (Thang 4)"
-          description: "Mô Tả"
-        ranks:
-          excellent:
-            name: "Xuất sắc"
-            gpaRange: "3.60 – 4.00"
-            description: "Hạng cao nhất, yêu cầu GPA ≥ 3.60"
-          good:
-            name: "Giỏi"
-            gpaRange: "3.20 – 3.59"
-            description: "Hạng tốt, yêu cầu GPA ≥ 3.20"
-          fair:
-            name: "Khá"
-            gpaRange: "2.50 – 3.19"
-            description: "Hạng khá, yêu cầu GPA ≥ 2.50"
-          average:
-            name: "Trung bình"
-            gpaRange: "2.00 – 2.49"
-            description: "Hạng trung bình, yêu cầu GPA ≥ 2.00"
-        notes:
-          title: "Lưu ý quan trọng"
-          note1: "Hạng tốt nghiệp có thể bị giảm nếu có >5% tín chỉ học lại hoặc bị kỷ luật"
-          note2: "Xếp loại dựa trên GPA tích lũy cuối cùng (thang điểm 4.0)"
-      gradingScale:
-        title: "Thang Điểm Duy Tân"
-        subtitle: "Bảng chuyển đổi điểm số giữa các thang điểm của Đại học Duy Tân"
-        table:
-          category: "Xếp Loại"
-          scale10: "Thang Điểm 10"
-          letter: "Điểm Chữ"
-          scale4: "Thang Điểm 4"
-          status: "Trạng Thái"
-        categories:
-          good: "Giỏi"
-          fair: "Khá"
-          average: "Trung bình"
-          averageWeak: "Trung bình yếu"
-          conditional: "Đạt"
-          fail: "Không đạt"
-          poor: "Kém"
-        status:
-          pass: "Đạt"
-          conditional: "Có điều kiện"
-          fail: "Không đạt"
-        notes:
-          title1: "Thang điểm 4 là thang điểm đánh giá chính thức để"
-          point1: "Xét học vụ"
-          point2: "Xét tốt nghiệp"
-          point3: "Xếp hạng sinh viên"
-          title3: "Điểm F (0.0)"
-          point6: "Không được tích lũy tín chỉ"
-          point7: "Bắt buộc phải học lại môn học đó"
-          point8: "Không tính vào GPA tích lũy"
   benefits:
     titlePrefix: "Tại sao nên"
     titlePrimary: "sử dụng?"

@@ -4,22 +4,15 @@ import { toTypedSchema } from '@vee-validate/zod'
 import { useI18n } from 'vue-i18n'
 import { GRADUATION_CLASSIFICATIONS } from '@/constants/gpa/graduation'
 import { GRADE_OPTIONS, getGradeByValue } from '@/constants/gpa/grades'
-import { createSimulationSchema, type SimulationValues, type CreditDistributionValues } from '@/schemas/gpa/simulation'
+import { createSimulationSchema, type SimulationValues } from '@/schemas/gpa/simulation'
 import { useAuthStore } from '@/stores/auth'
-import type { CreditDistribution } from '@/types/gpa'
+import type { CreditDistribution, SimulationResult, GraduationClassification } from '@/types/gpa'
 
 export const useSimulationCalculator = () => {
   const { t } = useI18n()
 
   const simulationSchema = createSimulationSchema(t)
-  const simulationResult = reactive<{
-    finalGpa: number | null
-    remainingGpa: number | null
-    graduationClassification: typeof GRADUATION_CLASSIFICATIONS[number] | null
-    distributionSummary: string | null
-    totalCredits: number | null
-    isWeakResult: boolean
-  }>({
+  const simulationResult = reactive<SimulationResult>({
     finalGpa: null,
     remainingGpa: null,
     graduationClassification: null,
@@ -32,7 +25,13 @@ export const useSimulationCalculator = () => {
   const totalDistributedCredits = ref(0)
   const isDistributionComplete = ref(false)
 
-  const getGraduationClassification = (gpa: number): typeof GRADUATION_CLASSIFICATIONS[number] | null => {
+  const { handleSubmit, isSubmitting, setFieldValue, values } = useForm<SimulationValues>({
+    validationSchema: toTypedSchema(simulationSchema),
+    validateOnMount: false,
+    initialValues: { completedCredits: 0, currentGpa: 0, remainingCredits: 1, creditDistributions: [] },
+  })
+
+  const getGraduationClassification = (gpa: number): GraduationClassification | null => {
     for (const classification of GRADUATION_CLASSIFICATIONS) {
       if (gpa >= classification.minGpa && gpa <= classification.maxGpa) {
         return classification
@@ -42,21 +41,18 @@ export const useSimulationCalculator = () => {
   }
 
   const updateTotalDistributedCredits = () => {
-    totalDistributedCredits.value = creditDistributions.value.reduce(
-      (sum, dist) => sum + dist.credits,
-      0
-    )
+    totalDistributedCredits.value = creditDistributions.value.reduce((sum, dist) => sum + dist.credits, 0)
+  }
+
+  const checkDistributionComplete = (remainingCredits: number) => {
+    isDistributionComplete.value = totalDistributedCredits.value === remainingCredits
   }
 
   const addDistribution = () => {
     const newId = `dist-${Date.now()}-${Math.random().toString(36).substr(2, 9)}`
     const defaultGrade = GRADE_OPTIONS[0]
     if (!defaultGrade) return
-    creditDistributions.value.push({
-      id: newId,
-      credits: 1,
-      gradeValue: defaultGrade.value,
-    })
+    creditDistributions.value.push({ id: newId, credits: 1, gradeValue: defaultGrade.value })
     updateTotalDistributedCredits()
   }
 
@@ -70,53 +66,25 @@ export const useSimulationCalculator = () => {
     if (index !== -1) {
       const current = creditDistributions.value[index]
       if (current) {
-        creditDistributions.value[index] = {
-          id: current.id,
-          credits: updates.credits ?? current.credits,
-          gradeValue: updates.gradeValue ?? current.gradeValue,
-        }
+        creditDistributions.value[index] = { id: current.id, credits: updates.credits ?? current.credits, gradeValue: updates.gradeValue ?? current.gradeValue }
         updateTotalDistributedCredits()
       }
     }
   }
 
-  const checkDistributionComplete = (remainingCredits: number) => {
-    isDistributionComplete.value = totalDistributedCredits.value === remainingCredits
+  const resetResult = () => {
+    simulationResult.finalGpa = null
+    simulationResult.remainingGpa = null
+    simulationResult.graduationClassification = null
+    simulationResult.distributionSummary = null
+    simulationResult.totalCredits = null
+    simulationResult.isWeakResult = false
   }
 
-  const { handleSubmit, isSubmitting, setFieldValue, values } = useForm<SimulationValues>({
-    validationSchema: toTypedSchema(simulationSchema),
-    validateOnMount: false,
-    initialValues: {
-      completedCredits: 0,
-      currentGpa: 0,
-      remainingCredits: 1,
-      creditDistributions: [],
-    },
-  })
-
-  watch(
-    () => values.remainingCredits,
-    (newValue: number | undefined) => {
-      if (newValue !== undefined) {
-        checkDistributionComplete(newValue)
-      }
-    }
-  )
-
   const calculateGpa = (values: SimulationValues) => {
-    const totalRemainingCredits = values.creditDistributions.reduce(
-      (sum, dist) => sum + dist.credits,
-      0
-    )
-
+    const totalRemainingCredits = values.creditDistributions.reduce((sum, dist) => sum + dist.credits, 0)
     if (totalRemainingCredits === 0) {
-      simulationResult.finalGpa = null
-      simulationResult.remainingGpa = null
-      simulationResult.graduationClassification = null
-      simulationResult.distributionSummary = null
-      simulationResult.totalCredits = null
-      simulationResult.isWeakResult = false
+      resetResult()
       return
     }
 
@@ -157,38 +125,34 @@ export const useSimulationCalculator = () => {
       return
     }
 
-    const totalDistributed = values.creditDistributions.reduce(
-      (sum, dist) => sum + dist.credits,
-      0
-    )
-
+    const totalDistributed = values.creditDistributions.reduce((sum, dist) => sum + dist.credits, 0)
     if (totalDistributed !== values.remainingCredits) {
       return
     }
 
     const total = values.completedCredits + values.remainingCredits
     if (total <= 0) {
-      simulationResult.finalGpa = null
-      simulationResult.remainingGpa = null
-      simulationResult.graduationClassification = null
-      simulationResult.distributionSummary = null
-      simulationResult.totalCredits = null
-      simulationResult.isWeakResult = false
+      resetResult()
       return
     }
 
     calculateGpa(values)
   })
 
+  watch(
+    () => values.remainingCredits,
+    (newValue: number | undefined) => {
+      if (newValue !== undefined) {
+        checkDistributionComplete(newValue)
+      }
+    }
+  )
+
   watch(creditDistributions, () => {
     updateTotalDistributedCredits()
     if (values.remainingCredits) {
       checkDistributionComplete(values.remainingCredits)
-      const distributions = creditDistributions.value.map((dist) => ({
-        id: dist.id,
-        credits: dist.credits,
-        gradeValue: dist.gradeValue,
-      }))
+      const distributions = creditDistributions.value.map((dist) => ({ id: dist.id, credits: dist.credits, gradeValue: dist.gradeValue }))
       setFieldValue('creditDistributions', distributions)
     }
   }, { deep: true })

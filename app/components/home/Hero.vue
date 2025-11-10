@@ -2,18 +2,30 @@
 import { useI18n } from 'vue-i18n'
 import { useNavigation } from '@/composables/common/useNavigation'
 import logoDtu from '@/assets/images/logo-dtu.png'
+import { useFadeIn } from '@/composables/animations/useFadeIn'
+import { useTextAnimation } from '@/composables/animations/useTextAnimation'
+import { useSlideIn } from '@/composables/animations/useSlideIn'
+import { useParallax } from '@/composables/animations/useParallax'
 
 const { t } = useI18n()
 const { navigateTo } = useNavigation()
+
+const { elementRef: logoRef } = useFadeIn({ delay: 100 })
+const { elementRef: titleRef } = useTextAnimation({ splitBy: 'words', direction: 'up', stagger: 50, delay: 200, duration: 5000 })
+const { elementRef: subtitleRef } = useTextAnimation({ splitBy: 'words', direction: 'up', stagger: 30, delay: 600, duration: 5000 })
+const { elementRef: ctaRef } = useSlideIn({ direction: 'bottom', delay: 1000 })
+const { offset: parallaxOffset } = useParallax({ speed: 0.3 })
 </script>
 
 <template>
   <section class="relative overflow-hidden bg-background text-foreground">
     <div
       class="absolute inset-0 bg-gradient-to-br from-primary/15 to-primary/5 pointer-events-none"
+      :style="{ transform: `translateY(${parallaxOffset * 0.5}px)` }"
     ></div>
     <div
       class="absolute top-0 right-0 w-1/2 sm:w-1/3 h-full opacity-10 pointer-events-none"
+      :style="{ transform: `translateY(${parallaxOffset * 0.3}px)` }"
     >
       <div
         class="w-full h-full bg-gradient-to-l from-primary-foreground/20 to-transparent"
@@ -22,7 +34,7 @@ const { navigateTo } = useNavigation()
     <div class="relative z-10">
       <div class="container mx-auto px-4 sm:px-6 py-16 sm:py-20 md:py-24 lg:py-32">
         <div class="max-w-4xl mx-auto text-center">
-          <div class="mb-6 sm:mb-8">
+          <div ref="logoRef" class="mb-6 sm:mb-8">
             <div
               class="bg-primary text-primary-foreground rounded-xl sm:rounded-2xl p-4 sm:p-6 inline-block"
             >
@@ -33,16 +45,18 @@ const { navigateTo } = useNavigation()
               />
             </div>
           </div>
-          <h1 class="text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-bold tracking-tight mb-4 sm:mb-6 px-2">
+          <h1 ref="titleRef" class="text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-bold tracking-tight mb-4 sm:mb-6 px-2">
             {{ t('home.hero.title') }}
           </h1>
           <p
+            ref="subtitleRef"
             class="text-base sm:text-lg md:text-xl lg:text-2xl opacity-90 max-w-2xl mx-auto leading-relaxed mb-6 sm:mb-8 px-4"
           >
             {{ t('home.hero.subtitle') }}
           </p>
 
           <div
+            ref="ctaRef"
             class="flex flex-col sm:flex-row gap-3 sm:gap-4 justify-center items-center px-4"
           >
             <NuxtLink

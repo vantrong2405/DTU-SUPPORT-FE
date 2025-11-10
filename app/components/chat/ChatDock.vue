@@ -2,6 +2,7 @@
 import { ref, onMounted, onBeforeUnmount } from 'vue'
 import * as Icon from '@/components/ui/icon'
 import ChatBox from '@/components/chat/index.vue'
+import { handleKey } from '@/lib/utils'
 
 const isOpen = ref(false)
 
@@ -10,9 +11,11 @@ const handleToggle = () => {
 }
 
 const handleKeydown = (e: KeyboardEvent) => {
-  if (e.key === 'Escape') {
+  handleKey(e, () => {
     isOpen.value = false
-  }
+  }, {
+    key: 'Escape',
+  })
 }
 
 onMounted(() => {
@@ -26,7 +29,7 @@ onBeforeUnmount(() => {
 
 <template>
   <Teleport to="body">
-  <div class="fixed right-4 z-50 sm:right-6" :style="{ bottom: 'calc(env(safe-area-inset-bottom, 0px) + 16px)' }">
+  <div class="fixed right-4 sm:right-6 md:right-8 z-50" :style="{ bottom: 'calc(env(safe-area-inset-bottom, 0px) + 88px)' }">
     <Transition name="dock">
       <div
         v-show="isOpen"

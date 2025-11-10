@@ -50,10 +50,5 @@ export const useChatConversation = () => {
     }
   }
 
-  return {
-    messages,
-    isLoading,
-    error: apiError,
-    sendUserMessage,
-  }
+  return { messages, isLoading, error: apiError, sendUserMessage }
 }

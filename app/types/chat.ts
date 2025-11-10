@@ -5,12 +5,10 @@ export interface ChatMessage {
 
 export type ToolName = 'calculateTargetGpa' | 'calculateSimulationGpa' | 'calculatePeGpa' | 'calculateRequiredFinalScore' | 'calculateFinalScore'
 
-export type UiComponent = 'GpaResultCard' | 'PeResultCard' | 'FinalScoreResultCard'
-
 export interface ToolResult {
   toolName: ToolName
-  data: Record<string, unknown>
-  uiComponent: UiComponent
+  data?: Record<string, unknown>
+  uiHtml?: string
 }
 
 export interface ChatMetadata {
@@ -35,4 +33,9 @@ export interface Message {
   content: string
   timestamp: Date
   toolResult?: ToolResult
+}
+
+export interface ChatTone {
+  value: string | undefined
+  labelKey: string
 }

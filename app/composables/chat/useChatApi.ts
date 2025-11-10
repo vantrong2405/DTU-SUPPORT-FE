@@ -1,5 +1,6 @@
 import type { ChatMessage, ChatResponseData } from '@/types/chat'
 import { useApiFetch } from '@/lib/api'
+import { CHAT_API } from '@/constants/api/chat.api'
 import { ref } from 'vue'
 
 export const useChatApi = () => {
@@ -10,11 +11,12 @@ export const useChatApi = () => {
     error: apiError,
     data: response,
     execute: executeChatRequest,
-  } = useApiFetch<ChatResponseData>('/api/chat', {
+  } = useApiFetch<ChatResponseData>(CHAT_API.chat(), {
     method: 'POST',
     immediate: false,
     body: requestPayload,
     query: requestQuery,
+    watch: false,
   })
 
   const sendChatMessage = async (messages: ChatMessage[], tone?: string): Promise<ChatResponseData> => {
@@ -31,9 +33,5 @@ export const useChatApi = () => {
     return payload
   }
 
-  return {
-    isSending,
-    apiError,
-    sendChatMessage,
-  }
+  return { isSending, apiError, sendChatMessage }
 }
