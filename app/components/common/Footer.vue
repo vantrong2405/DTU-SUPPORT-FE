@@ -102,13 +102,6 @@ const { target: footerRef } = useScrollReveal({ threshold: 0.1, animation: 'fade
               <NuxtLink
                 to="#"
                 class="text-muted-foreground hover:text-foreground transition-colors text-sm sm:text-sm block"
-                >{{ t('common.footer.links.payment') }}</NuxtLink
-              >
-            </li>
-            <li>
-              <NuxtLink
-                to="#"
-                class="text-muted-foreground hover:text-foreground transition-colors text-sm sm:text-sm block"
                 >{{ t('common.footer.links.privacy') }}</NuxtLink
               >
             </li>
