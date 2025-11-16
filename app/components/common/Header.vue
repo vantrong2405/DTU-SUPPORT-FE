@@ -21,58 +21,37 @@ const auth = useAuthStore()
 const showLogin = computed(() => auth.hasSessionChecked && !auth.user)
 const showLogout = computed(() => auth.hasSessionChecked && !!auth.user)
 
-const toggleMenu = () => {
-  isMenuOpen.value = !isMenuOpen.value
-}
-
-const closeMenu = () => {
-  isMenuOpen.value = false
-}
-
+const toggleMenu = () => { isMenuOpen.value = !isMenuOpen.value }
+const closeMenu = () => { isMenuOpen.value = false }
 const scrollToSection = (sectionId: string) => {
   closeMenu()
   const element = document.querySelector(sectionId)
-  if (element) {
-    element.scrollIntoView({ behavior: 'smooth' })
-  }
+  if (element) { element.scrollIntoView({ behavior: 'smooth' }) }
 }
 
-const handleNavClick = (
-  event: MouseEvent,
-  item: { to: string; scroll?: boolean }
-) => {
+const handleNavClick = (event: MouseEvent, item: { to: string; scroll?: boolean }) => {
   if (item.scroll) {
     event.preventDefault()
     scrollToSection(item.to)
   }
 }
-
 const getNavLink = (item: { to: string; scroll?: boolean }) => {
-  if (item.scroll) {
-    return { path: route.path, query: route.query }
-  }
+  if (item.scroll) { return { path: route.path, query: route.query } }
   return navigateTo(item.to)
 }
-
-const handleMobileNavClick = (
-  event: MouseEvent,
-  item: { to: string; scroll?: boolean }
-) => {
+const handleMobileNavClick = (event: MouseEvent, item: { to: string; scroll?: boolean }) => {
   handleNavClick(event, item)
   if (!item.scroll) closeMenu()
 }
 
 const navItems = computed(() => {
   const path = route.path
-
-  if (path !== '/' && !path.match(/^\/[a-z]{2}$/)) {
-    return []
-  }
+  const isHomePage = path === '/' || path.match(/^\/[a-z]{2}$/)
 
   return NAV_ITEMS.map((item) => ({
     label: t(`common.header.menu.${item.key}`),
     to: item.to,
-    scroll: 'scroll' in item ? item.scroll : false,
+    scroll: isHomePage && 'scroll' in item ? item.scroll : false,
   }))
 })
 

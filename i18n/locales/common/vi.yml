@@ -71,3 +71,7 @@ common:
       response: "Phản hồi trong 30 phút"
     copyright: "© {year} DTU Study Support. Tất cả quyền được bảo lưu."
     crafted: "Được tạo với ❤️ cho sinh viên DTU"
+  error:
+    subtitle: "Có vẻ như trang bạn đang tìm không tồn tại"
+    suggestions: "Có thể bạn đang tìm:"
+    backHome: "Về trang chủ"

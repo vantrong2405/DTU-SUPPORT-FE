@@ -3,10 +3,29 @@ import { useI18n } from 'vue-i18n'
 import * as Icon from '@/components/ui/icon'
 import { useNavigation } from '@/composables/common/useNavigation'
 import { useScrollReveal } from '@/composables/animations/useScrollReveal'
+import { useRoute, useRouter } from 'vue-router'
 
 const { t } = useI18n()
 const { navigateTo } = useNavigation()
+const route = useRoute()
+const router = useRouter()
 const { target: footerRef } = useScrollReveal({ threshold: 0.1, animation: 'fade' })
+
+const scrollToSection = (sectionId: string) => {
+  const element = document.querySelector(sectionId)
+  if (element) { element.scrollIntoView({ behavior: 'smooth' }) }
+}
+
+const handleAboutClick = async (event: MouseEvent) => {
+  event.preventDefault()
+  const homeLink = navigateTo('/')
+  if (route.path !== homeLink.path) {
+    await router.push(homeLink)
+    setTimeout(() => scrollToSection('#about-us'), 300)
+  } else {
+    scrollToSection('#about-us')
+  }
+}
 </script>
 
 <template>
@@ -20,19 +39,20 @@ const { target: footerRef } = useScrollReveal({ threshold: 0.1, animation: 'fade
             </p>
             <div class="flex gap-6">
               <NuxtLink
-                to="#about-us"
+                :to="navigateTo('/')"
                 class="text-sm text-muted-foreground hover:text-foreground transition-colors"
+                @click="handleAboutClick"
               >
                 {{ t('common.footer.links.about') }}
               </NuxtLink>
               <NuxtLink
-                to="#"
+                :to="navigateTo('/policy')"
                 class="text-sm text-muted-foreground hover:text-foreground transition-colors"
               >
                 {{ t('common.footer.links.policy') }}
               </NuxtLink>
               <NuxtLink
-                to="#"
+                :to="navigateTo('/contact')"
                 class="text-sm text-muted-foreground hover:text-foreground transition-colors"
               >
                 {{ t('common.footer.links.contact') }}

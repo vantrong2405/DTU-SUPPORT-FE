@@ -26,10 +26,7 @@ export function useParallax(options?: ParallaxOptions) {
     update()
     window.addEventListener('scroll', update, { passive: true })
   })
-
-  onUnmounted(() => {
-    window.removeEventListener('scroll', update)
-  })
+  onUnmounted(() => { window.removeEventListener('scroll', update) })
 
   return { offset }
 }

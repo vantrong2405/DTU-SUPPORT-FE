@@ -71,3 +71,7 @@ common:
       response: "30分以内に回答"
     copyright: "© {year} DTU Study Support. 全著作権所有。"
     crafted: "DTU学生のために❤️で作成"
+  error:
+    subtitle: "お探しのページは存在しないようです"
+    suggestions: "以下をお探しかもしれません："
+    backHome: "ホームに戻る"

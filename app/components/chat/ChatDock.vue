@@ -1,30 +1,28 @@
 <script setup lang="ts">
-import { ref, onMounted, onBeforeUnmount } from 'vue'
+import { ref, watch, onMounted, onBeforeUnmount } from 'vue'
 import * as Icon from '@/components/ui/icon'
 import ChatBox from '@/components/chat/index.vue'
 import { handleKey } from '@/lib/utils'
 
 const isOpen = ref(false)
+const showButton = ref(true)
 
-const handleToggle = () => {
-  isOpen.value = !isOpen.value
-}
+watch(isOpen, (newValue) => {
+  if (newValue) {
+    showButton.value = false
+  } else {
+    setTimeout(() => { showButton.value = true }, 250)
+  }
+})
+
+const handleToggle = () => { isOpen.value = !isOpen.value }
 
 const handleKeydown = (e: KeyboardEvent) => {
-  handleKey(e, () => {
-    isOpen.value = false
-  }, {
-    key: 'Escape',
-  })
+  handleKey(e, () => { isOpen.value = false }, { key: 'Escape' })
 }
 
-onMounted(() => {
-  window.addEventListener('keydown', handleKeydown)
-})
-
-onBeforeUnmount(() => {
-  window.removeEventListener('keydown', handleKeydown)
-})
+onMounted(() => { window.addEventListener('keydown', handleKeydown) })
+onBeforeUnmount(() => { window.removeEventListener('keydown', handleKeydown) })
 </script>
 
 <template>
@@ -42,11 +40,11 @@ onBeforeUnmount(() => {
     </Transition>
 
     <button
+      v-if="showButton && !isOpen"
       type="button"
       aria-label="Toggle AI Chat"
-      class="inline-flex items-center justify-center h-12 w-12 rounded-full bg-primary text-primary-foreground shadow-lg hover:shadow-xl transition-shadow focus:outline-none focus:ring-2 focus:ring-primary/40"
+      class="button-fade-in inline-flex items-center justify-center h-12 w-12 rounded-full bg-primary text-primary-foreground shadow-lg hover:shadow-xl transition-shadow focus:outline-none focus:ring-2 focus:ring-primary/40"
       @click="handleToggle"
-      v-show="!isOpen"
     >
       <Icon.Bot class="w-6 h-6" />
     </button>
@@ -55,8 +53,8 @@ onBeforeUnmount(() => {
 </template>
 
 <style scoped>
-.dock-enter-active,
-.dock-leave-active { transition: all 0.2s ease; }
-.dock-enter-from,
-.dock-leave-to { opacity: 0; transform: translateY(8px) scale(0.98); }
+.dock-enter-active, .dock-leave-active { transition: all 0.2s ease; }
+.dock-enter-from, .dock-leave-to { opacity: 0; transform: translateY(8px) scale(0.98); }
+.button-fade-in { animation: fadeIn 0.15s ease-out 0.05s forwards; }
+@keyframes fadeIn { from { opacity: 0; } to { opacity: 1; } }
 </style>

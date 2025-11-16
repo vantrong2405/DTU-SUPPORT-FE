@@ -3,7 +3,9 @@ export {
   X,
   ChevronUp,
   ChevronDown,
+  ChevronLeft,
   ChevronRight,
+  Search,
   Target,
   Calculator,
   Dumbbell,
@@ -39,4 +41,6 @@ export {
   Crown,
   Sparkles,
   Zap,
+  Upload,
+  DollarSign,
 } from 'lucide-vue-next'

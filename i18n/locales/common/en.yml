@@ -71,3 +71,7 @@ common:
       response: "Respond within 30 minutes"
     copyright: "© {year} DTU Study Support. All rights reserved."
     crafted: "Crafted with ❤️ for DTU students"
+  error:
+    subtitle: "It seems the page you're looking for doesn't exist"
+    suggestions: "You might be looking for:"
+    backHome: "Back to Home"

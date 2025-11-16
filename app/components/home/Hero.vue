@@ -11,21 +11,15 @@ const { navigateTo } = useNavigation()
   <section class="relative overflow-hidden bg-background text-foreground">
     <div class="container mx-auto px-4 sm:px-6 py-12 sm:py-16 md:py-20">
       <div class="max-w-6xl mx-auto">
-        <div class="bg-card/50 backdrop-blur-sm rounded-xl border border-border/50 p-8 sm:p-10 shadow-xl">
           <div class="grid lg:grid-cols-2 gap-8 md:gap-12 items-center">
             <div class="order-2 lg:order-1">
               <h1 class="text-4xl sm:text-5xl md:text-[48px] font-black leading-[1em] tracking-[-0.05em] mb-4 text-foreground">
                 {{ t('home.hero.title') }}
               </h1>
-              <p
-                class="text-base text-muted-foreground leading-[1.5em] mb-6"
-              >
+            <p class="text-base text-muted-foreground leading-[1.5em] mb-6">
                 {{ t('home.hero.subtitle') }}
               </p>
-
-              <div
-                class="flex flex-col sm:flex-row gap-4"
-              >
+            <div class="flex flex-col sm:flex-row gap-4">
                 <NuxtLink
                   :to="navigateTo('/tools')"
                   class="inline-flex items-center justify-center whitespace-nowrap rounded-lg bg-primary text-primary-foreground hover:bg-primary/90 h-12 px-5 text-base font-bold transition-colors"
@@ -47,7 +41,6 @@ const { navigateTo } = useNavigation()
                   alt="DTU Students"
                   class="w-full h-full object-cover"
                 />
-              </div>
             </div>
           </div>
         </div>
