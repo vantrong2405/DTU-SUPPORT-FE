@@ -21,11 +21,19 @@ tools:
     target:
       inputTitle: "Thông tin đầu vào"
       inputSubtitle: "Nhập thông tin GPA để tính toán kết quả dự đoán"
+      info:
+        title: "Cách sử dụng công cụ"
+        description: "Nhập thông tin GPA hiện tại và mục tiêu của bạn. Hệ thống sẽ tính toán GPA tối đa có thể đạt được nếu bạn đạt điểm A (4.0) ở tất cả các môn còn lại."
       fields:
         completedCredits: "Số tín đã học"
         currentGpa: "GPA hiện tại"
         targetGpa: "GPA mục tiêu"
         remainingCredits: "Số tín còn lại"
+      helpers:
+        completedCredits: "Ví dụ: Nếu bạn đã học 60 tín chỉ, nhập 60"
+        currentGpa: "Ví dụ: GPA hiện tại của bạn là 3.2, nhập 3.2"
+        targetGpa: "Ví dụ: Bạn muốn đạt GPA 3.5, nhập 3.5"
+        remainingCredits: "Ví dụ: Bạn còn 40 tín chỉ chưa học, nhập 40"
       placeholders:
         completedCredits: "Nhập số tín đã học"
         currentGpa: "Nhập GPA hiện tại (0–4.00)"
@@ -165,6 +173,8 @@ tools:
       description: "Công cụ tính GPA thể dục theo thang điểm DTU."
       inputTitle: "Tính toán GPA thể dục"
       inputSubtitle: "Đơn giản & nhanh"
+      info:
+        title: "Quy tắc tính điểm"
       rules:
         line1: "Nhập GPA (thang 4.0) của 3 môn thể dục"
         line2: "Trung bình ≥ 2.0: Đậu"
@@ -173,6 +183,10 @@ tools:
         pe1: "Thể dục 1 (0–4.00)"
         pe2: "Thể dục 2 (0–4.00)"
         pe3: "Thể dục 3 (0–4.00)"
+      helpers:
+        pe1: "Ví dụ: Nếu bạn đạt 3.5 điểm ở Thể dục 1, nhập 3.5"
+        pe2: "Ví dụ: Nếu bạn đạt 3.0 điểm ở Thể dục 2, nhập 3.0"
+        pe3: "Ví dụ: Nếu bạn đạt 2.5 điểm ở Thể dục 3, nhập 2.5"
       placeholders:
         pe1: "Nhập GPA Thể dục 1"
         pe2: "Nhập GPA Thể dục 2"
@@ -283,6 +297,9 @@ tools:
   pass:
     inputTitle: "Tính điểm cuối kỳ để qua môn"
     inputSubtitle: "Nhập thông tin các cột điểm và trọng số để tính điểm thi cuối kỳ cần thiết"
+    info:
+      title: "Cách sử dụng công cụ"
+      description: "Thêm các cột điểm (giữa kỳ, chuyên cần, bài tập...) với trọng số tương ứng. Tổng trọng số phải bằng 100%. Hệ thống sẽ tính điểm thi cuối kỳ tối thiểu cần đạt để qua môn."
     progress:
       total: "Tổng"
       remaining: "Còn lại"
@@ -300,6 +317,9 @@ tools:
     fields:
       finalExamWeight: "Trọng số thi cuối kỳ (%)"
       minPassingScore: "Điểm tối thiểu để qua môn"
+    helpers:
+      finalExamWeight: "Ví dụ: Nếu thi cuối kỳ chiếm 50% tổng điểm, nhập 50"
+      minPassingScore: "Ví dụ: Nếu điểm tối thiểu để qua môn là 4.0, nhập 4.0"
     placeholders:
       finalExamWeight: "Nhập trọng số thi cuối kỳ (%)"
       minPassingScore: "Nhập điểm tối thiểu (0-10)"

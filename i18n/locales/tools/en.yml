@@ -21,11 +21,19 @@ tools:
     target:
       inputTitle: "Input Information"
       inputSubtitle: "Enter GPA information to calculate predicted results"
+      info:
+        title: "How to use this tool"
+        description: "Enter your current GPA and target GPA. The system will calculate the maximum GPA you can achieve if you get an A (4.0) in all remaining courses."
       fields:
         completedCredits: "Completed Credits"
         currentGpa: "Current GPA"
         targetGpa: "Target GPA"
         remainingCredits: "Remaining Credits"
+      helpers:
+        completedCredits: "Example: If you have completed 60 credits, enter 60"
+        currentGpa: "Example: If your current GPA is 3.2, enter 3.2"
+        targetGpa: "Example: If you want to achieve a GPA of 3.5, enter 3.5"
+        remainingCredits: "Example: If you have 40 credits remaining, enter 40"
       placeholders:
         completedCredits: "Enter completed credits"
         currentGpa: "Enter current GPA (0–4.00)"
@@ -165,6 +173,8 @@ tools:
       description: "Calculate PE GPA according to DTU grading scale."
       inputTitle: "Physical Education GPA"
       inputSubtitle: "Simple & fast"
+      info:
+        title: "Grading Rules"
       rules:
         line1: "Enter GPA (4.0 scale) for 3 PE courses"
         line2: "Average ≥ 2.0: Pass"
@@ -173,6 +183,10 @@ tools:
         pe1: "PE 1 (0–4.00)"
         pe2: "PE 2 (0–4.00)"
         pe3: "PE 3 (0–4.00)"
+      helpers:
+        pe1: "Example: If you got 3.5 in PE 1, enter 3.5"
+        pe2: "Example: If you got 3.0 in PE 2, enter 3.0"
+        pe3: "Example: If you got 2.5 in PE 3, enter 2.5"
       placeholders:
         pe1: "Enter PE 1 GPA"
         pe2: "Enter PE 2 GPA"
@@ -283,6 +297,9 @@ tools:
   pass:
     inputTitle: "Calculate Final Exam Score to Pass"
     inputSubtitle: "Enter score components and weights to calculate required final exam score"
+    info:
+      title: "How to use this tool"
+      description: "Add score components (midterm, attendance, assignments...) with their corresponding weights. Total weight must equal 100%. The system will calculate the minimum final exam score needed to pass."
     progress:
       total: "Total"
       remaining: "Remaining"
@@ -300,6 +317,9 @@ tools:
     fields:
       finalExamWeight: "Final Exam Weight (%)"
       minPassingScore: "Minimum Passing Score"
+    helpers:
+      finalExamWeight: "Example: If final exam is 50% of total score, enter 50"
+      minPassingScore: "Example: If minimum passing score is 4.0, enter 4.0"
     placeholders:
       finalExamWeight: "Enter final exam weight (%)"
       minPassingScore: "Enter minimum score (0-10)"

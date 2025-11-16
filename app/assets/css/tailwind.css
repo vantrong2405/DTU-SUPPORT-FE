@@ -282,7 +282,8 @@
 
   /* Respect reduced motion */
   @media (prefers-reduced-motion: reduce) {
-    .animate-fade-in {
+    .animate-fade-in,
+    .animate-gradient {
       animation: none;
     }
 

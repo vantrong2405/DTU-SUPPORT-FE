@@ -37,7 +37,7 @@ const props = withDefaults(defineProps<Props>(), {
         :type="props.type"
         :step="props.step"
         :placeholder="props.placeholder"
-        class="h-11 w-full rounded-lg border border-input bg-background px-4 text-sm text-foreground transition-all duration-200 placeholder:text-muted-foreground/60 focus:border-primary focus:ring-2 focus:ring-primary/20 focus:outline-none hover:border-primary/50 disabled:opacity-50 disabled:cursor-not-allowed"
+        class="h-11 w-full rounded-lg border-2 border-border/40 bg-gradient-to-br from-background to-muted/20 px-4 text-sm text-foreground transition-all duration-300 placeholder:text-muted-foreground/60 focus:border-primary/60 focus:ring-2 focus:ring-primary/20 focus:ring-offset-1 focus:outline-none hover:border-primary/40 hover:bg-gradient-to-br hover:from-background hover:to-muted/30 disabled:opacity-50 disabled:cursor-not-allowed shadow-sm hover:shadow-md focus:shadow-lg"
       />
       <ErrorMessage
         v-if="errorPosition === 'bottom'"

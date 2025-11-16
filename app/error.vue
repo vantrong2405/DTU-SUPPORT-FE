@@ -4,10 +4,14 @@ import { Button } from '@/components/ui/button'
 import { useNavigation } from '@/composables/common/useNavigation'
 import { useRouter } from 'vue-router'
 import logoDtu from '@/assets/images/logo-dtu.png'
+import { useThemeLogic } from '@/composables/common/useThemeLogic'
 
 const { t } = useI18n()
 const { navigateTo } = useNavigation()
 const router = useRouter()
+const { setHtmlAttributes } = useThemeLogic()
+
+setHtmlAttributes()
 
 const popularLinks = [
   { key: 'tools', to: '/tools', label: t('common.header.menu.tools') },
@@ -49,7 +53,6 @@ const handleLinkClick = (path: string) => {
             v-for="link in popularLinks"
             :key="link.key"
             variant="outline"
-            class="bg-card border-border hover:bg-muted"
             @click="handleLinkClick(link.to)"
           >
             {{ link.label }}
@@ -57,10 +60,7 @@ const handleLinkClick = (path: string) => {
         </div>
       </div>
 
-      <Button
-        class="bg-primary hover:bg-primary/90 text-primary-foreground"
-        @click="handleGoHome"
-      >
+      <Button @click="handleGoHome">
         {{ t('common.error.backHome') }}
       </Button>
     </div>

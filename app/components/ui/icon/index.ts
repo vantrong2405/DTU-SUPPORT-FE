@@ -43,4 +43,5 @@ export {
   Zap,
   Upload,
   DollarSign,
+  Info,
 } from 'lucide-vue-next'

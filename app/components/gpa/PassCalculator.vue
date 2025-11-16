@@ -55,18 +55,33 @@ const resetCalculatorForm = () => {
 </script>
 
 <template>
-  <div class="grid grid-cols-1 lg:grid-cols-2 gap-4 sm:gap-6 lg:gap-8">
-    <div class="rounded-xl sm:rounded-2xl border border-border/20 bg-card text-card-foreground p-4 sm:p-5 md:p-6 shadow-md backdrop-blur-sm">
-      <div class="mb-4 sm:mb-5">
-        <h2 class="text-base sm:text-lg md:text-xl font-bold text-foreground mb-1.5 flex items-center gap-2">
-          <Icon.Calculator class="w-3.5 h-3.5 sm:w-4 sm:h-4 text-primary flex-shrink-0" />
-          {{ t(`${SCOPE}.inputTitle`) }}
-        </h2>
-        <p class="text-xs sm:text-xs text-muted-foreground">{{ t(`${SCOPE}.inputSubtitle`) }}</p>
-      </div>
-
-      <form @submit="onPassSubmit" class="space-y-3 sm:space-y-4">
-        <div class="flex items-center justify-between p-3 rounded-lg border border-border/20 bg-muted/30">
+  <div class="grid grid-cols-1 lg:grid-cols-2 gap-6 sm:gap-8 lg:gap-10">
+    <div class="relative rounded-2xl sm:rounded-3xl border border-border/30 bg-gradient-to-br from-card via-card/95 to-card/90 text-card-foreground p-6 sm:p-7 md:p-8 shadow-xl backdrop-blur-md overflow-hidden group hover:shadow-2xl hover:shadow-primary/5 transition-all duration-500">
+      <div class="absolute inset-0 bg-gradient-to-br from-primary/5 via-transparent to-accent/5 opacity-0 group-hover:opacity-100 transition-opacity duration-500"></div>
+      <div class="absolute top-0 left-0 w-48 h-48 bg-primary/5 rounded-full blur-3xl -translate-x-1/2 -translate-y-1/2"></div>
+      <div class="relative z-10">
+        <div class="mb-5 sm:mb-6">
+          <div class="flex items-center gap-3 mb-3">
+            <div class="w-10 h-10 sm:w-12 sm:h-12 rounded-xl bg-gradient-to-br from-primary/20 to-accent/20 flex items-center justify-center border border-primary/20">
+              <Icon.Calculator class="w-5 h-5 sm:w-6 sm:h-6 text-primary" />
+            </div>
+            <div>
+              <h2 class="text-lg sm:text-xl md:text-2xl font-bold text-foreground">{{ t(`${SCOPE}.inputTitle`) }}</h2>
+              <p class="text-xs sm:text-sm text-muted-foreground mt-0.5">{{ t(`${SCOPE}.inputSubtitle`) }}</p>
+            </div>
+          </div>
+        </div>
+        <div class="rounded-xl border border-primary/20 bg-gradient-to-br from-primary/5 via-primary/3 to-transparent p-4 mb-5">
+          <div class="flex items-start gap-3">
+            <Icon.Info class="w-5 h-5 text-primary flex-shrink-0 mt-0.5" />
+            <div class="flex-1 space-y-1">
+              <p class="text-sm font-semibold text-foreground">{{ t(`${SCOPE}.info.title`) }}</p>
+              <p class="text-xs text-muted-foreground leading-relaxed">{{ t(`${SCOPE}.info.description`) }}</p>
+            </div>
+          </div>
+        </div>
+      <form @submit="onPassSubmit" class="space-y-4 sm:space-y-5">
+        <div class="flex items-center justify-between p-4 rounded-xl border-2 border-border/30 bg-gradient-to-br from-muted/30 to-muted/20 shadow-sm">
           <div class="flex items-center gap-2 text-xs sm:text-sm">
             <span class="text-muted-foreground">{{ t(`${SCOPE}.progress.total`) }}:</span>
             <span class="font-semibold text-foreground">{{ (totalWeight + values.finalExamWeight).toFixed(1) }}%</span>
@@ -131,7 +146,7 @@ const resetCalculatorForm = () => {
                     type="text"
                     :model-value="comp.name"
                     @update:model-value="(val: string | number) => updateComponentField(comp.id, 'name', val)"
-                    class="h-11"
+                    class="h-11 border-2 border-border/40 bg-gradient-to-br from-background to-muted/20 focus:border-primary/60 focus:ring-2 focus:ring-primary/20 focus:ring-offset-1 hover:border-primary/40 hover:bg-gradient-to-br hover:from-background hover:to-muted/30 shadow-sm hover:shadow-md focus:shadow-lg transition-all duration-300"
                     :placeholder="t(`${SCOPE}.components.namePlaceholder`)"
                   />
                 </div>
@@ -147,7 +162,7 @@ const resetCalculatorForm = () => {
                     max="100"
                     :model-value="comp.weight"
                     @update:model-value="(val: string | number) => updateComponentField(comp.id, 'weight', val)"
-                    class="h-11"
+                    class="h-11 border-2 border-border/40 bg-gradient-to-br from-background to-muted/20 focus:border-primary/60 focus:ring-2 focus:ring-primary/20 focus:ring-offset-1 hover:border-primary/40 hover:bg-gradient-to-br hover:from-background hover:to-muted/30 shadow-sm hover:shadow-md focus:shadow-lg transition-all duration-300"
                     :placeholder="t(`${SCOPE}.components.weightPlaceholder`)"
                   />
                 </div>
@@ -163,7 +178,7 @@ const resetCalculatorForm = () => {
                     max="10"
                     :model-value="comp.score"
                     @update:model-value="(val: string | number) => updateComponentField(comp.id, 'score', val)"
-                    class="h-11"
+                    class="h-11 border-2 border-border/40 bg-gradient-to-br from-background to-muted/20 focus:border-primary/60 focus:ring-2 focus:ring-primary/20 focus:ring-offset-1 hover:border-primary/40 hover:bg-gradient-to-br hover:from-background hover:to-muted/30 shadow-sm hover:shadow-md focus:shadow-lg transition-all duration-300"
                     :placeholder="t(`${SCOPE}.components.scorePlaceholder`)"
                   />
                 </div>
@@ -172,39 +187,48 @@ const resetCalculatorForm = () => {
           </div>
         </div>
 
-        <FieldControl
-          name="finalExamWeight"
-          :label="t(`${SCOPE}.fields.finalExamWeight`)"
-          type="number"
-          step="0.1"
-          :placeholder="t(`${SCOPE}.placeholders.finalExamWeight`)"
-          required
-        />
+        <div class="space-y-2">
+          <FieldControl
+            name="finalExamWeight"
+            :label="t(`${SCOPE}.fields.finalExamWeight`)"
+            type="number"
+            step="0.1"
+            :placeholder="t(`${SCOPE}.placeholders.finalExamWeight`)"
+            required
+          />
+          <p class="text-xs text-muted-foreground ml-1">{{ t(`${SCOPE}.helpers.finalExamWeight`) }}</p>
+        </div>
 
-        <FieldControl
-          name="minPassingScore"
-          :label="t(`${SCOPE}.fields.minPassingScore`)"
-          type="number"
-          step="0.1"
-          :placeholder="t(`${SCOPE}.placeholders.minPassingScore`)"
-          required
-        />
+        <div class="space-y-2">
+          <FieldControl
+            name="minPassingScore"
+            :label="t(`${SCOPE}.fields.minPassingScore`)"
+            type="number"
+            step="0.1"
+            :placeholder="t(`${SCOPE}.placeholders.minPassingScore`)"
+            required
+          />
+          <p class="text-xs text-muted-foreground ml-1">{{ t(`${SCOPE}.helpers.minPassingScore`) }}</p>
+        </div>
 
-        <div class="flex flex-col sm:flex-row gap-2 sm:gap-3 pt-2">
+        <div class="flex flex-col sm:flex-row gap-3 pt-3">
           <Button type="submit" :disabled="isSubmitting || (totalWeight + values.finalExamWeight) !== 100" size="lg" class="flex-1 sm:flex-none">
             <Icon.Calculator />
             {{ isSubmitting ? t(`${SCOPE}.buttons.calculating`) : t(`${SCOPE}.buttons.calculate`) }}
           </Button>
-          <Button type="button" variant="outline" size="lg" class="flex-1 sm:flex-none" @click="resetCalculatorForm">
+          <Button type="button" variant="outline" size="lg" class="flex-1 sm:flex-none border-2 hover:bg-muted/50 transition-all duration-300" @click="resetCalculatorForm">
             <Icon.RotateCcw />
             {{ t(`${SCOPE}.buttons.reset`) }}
           </Button>
         </div>
       </form>
+      </div>
     </div>
 
-    <div class="rounded-xl sm:rounded-2xl border border-border/20 bg-card text-card-foreground p-4 sm:p-5 md:p-6 shadow-md backdrop-blur-sm min-h-[400px] flex items-center justify-center">
-      <div v-if="passResult.requiredFinalScore === null" class="w-full flex flex-col items-center justify-center rounded-xl bg-gradient-to-br from-muted/30 to-muted/10 border border-border/20 text-center px-4 sm:px-6 py-6 sm:py-8 transition-all duration-300">
+    <div class="relative rounded-2xl sm:rounded-3xl border border-border/30 bg-gradient-to-br from-card via-card/95 to-card/90 text-card-foreground p-6 sm:p-7 md:p-8 shadow-xl backdrop-blur-md min-h-[400px] flex items-center justify-center overflow-hidden group hover:shadow-2xl hover:shadow-primary/5 transition-all duration-500">
+      <div class="absolute inset-0 bg-gradient-to-br from-primary/5 via-transparent to-accent/5 opacity-0 group-hover:opacity-100 transition-opacity duration-500"></div>
+      <div class="absolute top-0 right-0 w-48 h-48 bg-accent/5 rounded-full blur-3xl translate-x-1/2 -translate-y-1/2"></div>
+      <div v-if="passResult.requiredFinalScore === null" class="relative w-full flex flex-col items-center justify-center rounded-2xl bg-gradient-to-br from-muted/40 via-muted/20 to-muted/10 border border-border/30 text-center px-4 sm:px-6 py-8 sm:py-10 transition-all duration-300 backdrop-blur-sm">
         <div class="relative mb-3 sm:mb-4">
           <div class="absolute inset-0 bg-primary/10 rounded-full blur-xl"></div>
           <Icon.ClipboardCheck class="w-10 h-10 sm:w-12 sm:h-12 text-primary/60 relative z-10" />
@@ -351,7 +375,7 @@ const resetCalculatorForm = () => {
                 step="0.1"
                 min="0"
                 max="10"
-                class="flex-1 h-11"
+                class="flex-1 h-11 border-2 border-border/40 bg-gradient-to-br from-background to-muted/20 focus:border-primary/60 focus:ring-2 focus:ring-primary/20 focus:ring-offset-1 hover:border-primary/40 hover:bg-gradient-to-br hover:from-background hover:to-muted/30 shadow-sm hover:shadow-md focus:shadow-lg transition-all duration-300"
                 :placeholder="t(`${SCOPE}.prediction.placeholder`)"
               />
               <Button type="button" @click="calculatePredictedScore" :disabled="!predictedScoreInput">
