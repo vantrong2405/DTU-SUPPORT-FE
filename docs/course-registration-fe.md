@@ -4,7 +4,6 @@
 
 Xây dựng giao diện người dùng cho hệ thống đăng ký tín chỉ thông minh:
 - Authentication với Google OAuth
-- Quản lý subscription & thanh toán
 - Tìm kiếm và hiển thị danh sách môn học
 - Form nhập thông tin để AI lập lịch học
 - Hiển thị kết quả đề xuất từ AI
@@ -31,17 +30,12 @@ Xây dựng giao diện người dùng cho hệ thống đăng ký tín chỉ th
 /courses                    → Danh sách môn học
 /courses/[code]             → Chi tiết môn học
 /schedule                   → AI Schedule Scheduler (form + results)
-/pricing                    → Subscription plans
-/payment/[id]               → Payment page
-/payment/success            → Payment success
-/payment/failed             → Payment failed
 ```
 
 ### Protected Routes (Auth required)
 
 ```
 /dashboard                  → User dashboard
-/dashboard/payments          → Lịch sử thanh toán
 /dashboard/schedules         → Lịch sử lập lịch học
 ```
 
@@ -93,17 +87,6 @@ ScheduleConflict.vue         → Cảnh báo xung đột
 ScheduleAlternative.vue      → Danh sách lớp thay thế
 ScheduleHistory.vue           → Lịch sử lập lịch học
 ScheduleCalendar.vue         → Calendar view của lịch học
-```
-
-### Payment Components (`app/components/payment/`)
-
-```
-PlanCard.vue                 → Card subscription plan
-PlanFeatures.vue             → Features của plan
-PaymentForm.vue              → Form thanh toán
-PaymentMethod.vue            → Chọn phương thức thanh toán (MoMo, PayPal, Stripe)
-PaymentStatus.vue            → Trạng thái thanh toán
-PaymentHistory.vue           → Lịch sử thanh toán
 ```
 
 ### Admin Components (`app/components/admin/`)
@@ -229,42 +212,6 @@ export const useSchedule = () => {
 }
 ```
 
-### Payment (`app/composables/usePayment.ts`)
-
-```typescript
-export const usePayment = () => {
-  const plans = ref<SubscriptionPlan[]>([])
-  const currentPlan = ref<SubscriptionPlan | null>(null)
-  const paymentHistory = ref<Payment[]>([])
-
-  const fetchPlans = async () => {
-    // Fetch subscription plans
-  }
-
-  const selectPlan = async (planId: number) => {
-    // Select plan and redirect to payment
-  }
-
-  const processPayment = async (paymentMethod: string) => {
-    // Process payment
-  }
-
-  const fetchPaymentHistory = async () => {
-    // Fetch payment history
-  }
-
-  return {
-    plans,
-    currentPlan,
-    paymentHistory,
-    fetchPlans,
-    selectPlan,
-    processPayment,
-    fetchPaymentHistory
-  }
-}
-```
-
 ### Admin (`app/composables/useAdmin.ts`)
 
 ```typescript
@@ -371,15 +318,6 @@ GET    /api/schedule/:id          → Get schedule detail
 POST   /api/schedule/:id/save     → Save schedule
 ```
 
-#### Payment
-```
-GET    /api/payment/plans        → Get subscription plans
-GET    /api/payment/current      → Get current plan
-POST   /api/payment/create       → Create payment
-POST   /api/payment/:id/verify    → Verify payment
-GET    /api/payment/history       → Get payment history
-```
-
 #### Admin
 ```
 GET    /api/admin/crawl/configs   → List crawl configs
@@ -449,38 +387,6 @@ User can:
   - Regenerate with different inputs
   - View calendar view
   - Export schedule
-```
-
-### 3. Payment Flow
-
-```
-User navigates to /pricing
-    ↓
-Display subscription plans (Free, Pro, Premium)
-    ↓
-User clicks "Subscribe" on a plan
-    ↓
-Check user's current plan
-    ↓
-If not free plan:
-  - Redirect to /payment/:planId
-  - Display PaymentForm
-  - User selects payment method (MoMo, PayPal, Stripe)
-    ↓
-User fills payment details
-    ↓
-Submit payment
-    ↓
-Process payment via gateway
-    ↓
-On success:
-  - Update user's plan_id
-  - Redirect to /payment/success
-  - Show confirmation
-    ↓
-On failure:
-  - Redirect to /payment/failed
-  - Show error message
 ```
 
 ### 4. Admin Crawl Management Flow
@@ -640,33 +546,6 @@ On completion:
 └─────────────────────────────────────┘
 ```
 
-### PlanCard Component
-
-**Props:**
-- `plan: SubscriptionPlan` - Plan data
-- `currentPlan?: boolean` - Is current plan
-
-**Displays:**
-- Plan name (Free, Pro, Premium)
-- Price per month
-- Features list (from JSONB)
-- "Current Plan" badge if active
-- "Subscribe" or "Upgrade" button
-
-**Layout:**
-```
-┌─────────────────────────────┐
-│       PRO                   │
-│   $9.99 / month             │
-│                             │
-│  ✓ AI Schedule: 100/month   │
-│  ✓ Crawl Limit: 50/month    │
-│  ✓ Priority Support         │
-│                             │
-│  [Subscribe]                │
-└─────────────────────────────┘
-```
-
 ---
 
 ## 📦 State Management
@@ -676,28 +555,20 @@ On completion:
 ```typescript
 export const useUserStore = defineStore('user', () => {
   const user = ref<User | null>(null)
-  const currentPlan = ref<SubscriptionPlan | null>(null)
   const isLoading = ref(false)
 
   const setUser = (userData: User) => {
     user.value = userData
   }
 
-  const setCurrentPlan = (plan: SubscriptionPlan) => {
-    currentPlan.value = plan
-  }
-
   const clearUser = () => {
     user.value = null
-    currentPlan.value = null
   }
 
   return {
     user,
-    currentPlan,
     isLoading,
     setUser,
-    setCurrentPlan,
     clearUser
   }
 })
@@ -772,15 +643,6 @@ export const useScheduleStore = defineStore('schedule', () => {
 - [ ] Implement schedule generation API call
 - [ ] Implement schedule saving
 - [ ] Create schedule history page
-
-### Phase 5: Payment Module
-- [ ] Create PlanCard component
-- [ ] Create PaymentForm component
-- [ ] Create PaymentMethod component
-- [ ] Create PaymentStatus component
-- [ ] Implement payment processing (MoMo, PayPal, Stripe)
-- [ ] Create payment success/failed pages
-- [ ] Create payment history page
 
 ### Phase 6: Admin Module
 - [ ] Create AdminGuard component

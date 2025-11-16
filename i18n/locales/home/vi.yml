@@ -33,42 +33,20 @@ home:
         description: "Chuyên về Digital Marketing và Content Creation"
 
   whatWeDo:
-    title: "DTU Help Center là gì?"
-    subtitle: "Nền tảng hỗ trợ học tập toàn diện được thiết kế đặc biệt cho sinh viên Đại học Duy Tân"
-    helpTitle: "Chúng tôi giúp gì cho bạn?"
-    paragraphs:
-      - "DTU Help Center là nền tảng được phát triển bởi sinh viên DTU, dành riêng cho cộng đồng sinh viên Duy Tân với mục tiêu hỗ trợ quá trình học tập hiệu quả."
-      - "Chúng tôi cung cấp các công cụ tính toán GPA, lập kế hoạch học tập, và marketplace tài liệu học tập để giúp bạn đạt được kết quả học tập tốt nhất."
-      - "Tất cả các công cụ đều được thiết kế dựa trên quy chế đào tạo của Đại học Duy Tân, đảm bảo tính chính xác và phù hợp với chương trình học của bạn."
-    visual:
-      audience: "Sinh viên DTU"
-      trust: "Hơn 1000+ sinh viên đã tin tưởng sử dụng các công cụ của chúng tôi"
-      metrics:
-        accuracy: "Độ chính xác"
-        support: "Hỗ trợ"
-        free: "Miễn phí"
+    title: "Công cụ & Dịch vụ chính"
     features:
       - icon: "📊"
-        title: "Tính toán GPA"
-        description: "Công cụ tính điểm trung bình tích lũy chính xác, giúp bạn theo dõi kết quả học tập một cách khoa học."
-        benefits:
-          - "Tính GPA chính xác"
-          - "Dự đoán xếp loại"
-          - "Lập kế hoạch học tập"
-      - icon: "📅"
-        title: "Lập lịch học"
-        description: "Hỗ trợ đăng ký tín chỉ và sắp xếp thời khóa biểu tối ưu, tránh xung đột lịch học."
-        benefits:
-          - "Gợi ý học phần"
-          - "Xếp thời khóa biểu"
-          - "Kiểm tra điều kiện"
+        title: "Công cụ tính điểm GPA"
+        description: "Tính toán điểm trung bình học kỳ và tích lũy chính xác."
+      - icon: "🎓"
+        title: "Dự đoán loại bằng"
+        description: "Ước tính xếp loại bằng tốt nghiệp dựa trên kết quả hiện tại."
       - icon: "📚"
-        title: "Marketplace tài liệu"
-        description: "Nền tảng mua bán tài liệu học tập, đề thi, bài tập từ sinh viên các khóa."
-        benefits:
-          - "Tài liệu chất lượng"
-          - "Đề thi mẫu"
-          - "Hệ thống đánh giá"
+        title: "Marketplace Tài liệu"
+        description: "Mua bán, trao đổi tài liệu học tập, đề thi và đồ án."
+      - icon: "🤝"
+        title: "Dịch vụ Hỗ trợ"
+        description: "Tìm kiếm gia sư, người review đồ án và các dịch vụ khác."
 
   testimonials:
     title: "Sinh viên nói gì về chúng mình"
@@ -118,8 +96,20 @@ home:
         answer: "Đây là nơi sinh viên mua/bán và chia sẻ tài liệu. Bạn nên kiểm tra nội dung trước khi mua, và có thể đánh giá, phản hồi để cộng đồng minh bạch hơn."
       - question: "Tôi có cần đăng nhập để sử dụng không?"
         answer: "Các công cụ tính toán (GPA, xếp loại, lộ trình) có thể dùng ngay. Marketplace cần đăng nhập để đăng bán hoặc mua tài liệu."
+  news:
+    title: "Tin tức & Thông báo"
+    items:
+      - image: "📅"
+        title: "Thông báo lịch thi học kỳ II năm học 2023-2024"
+        description: "Chi tiết lịch thi, địa điểm và những điều cần lưu ý cho sinh viên toàn trường trong kỳ thi sắp tới."
+      - image: "🎉"
+        title: "Sự kiện \"Ngày hội việc làm 2024\" sắp diễn ra"
+        description: "Cơ hội gặp gỡ hơn 50 doanh nghiệp hàng đầu và tìm kiếm cơ hội thực tập, việc làm ngay tại sân trường."
+      - image: "📖"
+        title: "Bí quyết ôn thi hiệu quả: Phương pháp Pomodoro"
+        description: "Khám phá kỹ thuật quản lý thời gian giúp bạn tập trung cao độ và đạt kết quả tốt nhất trong các bài thi."
   hero:
-    title: "DTU Help Center"
-    subtitle: "Nền tảng hỗ trợ học tập toàn diện cho sinh viên Đại học Duy Tân"
-    primaryCta: "Khám phá các công cụ"
-    secondaryCta: "Tìm hiểu thêm"
+    title: "Trợ thủ đắc lực cho sinh viên Duy Tân"
+    subtitle: "Truy cập các công cụ tính điểm, kho tài liệu và dịch vụ hỗ trợ được thiết kế riêng cho sinh viên DTU."
+    primaryCta: "Tính điểm ngay"
+    secondaryCta: "Khám phá Marketplace"

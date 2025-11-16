@@ -29,7 +29,6 @@ export interface User {
   id: number
   email: string
   name: string
-  subscription_plan_id: number | null
 }
 
 export interface ApiResponse<T> {

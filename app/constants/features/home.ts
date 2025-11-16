@@ -1,6 +1,6 @@
 export const NAV_ITEMS = [
-  { key: 'whatWeDo', to: '#what-we-do', scroll: true },
-  { key: 'about', to: '#about-us', scroll: true },
-  { key: 'testimonials', to: '#testimonials', scroll: true },
-  { key: 'faq', to: '#faq', scroll: true },
+  { key: 'tools', to: '/tools' },
+  { key: 'marketplace', to: '/marketplace' },
+  { key: 'services', to: '/services' },
+  { key: 'news', to: '#news', scroll: true },
 ] as const

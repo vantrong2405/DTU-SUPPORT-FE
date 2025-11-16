@@ -21,11 +21,19 @@ tools:
     target:
       inputTitle: "入力情報"
       inputSubtitle: "GPA 情報を入力して予測結果を計算"
+      info:
+        title: "このツールの使い方"
+        description: "現在の GPA と目標 GPA を入力してください。システムは、残りのすべての科目で A (4.0) を取得した場合に達成できる最大 GPA を計算します。"
       fields:
         completedCredits: "取得済み単位"
         currentGpa: "現在の GPA"
         targetGpa: "目標 GPA"
         remainingCredits: "残り単位"
+      helpers:
+        completedCredits: "例: 60単位を取得済みの場合、60と入力"
+        currentGpa: "例: 現在の GPA が 3.2 の場合、3.2 と入力"
+        targetGpa: "例: GPA 3.5 を達成したい場合、3.5 と入力"
+        remainingCredits: "例: 残り40単位がある場合、40と入力"
       placeholders:
         completedCredits: "取得済み単位を入力"
         currentGpa: "現在の GPA を入力 (0–4.00)"
@@ -165,6 +173,8 @@ tools:
       description: "DTU の評価基準に従って体育 GPA を計算。"
       inputTitle: "体育 GPA を計算"
       inputSubtitle: "シンプル＆高速"
+      info:
+        title: "評価ルール"
       rules:
         line1: "3つの体育科目の GPA（4.0 スケール）を入力"
         line2: "平均 ≥ 2.0: 合格"
@@ -173,6 +183,10 @@ tools:
         pe1: "体育 1 (0–4.00)"
         pe2: "体育 2 (0–4.00)"
         pe3: "体育 3 (0–4.00)"
+      helpers:
+        pe1: "例: 体育 1 で 3.5 を取得した場合、3.5 と入力"
+        pe2: "例: 体育 2 で 3.0 を取得した場合、3.0 と入力"
+        pe3: "例: 体育 3 で 2.5 を取得した場合、2.5 と入力"
       placeholders:
         pe1: "体育 1 の GPA を入力"
         pe2: "体育 2 の GPA を入力"
@@ -283,6 +297,9 @@ tools:
   pass:
     inputTitle: "合格するための期末試験の点数を計算"
     inputSubtitle: "各評価項目と重みを入力して、必要な期末試験の点数を計算"
+    info:
+      title: "このツールの使い方"
+      description: "評価項目（中間試験、出席、課題など）を対応する重みとともに追加してください。合計の重みは100%である必要があります。システムは合格に必要な最低期末試験の点数を計算します。"
     progress:
       total: "合計"
       remaining: "残り"
@@ -300,6 +317,9 @@ tools:
     fields:
       finalExamWeight: "期末試験の重み (%)"
       minPassingScore: "合格に必要な最低点数"
+    helpers:
+      finalExamWeight: "例: 期末試験が総点の50%を占める場合、50と入力"
+      minPassingScore: "例: 合格に必要な最低点数が4.0の場合、4.0と入力"
     placeholders:
       finalExamWeight: "期末試験の重みを入力 (%)"
       minPassingScore: "最低点数を入力 (0-10)"
@@ -414,4 +434,3 @@ tools:
           - "試験・課題のサンプル"
           - "評価・フィードバック"
           - "科目・専攻で検索"
-          - "安全な支払い"

@@ -21,58 +21,37 @@ const auth = useAuthStore()
 const showLogin = computed(() => auth.hasSessionChecked && !auth.user)
 const showLogout = computed(() => auth.hasSessionChecked && !!auth.user)
 
-const toggleMenu = () => {
-  isMenuOpen.value = !isMenuOpen.value
-}
-
-const closeMenu = () => {
-  isMenuOpen.value = false
-}
-
+const toggleMenu = () => { isMenuOpen.value = !isMenuOpen.value }
+const closeMenu = () => { isMenuOpen.value = false }
 const scrollToSection = (sectionId: string) => {
   closeMenu()
   const element = document.querySelector(sectionId)
-  if (element) {
-    element.scrollIntoView({ behavior: 'smooth' })
-  }
+  if (element) { element.scrollIntoView({ behavior: 'smooth' }) }
 }
 
-const handleNavClick = (
-  event: MouseEvent,
-  item: { to: string; scroll?: boolean }
-) => {
+const handleNavClick = (event: MouseEvent, item: { to: string; scroll?: boolean }) => {
   if (item.scroll) {
     event.preventDefault()
     scrollToSection(item.to)
   }
 }
-
 const getNavLink = (item: { to: string; scroll?: boolean }) => {
-  if (item.scroll) {
-    return { path: route.path, query: route.query }
-  }
+  if (item.scroll) { return { path: route.path, query: route.query } }
   return navigateTo(item.to)
 }
-
-const handleMobileNavClick = (
-  event: MouseEvent,
-  item: { to: string; scroll?: boolean }
-) => {
+const handleMobileNavClick = (event: MouseEvent, item: { to: string; scroll?: boolean }) => {
   handleNavClick(event, item)
   if (!item.scroll) closeMenu()
 }
 
 const navItems = computed(() => {
   const path = route.path
-
-  if (path !== '/' && !path.match(/^\/[a-z]{2}$/)) {
-    return []
-  }
+  const isHomePage = path === '/' || path.match(/^\/[a-z]{2}$/)
 
   return NAV_ITEMS.map((item) => ({
     label: t(`common.header.menu.${item.key}`),
     to: item.to,
-    scroll: 'scroll' in item ? item.scroll : false,
+    scroll: isHomePage && 'scroll' in item ? item.scroll : false,
   }))
 })
 
@@ -106,13 +85,13 @@ const { elementRef: headerRef } = useFadeIn({ delay: 100 })
           </div>
         </NuxtLink>
 
-        <nav class="hidden lg:flex items-center justify-center flex-1 space-x-2 xl:space-x-3 2xl:space-x-4">
+        <nav class="hidden lg:flex items-center justify-center flex-1 space-x-6">
           <NuxtLink
             v-for="item in navItems"
             :key="item.to"
             :to="getNavLink(item)"
-            class="text-muted-foreground hover:text-foreground hover:bg-[hsl(var(--accent)/0.16)] rounded-md px-2 xl:px-3 py-1.5 transition-all duration-200 font-medium text-sm xl:text-base whitespace-nowrap hover:scale-105"
-            active-class="text-primary"
+            class="text-[#D1D5DB] hover:text-foreground transition-colors duration-200 font-medium text-sm leading-[1.43em] whitespace-nowrap"
+            active-class="text-foreground"
             @click="handleNavClick($event, item)"
           >
             {{ item.label }}
@@ -150,8 +129,8 @@ const { elementRef: headerRef } = useFadeIn({ delay: 100 })
         <div v-if="isMenuOpen" class="lg:hidden border-t border-border bg-background max-h-[calc(100vh-3.5rem)] overflow-y-auto">
         <nav class="py-3 sm:py-4 space-y-1 sm:space-y-2">
           <NuxtLink v-for="item in navItems" :key="item.to" :to="getNavLink(item)"
-            class="block text-muted-foreground hover:text-foreground hover:bg-[hsl(var(--accent)/0.16)] rounded-md px-3 sm:px-4 py-2 sm:py-2.5 transition-colors duration-150 font-medium text-sm sm:text-base"
-            active-class="text-primary bg-accent/10" @click="handleMobileNavClick($event, item)">
+            class="block text-[#D1D5DB] hover:text-foreground transition-colors duration-150 font-medium text-sm leading-[1.43em] px-3 sm:px-4 py-2 sm:py-2.5"
+            active-class="text-foreground" @click="handleMobileNavClick($event, item)">
             {{ item.label }}
           </NuxtLink>
 
