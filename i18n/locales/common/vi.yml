@@ -6,6 +6,10 @@ common:
       whatWeDo: "DTU Helper là gì?"
       testimonials: "Sinh viên nói gì"
       faq: "FAQ"
+      tools: "Công cụ"
+      marketplace: "Marketplace"
+      services: "Dịch vụ"
+      news: "Tin tức"
   auth:
     register: "Đăng ký"
     login:
@@ -58,6 +62,9 @@ common:
       faq: "FAQ"
       privacy: "Chính sách bảo mật"
       terms: "Điều khoản dịch vụ"
+      about: "Về chúng tôi"
+      policy: "Chính sách"
+      contact: "Liên hệ"
     contact:
       messenger: "Messenger 24/7"
       facebook: "Trang Facebook"

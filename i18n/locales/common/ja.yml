@@ -6,6 +6,10 @@ common:
       whatWeDo: "DTU Helper とは？"
       testimonials: "レビュー"
       faq: "よくある質問"
+      tools: "ツール"
+      marketplace: "マーケットプレイス"
+      services: "サービス"
+      news: "ニュース"
   auth:
     register: "登録"
     login:
@@ -58,6 +62,9 @@ common:
       faq: "よくある質問"
       privacy: "プライバシーポリシー"
       terms: "利用規約"
+      about: "私たちについて"
+      policy: "ポリシー"
+      contact: "お問い合わせ"
     contact:
       messenger: "Messenger 24/7"
       facebook: "Facebookページ"

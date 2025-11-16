@@ -6,6 +6,10 @@ common:
       whatWeDo: "What is DTU Helper?"
       testimonials: "Testimonials"
       faq: "FAQ"
+      tools: "Tools"
+      marketplace: "Marketplace"
+      services: "Services"
+      news: "News"
   auth:
     register: "Register"
     login:
@@ -58,6 +62,9 @@ common:
       faq: "FAQ"
       privacy: "Privacy Policy"
       terms: "Terms of Service"
+      about: "About us"
+      policy: "Policy"
+      contact: "Contact"
     contact:
       messenger: "Messenger 24/7"
       facebook: "Facebook Page"
