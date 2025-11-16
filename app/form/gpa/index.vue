@@ -2,11 +2,11 @@
 import { useI18n } from 'vue-i18n'
 import { Tabs, TabsList, TabsTrigger, TabsContent } from '@/components/ui/tabs'
 import * as Icon from '@/components/ui/icon'
-import TargetCalculator from './TargetCalculator.vue'
+import TargetCalculator from './ui/TargetCalculator.vue'
 import GraduationInfo from './common/GraduationInfo.vue'
-import PeCalculator from './PeCalculator.vue'
-import PassCalculator from './PassCalculator.vue'
-import GpaCalculator from './GpaCalculator.vue'
+import PeCalculator from './ui/PeCalculator.vue'
+import PassCalculator from './ui/PassCalculator.vue'
+import GpaCalculator from './ui/GpaCalculator.vue'
 
 const { t } = useI18n()
 const SCOPE = 'tools.gpa'
