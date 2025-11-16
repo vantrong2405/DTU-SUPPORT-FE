@@ -33,42 +33,20 @@ home:
         description: "デジタルマーケティングとコンテンツ制作を専門とする"
 
   whatWeDo:
-    title: "DTU Help Center とは？"
-    subtitle: "DTU 学生のために設計された総合学習支援プラットフォーム"
-    helpTitle: "私たちはあなたに何ができますか？"
-    paragraphs:
-      - "DTU Help Center は DTU 学生によって開発され、学習を効果的に支援するためのプラットフォームです。"
-      - "GPA 計算、学習計画、学習資料マーケットプレイスを提供し、より良い結果をサポートします。"
-      - "すべてのツールは DTU の学則に基づいて設計され、正確性と適合性を重視しています。"
-    visual:
-      audience: "DTU 学生"
-      trust: "1000+ 名以上の学生に信頼されています"
-      metrics:
-        accuracy: "精度"
-        support: "サポート"
-        free: "無料"
+    title: "主要ツール & サービス"
     features:
       - icon: "📊"
-        title: "GPA 計算"
-        description: "学業成績を追跡するための正確な累積 GPA 計算。"
-        benefits:
-          - "正確な GPA"
-          - "学位区分の予測"
-          - "学習計画"
-      - icon: "📅"
-        title: "学習スケジュール"
-        description: "単位登録と時間割の最適化で衝突を回避。"
-        benefits:
-          - "科目の提案"
-          - "時間割の作成"
-          - "履修条件の確認"
+        title: "GPA計算ツール"
+        description: "学期および累積成績平均点を正確に計算。"
+      - icon: "🎓"
+        title: "学位区分予測"
+        description: "現在の結果に基づいて卒業区分を推定。"
       - icon: "📚"
-        title: "学習資料マーケット"
-        description: "学習資料、試験、課題の売買プラットフォーム。"
-        benefits:
-          - "高品質な資料"
-          - "サンプル試験"
-          - "評価システム"
+        title: "学習資料マーケットプレイス"
+        description: "学習資料、試験、プロジェクトの売買・交換。"
+      - icon: "🤝"
+        title: "サポートサービス"
+        description: "家庭教師、プロジェクトレビュアー、その他のサービスを探す。"
 
   testimonials:
     title: "学生の声"
@@ -119,7 +97,19 @@ home:
       - question: "ツールの利用にログインは必要ですか？"
         answer: "GPA、区分予測、ロードマップはログイン不要。マーケットは購入/出品にログインが必要です。"
   hero:
-    title: "DTU Help Center"
-    subtitle: "DTU 学生のための総合学習支援プラットフォーム"
-    primaryCta: "ツールを探索"
-    secondaryCta: "詳しく見る"
+    title: "Duy Tan大学学生のための信頼できるアシスタント"
+    subtitle: "DTU学生専用に設計された成績計算ツール、学習資料ライブラリ、サポートサービスにアクセス。"
+    primaryCta: "今すぐ成績を計算"
+    secondaryCta: "マーケットプレイスを探索"
+  news:
+    title: "ニュース & お知らせ"
+    items:
+      - image: "📅"
+        title: "お知らせ：2023-2024学年度第2学期試験日程"
+        description: "今後の試験期間における全学生向けの詳細な試験日程、会場、注意事項。"
+      - image: "🎉"
+        title: "イベント「就職フェア2024」開催予定"
+        description: "50社以上の主要企業との出会いと、キャンパス内でのインターンシップ・就職機会を探すチャンス。"
+      - image: "📖"
+        title: "効果的な勉強のコツ：ポモドーロテクニック"
+        description: "集中力を高め、試験で最高の結果を達成するための時間管理テクニックを発見。"

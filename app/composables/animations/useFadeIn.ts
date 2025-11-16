@@ -44,13 +44,8 @@ export function useFadeIn(options?: Partial<AnimationConfig>) {
     isAnimating.value = false
   }
 
-  onMounted(() => {
-    start()
-  })
-
-  onUnmounted(() => {
-    stop()
-  })
+  onMounted(() => { start() })
+  onUnmounted(() => { stop() })
 
   return { elementRef, isVisible, isAnimating, start, stop }
 }

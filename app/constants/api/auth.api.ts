@@ -6,4 +6,5 @@ export const AUTH_API = {
     }
     return baseUrl
   },
+  logout: () => '/oauth/logout',
 } as const

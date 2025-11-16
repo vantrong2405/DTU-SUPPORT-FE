@@ -33,42 +33,20 @@ home:
         description: "Specialized in Digital Marketing and Content Creation"
 
   whatWeDo:
-    title: "What is DTU Help Center?"
-    subtitle: "A comprehensive learning support platform designed for DTU students"
-    helpTitle: "How do we help you?"
-    paragraphs:
-      - "DTU Help Center is a platform developed by DTU students, dedicated to the DTU student community to support effective learning."
-      - "We provide tools for GPA calculation, study planning, and a study materials marketplace to help you achieve the best results."
-      - "All tools are designed based on DTU's academic regulations to ensure accuracy and suitability."
-    visual:
-      audience: "DTU Students"
-      trust: "Over 1000+ students trust our tools"
-      metrics:
-        accuracy: "Accuracy"
-        support: "Support"
-        free: "Free"
+    title: "Main Tools & Services"
     features:
       - icon: "📊"
-        title: "GPA Calculator"
-        description: "Accurate cumulative GPA calculator to track your academic performance."
-        benefits:
-          - "Accurate GPA"
-          - "Degree classification prediction"
-          - "Study planning"
-      - icon: "📅"
-        title: "Study Scheduling"
-        description: "Credit registration and schedule optimization to avoid conflicts."
-        benefits:
-          - "Course suggestions"
-          - "Timetable arrangement"
-          - "Prerequisite checks"
+        title: "GPA Calculation Tool"
+        description: "Calculate semester and cumulative grade point average accurately."
+      - icon: "🎓"
+        title: "Degree Classification Prediction"
+        description: "Estimate graduation classification based on current results."
       - icon: "📚"
-        title: "Materials Marketplace"
-        description: "A platform for buying and selling study materials, exams, and assignments."
-        benefits:
-          - "Quality materials"
-          - "Sample exams"
-          - "Rating system"
+        title: "Study Materials Marketplace"
+        description: "Buy, sell and exchange study materials, exams and projects."
+      - icon: "🤝"
+        title: "Support Services"
+        description: "Find tutors, project reviewers and other services."
 
   testimonials:
     title: "What students say about us"
@@ -119,7 +97,19 @@ home:
       - question: "Do I need to log in to use the tools?"
         answer: "GPA, classification, and roadmap tools are free to use. Marketplace requires login to buy/sell."
   hero:
-    title: "DTU Help Center"
-    subtitle: "A comprehensive learning support platform for DTU students"
-    primaryCta: "Explore tools"
-    secondaryCta: "Learn more"
+    title: "Your trusted assistant for Duy Tan University students"
+    subtitle: "Access grade calculation tools, study materials library and support services designed specifically for DTU students."
+    primaryCta: "Calculate grades now"
+    secondaryCta: "Explore Marketplace"
+  news:
+    title: "News & Announcements"
+    items:
+      - image: "📅"
+        title: "Announcement: Exam schedule for Semester II, Academic Year 2023-2024"
+        description: "Detailed exam schedule, locations and important notes for all students in the upcoming exam period."
+      - image: "🎉"
+        title: "Event \"Job Fair 2024\" coming soon"
+        description: "Opportunity to meet over 50 leading companies and find internship and job opportunities right on campus."
+      - image: "📖"
+        title: "Effective study tips: Pomodoro Technique"
+        description: "Discover time management techniques to help you focus intensely and achieve the best results in exams."
