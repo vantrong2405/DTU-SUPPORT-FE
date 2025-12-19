@@ -1,21 +1,28 @@
-Compare the current implementation with the design in docs/ai/design/ and requirements in docs/ai/requirements/. Please follow this structured review:
+# Kiểm Tra Implementation
 
-1. Ask me for:
-   - Feature/branch description
-   - List of modified files
-   - Relevant design doc(s) (feature-specific and/or project-level)
-   - Any known constraints or assumptions
+So sánh implementation với design và requirements.
 
-2. For each design doc:
-   - Summarize key architectural decisions and constraints
-   - Highlight components, interfaces, and data flows that must be respected
+## Bước 1: Thu thập thông tin
+Hỏi user về:
+- Mô tả feature/branch
+- Danh sách file đã sửa
+- Tài liệu thiết kế liên quan
 
-3. File-by-file comparison:
-   - Confirm implementation matches design intent
-   - Note deviations or missing pieces
-   - Flag logic gaps, edge cases, or security issues
-   - Suggest simplifications or refactors
-   - Identify missing tests or documentation updates
+## Bước 2: So sánh
+Với mỗi file đã sửa:
+- Kiểm tra implementation khớp với ý định design
+- Ghi chú lệch hoặc phần thiếu
+- Đánh dấu khoảng trống logic, edge cases, vấn đề bảo mật
+- Xác định tests thiếu
 
-4. Summarize findings with recommended next steps.
+## Bước 3: Tóm tắt
+Tóm tắt:
+- Implementation khớp design: Có/Không/Một phần
+- Phần thiếu và lệch
+- Mối quan tâm Bảo mật/Hiệu năng
+- Tests thiếu
+- Bước tiếp theo
 
+---
+
+**Bắt đầu:** Hỏi mô tả feature và file đã sửa.
