@@ -2,9 +2,19 @@ home:
   about:
     title: "Về DTU Helper"
     description: "DTU Helper cung cấp công cụ và tài nguyên cho sinh viên."
-    cta: "Tìm hiểu thêm"
+    badge: "Gặp đội ngũ trong mơ của chúng tôi"
+    cta: "Liên hệ với chúng tôi"
     teamTitle: "Đội ngũ phát triển"
     teamSubtitle: "Đội ngũ đa dạng với chuyên môn sâu về công nghệ và marketing"
+    extendedTeamTitle: "Đội ngũ mở rộng"
+    stats:
+      - label: "Sinh viên"
+      - label: "Đánh giá"
+      - label: "Dự án"
+      - label: "Hỗ trợ"
+    ctaTitle: "Tham gia đội ngũ tuyệt vời của chúng tôi"
+    ctaSubtitle: "Sẵn sàng giúp bạn thành công"
+    ctaButton: "Tham gia đội ngũ của chúng tôi"
     teamMembers:
       0:
         name: "Nguyễn Minh Tuấn"
@@ -28,12 +38,33 @@ home:
         description: "Chuyên về Java, Spring Boot và Microservices"
       4:
         name: "Nguyễn Thị Mai"
-        role: "Marketing Specialist"
+        role: "Chuyên viên Marketing"
         avatar: "👩‍💼"
         description: "Chuyên về Digital Marketing và Content Creation"
+      5:
+        name: "Trần Văn Nam"
+        role: "Nhà thiết kế UI/UX"
+        avatar: "🎨"
+        description: "Chuyên về thiết kế giao diện và trải nghiệm người dùng"
+      6:
+        name: "Lê Thị Kim"
+        role: "Người viết nội dung"
+        avatar: "✍️"
+        description: "Chuyên về viết nội dung marketing và tài liệu học tập"
+      7:
+        name: "Phạm Minh Hoàng"
+        role: "Kỹ sư DevOps"
+        avatar: "🔧"
+        description: "Chuyên về hệ thống, CI/CD và quản lý infrastructure"
 
   whatWeDo:
+    badge: "Chúng tôi cung cấp gì"
     title: "Công cụ & Dịch vụ chính"
+    subtitle: "Khám phá các công cụ và dịch vụ hỗ trợ học tập tốt nhất cho sinh viên DTU"
+    learnMore: "Tìm hiểu thêm"
+    readyTitle: "Sẵn sàng bắt đầu?"
+    readySubtitle: "Khám phá các công cụ của chúng tôi và bắt đầu học tập ngay"
+    exploreButton: "Khám phá công cụ"
     features:
       - icon: "📊"
         title: "Công cụ tính điểm GPA"
@@ -98,6 +129,12 @@ home:
         answer: "Các công cụ tính toán (GPA, xếp loại, lộ trình) có thể dùng ngay. Marketplace cần đăng nhập để đăng bán hoặc mua tài liệu."
   news:
     title: "Tin tức & Thông báo"
+    badge: "Cập nhật mới nhất"
+    readMore: "Đọc thêm"
+    categories:
+      - "Tin tức"
+      - "Sự kiện"
+      - "Thông báo"
     items:
       - image: "📅"
         title: "Thông báo lịch thi học kỳ II năm học 2023-2024"
@@ -109,7 +146,15 @@ home:
         title: "Bí quyết ôn thi hiệu quả: Phương pháp Pomodoro"
         description: "Khám phá kỹ thuật quản lý thời gian giúp bạn tập trung cao độ và đạt kết quả tốt nhất trong các bài thi."
   hero:
+    badge: "Công cụ hỗ trợ sinh viên DTU"
     title: "Trợ thủ đắc lực cho sinh viên Duy Tân"
+    heroImageAlt: "Sinh viên DTU"
     subtitle: "Truy cập các công cụ tính điểm, kho tài liệu và dịch vụ hỗ trợ được thiết kế riêng cho sinh viên DTU."
+    features:
+      - "Tính điểm GPA chính xác theo quy chế DTU"
+      - "Dự đoán xếp loại bằng tốt nghiệp"
+      - "Marketplace tài liệu học tập"
+    stat1Label: "Sinh viên sử dụng"
+    stat2Label: "Đánh giá trung bình"
     primaryCta: "Tính điểm ngay"
     secondaryCta: "Khám phá Marketplace"

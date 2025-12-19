@@ -44,4 +44,5 @@ export {
   Upload,
   DollarSign,
   Info,
+  ArrowRight,
 } from 'lucide-vue-next'

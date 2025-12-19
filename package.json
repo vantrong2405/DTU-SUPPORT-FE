@@ -45,6 +45,7 @@
     "@iconify/vue": "^5.0.0",
     "@types/dompurify": "^3.2.0",
     "@types/node": "^24.10.0",
+    "baseline-browser-mapping": "^2.9.10",
     "nuxi": "^3.29.3",
     "prettier": "^3.6.2",
     "shadcn-nuxt": "^2.2.0",
