@@ -47,3 +47,32 @@ target:
     good: "良好"
     fair: "普通"
     average: "平均"
+  results:
+    title: "結果"
+    subtitle: "達成可能な最大GPA"
+    scale: "4.0スケール"
+    success:
+      title: "目標達成可能"
+      message: "残りの単位数で全Aを取れば、GPA {gpa} を達成できます。"
+    warning:
+      title: "目標達成困難"
+      message: "最大GPAは {gpa} で、目標達成には不十分な可能性があります。"
+  simulation:
+    distribution:
+      title: "成績配分"
+  pe:
+    results:
+      headline:
+        pass: "体育プログラムに合格"
+        fail: "体育プログラムに不合格"
+      scale: "4.0 スケールで"
+      pass: "合格"
+      fail: "不合格"
+      courses:
+        c1: "科目 1"
+        c2: "科目 2"
+        c3: "科目 3"
+      analysis:
+        title: "分析:"
+        pass: "合格！ 体育プログラムを GPA {gpa} で修了しました。"
+        fail: "不合格。 平均体育 GPA は {gpa} です。 もう少し頑張りましょう。"

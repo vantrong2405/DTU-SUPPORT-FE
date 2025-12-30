@@ -29,7 +29,6 @@ export interface User {
   id: number
   email: string
   name: string
-  subscription_plan_id: number | null
 }
 
 export interface ApiResponse<T> {
@@ -43,4 +42,13 @@ export interface ApiError {
 
 export interface ApiErrorResponse {
   errors: ApiError[]
+}
+
+export interface HandleKeyOptions {
+  key?: string | string[]
+  shiftKey?: boolean
+  ctrlKey?: boolean
+  altKey?: boolean
+  metaKey?: boolean
+  preventDefault?: boolean
 }

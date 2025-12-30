@@ -5,22 +5,15 @@ import { useI18n } from 'vue-i18n'
 import { GRADUATION_CLASSIFICATIONS } from '@/constants/gpa/graduation'
 import { createTargetSchema, type TargetValues } from '@/schemas/gpa/target'
 import { useAuthStore } from '@/stores/auth'
+import type { TargetResult, GraduationClassification } from '@/types/gpa'
 
 export const useTargetCalculator = () => {
   const { t } = useI18n()
 
   const targetSchema = createTargetSchema(t)
-  const targetResult = reactive<{
-    maxGpaWithAllA: number | null
-    canReachTargetWithAllA: boolean | null
-    graduationClassification: typeof GRADUATION_CLASSIFICATIONS[number] | null
-  }>({
-    maxGpaWithAllA: null,
-    canReachTargetWithAllA: null,
-    graduationClassification: null,
-  })
+  const targetResult = reactive<TargetResult>({ maxGpaWithAllA: null, canReachTargetWithAllA: null, graduationClassification: null })
 
-  const getGraduationClassification = (gpa: number): typeof GRADUATION_CLASSIFICATIONS[number] | null => {
+  const getGraduationClassification = (gpa: number): GraduationClassification | null => {
     for (const classification of GRADUATION_CLASSIFICATIONS) {
       if (gpa >= classification.minGpa && gpa <= classification.maxGpa) {
         return classification
@@ -32,12 +25,7 @@ export const useTargetCalculator = () => {
   const { handleSubmit, isSubmitting } = useForm<TargetValues>({
     validationSchema: toTypedSchema(targetSchema),
     validateOnMount: false,
-    initialValues: {
-      completedCredits: 0,
-      currentGpa: 0,
-      targetGpa: 0,
-      remainingCredits: 1,
-    },
+    initialValues: { completedCredits: 0, currentGpa: 0, targetGpa: 0, remainingCredits: 1 },
   })
 
   const onTargetSubmit = handleSubmit((values: TargetValues) => {
@@ -65,9 +53,5 @@ export const useTargetCalculator = () => {
     targetResult.graduationClassification = getGraduationClassification(rounded)
   })
 
-  return {
-    targetResult,
-    onTargetSubmit,
-    isSubmitting,
-  }
+  return { targetResult, onTargetSubmit, isSubmitting }
 }

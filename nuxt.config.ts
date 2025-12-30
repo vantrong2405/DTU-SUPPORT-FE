@@ -14,6 +14,24 @@ export default defineNuxtConfig({
     },
     build: {
       sourcemap: false,
+      rollupOptions: {
+        output: {
+          manualChunks: (id) => {
+            if (id.includes('node_modules')) {
+              if (id.includes('animejs')) {
+                return 'animejs'
+              }
+              if (id.includes('vue-i18n')) {
+                return 'vue-i18n'
+              }
+              if (id.includes('@vueuse')) {
+                return 'vueuse'
+              }
+              return 'vendor'
+            }
+          },
+        },
+      },
     },
   },
   tailwindcss: {
@@ -29,19 +47,19 @@ export default defineNuxtConfig({
       {
         code: 'en',
         name: 'English',
-        files: ['common/en.yml', 'home/en.yml', 'tools/en.yml', 'gpa/en.yml'],
+        files: ['common/en.yml', 'home/en.yml', 'tools/en.yml', 'gpa/en.yml', 'chat/en.yml', 'marketplace/en.yml'],
         iso: 'en-US',
       },
       {
         code: 'vi',
         name: 'Vietnamese',
-        files: ['common/vi.yml', 'home/vi.yml', 'tools/vi.yml', 'gpa/vi.yml'],
+        files: ['common/vi.yml', 'home/vi.yml', 'tools/vi.yml', 'gpa/vi.yml', 'chat/vi.yml', 'marketplace/vi.yml'],
         iso: 'vi-VN',
       },
       {
         code: 'ja',
         name: 'Japanese',
-        files: ['common/ja.yml', 'home/ja.yml', 'tools/ja.yml', 'gpa/ja.yml'],
+        files: ['common/ja.yml', 'home/ja.yml', 'tools/ja.yml', 'gpa/ja.yml', 'chat/ja.yml', 'marketplace/ja.yml'],
         iso: 'ja-JP',
       },
     ],

@@ -69,8 +69,7 @@ const response = await fetch(`${config.public.backendUrl}/users/me`, {
   "data": {
     "id": 1,
     "email": "user@example.com",
-    "name": "John Doe",
-    "subscription_plan_id": 1
+    "name": "John Doe"
   }
 }
 ```

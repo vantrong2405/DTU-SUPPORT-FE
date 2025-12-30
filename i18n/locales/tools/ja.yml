@@ -21,11 +21,19 @@ tools:
     target:
       inputTitle: "入力情報"
       inputSubtitle: "GPA 情報を入力して予測結果を計算"
+      info:
+        title: "このツールの使い方"
+        description: "現在の GPA と目標 GPA を入力してください。システムは、残りのすべての科目で A (4.0) を取得した場合に達成できる最大 GPA を計算します。"
       fields:
         completedCredits: "取得済み単位"
         currentGpa: "現在の GPA"
         targetGpa: "目標 GPA"
         remainingCredits: "残り単位"
+      helpers:
+        completedCredits: "例: 60単位を取得済みの場合、60と入力"
+        currentGpa: "例: 現在の GPA が 3.2 の場合、3.2 と入力"
+        targetGpa: "例: GPA 3.5 を達成したい場合、3.5 と入力"
+        remainingCredits: "例: 残り40単位がある場合、40と入力"
       placeholders:
         completedCredits: "取得済み単位を入力"
         currentGpa: "現在の GPA を入力 (0–4.00)"
@@ -72,11 +80,101 @@ tools:
     gpa:
       title: "GPA を計算"
       description: "現在の GPA または累積 GPA を取得済み/在籍中の単位に基づいて計算。この機能は近日公開予定です。"
+    simulation:
+      inputTitle: "詳細GPA計算"
+      inputSubtitle: "成績分布をシミュレートして、全コース終了後の最終GPAを確認"
+      help: "使用ガイド"
+      fields:
+        completedCredits: "修了単位数"
+        currentGpa: "現在のGPA"
+        remainingCredits: "残り単位数"
+      placeholders:
+        completedCredits: "修了単位数を入力"
+        currentGpa: "現在のGPAを入力"
+        remainingCredits: "残り単位数を入力"
+      distribution:
+        title: "単位数配分"
+        credits: "単位"
+        creditsLabel: "単位数"
+        creditsPlaceholder: "単位数を入力"
+        gradeLabel: "予想成績"
+        addButton: "配分を追加"
+        removeButton: "削除"
+        successMessage: "{credits}単位を正しく配分しました。計算準備完了！"
+        empty: "成績配分がまだありません。「配分を追加」をクリックして開始してください。"
+      grades:
+        "A+":
+          label: "A+ ({point})"
+          category: "優秀"
+        "A":
+          label: "A ({point})"
+          category: "優秀"
+        "A-":
+          label: "A− ({point})"
+          category: "良好"
+        "B+":
+          label: "B+ ({point})"
+          category: "良好"
+        "B":
+          label: "B ({point})"
+          category: "良好"
+        "B-":
+          label: "B− ({point})"
+          category: "普通"
+        "C+":
+          label: "C+ ({point})"
+          category: "普通"
+        "C":
+          label: "C ({point})"
+          category: "普通"
+        "C-":
+          label: "C− ({point})"
+          category: "やや劣る"
+        "D":
+          label: "D ({point})"
+          category: "合格"
+      buttons:
+        calculate: "詳細GPA計算"
+        calculating: "計算中..."
+        reset: "リセット"
+      results:
+        title: "詳細GPA結果"
+        subtitle: "予想最終GPA"
+        scale: "4.0スケール"
+        summary: "{summary}を達成すると仮定 → 最終GPA {gpa} → 分類 {rank}。"
+        empty:
+          title: "結果がまだありません"
+          description: "情報を入力して計算すると結果が表示されます"
+        warning:
+          title: "結果が弱い - 改善が必要"
+          message: "最終GPAが2.0未満です。卒業要件を満たすため、成績を改善してください。"
+        boxes:
+          currentGpa: "現在のGPA"
+          finalGpa: "最終GPA"
+          afterCompletion: "完了後"
+          additionalCredits: "追加単位数"
+          totalCredits: "総単位数"
+        analysis:
+          title: "分析:"
+      validation:
+        completedCredits:
+          invalid: "修了単位数が無効です"
+        currentGpa:
+          invalid: "現在のGPAが無効です"
+          min: "現在のGPAは0以上である必要があります"
+          max: "現在のGPAは4以下である必要があります"
+        remainingCredits:
+          invalid: "残り単位数が無効です"
+          min: "残り単位数は1以上である必要があります"
+        creditDistributions:
+          min: "少なくとも1つの成績配分が必要です"
     pe:
       title: "体育 GPA"
       description: "DTU の評価基準に従って体育 GPA を計算。"
       inputTitle: "体育 GPA を計算"
       inputSubtitle: "シンプル＆高速"
+      info:
+        title: "評価ルール"
       rules:
         line1: "3つの体育科目の GPA（4.0 スケール）を入力"
         line2: "平均 ≥ 2.0: 合格"
@@ -85,6 +183,10 @@ tools:
         pe1: "体育 1 (0–4.00)"
         pe2: "体育 2 (0–4.00)"
         pe3: "体育 3 (0–4.00)"
+      helpers:
+        pe1: "例: 体育 1 で 3.5 を取得した場合、3.5 と入力"
+        pe2: "例: 体育 2 で 3.0 を取得した場合、3.0 と入力"
+        pe3: "例: 体育 3 で 2.5 を取得した場合、2.5 と入力"
       placeholders:
         pe1: "体育 1 の GPA を入力"
         pe2: "体育 2 の GPA を入力"
@@ -176,6 +278,7 @@ tools:
           fair: "可"
           average: "平均"
           averageWeak: "平均未満"
+          conditional: "合格"
           fail: "不可"
           poor: "不良"
         status:
@@ -187,13 +290,92 @@ tools:
           point1: "学業評価"
           point2: "卒業評価"
           point3: "学生ランキング"
-          title2: "D (1.0) は条件付き合格と見なされます"
-          point4: "総単位の>5%がD評価の場合、改善が必要です"
-          point5: "単位は累積されますが、GPAに影響します"
           title3: "F (0.0)"
           point6: "単位は累積されません"
           point7: "コースを再履修する必要があります"
           point8: "累積 GPA にカウントされません"
+  pass:
+    inputTitle: "合格するための期末試験の点数を計算"
+    inputSubtitle: "各評価項目と重みを入力して、必要な期末試験の点数を計算"
+    info:
+      title: "このツールの使い方"
+      description: "評価項目（中間試験、出席、課題など）を対応する重みとともに追加してください。合計の重みは100%である必要があります。システムは合格に必要な最低期末試験の点数を計算します。"
+    progress:
+      total: "合計"
+      remaining: "残り"
+    components:
+      title: "評価項目"
+      addButton: "項目を追加"
+      empty: "評価項目がありません。「項目を追加」をクリックして開始してください。"
+      removeButton: "削除"
+      nameLabel: "項目名"
+      namePlaceholder: "例: 中間試験"
+      weightLabel: "重み"
+      weightPlaceholder: "重みを入力 (%)"
+      scoreLabel: "現在の点数"
+      scorePlaceholder: "点数を入力 (0-10)"
+    fields:
+      finalExamWeight: "期末試験の重み (%)"
+      minPassingScore: "合格に必要な最低点数"
+    helpers:
+      finalExamWeight: "例: 期末試験が総点の50%を占める場合、50と入力"
+      minPassingScore: "例: 合格に必要な最低点数が4.0の場合、4.0と入力"
+    placeholders:
+      finalExamWeight: "期末試験の重みを入力 (%)"
+      minPassingScore: "最低点数を入力 (0-10)"
+    buttons:
+      calculate: "期末試験の点数を計算"
+      calculating: "計算中..."
+      reset: "リセット"
+    empty:
+      title: "計算の準備完了"
+      description: "左側のフォームに情報を入力し、「計算」をクリックして結果を表示"
+    results:
+      title: "計算結果"
+      cannotPass:
+        title: "合格不可"
+        message: "期末試験で満点（10.0）を取っても、合格に必要な最低点数に達することはできません。"
+      requiredMessage: "合格するには、期末試験で少なくとも {score} 点（{weight}%）が必要です"
+      requiredSubMessage: "この点数は、現在の点数と期末試験の重みに基づいています"
+      cards:
+        currentScore: "現在の点数"
+        finalExamContribution: "期末試験の貢献度"
+        requiredScore: "必要な点数"
+      details:
+        title: "評価項目の詳細"
+        table:
+          name: "項目名"
+          weight: "重み (%)"
+          score: "点数"
+          contribution: "貢献度 (%)"
+          currentTotal: "現在の合計"
+          finalExam: "期末試験"
+          grandTotal: "合計"
+    prediction:
+      title: "期末結果を予測"
+      placeholder: "予想される期末試験の点数を入力"
+      button: "予測"
+      finalScore: "最終点数"
+      gpa4: "GPA (4.0 スケール)"
+      letterGrade: "文字成績"
+      status: "状態"
+      pass: "合格"
+      fail: "不合格"
+    validation:
+      components:
+        min: "少なくとも 1 つの項目が必要です"
+      finalExamWeight:
+        invalid: "無効な期末試験の重み"
+        min: "期末試験の重みは 0 未満にできません"
+        max: "期末試験の重みは 100 を超えることはできません"
+      minPassingScore:
+        invalid: "無効な最低合格点数"
+        min: "最低合格点数は 0 未満にできません"
+        max: "最低合格点数は 10 を超えることはできません"
+      finalExamScore:
+        invalid: "無効な期末試験の点数"
+        min: "期末試験の点数は 0 未満にできません"
+        max: "期末試験の点数は 10 を超えることはできません"
   benefits:
     titlePrefix: "なぜ"
     titlePrimary: "使うべき？"
@@ -252,4 +434,3 @@ tools:
           - "試験・課題のサンプル"
           - "評価・フィードバック"
           - "科目・専攻で検索"
-          - "安全な支払い"

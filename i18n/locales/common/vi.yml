@@ -6,6 +6,10 @@ common:
       whatWeDo: "DTU Helper là gì?"
       testimonials: "Sinh viên nói gì"
       faq: "FAQ"
+      tools: "Công cụ"
+      marketplace: "Marketplace"
+      services: "Dịch vụ"
+      news: "Tin tức"
   auth:
     register: "Đăng ký"
     login:
@@ -56,12 +60,18 @@ common:
       tools: "Công cụ"
       help: "Hỗ trợ học tập"
       faq: "FAQ"
-      payment: "Hướng dẫn thanh toán"
       privacy: "Chính sách bảo mật"
       terms: "Điều khoản dịch vụ"
+      about: "Về chúng tôi"
+      policy: "Chính sách"
+      contact: "Liên hệ"
     contact:
       messenger: "Messenger 24/7"
       facebook: "Trang Facebook"
       response: "Phản hồi trong 30 phút"
     copyright: "© {year} DTU Study Support. Tất cả quyền được bảo lưu."
     crafted: "Được tạo với ❤️ cho sinh viên DTU"
+  error:
+    subtitle: "Có vẻ như trang bạn đang tìm không tồn tại"
+    suggestions: "Có thể bạn đang tìm:"
+    backHome: "Về trang chủ"
