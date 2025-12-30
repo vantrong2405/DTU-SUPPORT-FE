@@ -14,24 +14,6 @@ export default defineNuxtConfig({
     },
     build: {
       sourcemap: false,
-      rollupOptions: {
-        output: {
-          manualChunks: (id) => {
-            if (id.includes('node_modules')) {
-              if (id.includes('animejs')) {
-                return 'animejs'
-              }
-              if (id.includes('vue-i18n')) {
-                return 'vue-i18n'
-              }
-              if (id.includes('@vueuse')) {
-                return 'vueuse'
-              }
-              return 'vendor'
-            }
-          },
-        },
-      },
     },
   },
   tailwindcss: {
@@ -42,7 +24,7 @@ export default defineNuxtConfig({
     },
   },
   i18n: {
-    langDir: 'locales',
+    langDir: '../i18n/locales',
     locales: [
       {
         code: 'en',
