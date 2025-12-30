@@ -2,9 +2,19 @@ home:
   about:
     title: "About DTU Helper"
     description: "DTU Helper provides tools and resources for students."
-    cta: "Learn more"
+    badge: "Meet Our Amazing Team"
+    cta: "Contact us"
     teamTitle: "Development Team"
     teamSubtitle: "A diverse team with deep expertise in technology and marketing"
+    extendedTeamTitle: "Extended Team"
+    stats:
+      - label: "Students"
+      - label: "Rating"
+      - label: "Projects"
+      - label: "Support"
+    ctaTitle: "Join Our Amazing Team"
+    ctaSubtitle: "Ready to help you succeed"
+    ctaButton: "Join Our Team"
     teamMembers:
       0:
         name: "Nguyễn Minh Tuấn"
@@ -31,9 +41,30 @@ home:
         role: "Marketing Specialist"
         avatar: "👩‍💼"
         description: "Specialized in Digital Marketing and Content Creation"
+      5:
+        name: "Trần Văn Nam"
+        role: "UI/UX Designer"
+        avatar: "🎨"
+        description: "Specialized in interface design and user experience"
+      6:
+        name: "Lê Thị Kim"
+        role: "Content Writer"
+        avatar: "✍️"
+        description: "Specialized in marketing content and educational materials"
+      7:
+        name: "Phạm Minh Hoàng"
+        role: "DevOps Engineer"
+        avatar: "🔧"
+        description: "Specialized in systems, CI/CD and infrastructure management"
 
   whatWeDo:
+    badge: "What We Offer"
     title: "Main Tools & Services"
+    subtitle: "Discover the best tools and services to support DTU students' learning journey"
+    learnMore: "Learn More"
+    readyTitle: "Ready to Get Started?"
+    readySubtitle: "Explore our tools and start learning today"
+    exploreButton: "Explore Tools"
     features:
       - icon: "📊"
         title: "GPA Calculation Tool"
@@ -97,12 +128,26 @@ home:
       - question: "Do I need to log in to use the tools?"
         answer: "GPA, classification, and roadmap tools are free to use. Marketplace requires login to buy/sell."
   hero:
+    badge: "Support tools for DTU students"
     title: "Your trusted assistant for Duy Tan University students"
+    heroImageAlt: "DTU Students"
     subtitle: "Access grade calculation tools, study materials library and support services designed specifically for DTU students."
+    features:
+      - "Accurate GPA calculation according to DTU regulations"
+      - "Predict degree classification"
+      - "Study materials marketplace"
+    stat1Label: "Students"
+    stat2Label: "Average rating"
     primaryCta: "Calculate grades now"
     secondaryCta: "Explore Marketplace"
   news:
     title: "News & Announcements"
+    badge: "Latest Updates"
+    readMore: "Read More"
+    categories:
+      - "News"
+      - "Events"
+      - "Announcements"
     items:
       - image: "📅"
         title: "Announcement: Exam schedule for Semester II, Academic Year 2023-2024"

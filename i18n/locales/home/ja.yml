@@ -2,9 +2,19 @@ home:
   about:
     title: "DTU Helper について"
     description: "DTU Helper は学生向けのツールとリソースを提供します。"
-    cta: "詳しく見る"
+    badge: "素晴らしいチームに会おう"
+    cta: "お問い合わせ"
     teamTitle: "開発チーム"
     teamSubtitle: "テクノロジーとマーケティングに精通した多様なチーム"
+    extendedTeamTitle: "拡張チーム"
+    stats:
+      - label: "学生"
+      - label: "評価"
+      - label: "プロジェクト"
+      - label: "サポート"
+    ctaTitle: "素晴らしいチームに参加しよう"
+    ctaSubtitle: "成功をお手伝いする準備ができています"
+    ctaButton: "チームに参加する"
     teamMembers:
       0:
         name: "Nguyễn Minh Tuấn"
@@ -31,9 +41,30 @@ home:
         role: "マーケティングスペシャリスト"
         avatar: "👩‍💼"
         description: "デジタルマーケティングとコンテンツ制作を専門とする"
+      5:
+        name: "Trần Văn Nam"
+        role: "UI/UXデザイナー"
+        avatar: "🎨"
+        description: "インターフェースデザインとユーザーエクスペリエンスを専門とする"
+      6:
+        name: "Lê Thị Kim"
+        role: "コンテンツライター"
+        avatar: "✍️"
+        description: "マーケティングコンテンツと教育教材を専門とする"
+      7:
+        name: "Phạm Minh Hoàng"
+        role: "DevOpsエンジニア"
+        avatar: "🔧"
+        description: "システム、CI/CD、インフラ管理を専門とする"
 
   whatWeDo:
+    badge: "提供するもの"
     title: "主要ツール & サービス"
+    subtitle: "DTU学生の学習旅をサポートする最適なツールとサービスを発見"
+    learnMore: "詳細を見る"
+    readyTitle: "準備はできていますか？"
+    readySubtitle: "今すぐツールを探索して学習を開始"
+    exploreButton: "ツールを探索"
     features:
       - icon: "📊"
         title: "GPA計算ツール"
@@ -97,12 +128,26 @@ home:
       - question: "ツールの利用にログインは必要ですか？"
         answer: "GPA、区分予測、ロードマップはログイン不要。マーケットは購入/出品にログインが必要です。"
   hero:
+    badge: "DTU学生向けサポートツール"
     title: "Duy Tan大学学生のための信頼できるアシスタント"
+    heroImageAlt: "DTU学生"
     subtitle: "DTU学生専用に設計された成績計算ツール、学習資料ライブラリ、サポートサービスにアクセス。"
+    features:
+      - "DTU規定に基づく正確なGPA計算"
+      - "学位区分の予測"
+      - "学習資料マーケットプレイス"
+    stat1Label: "利用学生数"
+    stat2Label: "平均評価"
     primaryCta: "今すぐ成績を計算"
     secondaryCta: "マーケットプレイスを探索"
   news:
     title: "ニュース & お知らせ"
+    badge: "最新更新"
+    readMore: "続きを読む"
+    categories:
+      - "ニュース"
+      - "イベント"
+      - "お知らせ"
     items:
       - image: "📅"
         title: "お知らせ：2023-2024学年度第2学期試験日程"

@@ -13,5 +13,10 @@ export const useNavigation = () => {
     return { path: targetPath, query }
   }
 
-  return { navigateTo }
+  const getLocalePath = (path: string): string => {
+    const currentLocale = locale.value as LocaleCode
+    return currentLocale === 'en' ? path : `/${currentLocale}${path}`
+  }
+
+  return { navigateTo, getLocalePath }
 }
