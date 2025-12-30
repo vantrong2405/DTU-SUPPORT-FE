@@ -1,5 +1,6 @@
 services:
-  app:
+  web:
+    image: dtu-support-fe
     build: .
     ports:
       - "4000:3000"
