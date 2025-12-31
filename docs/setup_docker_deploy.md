@@ -1,13 +1,16 @@
-# VPS Deployment Guide
+# Hướng Dẫn Deploy VPS
 
 ## Deploy Lần Đầu
 
 ```bash
 # 1. Tạo thư mục
-mkdir -p ~/dtu/dtu-support-fe && cd ~/dtu/dtu-support-fe
+mkdir -p ~/dtu/dtu-support-fe
+cd ~/dtu/dtu-support-fe
 
-# 2. Tạo docker-compose.yml
-cat > docker-compose.yml << 'EOF'
+# 2. Tạo file docker-compose.yml
+nano docker-compose.yml
+
+# Copy nội dung này vào file:
 services:
   web:
     image: vantrong1/dtu-support-fe:latest
@@ -15,7 +18,8 @@ services:
     restart: unless-stopped
     ports:
       - "127.0.0.1:4000:3000"
-EOF
+
+# Lưu file: Ctrl+O, Enter, Ctrl+X
 
 # 3. Chạy container
 docker compose up -d
@@ -28,12 +32,12 @@ curl -s http://localhost:4000 | grep -o 'backendUrl":"[^"]*"'
 
 ---
 
-## Khi Có Code Mới (Rebuild)
+## Khi Có Code Mới
 
-### Bước 1: Trên Local Machine
+### Bước 1: Trên Máy Local
 
 ```bash
-cd /path/to/DTU-SUPPORT-FE
+cd /home/trongtk248/Documents/DTU-SUPPORT-FE
 
 # 1. Dùng env production
 cp .env.production .env
@@ -67,10 +71,10 @@ curl -s http://localhost:4000 | grep -o 'backendUrl":"[^"]*"'
 
 ---
 
-## Kiểm Tra Container
+## Các Lệnh Kiểm Tra Container
 
 ```bash
-# Container đang chạy?
+# Container có đang chạy không?
 docker ps | grep dtu-support-fe
 
 # Xem logs
@@ -85,8 +89,8 @@ docker compose down
 
 ---
 
-## Lưu Ý Quan Trọng
+## Lưu Ý
 
-✅ **Source code KHÔNG cần trên VPS** - chỉ cần docker-compose.yml
+✅ **KHÔNG cần source code trên VPS** - chỉ cần docker-compose.yml
 ✅ **Mỗi lần sửa code → phải rebuild & push Docker Hub**
-✅ **Image đã chứa sẵn production URL** - không cần .env file trên VPS
+✅ **Image đã chứa sẵn production URL** - không cần file .env trên VPS
