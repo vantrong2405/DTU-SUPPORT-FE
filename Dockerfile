@@ -11,6 +11,7 @@ RUN corepack enable && corepack prepare yarn@stable --activate
 ENV YARN_CACHE_FOLDER=/tmp/.yarn-cache
 
 FROM base AS build
+ARG NUXT_PUBLIC_BACKEND_URL
 
 COPY package.json yarn.lock ./
 RUN yarn install --frozen-lockfile

@@ -1,8 +1,9 @@
 services:
   web:
     image: dtu-support-fe
-    build: .
+    build:
+      context: .
+      args:
+        NUXT_PUBLIC_BACKEND_URL: ${NUXT_PUBLIC_BACKEND_URL}
     ports:
       - "4000:3000"
-    env_file:
-      - ${ENV_FILE}

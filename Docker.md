@@ -5,12 +5,14 @@
 
 ## Commands
 ```bash
-# Build
-docker compose build
-
 # Development
-ENV_FILE=.env.development docker compose up -d
+cp .env.development .env && docker compose up --build -d
 
-# Production
-ENV_FILE=.env.production docker compose up -d
+# Production (on VPS)
+cp .env.production .env && docker compose up --build -d
 ```
+
+## Environment
+- `.env` is auto-loaded by docker-compose for build args
+- Change environment by copying different env file to `.env`
+- `.env` is in `.gitignore` - don't commit it

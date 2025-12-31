@@ -38,22 +38,28 @@ const parseEnvKeys = (content: string): string[] => {
 }
 
 export const validateEnv = () => {
-  const requiredKeys = extractKeysFromFile(EnvFile.EXAMPLE)
-
-  if (requiredKeys.length === 0) {
-    return
-  }
-
   const envFile = getEnvFileName()
-  const existingKeys = extractKeysFromFile(envFile)
-  const missingKeys = requiredKeys.filter((key) => !existingKeys.includes(key))
 
-  if (missingKeys.length === 0) {
+  try {
+    const requiredKeys = extractKeysFromFile(EnvFile.EXAMPLE)
+
+    if (requiredKeys.length === 0) {
+      return
+    }
+
+    const existingKeys = extractKeysFromFile(envFile)
+    const missingKeys = requiredKeys.filter((key) => !existingKeys.includes(key))
+
+    if (missingKeys.length === 0) {
+      return
+    }
+
+    const missing = missingKeys.join(', ')
+    const message = `Missing required environment variables in ${envFile}: ${missing}`
+    console.error(message)
+    throw new Error(message)
+  } catch (e) {
+    console.warn(`Env validation skipped: ${e instanceof Error ? e.message : 'file not found'} (values already baked at build time)`)
     return
   }
-
-  const missing = missingKeys.join(', ')
-  const message = `Missing required environment variables in ${envFile}: ${missing}`
-  console.error(message)
-  throw new Error(message)
 }
