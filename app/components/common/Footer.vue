@@ -39,20 +39,19 @@ const handleAboutClick = async (event: MouseEvent) => {
             </p>
             <div class="flex gap-6">
               <NuxtLink
-                :to="navigateTo('/')"
-                class="text-sm text-muted-foreground hover:text-foreground transition-colors"
-                @click="handleAboutClick"
-              >
-                {{ t('common.footer.links.about') }}
-              </NuxtLink>
-              <NuxtLink
-                :to="navigateTo('/policy')"
+                to="/privacy-policy"
                 class="text-sm text-muted-foreground hover:text-foreground transition-colors"
               >
-                {{ t('common.footer.links.policy') }}
+                Privacy Policy
               </NuxtLink>
               <NuxtLink
-                :to="navigateTo('/contact')"
+                to="/terms"
+                class="text-sm text-muted-foreground hover:text-foreground transition-colors"
+              >
+                Terms of Service
+              </NuxtLink>
+              <NuxtLink
+                to="/contact"
                 class="text-sm text-muted-foreground hover:text-foreground transition-colors"
               >
                 {{ t('common.footer.links.contact') }}
